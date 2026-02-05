@@ -1,0 +1,937 @@
+// ============================================================================
+// NINTENDONT CONTROLLER MAPPING SERVICE
+// ============================================================================
+// Detects USB/Bluetooth controllers and generates Nintendont-compatible
+// controller configuration files (.ini format).
+//
+// Nintendont Config Location: SD:/controllers/{VID}_{PID}.ini
+// ============================================================================
+
+import 'dart:io';
+import 'dart:convert';
+import 'dart:async';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+
+// ============================================================================
+// CONTROLLER BUTTON DEFINITIONS
+// ============================================================================
+
+/// Standard GameCube button mapping targets
+enum GCButton {
+  a,
+  b,
+  x,
+  y,
+  z,
+  start,
+  dpadUp,
+  dpadDown,
+  dpadLeft,
+  dpadRight,
+  l,
+  r,
+  stickMain, // Main analog stick click (if supported)
+  stickC, // C-Stick click (if supported)
+}
+
+/// Analog axis targets for GameCube
+enum GCAxis {
+  mainX, // Main stick X
+  mainY, // Main stick Y
+  cX, // C-Stick X
+  cY, // C-Stick Y
+  lAnalog, // L trigger analog
+  rAnalog, // R trigger analog
+}
+
+// ============================================================================
+// CONTROLLER DATA MODELS
+// ============================================================================
+
+/// Represents a detected USB/Bluetooth controller
+class DetectedController {
+  final String name;
+  final int vendorId; // USB VID
+  final int productId; // USB PID
+  final String devicePath;
+  final ControllerType type;
+  final bool isWireless;
+
+  DetectedController({
+    required this.name,
+    required this.vendorId,
+    required this.productId,
+    required this.devicePath,
+    required this.type,
+    this.isWireless = false,
+  });
+
+  /// Generate filename for Nintendont config
+  String get configFileName {
+    final vid = vendorId.toRadixString(16).padLeft(4, '0').toUpperCase();
+    final pid = productId.toRadixString(16).padLeft(4, '0').toUpperCase();
+    return '${vid}_$pid.ini';
+  }
+
+  /// Unique identifier
+  String get id =>
+      '${vendorId.toRadixString(16)}_${productId.toRadixString(16)}';
+
+  @override
+  String toString() =>
+      '$name (VID:${vendorId.toRadixString(16)} PID:${productId.toRadixString(16)})';
+}
+
+/// Known controller types for preset mappings
+enum ControllerType {
+  xbox360,
+  xboxOne,
+  xboxSeries,
+  dualShock3,
+  dualShock4,
+  dualSense,
+  switchPro,
+  switchJoyconPair,
+  generic8BitDo,
+  genericHID,
+  unknown,
+}
+
+/// A single button/axis mapping
+class ControllerMapping {
+  final int sourceButton; // Button index on the physical controller
+  final int? sourceAxis; // Axis index (for analog inputs)
+  final GCButton? targetButton;
+  final GCAxis? targetAxis;
+  final bool inverted; // Invert axis direction
+  final int deadzone; // Deadzone for analog (0-127)
+
+  const ControllerMapping({
+    this.sourceButton = -1,
+    this.sourceAxis,
+    this.targetButton,
+    this.targetAxis,
+    this.inverted = false,
+    this.deadzone = 20,
+  });
+
+  bool get isButtonMapping => targetButton != null;
+  bool get isAxisMapping => targetAxis != null;
+
+  ControllerMapping copyWith({
+    int? sourceButton,
+    int? sourceAxis,
+    GCButton? targetButton,
+    GCAxis? targetAxis,
+    bool? inverted,
+    int? deadzone,
+  }) {
+    return ControllerMapping(
+      sourceButton: sourceButton ?? this.sourceButton,
+      sourceAxis: sourceAxis ?? this.sourceAxis,
+      targetButton: targetButton ?? this.targetButton,
+      targetAxis: targetAxis ?? this.targetAxis,
+      inverted: inverted ?? this.inverted,
+      deadzone: deadzone ?? this.deadzone,
+    );
+  }
+}
+
+/// Complete controller configuration
+class ControllerConfig {
+  final DetectedController controller;
+  final Map<GCButton, ControllerMapping> buttonMappings;
+  final Map<GCAxis, ControllerMapping> axisMappings;
+  final int rumbleStrength; // 0-100
+  final bool analogTriggers; // Use analog L/R
+
+  ControllerConfig({
+    required this.controller,
+    required this.buttonMappings,
+    required this.axisMappings,
+    this.rumbleStrength = 100,
+    this.analogTriggers = true,
+  });
+
+  ControllerConfig copyWith({
+    DetectedController? controller,
+    Map<GCButton, ControllerMapping>? buttonMappings,
+    Map<GCAxis, ControllerMapping>? axisMappings,
+    int? rumbleStrength,
+    bool? analogTriggers,
+  }) {
+    return ControllerConfig(
+      controller: controller ?? this.controller,
+      buttonMappings: buttonMappings ?? this.buttonMappings,
+      axisMappings: axisMappings ?? this.axisMappings,
+      rumbleStrength: rumbleStrength ?? this.rumbleStrength,
+      analogTriggers: analogTriggers ?? this.analogTriggers,
+    );
+  }
+
+  /// Generate Nintendont INI file content
+  String toNintendontIni() {
+    final buffer = StringBuffer();
+
+    buffer.writeln('; Nintendont Controller Configuration');
+    buffer.writeln('; Generated by Orbiit');
+    buffer.writeln('; Controller: ${controller.name}');
+    buffer.writeln(
+        '; VID: 0x${controller.vendorId.toRadixString(16).toUpperCase()}');
+    buffer.writeln(
+        '; PID: 0x${controller.productId.toRadixString(16).toUpperCase()}');
+    buffer.writeln();
+    buffer.writeln('[Controller]');
+    buffer.writeln(
+        'VID = 0x${controller.vendorId.toRadixString(16).padLeft(4, '0').toUpperCase()}');
+    buffer.writeln(
+        'PID = 0x${controller.productId.toRadixString(16).padLeft(4, '0').toUpperCase()}');
+    buffer.writeln();
+
+    // Button mappings
+    buffer.writeln('[Buttons]');
+    for (final entry in buttonMappings.entries) {
+      final gcButton = entry.key;
+      final mapping = entry.value;
+      buffer
+          .writeln('${_gcButtonToIniKey(gcButton)} = ${mapping.sourceButton}');
+    }
+    buffer.writeln();
+
+    // Axis mappings
+    buffer.writeln('[Axes]');
+    for (final entry in axisMappings.entries) {
+      final gcAxis = entry.key;
+      final mapping = entry.value;
+      if (mapping.sourceAxis != null) {
+        final invertFlag = mapping.inverted ? '-' : '';
+        buffer.writeln(
+            '${_gcAxisToIniKey(gcAxis)} = $invertFlag${mapping.sourceAxis}');
+      }
+    }
+    buffer.writeln();
+
+    // Deadzone settings
+    buffer.writeln('[Deadzone]');
+    buffer.writeln('MainStick = ${axisMappings[GCAxis.mainX]?.deadzone ?? 20}');
+    buffer.writeln('CStick = ${axisMappings[GCAxis.cX]?.deadzone ?? 20}');
+    buffer
+        .writeln('Triggers = ${axisMappings[GCAxis.lAnalog]?.deadzone ?? 10}');
+    buffer.writeln();
+
+    // Rumble
+    buffer.writeln('[Rumble]');
+    buffer.writeln('Strength = $rumbleStrength');
+
+    return buffer.toString();
+  }
+
+  String _gcButtonToIniKey(GCButton button) {
+    switch (button) {
+      case GCButton.a:
+        return 'A';
+      case GCButton.b:
+        return 'B';
+      case GCButton.x:
+        return 'X';
+      case GCButton.y:
+        return 'Y';
+      case GCButton.z:
+        return 'Z';
+      case GCButton.start:
+        return 'Start';
+      case GCButton.dpadUp:
+        return 'DpadUp';
+      case GCButton.dpadDown:
+        return 'DpadDown';
+      case GCButton.dpadLeft:
+        return 'DpadLeft';
+      case GCButton.dpadRight:
+        return 'DpadRight';
+      case GCButton.l:
+        return 'L';
+      case GCButton.r:
+        return 'R';
+      case GCButton.stickMain:
+        return 'StickMain';
+      case GCButton.stickC:
+        return 'StickC';
+    }
+  }
+
+  String _gcAxisToIniKey(GCAxis axis) {
+    switch (axis) {
+      case GCAxis.mainX:
+        return 'MainX';
+      case GCAxis.mainY:
+        return 'MainY';
+      case GCAxis.cX:
+        return 'CX';
+      case GCAxis.cY:
+        return 'CY';
+      case GCAxis.lAnalog:
+        return 'LAnalog';
+      case GCAxis.rAnalog:
+        return 'RAnalog';
+    }
+  }
+}
+
+// ============================================================================
+// NINTENDONT CONTROLLER SERVICE
+// ============================================================================
+
+/// Service for detecting controllers and generating Nintendont configurations
+class NintendontControllerService {
+  // Singleton pattern
+  static final NintendontControllerService _instance =
+      NintendontControllerService._internal();
+  factory NintendontControllerService() => _instance;
+  NintendontControllerService._internal();
+
+  // Stream for controller events
+  final _controllerStreamController =
+      StreamController<List<DetectedController>>.broadcast();
+  Stream<List<DetectedController>> get controllerStream =>
+      _controllerStreamController.stream;
+
+  // Currently detected controllers
+  final List<DetectedController> _detectedControllers = [];
+  List<DetectedController> get detectedControllers =>
+      List.unmodifiable(_detectedControllers);
+
+  // Known controller database (VID/PID -> preset mappings)
+  static final Map<String, _ControllerPreset> _knownControllers = {
+    // Xbox 360
+    '045e_028e':
+        _ControllerPreset('Xbox 360 Controller', ControllerType.xbox360),
+    '045e_028f': _ControllerPreset('Xbox 360 Wireless', ControllerType.xbox360),
+
+    // Xbox One
+    '045e_02d1':
+        _ControllerPreset('Xbox One Controller', ControllerType.xboxOne),
+    '045e_02dd':
+        _ControllerPreset('Xbox One Controller', ControllerType.xboxOne),
+    '045e_02e3': _ControllerPreset('Xbox One Elite', ControllerType.xboxOne),
+    '045e_02ea':
+        _ControllerPreset('Xbox One S Controller', ControllerType.xboxOne),
+
+    // Xbox Series
+    '045e_0b12': _ControllerPreset(
+        'Xbox Series X Controller', ControllerType.xboxSeries),
+    '045e_0b13': _ControllerPreset(
+        'Xbox Series X Controller', ControllerType.xboxSeries),
+
+    // DualShock 3
+    '054c_0268': _ControllerPreset('DualShock 3', ControllerType.dualShock3),
+
+    // DualShock 4
+    '054c_05c4': _ControllerPreset('DualShock 4', ControllerType.dualShock4),
+    '054c_09cc': _ControllerPreset('DualShock 4 V2', ControllerType.dualShock4),
+
+    // DualSense
+    '054c_0ce6': _ControllerPreset('DualSense', ControllerType.dualSense),
+    '054c_0df2': _ControllerPreset('DualSense Edge', ControllerType.dualSense),
+
+    // Nintendo Switch Pro
+    '057e_2009':
+        _ControllerPreset('Switch Pro Controller', ControllerType.switchPro),
+
+    // 8BitDo controllers
+    '2dc8_2100':
+        _ControllerPreset('8BitDo SN30 Pro', ControllerType.generic8BitDo),
+    '2dc8_2101':
+        _ControllerPreset('8BitDo SN30 Pro+', ControllerType.generic8BitDo),
+    '2dc8_3106':
+        _ControllerPreset('8BitDo Pro 2', ControllerType.generic8BitDo),
+  };
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // CONTROLLER DETECTION
+  // ══════════════════════════════════════════════════════════════════════════
+
+  /// Scan for connected controllers
+  Future<List<DetectedController>> scanForControllers() async {
+    _detectedControllers.clear();
+
+    if (Platform.isWindows) {
+      await _scanWindowsControllers();
+    }
+
+    _controllerStreamController.add(_detectedControllers);
+    return _detectedControllers;
+  }
+
+  /// Windows-specific controller detection via PowerShell/WMI
+  Future<void> _scanWindowsControllers() async {
+    try {
+      // Use PowerShell to get HID devices
+      final result = await Process.run('powershell', [
+        '-Command',
+        '''
+        Get-PnpDevice -Class HIDClass -Status OK | 
+        Where-Object { \$_.InstanceId -match 'VID_|USB' } | 
+        Select-Object FriendlyName, InstanceId, Status | 
+        ConvertTo-Json -Depth 2
+        '''
+      ]);
+
+      if (result.exitCode == 0 && result.stdout.toString().trim().isNotEmpty) {
+        final jsonStr = result.stdout.toString().trim();
+        final dynamic parsed = json.decode(jsonStr.isEmpty ? '[]' : jsonStr);
+        final List<dynamic> devices = parsed is List ? parsed : [parsed];
+
+        for (final device in devices) {
+          final instanceId = (device['InstanceId'] ?? '').toString();
+          final name =
+              (device['FriendlyName'] ?? 'Unknown Controller').toString();
+
+          // Parse VID and PID from instance ID
+          final vidMatch =
+              RegExp(r'VID_([0-9A-Fa-f]{4})').firstMatch(instanceId);
+          final pidMatch =
+              RegExp(r'PID_([0-9A-Fa-f]{4})').firstMatch(instanceId);
+
+          if (vidMatch != null && pidMatch != null) {
+            final vid = int.parse(vidMatch.group(1)!, radix: 16);
+            final pid = int.parse(pidMatch.group(1)!, radix: 16);
+
+            // Check if it's a known game controller
+            if (_isGameController(vid, pid, name)) {
+              final controller = _createController(vid, pid, name, instanceId);
+              _detectedControllers.add(controller);
+            }
+          }
+        }
+      }
+
+      debugPrint(
+          '[Nintendont] Found ${_detectedControllers.length} controllers');
+    } catch (e) {
+      debugPrint('[Nintendont] Error scanning controllers: $e');
+    }
+  }
+
+  /// Check if a device is likely a game controller
+  bool _isGameController(int vid, int pid, String name) {
+    final nameLower = name.toLowerCase();
+
+    // Check known controller database
+    final key =
+        '${vid.toRadixString(16).padLeft(4, '0')}_${pid.toRadixString(16).padLeft(4, '0')}';
+    if (_knownControllers.containsKey(key)) return true;
+
+    // Check common controller keywords
+    final controllerKeywords = [
+      'controller',
+      'gamepad',
+      'joystick',
+      'xbox',
+      'playstation',
+      'dualshock',
+      'dualsense',
+      'switch pro',
+      '8bitdo',
+      'logitech',
+    ];
+
+    return controllerKeywords.any((kw) => nameLower.contains(kw));
+  }
+
+  /// Create a DetectedController from device info
+  DetectedController _createController(
+      int vid, int pid, String name, String path) {
+    final key =
+        '${vid.toRadixString(16).padLeft(4, '0')}_${pid.toRadixString(16).padLeft(4, '0')}';
+    final preset = _knownControllers[key];
+
+    return DetectedController(
+      name: preset?.name ?? name,
+      vendorId: vid,
+      productId: pid,
+      devicePath: path,
+      type: preset?.type ?? ControllerType.unknown,
+      isWireless: name.toLowerCase().contains('wireless') ||
+          name.toLowerCase().contains('bluetooth'),
+    );
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // PRESET MAPPINGS
+  // ══════════════════════════════════════════════════════════════════════════
+
+  /// Get default button mapping for a controller type
+  ControllerConfig getPresetMapping(DetectedController controller) {
+    switch (controller.type) {
+      case ControllerType.xbox360:
+      case ControllerType.xboxOne:
+      case ControllerType.xboxSeries:
+        return _createXboxMapping(controller);
+
+      case ControllerType.dualShock3:
+      case ControllerType.dualShock4:
+      case ControllerType.dualSense:
+        return _createPlayStationMapping(controller);
+
+      case ControllerType.switchPro:
+        return _createSwitchProMapping(controller);
+
+      case ControllerType.generic8BitDo:
+        return _create8BitDoMapping(controller);
+
+      default:
+        return _createGenericMapping(controller);
+    }
+  }
+
+  /// Xbox controller mapping (360/One/Series)
+  ControllerConfig _createXboxMapping(DetectedController controller) {
+    return ControllerConfig(
+      controller: controller,
+      buttonMappings: {
+        // Xbox A -> GC A
+        GCButton.a:
+            const ControllerMapping(sourceButton: 0, targetButton: GCButton.a),
+        // Xbox B -> GC B
+        GCButton.b:
+            const ControllerMapping(sourceButton: 1, targetButton: GCButton.b),
+        // Xbox X -> GC X
+        GCButton.x:
+            const ControllerMapping(sourceButton: 2, targetButton: GCButton.x),
+        // Xbox Y -> GC Y
+        GCButton.y:
+            const ControllerMapping(sourceButton: 3, targetButton: GCButton.y),
+        // Xbox LB -> GC Z (shoulder button)
+        GCButton.z:
+            const ControllerMapping(sourceButton: 4, targetButton: GCButton.z),
+        // Xbox Start -> GC Start
+        GCButton.start: const ControllerMapping(
+            sourceButton: 7, targetButton: GCButton.start),
+        // Xbox RB -> GC R (digital)
+        GCButton.r:
+            const ControllerMapping(sourceButton: 5, targetButton: GCButton.r),
+        // D-Pad
+        GCButton.dpadUp: const ControllerMapping(
+            sourceButton: 12, targetButton: GCButton.dpadUp),
+        GCButton.dpadDown: const ControllerMapping(
+            sourceButton: 13, targetButton: GCButton.dpadDown),
+        GCButton.dpadLeft: const ControllerMapping(
+            sourceButton: 14, targetButton: GCButton.dpadLeft),
+        GCButton.dpadRight: const ControllerMapping(
+            sourceButton: 15, targetButton: GCButton.dpadRight),
+      },
+      axisMappings: {
+        // Left stick -> Main stick
+        GCAxis.mainX: const ControllerMapping(
+            sourceAxis: 0, targetAxis: GCAxis.mainX, deadzone: 15),
+        GCAxis.mainY: const ControllerMapping(
+            sourceAxis: 1,
+            targetAxis: GCAxis.mainY,
+            inverted: true,
+            deadzone: 15),
+        // Right stick -> C-Stick
+        GCAxis.cX: const ControllerMapping(
+            sourceAxis: 2, targetAxis: GCAxis.cX, deadzone: 15),
+        GCAxis.cY: const ControllerMapping(
+            sourceAxis: 3, targetAxis: GCAxis.cY, inverted: true, deadzone: 15),
+        // Triggers -> L/R analog
+        GCAxis.lAnalog: const ControllerMapping(
+            sourceAxis: 4, targetAxis: GCAxis.lAnalog, deadzone: 10),
+        GCAxis.rAnalog: const ControllerMapping(
+            sourceAxis: 5, targetAxis: GCAxis.rAnalog, deadzone: 10),
+      },
+      rumbleStrength: 100,
+      analogTriggers: true,
+    );
+  }
+
+  /// PlayStation controller mapping (DS3/DS4/DualSense)
+  ControllerConfig _createPlayStationMapping(DetectedController controller) {
+    return ControllerConfig(
+      controller: controller,
+      buttonMappings: {
+        // Cross -> GC A
+        GCButton.a:
+            const ControllerMapping(sourceButton: 1, targetButton: GCButton.a),
+        // Circle -> GC B
+        GCButton.b:
+            const ControllerMapping(sourceButton: 2, targetButton: GCButton.b),
+        // Square -> GC X
+        GCButton.x:
+            const ControllerMapping(sourceButton: 0, targetButton: GCButton.x),
+        // Triangle -> GC Y
+        GCButton.y:
+            const ControllerMapping(sourceButton: 3, targetButton: GCButton.y),
+        // L1 -> GC Z
+        GCButton.z:
+            const ControllerMapping(sourceButton: 4, targetButton: GCButton.z),
+        // Options/Start -> GC Start
+        GCButton.start: const ControllerMapping(
+            sourceButton: 9, targetButton: GCButton.start),
+        // R1 -> GC R
+        GCButton.r:
+            const ControllerMapping(sourceButton: 5, targetButton: GCButton.r),
+        // D-Pad
+        GCButton.dpadUp: const ControllerMapping(
+            sourceButton: 11, targetButton: GCButton.dpadUp),
+        GCButton.dpadDown: const ControllerMapping(
+            sourceButton: 12, targetButton: GCButton.dpadDown),
+        GCButton.dpadLeft: const ControllerMapping(
+            sourceButton: 13, targetButton: GCButton.dpadLeft),
+        GCButton.dpadRight: const ControllerMapping(
+            sourceButton: 14, targetButton: GCButton.dpadRight),
+      },
+      axisMappings: {
+        GCAxis.mainX: const ControllerMapping(
+            sourceAxis: 0, targetAxis: GCAxis.mainX, deadzone: 15),
+        GCAxis.mainY: const ControllerMapping(
+            sourceAxis: 1,
+            targetAxis: GCAxis.mainY,
+            inverted: true,
+            deadzone: 15),
+        GCAxis.cX: const ControllerMapping(
+            sourceAxis: 2, targetAxis: GCAxis.cX, deadzone: 15),
+        GCAxis.cY: const ControllerMapping(
+            sourceAxis: 5, targetAxis: GCAxis.cY, inverted: true, deadzone: 15),
+        GCAxis.lAnalog: const ControllerMapping(
+            sourceAxis: 3, targetAxis: GCAxis.lAnalog, deadzone: 10),
+        GCAxis.rAnalog: const ControllerMapping(
+            sourceAxis: 4, targetAxis: GCAxis.rAnalog, deadzone: 10),
+      },
+      rumbleStrength: 100,
+      analogTriggers: true,
+    );
+  }
+
+  /// Nintendo Switch Pro controller mapping
+  ControllerConfig _createSwitchProMapping(DetectedController controller) {
+    return ControllerConfig(
+      controller: controller,
+      buttonMappings: {
+        // B -> GC A (Nintendo layout)
+        GCButton.a:
+            const ControllerMapping(sourceButton: 0, targetButton: GCButton.a),
+        // A -> GC B
+        GCButton.b:
+            const ControllerMapping(sourceButton: 1, targetButton: GCButton.b),
+        // Y -> GC X
+        GCButton.x:
+            const ControllerMapping(sourceButton: 2, targetButton: GCButton.x),
+        // X -> GC Y
+        GCButton.y:
+            const ControllerMapping(sourceButton: 3, targetButton: GCButton.y),
+        // L -> GC Z
+        GCButton.z:
+            const ControllerMapping(sourceButton: 4, targetButton: GCButton.z),
+        // + -> GC Start
+        GCButton.start: const ControllerMapping(
+            sourceButton: 9, targetButton: GCButton.start),
+        // R -> GC R
+        GCButton.r:
+            const ControllerMapping(sourceButton: 5, targetButton: GCButton.r),
+        // L digital -> GC L
+        GCButton.l:
+            const ControllerMapping(sourceButton: 6, targetButton: GCButton.l),
+        // D-Pad
+        GCButton.dpadUp: const ControllerMapping(
+            sourceButton: 11, targetButton: GCButton.dpadUp),
+        GCButton.dpadDown: const ControllerMapping(
+            sourceButton: 12, targetButton: GCButton.dpadDown),
+        GCButton.dpadLeft: const ControllerMapping(
+            sourceButton: 13, targetButton: GCButton.dpadLeft),
+        GCButton.dpadRight: const ControllerMapping(
+            sourceButton: 14, targetButton: GCButton.dpadRight),
+      },
+      axisMappings: {
+        GCAxis.mainX: const ControllerMapping(
+            sourceAxis: 0, targetAxis: GCAxis.mainX, deadzone: 15),
+        GCAxis.mainY: const ControllerMapping(
+            sourceAxis: 1,
+            targetAxis: GCAxis.mainY,
+            inverted: true,
+            deadzone: 15),
+        GCAxis.cX: const ControllerMapping(
+            sourceAxis: 2, targetAxis: GCAxis.cX, deadzone: 15),
+        GCAxis.cY: const ControllerMapping(
+            sourceAxis: 3, targetAxis: GCAxis.cY, inverted: true, deadzone: 15),
+        // Switch Pro has digital triggers, map to full press
+        GCAxis.lAnalog: const ControllerMapping(
+            sourceAxis: 4, targetAxis: GCAxis.lAnalog, deadzone: 0),
+        GCAxis.rAnalog: const ControllerMapping(
+            sourceAxis: 5, targetAxis: GCAxis.rAnalog, deadzone: 0),
+      },
+      rumbleStrength: 80,
+      analogTriggers: false, // Switch Pro has digital triggers
+    );
+  }
+
+  /// 8BitDo controller mapping
+  ControllerConfig _create8BitDoMapping(DetectedController controller) {
+    // 8BitDo in XInput mode is similar to Xbox
+    return _createXboxMapping(controller);
+  }
+
+  /// Generic HID controller mapping (best guess)
+  ControllerConfig _createGenericMapping(DetectedController controller) {
+    return ControllerConfig(
+      controller: controller,
+      buttonMappings: {
+        GCButton.a:
+            const ControllerMapping(sourceButton: 0, targetButton: GCButton.a),
+        GCButton.b:
+            const ControllerMapping(sourceButton: 1, targetButton: GCButton.b),
+        GCButton.x:
+            const ControllerMapping(sourceButton: 2, targetButton: GCButton.x),
+        GCButton.y:
+            const ControllerMapping(sourceButton: 3, targetButton: GCButton.y),
+        GCButton.z:
+            const ControllerMapping(sourceButton: 4, targetButton: GCButton.z),
+        GCButton.start: const ControllerMapping(
+            sourceButton: 7, targetButton: GCButton.start),
+        GCButton.l:
+            const ControllerMapping(sourceButton: 6, targetButton: GCButton.l),
+        GCButton.r:
+            const ControllerMapping(sourceButton: 5, targetButton: GCButton.r),
+      },
+      axisMappings: {
+        GCAxis.mainX: const ControllerMapping(
+            sourceAxis: 0, targetAxis: GCAxis.mainX, deadzone: 20),
+        GCAxis.mainY: const ControllerMapping(
+            sourceAxis: 1,
+            targetAxis: GCAxis.mainY,
+            inverted: true,
+            deadzone: 20),
+        GCAxis.cX: const ControllerMapping(
+            sourceAxis: 2, targetAxis: GCAxis.cX, deadzone: 20),
+        GCAxis.cY: const ControllerMapping(
+            sourceAxis: 3, targetAxis: GCAxis.cY, inverted: true, deadzone: 20),
+      },
+      rumbleStrength: 100,
+      analogTriggers: false,
+    );
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // CONFIG FILE OPERATIONS
+  // ══════════════════════════════════════════════════════════════════════════
+
+  /// Save controller config to SD card/USB drive
+  Future<bool> saveConfigToDevice(
+      ControllerConfig config, String devicePath) async {
+    try {
+      // Create controllers directory on device
+      final controllersDir = Directory('$devicePath/controllers');
+      if (!await controllersDir.exists()) {
+        await controllersDir.create(recursive: true);
+      }
+
+      // Write INI file
+      final configFile =
+          File('${controllersDir.path}/${config.controller.configFileName}');
+      await configFile.writeAsString(config.toNintendontIni());
+
+      debugPrint('[Nintendont] Saved config: ${configFile.path}');
+      return true;
+    } catch (e) {
+      debugPrint('[Nintendont] Error saving config: $e');
+      return false;
+    }
+  }
+
+  /// Load existing config from device
+  Future<ControllerConfig?> loadConfigFromDevice(
+    DetectedController controller,
+    String devicePath,
+  ) async {
+    try {
+      final configFile =
+          File('$devicePath/controllers/${controller.configFileName}');
+      if (!await configFile.exists()) return null;
+
+      final content = await configFile.readAsString();
+      return _parseNintendontIni(controller, content);
+    } catch (e) {
+      debugPrint('[Nintendont] Error loading config: $e');
+      return null;
+    }
+  }
+
+  /// Parse Nintendont INI file into ControllerConfig (real INI parsing).
+  ControllerConfig? _parseNintendontIni(
+      DetectedController controller, String content) {
+    final buttonMappings = <GCButton, ControllerMapping>{};
+    final axisMappings = <GCAxis, ControllerMapping>{};
+    int mainDeadzone = 20;
+    int cStickDeadzone = 20;
+    int triggerDeadzone = 10;
+
+    String section = '';
+    for (final line in content.split(RegExp(r'\r?\n'))) {
+      final trimmed = line.trim();
+      if (trimmed.isEmpty || trimmed.startsWith(';')) continue;
+      if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
+        section = trimmed.substring(1, trimmed.length - 1).trim();
+        continue;
+      }
+      final eq = trimmed.indexOf('=');
+      if (eq == -1) continue;
+      final key = trimmed.substring(0, eq).trim();
+      final value = trimmed.substring(eq + 1).trim();
+
+      if (section == 'Buttons') {
+        final gcButton = _iniKeyToGcButton(key);
+        final source = int.tryParse(value);
+        if (gcButton != null && source != null && source >= 0) {
+          buttonMappings[gcButton] = ControllerMapping(
+            sourceButton: source,
+            targetButton: gcButton,
+            deadzone: 20,
+          );
+        }
+      } else if (section == 'Axes') {
+        final gcAxis = _iniKeyToGcAxis(key);
+        final inverted = value.startsWith('-');
+        final numStr = inverted ? value.substring(1).trim() : value;
+        final source = int.tryParse(numStr);
+        if (gcAxis != null && source != null && source >= 0) {
+          axisMappings[gcAxis] = ControllerMapping(
+            sourceAxis: source,
+            targetAxis: gcAxis,
+            inverted: inverted,
+            deadzone: gcAxis == GCAxis.mainX || gcAxis == GCAxis.mainY
+                ? mainDeadzone
+                : gcAxis == GCAxis.cX || gcAxis == GCAxis.cY
+                    ? cStickDeadzone
+                    : triggerDeadzone,
+          );
+        }
+      } else if (section == 'Deadzone') {
+        if (key == 'MainStick') mainDeadzone = int.tryParse(value) ?? 20;
+        if (key == 'CStick') cStickDeadzone = int.tryParse(value) ?? 20;
+        if (key == 'Triggers') triggerDeadzone = int.tryParse(value) ?? 10;
+      }
+    }
+
+    if (buttonMappings.isEmpty && axisMappings.isEmpty) {
+      return getPresetMapping(controller);
+    }
+
+    return ControllerConfig(
+      controller: controller,
+      buttonMappings: buttonMappings.isNotEmpty
+          ? buttonMappings
+          : getPresetMapping(controller).buttonMappings,
+      axisMappings: axisMappings.isNotEmpty
+          ? axisMappings
+          : getPresetMapping(controller).axisMappings,
+    );
+  }
+
+  static GCButton? _iniKeyToGcButton(String key) {
+    switch (key) {
+      case 'A':
+        return GCButton.a;
+      case 'B':
+        return GCButton.b;
+      case 'X':
+        return GCButton.x;
+      case 'Y':
+        return GCButton.y;
+      case 'Z':
+        return GCButton.z;
+      case 'Start':
+        return GCButton.start;
+      case 'DpadUp':
+        return GCButton.dpadUp;
+      case 'DpadDown':
+        return GCButton.dpadDown;
+      case 'DpadLeft':
+        return GCButton.dpadLeft;
+      case 'DpadRight':
+        return GCButton.dpadRight;
+      case 'L':
+        return GCButton.l;
+      case 'R':
+        return GCButton.r;
+      case 'StickMain':
+        return GCButton.stickMain;
+      case 'StickC':
+        return GCButton.stickC;
+      default:
+        return null;
+    }
+  }
+
+  static GCAxis? _iniKeyToGcAxis(String key) {
+    switch (key) {
+      case 'MainX':
+        return GCAxis.mainX;
+      case 'MainY':
+        return GCAxis.mainY;
+      case 'CX':
+        return GCAxis.cX;
+      case 'CY':
+        return GCAxis.cY;
+      case 'LAnalog':
+        return GCAxis.lAnalog;
+      case 'RAnalog':
+        return GCAxis.rAnalog;
+      default:
+        return null;
+    }
+  }
+
+  /// List all controller configs on a device
+  Future<List<String>> listConfigsOnDevice(String devicePath) async {
+    try {
+      final controllersDir = Directory('$devicePath/controllers');
+      if (!await controllersDir.exists()) return [];
+
+      final configs = <String>[];
+      await for (final entity in controllersDir.list()) {
+        if (entity is File && entity.path.endsWith('.ini')) {
+          configs.add(entity.path);
+        }
+      }
+      return configs;
+    } catch (e) {
+      debugPrint('[Nintendont] Error listing configs: $e');
+      return [];
+    }
+  }
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // LIFECYCLE
+  // ══════════════════════════════════════════════════════════════════════════
+
+  /// Start periodic controller scanning
+  Timer? _scanTimer;
+
+  void startPeriodicScan({Duration interval = const Duration(seconds: 5)}) {
+    stopPeriodicScan();
+    _scanTimer = Timer.periodic(interval, (_) => scanForControllers());
+    scanForControllers(); // Initial scan
+  }
+
+  void stopPeriodicScan() {
+    _scanTimer?.cancel();
+    _scanTimer = null;
+  }
+
+  void dispose() {
+    stopPeriodicScan();
+    _controllerStreamController.close();
+  }
+}
+
+// ============================================================================
+// INTERNAL HELPERS
+// ============================================================================
+
+class _ControllerPreset {
+  final String name;
+  final ControllerType type;
+
+  const _ControllerPreset(this.name, this.type);
+}
