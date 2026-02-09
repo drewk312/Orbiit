@@ -78,6 +78,7 @@ Users are solely responsible for complying with copyright laws.
 
 
 
+<!--
 ## 📸 Gallery
 
 | **Command Center** | **Game Library** |
@@ -91,6 +92,7 @@ Users are solely responsible for complying with copyright laws.
 | **Settings** | **Modern UI** |
 |:---:|:---:|
 | ![Settings](docs/media/settings.png) | ![Modern UI](docs/media/clean.png) |
+-->
 
 ## 📥 Installation
 
