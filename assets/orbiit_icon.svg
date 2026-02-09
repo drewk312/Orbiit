@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00C2FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0066FF;stop-opacity:1" />
+    </linearGradient>
+    
+    <radialGradient id="coreBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#1A1F3C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0B0D17;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Main background -->
+  <rect width="512" height="512" fill="#0B0D17"/>
+  
+  <!-- Core circle background -->
+  <circle cx="256" cy="256" r="240" fill="url(#coreBg)"/>
+  
+  <!-- Outer ring (thick) -->
+  <circle cx="256" cy="256" r="220" fill="none" stroke="url(#primaryGrad)" stroke-width="12" stroke-linecap="round"/>
+  
+  <!-- Middle ring (medium) -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="url(#primaryGrad)" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+  
+  <!-- Inner ring (thin) -->
+  <circle cx="256" cy="256" r="140" fill="none" stroke="url(#primaryGrad)" stroke-width="5" stroke-linecap="round" opacity="0.4"/>
+  
+  <!-- Central disc (main visual) -->
+  <circle cx="256" cy="256" r="110" fill="#00C2FF" opacity="0.15"/>
+  <circle cx="256" cy="256" r="100" fill="url(#primaryGrad)" opacity="0.9"/>
+  
+  <!-- Inner solid circle (deep space) -->
+  <circle cx="256" cy="256" r="85" fill="#0B0D17"/>
+  
+  <!-- Center core (bright cyan) -->
+  <circle cx="256" cy="256" r="50" fill="#00C2FF"/>
+  
+  <!-- Bright center point -->
+  <circle cx="256" cy="256" r="30" fill="white" opacity="0.95"/>
+  
+  <!-- Orbital elements (satellites) -->
+  <!-- Top satellite -->
+  <circle cx="256" cy="150" r="14" fill="#00C2FF"/>
+  <circle cx="256" cy="150" r="10" fill="white" opacity="0.8"/>
+  
+  <!-- Bottom right satellite -->
+  <circle cx="340" cy="295" r="12" fill="#00C2FF" opacity="0.8"/>
+  <circle cx="340" cy="295" r="8" fill="white" opacity="0.7"/>
+  
+  <!-- Bottom left satellite -->
+  <circle cx="172" cy="295" r="11" fill="#00C2FF" opacity="0.7"/>
+  <circle cx="172" cy="295" r="7" fill="white" opacity="0.6"/>
+  
+  <!-- Corner highlights for depth -->
+  <circle cx="320" cy="200" r="3" fill="white" opacity="0.6"/>
+  <circle cx="210" cy="320" r="2" fill="white" opacity="0.5"/>
+</svg>

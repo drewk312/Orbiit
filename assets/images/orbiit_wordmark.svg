@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 220" width="900" height="220">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A0A0F"/>
+      <stop offset="100%" style="stop-color:#08080C"/>
+    </linearGradient>
+
+    <linearGradient id="textWhite" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#C0C8D8"/>
+    </linearGradient>
+
+    <linearGradient id="accentLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:0.6"/>
+      <stop offset="50%" style="stop-color:#8B5CF6;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#E060FF;stop-opacity:0.2"/>
+    </linearGradient>
+
+    <radialGradient id="cyanDot" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:1"/>
+      <stop offset="50%" style="stop-color:#00D4FF;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#00D4FF;stop-opacity:0"/>
+    </radialGradient>
+
+    <radialGradient id="purpleDot" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1"/>
+      <stop offset="50%" style="stop-color:#8B5CF6;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:0"/>
+    </radialGradient>
+
+    <filter id="dotGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="4" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="textShadow" x="-5%" y="-5%" width="110%" height="120%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="tinyGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="220" rx="20" fill="url(#bg)"/>
+
+  <!-- Stars -->
+  <circle cx="40" cy="30" r="0.8" fill="white" opacity="0.3"/>
+  <circle cx="200" cy="195" r="0.6" fill="white" opacity="0.25"/>
+  <circle cx="500" cy="20" r="1" fill="white" opacity="0.35" filter="url(#tinyGlow)"/>
+  <circle cx="750" cy="190" r="0.7" fill="white" opacity="0.3"/>
+  <circle cx="850" cy="40" r="0.9" fill="white" opacity="0.3" filter="url(#tinyGlow)"/>
+  <circle cx="620" cy="200" r="0.5" fill="#8B5CF6" opacity="0.2"/>
+  <circle cx="100" cy="180" r="0.6" fill="#00D4FF" opacity="0.2"/>
+
+  <!-- === MINI LOGO (orbit + dots) === -->
+  <!-- Orbit ring -->
+  <ellipse cx="80" cy="100" rx="48" ry="18" fill="none" stroke="#00D4FF" stroke-width="1.2" 
+           transform="rotate(-25 80 100)" opacity="0.35"/>
+  <ellipse cx="80" cy="100" rx="42" ry="15" fill="none" stroke="#8B5CF6" stroke-width="0.6" 
+           transform="rotate(-25 80 100)" opacity="0.2"/>
+
+  <!-- Center O of mini logo -->
+  <circle cx="80" cy="100" r="18" fill="none" stroke="white" stroke-width="4" opacity="0.9"/>
+  <circle cx="80" cy="100" r="2" fill="white" opacity="0.5"/>
+
+  <!-- Mini ii dots on orbit -->
+  <circle cx="52" cy="82" r="5" fill="#00D4FF" filter="url(#dotGlow)"/>
+  <circle cx="52" cy="82" r="2" fill="white" opacity="0.9"/>
+  <circle cx="108" cy="118" r="5" fill="#8B5CF6" filter="url(#dotGlow)"/>
+  <circle cx="108" cy="118" r="2" fill="white" opacity="0.9"/>
+
+  <!-- === WORDMARK === -->
+  <!-- "ORB" in white -->
+  <text x="148" y="120" font-family="'Segoe UI', 'SF Pro Display', 'Helvetica Neue', sans-serif" 
+        font-size="72" font-weight="700" letter-spacing="5" fill="url(#textWhite)" filter="url(#textShadow)">
+    ORB
+  </text>
+
+  <!-- First "I" with cyan dot -->
+  <text x="370" y="120" font-family="'Segoe UI', 'SF Pro Display', 'Helvetica Neue', sans-serif" 
+        font-size="72" font-weight="700" letter-spacing="5" fill="url(#textWhite)" filter="url(#textShadow)">
+    I
+  </text>
+  <!-- Cyan dot replaces the tittle of first I -->
+  <circle cx="387" cy="52" r="8" fill="url(#cyanDot)" filter="url(#dotGlow)"/>
+  <circle cx="387" cy="52" r="3.5" fill="white" opacity="0.95"/>
+
+  <!-- Second "I" with purple dot -->
+  <text x="408" y="120" font-family="'Segoe UI', 'SF Pro Display', 'Helvetica Neue', sans-serif" 
+        font-size="72" font-weight="700" letter-spacing="5" fill="url(#textWhite)" filter="url(#textShadow)">
+    I
+  </text>
+  <!-- Purple dot replaces the tittle of second I -->
+  <circle cx="425" cy="52" r="8" fill="url(#purpleDot)" filter="url(#dotGlow)"/>
+  <circle cx="425" cy="52" r="3.5" fill="white" opacity="0.95"/>
+
+  <!-- "T" -->
+  <text x="445" y="120" font-family="'Segoe UI', 'SF Pro Display', 'Helvetica Neue', sans-serif" 
+        font-size="72" font-weight="700" letter-spacing="5" fill="url(#textWhite)" filter="url(#textShadow)">
+    T
+  </text>
+
+  <!-- Accent line under wordmark -->
+  <line x1="150" y1="138" x2="510" y2="138" stroke="url(#accentLine)" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Tagline -->
+  <text x="152" y="165" font-family="'Segoe UI', 'SF Pro Display', 'Helvetica Neue', sans-serif" 
+        font-size="14" font-weight="400" letter-spacing="5" fill="#505868" opacity="0.8">
+    YOUR GAMES. IN ORBIT.
+  </text>
+
+  <!-- Subtle border -->
+  <rect width="900" height="220" rx="20" fill="none" stroke="#151520" stroke-width="1"/>
+</svg>
