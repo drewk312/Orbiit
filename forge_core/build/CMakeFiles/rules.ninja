@@ -72,7 +72,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = C:\Users\kidke\Downloads\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\mingw64\bin\cmake.exe --regenerate-during-build -S"C:\Users\kidke\OneDrive\Desktop\Best Wii\wiigc_fusion\forge_core" -B"C:\Users\kidke\OneDrive\Desktop\Best Wii\wiigc_fusion\forge_core\build"
+  command = C:\Users\kidke\Downloads\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\mingw64\bin\cmake.exe --regenerate-during-build -S"C:\Users\kidke\OneDrive\Desktop\Best Wii\Orbiit\forge_core" -B"C:\Users\kidke\OneDrive\Desktop\Best Wii\Orbiit\forge_core\build"
   description = Re-running CMake...
   generator = 1
 

@@ -271,14 +271,13 @@ class _FusionAppCardState extends State<FusionAppCard> {
     }
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+      padding: const EdgeInsets.fromLTRB(8, 8, 8, 0), // Reduced padding to prevent overflow
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Size badge (Glassmorphic, Smaller) - NOW ON LEFT
           if (widget.game.size != null)
             Flexible(
-              flex: 0,
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                 decoration: BoxDecoration(
@@ -298,7 +297,7 @@ class _FusionAppCardState extends State<FusionAppCard> {
                     letterSpacing: 0.5,
                   ),
                   maxLines: 1,
-                  overflow: TextOverflow.clip,
+                  overflow: TextOverflow.ellipsis, // Changed to ellipsis
                 ),
               ),
             )
@@ -309,7 +308,6 @@ class _FusionAppCardState extends State<FusionAppCard> {
 
           // Platform/Category badge - NOW ON RIGHT
           Flexible(
-            flex: 0,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
@@ -334,7 +332,7 @@ class _FusionAppCardState extends State<FusionAppCard> {
                   fontFamily: 'Inter', // Ensure brand font
                 ),
                 maxLines: 1,
-                overflow: TextOverflow.clip,
+                overflow: TextOverflow.ellipsis, // Changed to ellipsis
               ),
             ),
           ),

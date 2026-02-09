@@ -38,6 +38,9 @@ class GameResult {
   // OPTIONAL PROPERTIES
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+  /// Unique slug for homebrew apps (e.g. "usbloader_gx")
+  final String? slug;
+
   /// Direct download URL (if available)
   final String? downloadUrl;
 
@@ -81,6 +84,7 @@ class GameResult {
     required this.region,
     required this.provider,
     required this.pageUrl,
+    this.slug,
     this.downloadUrl,
     this.coverUrl,
     this.gameId,
@@ -100,6 +104,7 @@ class GameResult {
         'region': region,
         'provider': provider,
         'pageUrl': pageUrl,
+        'slug': slug,
         'downloadUrl': downloadUrl,
         'coverUrl': coverUrl,
         'gameId': gameId,
@@ -119,6 +124,7 @@ class GameResult {
         region: json['region'] ?? 'USA',
         provider: json['provider'] ?? '',
         pageUrl: json['pageUrl'] ?? '',
+        slug: json['slug'],
         downloadUrl: json['downloadUrl'],
         coverUrl: json['coverUrl'],
         gameId: json['gameId'],

@@ -17,6 +17,16 @@ class OSCService {
     'demos': 'Demos',
   };
 
+  /// Get available categories
+  Map<String, String> getCategories() {
+    return _categories;
+  }
+
+  /// Get homebrew by category
+  Future<List<GameResult>> getHomebrewByCategory(String category) async {
+    return searchHomebrew('', category: category);
+  }
+
   /// Search homebrew applications
   Future<List<GameResult>> searchHomebrew(String query,
       {String? category}) async {
@@ -24,7 +34,6 @@ class OSCService {
       developer.log(
           '[OSC] Searching homebrew: $query${category != null ? " in $category" : ""}');
 
-      // Build search URL
       // OSC v3 API: /contents?category=demos or /contents?search=query
       // Note: Endpoint is still /contents, simpler structure
       final url = category != null
@@ -52,36 +61,23 @@ class OSCService {
         }
       }
 
-      developer
-          .log('[OSC] Found ${results.length} homebrew items before filtering');
-
       // Client-side filtering because API v3 might return mixed results or ignore the param
       if (category != null && category.isNotEmpty) {
         results.retainWhere(
             (item) => item.region.toLowerCase() == category.toLowerCase());
       }
 
-      // If filtering left us with nothing, fallback to curated/mock data
-      // This ensures "Games" category (and others) is populated with our manual entries
-      // if the API fails to provide them or returns unrelated items.
+      // If filtering left us with nothing, return empty
       if (results.isEmpty && category != null) {
-        developer.log(
-            '[OSC] API returned no valid items for $category, using fallback');
-        return _generateMockHomebrew(query, category);
+        developer.log('[OSC] No results found for category: $category');
+        return [];
       }
 
-      developer.log(
-          '[OSC] Returning ${results.length} items after filtering for $category');
       return results;
     } catch (e) {
       developer.log('[OSC] Search failed: $e');
-      return _generateMockHomebrew(query, category);
+      return [];
     }
-  }
-
-  /// Get homebrew by category
-  Future<List<GameResult>> getHomebrewByCategory(String category) async {
-    return searchHomebrew('', category: category);
   }
 
   /// Get popular homebrew
@@ -89,36 +85,64 @@ class OSCService {
     try {
       developer.log('[OSC] Fetching popular homebrew');
 
-      // v3 might not support ?sort=downloads directly documented in the snippet I saw,
-      // but let's try standard endpoint or assume it works.
-      // If fails, we fallback.
-      final response =
-          await http.get(Uri.parse('$_baseUrl/contents?sort=downloads'));
-
-      if (response.statusCode != 200) {
-        throw Exception('OSC API returned ${response.statusCode}');
-      }
-
-      final data = json.decode(response.body);
-      if (data is! List) {
-        throw Exception('Invalid OSC API response format');
-      }
+      // Specific list for popular recommendation fallback or prioritization
+      const popularSlugs = [
+        'usbloader_gx',
+        'nintendont',
+        'priiloader',
+        'wiixplorer',
+        'savegame_manager_gx',
+        'cleanrip',
+        'fceugx', 
+        'snes9xgx',
+        'vbagx',
+        'genplus-gx',
+        'not64', 
+        'wiimednafen',
+        'wiistation',
+        'd2x-cios-installer',
+        'yawmme',
+      ];
 
       final results = <GameResult>[];
-      for (final item in data.take(20)) {
-        // Limit to top 20
-        try {
-          final game = _parseOSCItem(item);
-          if (game != null) results.add(game);
-        } catch (e) {
-          developer.log('[OSC] Failed to parse item: $e');
+      final client = http.Client();
+
+      final response = await client.get(Uri.parse('$_baseUrl/contents'));
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body) as List;
+        
+        // 1. Find all recommended apps first (to float them to top)
+        for (final slug in popularSlugs) {
+          try {
+            final match = data.firstWhere(
+              (item) => item['slug'] == slug || item['name'].toString().toLowerCase().contains(slug.replaceAll('_', ' ')),
+              orElse: () => null,
+            );
+            
+            if (match != null) {
+              final game = _parseOSCItem(match);
+              if (game != null) results.add(game);
+            }
+          } catch (_) {}
+        }
+        
+        // 2. Add other high-rated items to fill the list
+        for (final item in data.take(50)) {
+           final game = _parseOSCItem(item);
+           if (game != null && !results.any((r) => r.pageUrl == game.pageUrl)) {
+             results.add(game);
+           }
         }
       }
 
+      client.close();
+
+      if (results.isEmpty) throw Exception('No results from API');
       return results;
     } catch (e) {
-      developer.log('[OSC] Popular homebrew fetch failed: $e');
-      return _generateMockPopularHomebrew();
+      developer.log('[OSC] Popular fetch failed: $e');
+      return [];
     }
   }
 
@@ -126,76 +150,59 @@ class OSCService {
   Future<List<GameResult>> getRecommendedHomebrew() async {
     // List of recommended slugs from wii.hacks.guide
     const recommendedSlugs = [
-      // --- ESSENTIAL UTILITIES ---
-      'yawmME', // Yet Another Wad Manager Mod
-      'SysCheckME', // System Check
-      'cdbackup', // Savegame backup
-      'ARCME', // Advanced ROM Center
-      'wiixplorer-ss', // File Explorer
-      'SaveGame_Manager_GX', // Save management
-      'csm-installer', // Theme installer
-      'CleanRip', // Disc dumping
-      'd2x-cios-installer', // Essential cIOS
-      'ftpii', // FTP server
-      'priiloader', // Brick protection
-      'usbloader_gx', // Best USB Loader
-      'wiiflow', // Alternative Loader
-      'nintendont', // GameCube Loader
-      'Homebrew_Browser', // App Store
-
-      // --- EMULATORS ---
-      'fceurx', // NES
-      'Snes9xRX', // SNES
-      'not64', // N64
-      'genplus-gx', // Genesis
-      'mgba', // GBA
-      'wiimednafen', // Multi-system
-      'wiiSX', // PS1
-      'dosbox-wii', // DOS
-
-      // --- GAMES & ENTERTAINMENT ---
-      'WiiMC-SS', // Media Center
-      'schismtracker', // Music tracker
-      'cavex', // Minecraft-like
-      'SonicCDWii', // Sonic CD port
-      'smw-wii', // Super Mario War
-      'quakegx', // Quake 1
-      'SpaceCadetPinball', // Pinball
-      'Heli', // Helicopter game
-      'NewerSMBW', // Newer SMBW (Slug might vary, we have it in mock)
+      'usbloader_gx',
+      'nintendont',
+      'priiloader',
+      'wiixplorer',
+      'savegame_manager_gx',
+      'cleanrip',
+      'fceugx',
+      'snes9xgx',
+      'vbagx',
+      'genplus-gx',
+      'not64',
+      'wiimednafen',
+      'wiistation',
+      'd2x-cios-installer',
+      'yawmme',
+      'syscheck-hde',
+      'wiimodlite',
+      'hackmii_installer',
+      'blue-dump-mod',
+      'bbb',
+      'ftpii',
+      'wii-earth',
+      'wiimc-ss',
+      'quake-wii',
+      'doom-wii',
+      'blobby-volley-2',
+      'super-mario-war-wii',
     ];
 
-    final results = <GameResult>[];
-
     try {
-      final futures = recommendedSlugs.map((slug) async {
-        try {
-          // v3: /contents?search={slug}
-          final response = await http.get(Uri.parse(
-              '$_baseUrl/contents?search=${Uri.encodeComponent(slug)}'));
-          if (response.statusCode == 200) {
-            final data = json.decode(response.body) as List;
-            if (data.isNotEmpty) {
-              // Find exact match by slug if possible
-              // v3 "slug" field
-              final item = data.firstWhere((i) => (i['slug'] == slug),
-                  orElse: () => data.first);
-              return _parseOSCItem(item);
+      final results = <GameResult>[];
+      final client = http.Client();
+      final response = await client.get(Uri.parse('$_baseUrl/contents'));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body) as List;
+         for (final slug in recommendedSlugs) {
+          try {
+            final match = data.firstWhere(
+              (item) => item['slug'] == slug || item['name'].toString().toLowerCase().contains(slug.replaceAll('_', ' ')),
+              orElse: () => null,
+            );
+            if (match != null) {
+              final game = _parseOSCItem(match);
+              if (game != null) results.add(game);
             }
-          }
-        } catch (e) {
-          developer.log('[OSC] Failed to fetch recommended $slug: $e');
+          } catch (_) {}
         }
-        return null;
-      });
-
-      final fetched = await Future.wait(futures);
-      results.addAll(fetched.whereType<GameResult>());
-
+      }
+      client.close();
       return results;
     } catch (e) {
       developer.log('[OSC] Recommended fetch failed: $e');
-      return []; // Return empty or fallback
+      return [];
     }
   }
 
@@ -237,6 +244,7 @@ class OSCService {
         title: name,
         platform: 'Wii Homebrew',
         downloadUrl: zipUrl,
+        slug: slug,
         coverUrl: iconUrl,
         size: sizeStr,
         version: version,
@@ -291,54 +299,6 @@ class OSCService {
         description: 'Multi-format media player for Wii',
       ),
       GameResult(
-        title: 'ScummVM',
-        platform: 'Wii Homebrew',
-        downloadUrl: '$_cdnUrl/scummvm/scummvm.zip',
-        coverUrl: '$_cdnUrl/scummvm/icon.png',
-        size: '15.2MB',
-        version: '2.5.0',
-        region: 'EMULATORS',
-        provider: 'ScummVM Team',
-        pageUrl: 'https://oscwii.org/library/app/scummvm',
-        description: 'Play classic point-and-click adventure games',
-      ),
-      GameResult(
-        title: 'FCE Ultra GX',
-        platform: 'Wii Homebrew',
-        downloadUrl: '$_cdnUrl/fceugx/fceugx.zip',
-        coverUrl: '$_cdnUrl/fceugx/icon.png',
-        size: '3.4MB',
-        version: '3.4.0',
-        region: 'EMULATORS',
-        provider: 'dborth',
-        pageUrl: 'https://oscwii.org/library/app/fceugx',
-        description: 'Nintendo Entertainment System emulator',
-      ),
-      GameResult(
-        title: 'Snes9x GX',
-        platform: 'Wii Homebrew',
-        downloadUrl: '$_cdnUrl/snes9xgx/snes9xgx.zip',
-        coverUrl: '$_cdnUrl/snes9xgx/icon.png',
-        size: '4.2MB',
-        version: '4.4.0',
-        region: 'EMULATORS',
-        provider: 'dborth',
-        pageUrl: 'https://oscwii.org/library/app/snes9xgx',
-        description: 'Super Nintendo emulator for Wii',
-      ),
-      GameResult(
-        title: 'Visual Boy Advance GX',
-        platform: 'Wii Homebrew',
-        downloadUrl: '$_cdnUrl/vbagx/vbagx.zip',
-        coverUrl: '$_cdnUrl/vbagx/icon.png',
-        size: '5.1MB',
-        version: '2.4.0',
-        region: 'EMULATORS',
-        provider: 'dborth',
-        pageUrl: 'https://oscwii.org/library/app/vbagx',
-        description: 'Game Boy Advance emulator',
-      ),
-      GameResult(
         title: 'USB Loader GX',
         platform: 'Wii Homebrew',
         downloadUrl: '$_cdnUrl/usbloader_gx/usbloader_gx.zip',
@@ -350,92 +310,17 @@ class OSCService {
         pageUrl: 'https://oscwii.org/library/app/usbloader_gx',
         description: 'Load Wii and GameCube backups from USB',
       ),
-      GameResult(
-        title: 'WiiFlow',
-        platform: 'Wii Homebrew',
-        downloadUrl: '$_cdnUrl/wiiflow/wiiflow.zip',
-        coverUrl: '$_cdnUrl/wiiflow/icon.png',
-        size: '7.2MB',
-        version: '5.4.9',
-        region: 'UTILITIES',
-        provider: 'WiiFlow Team',
-        pageUrl: 'https://oscwii.org/library/app/wiiflow',
-        description: 'Beautiful USB loader with coverflow',
-      ),
-      // Mock Games for fallback
-      GameResult(
-        title: 'Newer Super Mario Bros. Wii',
-        platform: 'Wii Homebrew',
-        downloadUrl: null, // Often external
-        coverUrl: null,
-        size: '570MB',
-        version: '1.2.0',
-        region: 'GAMES',
-        provider: 'Newer Team',
-        pageUrl: 'https://newerteam.com/wii/',
-        description: 'Partial conversion of NSMBW w/ new levels',
-      ),
-      GameResult(
-        title: 'Helii',
-        platform: 'Wii Homebrew',
-        downloadUrl: '$_cdnUrl/helii/helii.zip',
-        coverUrl: '$_cdnUrl/helii/icon.png',
-        size: '3.5MB',
-        version: '1.0',
-        region: 'GAMES',
-        provider: 'Unknown',
-        pageUrl: 'https://oscwii.org/library/app/helii',
-        description: 'Fly a helicopter and save people',
-      ),
-      GameResult(
-        title: 'Super Mario War Wii',
-        platform: 'Wii Homebrew',
-        downloadUrl: '$_cdnUrl/smw-wii/smw-wii.zip',
-        coverUrl: '$_cdnUrl/smw-wii/icon.png',
-        size: '8.2MB',
-        version: '1.4',
-        region: 'GAMES',
-        provider: 'Tantric',
-        pageUrl: 'https://oscwii.org/library/app/smw-wii',
-        description: 'Multiplayer Mario deathmatch game',
-      ),
-      GameResult(
-        title: 'QuakeGX',
-        platform: 'Wii Homebrew',
-        downloadUrl: '$_cdnUrl/quakegx/quakegx.zip',
-        coverUrl: '$_cdnUrl/quakegx/icon.png',
-        size: '3.6MB',
-        version: '0.0.6',
-        region: 'GAMES',
-        provider: 'QuakeGX Team',
-        pageUrl: 'https://oscwii.org/library/app/quakegx',
-        description: 'Quake 1 port for Wii',
-      ),
-      GameResult(
-        title: 'Space Cadet Pinball',
-        platform: 'Wii Homebrew',
-        downloadUrl: '$_cdnUrl/SpaceCadetPinball/SpaceCadetPinball.zip',
-        coverUrl: '$_cdnUrl/SpaceCadetPinball/icon.png',
-        size: '2.8MB',
-        version: '1.0',
-        region: 'GAMES',
-        provider: 'fgsfds',
-        pageUrl: 'https://oscwii.org/library/app/SpaceCadetPinball',
-        description: 'Decompilation of 3D Pinball for Windows',
-      ),
+      // Add more mocks if needed, kept simple for now
     ];
 
-    // Filter by category and/or query
     var filtered = mockData;
 
-    // Filter by category first
     if (category != null && category.isNotEmpty) {
       filtered = filtered
-          .where((game) => game.region?.toLowerCase() == category.toLowerCase())
+          .where((game) => game.region.toLowerCase() == category.toLowerCase())
           .toList();
     }
 
-    // Then filter by query if provided
     if (query.isNotEmpty) {
       filtered = filtered
           .where(
@@ -444,15 +329,5 @@ class OSCService {
     }
 
     return filtered;
-  }
-
-  /// Generate mock popular homebrew
-  List<GameResult> _generateMockPopularHomebrew() {
-    return _generateMockHomebrew('', null);
-  }
-
-  /// Get available categories
-  Map<String, String> getCategories() {
-    return Map.from(_categories);
   }
 }

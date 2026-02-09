@@ -24,7 +24,7 @@ class OSCProvider with ChangeNotifier {
 
   Map<String, String> get categories {
     final cats = Map<String, String>.from(_oscService.getCategories());
-    cats['rom_hacks'] = 'Rom Hacks';
+    // cats['rom_hacks'] = 'Rom Hacks'; // Removed per user request
     cats['gamebrew'] = 'GameBrew';
     return cats;
   }

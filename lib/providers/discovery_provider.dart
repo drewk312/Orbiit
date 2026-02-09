@@ -19,6 +19,7 @@ import 'package:ffi/ffi.dart';
 import 'package:path/path.dart' as path_lib;
 import '../services/cover_art/cover_art_service.dart';
 import '../services/cover_art/cover_art_source.dart';
+import '../services/gamebrew_service.dart';
 
 class DiscoveryProvider extends ChangeNotifier {
   List<GameResult> _results = [];
@@ -34,6 +35,7 @@ class DiscoveryProvider extends ChangeNotifier {
   final VimmService _vimm = VimmService();
   final SmartSearchService _smartSearch = SmartSearchService();
   final UnifiedSearchService _unifiedSearch = UnifiedSearchService();
+  final GameBrewService _gameBrewService = GameBrewService();
   final ArchiveService _archive = ArchiveService();
   final DownloadService _download = DownloadService();
   final LibraryStateService _library = LibraryStateService();
@@ -95,12 +97,15 @@ class DiscoveryProvider extends ChangeNotifier {
     debugPrint('[Discovery] Loading store sections...');
 
     try {
+      final romHacks = await _gameBrewService.fetchHomebrew();
+
       // Popular titles from all categories
       _popularGames = [
         ..._getPopularTitles(), // Wii
         ..._getPopularGameCubeTitles(),
         ..._getPopularWiiUTitles(), // Wii U
         ..._getPopularRetroTitles(),
+        ...romHacks,
       ];
 
       // Latest releases (simulated for now)

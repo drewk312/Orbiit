@@ -64,6 +64,7 @@ import '../models/game_result.dart';
 import '../services/archive_org_service.dart';
 import '../services/myrient_scraper.dart';
 import '../services/homebrew_automation_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CONFIGURATION
@@ -495,6 +496,41 @@ class ForgeProvider extends ChangeNotifier {
 
       debugPrint('[ForgeProvider] Starting forge for: ${game.title}');
       notifyListeners();
+
+      // ⚡ Handle External Browser Requirements (Rom Hacks / Manual Downloads)
+      if (game.requiresBrowser || (game.description?.contains('requires browser') ?? false)) {
+        _statusMessage = 'Opening external download page...';
+        notifyListeners();
+        
+        final url = game.pageUrl ?? game.downloadUrl;
+        if (url != null && url.isNotEmpty) {
+          try {
+             await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+             _statusMessage = 'Opened in browser';
+             _currentStatus = ForgeStatus.ready;
+          } catch (e) {
+             _error = 'Could not open browser: $e';
+             _currentStatus = ForgeStatus.error;
+          }
+        } else {
+             _error = 'No URL available to open';
+             _currentStatus = ForgeStatus.error;
+        }
+
+        // Complete the "forge" immediately
+        _isForging = false;
+        _progress = 1.0;
+        notifyListeners();
+        
+        // Process next item in queue after delay
+        await Future.delayed(const Duration(seconds: 1));
+        if (_downloadQueue.isNotEmpty) {
+          final next = _downloadQueue.removeAt(0);
+          unawaited(_saveQueueToDisk());
+          unawaited(startForge(next));
+        }
+        return;
+      }
 
       // ─────────────────────────────────────────────────────────────────────
       // URL Resolution

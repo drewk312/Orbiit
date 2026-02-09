@@ -7,6 +7,7 @@
 #include <iostream>
 #include <thread>
 #include <atomic>
+#include <memory>
 #include <map>
 #include <mutex>
 #include <cstring>
@@ -334,14 +335,6 @@ FORGE_EXPORT bool forge_get_mission_progress(int32_t mission_id, int32_t* status
     return true;
 }
 
-FORGE_EXPORT bool forge_cancel_mission(uint64_t mission_id) {
-    std::lock_guard<std::mutex> lock(g_missions_mutex);
-    auto it = g_missions.find(mission_id);
-    if (it == g_missions.end()) return false;
-    if (it->second.joinable()) it->second.join();
-    g_missions.erase(it);
-    return true;
-}
 
 FORGE_EXPORT bool forge_format_drive_32kb(const char* drive_path, const char* label, ForgeProgressCallback callback) {
     callback(FORGE_STATUS_FORGING, 0.0f, "Preparing drive format...");

@@ -1,8 +1,8 @@
 # ninja log v7
-372	2235	7917962047906459	CMakeFiles/forge_core.dir/platform_identifier.cpp.obj	d94d297e83a98428
-590	2412	7917962049430283	CMakeFiles/forge_core.dir/banner_parser.cpp.obj	46da33fd0ba851ed
-641	3085	7917962049885111	CMakeFiles/forge_core.dir/handshake_core.cpp.obj	7da2236be10ff246
-915	10405	7917962052576180	CMakeFiles/forge_core.dir/C_/Users/kidke/OneDrive/Desktop/Best_Wii/wiigc_fusion/native/forge_logic.cpp.obj	ed90bc70f3865127
-42	12008	7917962044615877	CMakeFiles/forge_core.dir/forge_manager.cpp.obj	92fa8d67e0478110
-12010	13350	7917962175930932	libforge_core.dll	73ca55b595df8921
-12010	13350	7917962175930932	libforge_core.dll.a	73ca55b595df8921
+71	470	7923260942778252	CMakeFiles/forge_core.dir/handshake_core.cpp.obj	92118727279919a3
+36	774	7923260942424434	CMakeFiles/forge_core.dir/platform_identifier.cpp.obj	7d2d9438e81e5212
+53	798	7923260942595729	CMakeFiles/forge_core.dir/banner_parser.cpp.obj	99d78c190311e31e
+90	9363	7923260942967799	CMakeFiles/forge_core.dir/C_/Users/kidke/OneDrive/Desktop/Best_Wii/Orbiit/native/forge_logic.cpp.obj	d32dc06c5bbfa7d8
+36	8605	7923265711088065	CMakeFiles/forge_core.dir/forge_manager.cpp.obj	13429c4361562259
+8618	9565	7923265805505442	libforge_core.dll	1428ff3a601731e
+8618	9565	7923265805505442	libforge_core.dll.a	1428ff3a601731e

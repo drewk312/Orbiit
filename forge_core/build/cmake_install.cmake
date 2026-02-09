@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/kidke/OneDrive/Desktop/Best Wii/wiigc_fusion/forge_core
+# Install script for directory: C:/Users/kidke/OneDrive/Desktop/Best Wii/Orbiit/forge_core
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,7 +38,7 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/kidke/OneDrive/Desktop/Best Wii/wiigc_fusion/forge_core/build/libforge_core.dll")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE SHARED_LIBRARY FILES "C:/Users/kidke/OneDrive/Desktop/Best Wii/Orbiit/forge_core/build/libforge_core.dll")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/libforge_core.dll" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/libforge_core.dll")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -48,13 +48,13 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES "C:/Users/kidke/OneDrive/Desktop/Best Wii/wiigc_fusion/forge_core/forge_manager.h")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES "C:/Users/kidke/OneDrive/Desktop/Best Wii/Orbiit/forge_core/forge_manager.h")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/kidke/OneDrive/Desktop/Best Wii/wiigc_fusion/forge_core/build/install_local_manifest.txt"
+  file(WRITE "C:/Users/kidke/OneDrive/Desktop/Best Wii/Orbiit/forge_core/build/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -70,6 +70,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/Users/kidke/OneDrive/Desktop/Best Wii/wiigc_fusion/forge_core/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/Users/kidke/OneDrive/Desktop/Best Wii/Orbiit/forge_core/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

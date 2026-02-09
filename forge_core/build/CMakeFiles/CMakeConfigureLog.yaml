@@ -30,6 +30,9 @@ events:
       - "samu"
     candidate_directories:
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -70,6 +73,8 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Program Files (x86)/PowerShell/7/ninja-build.com"
       - "C:/Program Files (x86)/PowerShell/7/ninja-build.exe"
@@ -80,6 +85,33 @@ events:
       - "C:/Program Files (x86)/PowerShell/7/samu.com"
       - "C:/Program Files (x86)/PowerShell/7/samu.exe"
       - "C:/Program Files (x86)/PowerShell/7/samu"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/ninja-build.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/ninja-build.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/ninja-build"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/ninja.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/ninja.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/ninja"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/samu.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/samu.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/samu"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/ninja-build.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/ninja-build.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/ninja-build"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/ninja.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/ninja.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/ninja"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/samu.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/samu.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/samu"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/ninja-build.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/ninja-build.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/ninja-build"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/ninja.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/ninja.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/ninja"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/samu.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/samu.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/samu"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/ninja-build.com"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/ninja-build.exe"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/ninja-build"
@@ -232,6 +264,9 @@ events:
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -304,6 +339,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -330,6 +367,9 @@ events:
       - "clang++"
     candidate_directories:
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -370,6 +410,8 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Program Files (x86)/PowerShell/7/c++.com"
       - "C:/Program Files (x86)/PowerShell/7/c++.exe"
@@ -389,6 +431,60 @@ events:
       - "C:/Program Files (x86)/PowerShell/7/clang++.com"
       - "C:/Program Files (x86)/PowerShell/7/clang++.exe"
       - "C:/Program Files (x86)/PowerShell/7/clang++"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/c++.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/c++.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/c++"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/g++.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/g++.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/g++"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/cl.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/cl.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/cl"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/bcc.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/bcc.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/bcc"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/icx.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/icx.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/icx"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/clang++.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/clang++.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/clang++"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/c++.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/c++.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/c++"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/g++.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/g++.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/g++"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/cl.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/cl.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/cl"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/bcc.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/bcc.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/bcc"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/icx.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/icx.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/icx"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/clang++.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/clang++.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/clang++"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/c++.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/c++.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/c++"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/g++.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/g++.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/g++"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/cl.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/cl.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/cl"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/bcc.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/bcc.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/bcc"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/icx.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/icx.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/icx"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/clang++.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/clang++.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/clang++"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/c++.com"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/c++.exe"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/c++"
@@ -682,6 +778,9 @@ events:
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -754,6 +853,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -782,6 +883,9 @@ events:
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -854,6 +958,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "message-v1"
     backtrace:
@@ -874,7 +980,7 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
       
       The CXX compiler identification is GNU, found in:
-        C:/Users/kidke/OneDrive/Desktop/Best Wii/wiigc_fusion/forge_core/build/CMakeFiles/4.1.0/CompilerIdCXX/a.exe
+        C:/Users/kidke/OneDrive/Desktop/Best Wii/Orbiit/forge_core/build/CMakeFiles/4.1.0/CompilerIdCXX/a.exe
       
   -
     kind: "find-v1"
@@ -898,6 +1004,9 @@ events:
     candidate_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/"
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -937,12 +1046,17 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/ar.com"
     found: "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/ar.exe"
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -1015,6 +1129,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1037,6 +1153,9 @@ events:
     candidate_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/"
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -1076,12 +1195,17 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/ranlib.com"
     found: "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/ranlib.exe"
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -1154,6 +1278,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1176,6 +1302,9 @@ events:
     candidate_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/"
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -1215,12 +1344,17 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/strip.com"
     found: "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/strip.exe"
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -1293,6 +1427,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1315,6 +1451,9 @@ events:
     candidate_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/"
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -1354,12 +1493,17 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/ld.com"
     found: "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/ld.exe"
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -1432,6 +1576,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1454,6 +1600,9 @@ events:
     candidate_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/"
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -1493,12 +1642,17 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/nm.com"
     found: "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/nm.exe"
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -1571,6 +1725,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1593,6 +1749,9 @@ events:
     candidate_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/"
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -1632,12 +1791,17 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/objdump.com"
     found: "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/objdump.exe"
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -1710,6 +1874,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1732,6 +1898,9 @@ events:
     candidate_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/"
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -1771,12 +1940,17 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/objcopy.com"
     found: "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/objcopy.exe"
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -1849,6 +2023,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -1871,6 +2047,9 @@ events:
     candidate_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/"
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -1910,12 +2089,17 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/readelf.com"
     found: "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/readelf.exe"
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -1988,6 +2172,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -2010,6 +2196,9 @@ events:
     candidate_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/"
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -2049,12 +2238,17 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/dlltool.com"
     found: "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/dlltool.exe"
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -2127,6 +2321,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -2149,6 +2345,9 @@ events:
     candidate_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/"
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -2188,12 +2387,17 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/addr2line.com"
     found: "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/addr2line.exe"
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -2266,6 +2470,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -2288,6 +2494,9 @@ events:
     candidate_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/"
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -2327,6 +2536,8 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/tapi.com"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/tapi.exe"
@@ -2334,6 +2545,15 @@ events:
       - "C:/Program Files (x86)/PowerShell/7/tapi.com"
       - "C:/Program Files (x86)/PowerShell/7/tapi.exe"
       - "C:/Program Files (x86)/PowerShell/7/tapi"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/tapi.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/tapi.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/tapi"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/tapi.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/tapi.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/tapi"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/tapi.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/tapi.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/tapi"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/tapi.com"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/tapi.exe"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/tapi"
@@ -2451,10 +2671,19 @@ events:
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/tapi.com"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/tapi.exe"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/tapi"
+      - "C:/flutter/bin/tapi.com"
+      - "C:/flutter/bin/tapi.exe"
+      - "C:/flutter/bin/tapi"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/tapi.com"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/tapi.exe"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/tapi"
     found: false
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -2527,6 +2756,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -2552,6 +2783,9 @@ events:
     candidate_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/"
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -2591,6 +2825,8 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ar-15.2.com"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ar-15.2.exe"
@@ -2598,6 +2834,15 @@ events:
       - "C:/Program Files (x86)/PowerShell/7/gcc-ar-15.2.com"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ar-15.2.exe"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ar-15.2"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.2.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.2.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.2"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.2.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.2.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.2"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ar-15.2.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ar-15.2.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ar-15.2"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ar-15.2.com"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ar-15.2.exe"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ar-15.2"
@@ -2715,12 +2960,27 @@ events:
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ar-15.2.com"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ar-15.2.exe"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ar-15.2"
+      - "C:/flutter/bin/gcc-ar-15.2.com"
+      - "C:/flutter/bin/gcc-ar-15.2.exe"
+      - "C:/flutter/bin/gcc-ar-15.2"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2.com"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2.exe"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.2"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ar-15.com"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ar-15.exe"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ar-15"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ar-15.com"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ar-15.exe"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ar-15"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar-15"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar-15"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ar-15.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ar-15.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ar-15"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ar-15.com"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ar-15.exe"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ar-15"
@@ -2838,12 +3098,27 @@ events:
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ar-15.com"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ar-15.exe"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ar-15"
+      - "C:/flutter/bin/gcc-ar-15.com"
+      - "C:/flutter/bin/gcc-ar-15.exe"
+      - "C:/flutter/bin/gcc-ar-15"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.com"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15.exe"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar-15"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ar15.com"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ar15.exe"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ar15"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ar15.com"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ar15.exe"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ar15"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar15.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar15.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ar15"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar15.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar15.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ar15"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ar15.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ar15.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ar15"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ar15.com"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ar15.exe"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ar15"
@@ -2961,11 +3236,20 @@ events:
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ar15.com"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ar15.exe"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ar15"
+      - "C:/flutter/bin/gcc-ar15.com"
+      - "C:/flutter/bin/gcc-ar15.exe"
+      - "C:/flutter/bin/gcc-ar15"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15.com"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15.exe"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ar15"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ar.com"
     found: "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ar.exe"
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -3038,6 +3322,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -3063,6 +3349,9 @@ events:
     candidate_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/"
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -3102,6 +3391,8 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ranlib-15.2.com"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ranlib-15.2.exe"
@@ -3109,6 +3400,15 @@ events:
       - "C:/Program Files (x86)/PowerShell/7/gcc-ranlib-15.2.com"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ranlib-15.2.exe"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ranlib-15.2"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.2.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.2.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.2"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.2.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.2.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.2"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ranlib-15.2.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ranlib-15.2.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ranlib-15.2"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ranlib-15.2.com"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ranlib-15.2.exe"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ranlib-15.2"
@@ -3226,12 +3526,27 @@ events:
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ranlib-15.2.com"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ranlib-15.2.exe"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ranlib-15.2"
+      - "C:/flutter/bin/gcc-ranlib-15.2.com"
+      - "C:/flutter/bin/gcc-ranlib-15.2.exe"
+      - "C:/flutter/bin/gcc-ranlib-15.2"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2.com"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2.exe"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.2"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ranlib-15.com"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ranlib-15.exe"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ranlib-15"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ranlib-15.com"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ranlib-15.exe"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ranlib-15"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib-15"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib-15"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ranlib-15.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ranlib-15.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ranlib-15"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ranlib-15.com"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ranlib-15.exe"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ranlib-15"
@@ -3349,12 +3664,27 @@ events:
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ranlib-15.com"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ranlib-15.exe"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ranlib-15"
+      - "C:/flutter/bin/gcc-ranlib-15.com"
+      - "C:/flutter/bin/gcc-ranlib-15.exe"
+      - "C:/flutter/bin/gcc-ranlib-15"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.com"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15.exe"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib-15"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ranlib15.com"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ranlib15.exe"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ranlib15"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ranlib15.com"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ranlib15.exe"
       - "C:/Program Files (x86)/PowerShell/7/gcc-ranlib15"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib15.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib15.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/gcc-ranlib15"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib15.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib15.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/gcc-ranlib15"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ranlib15.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ranlib15.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/gcc-ranlib15"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ranlib15.com"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ranlib15.exe"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/gcc-ranlib15"
@@ -3472,11 +3802,20 @@ events:
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ranlib15.com"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ranlib15.exe"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/gcc-ranlib15"
+      - "C:/flutter/bin/gcc-ranlib15.com"
+      - "C:/flutter/bin/gcc-ranlib15.exe"
+      - "C:/flutter/bin/gcc-ranlib15"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15.com"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15.exe"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/gcc-ranlib15"
       - "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ranlib.com"
     found: "C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/gcc-ranlib.exe"
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -3549,6 +3888,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -3573,6 +3914,9 @@ events:
       - "windres"
     candidate_directories:
       - "C:/Program Files (x86)/PowerShell/7/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/libnvvp/"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7/bin/"
@@ -3613,6 +3957,8 @@ events:
       - "C:/Users/kidke/AppData/Local/Programs/Antigravity/bin/"
       - "C:/Users/kidke/AppData/Local/Programs/cursor/resources/app/bin/"
       - "C:/Users/kidke/Downloads/Best Wii/flutter-sdk/bin/"
+      - "C:/flutter/bin/"
+      - "C:/Users/kidke/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
       - "C:/Program Files/bin/"
       - "C:/Program Files/sbin/"
       - "C:/Program Files/"
@@ -3629,6 +3975,15 @@ events:
       - "C:/Program Files (x86)/PowerShell/7/windres.com"
       - "C:/Program Files (x86)/PowerShell/7/windres.exe"
       - "C:/Program Files (x86)/PowerShell/7/windres"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/windres.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/windres.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/windres"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/windres.com"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/windres.exe"
+      - "C:/Users/kidke/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/windres"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/windres.com"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/windres.exe"
+      - "C:/Program Files/ImageMagick-7.1.2-Q16-HDRI/windres"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/windres.com"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/windres.exe"
       - "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/bin/windres"
@@ -3682,6 +4037,9 @@ events:
     search_context:
       ENV{PATH}:
         - "C:\\Program Files (x86)\\PowerShell\\7"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\kidke\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
+        - "C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\bin"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.8\\libnvvp"
         - "C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.7\\bin"
@@ -3754,6 +4112,8 @@ events:
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\Antigravity\\bin"
         - "C:\\Users\\kidke\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin"
         - "C:\\Users\\kidke\\Downloads\\Best Wii\\flutter-sdk\\bin"
+        - "C:\\flutter\\bin"
+        - "c:\\Users\\kidke\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
       CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/forge_core"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
@@ -3769,8 +4129,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/kidke/OneDrive/Desktop/Best Wii/wiigc_fusion/forge_core/build/CMakeFiles/CMakeScratch/TryCompile-1y2mnk"
-      binary: "C:/Users/kidke/OneDrive/Desktop/Best Wii/wiigc_fusion/forge_core/build/CMakeFiles/CMakeScratch/TryCompile-1y2mnk"
+      source: "C:/Users/kidke/OneDrive/Desktop/Best Wii/Orbiit/forge_core/build/CMakeFiles/CMakeScratch/TryCompile-1fzquh"
+      binary: "C:/Users/kidke/OneDrive/Desktop/Best Wii/Orbiit/forge_core/build/CMakeFiles/CMakeScratch/TryCompile-1fzquh"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -3780,10 +4140,10 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/kidke/OneDrive/Desktop/Best Wii/wiigc_fusion/forge_core/build/CMakeFiles/CMakeScratch/TryCompile-1y2mnk'
+        Change Dir: 'C:/Users/kidke/OneDrive/Desktop/Best Wii/Orbiit/forge_core/build/CMakeFiles/CMakeScratch/TryCompile-1fzquh'
         
-        Run Build Command(s): C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/ninja.exe -v cmTC_acb3e
-        [1/2] C:\\Users\\kidke\\Downloads\\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\\mingw64\\bin\\c++.exe   -v -o CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj -c C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp
+        Run Build Command(s): C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/ninja.exe -v cmTC_78878
+        [1/2] C:\\Users\\kidke\\Downloads\\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\\mingw64\\bin\\c++.exe   -v -o CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj -c C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp
         Using built-in specs.
         COLLECT_GCC=C:\\Users\\kidke\\Downloads\\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\\mingw64\\bin\\c++.exe
         OFFLOAD_TARGET_NAMES=nvptx-none
@@ -3792,8 +4152,8 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib zstd
         gcc version 15.2.0 (MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1) 
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_acb3e.dir/'
-         C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_acb3e.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o C:\\Users\\kidke\\AppData\\Local\\Temp\\ccBnNgxa.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_78878.dir/'
+         C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_78878.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o C:\\Users\\kidke\\AppData\\Local\\Temp\\cc0o5Ho3.s
         GNU C++17 (MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1) version 15.2.0 (x86_64-w64-mingw32)
         	compiled by GNU C version 15.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
         
@@ -3818,13 +4178,13 @@ events:
          C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include
         End of search list.
         Compiler executable checksum: 43a2d58255b90554ada10a53fa1a7228
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_acb3e.dir/'
-         C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\kidke\\AppData\\Local\\Temp\\ccBnNgxa.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_78878.dir/'
+         C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\kidke\\AppData\\Local\\Temp\\cc0o5Ho3.s
         GNU assembler version 2.45 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r1) 2.45
         COMPILER_PATH=C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/;C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/;C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/;C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.'
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Users\\kidke\\Downloads\\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\\mingw64\\bin\\c++.exe  -v -Wl,-v CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_acb3e.exe -Wl,--out-implib,libcmTC_acb3e.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.'
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Users\\kidke\\Downloads\\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\\mingw64\\bin\\c++.exe  -v -Wl,-v CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_78878.exe -Wl,--out-implib,libcmTC_78878.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
         Using built-in specs.
         COLLECT_GCC=C:\\Users\\kidke\\Downloads\\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\\mingw64\\bin\\c++.exe
         COLLECT_LTO_WRAPPER=C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe
@@ -3836,12 +4196,12 @@ events:
         gcc version 15.2.0 (MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1) 
         COMPILER_PATH=C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/;C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/;C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/;C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_acb3e.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_acb3e.'
-         C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\kidke\\AppData\\Local\\Temp\\ccfbK5vd.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_acb3e.exe C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_acb3e.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_78878.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_78878.'
+         C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\kidke\\AppData\\Local\\Temp\\ccnUsOWa.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_78878.exe C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_78878.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
         collect2 version 15.2.0
-        C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\kidke\\AppData\\Local\\Temp\\ccfbK5vd.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_acb3e.exe C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_acb3e.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\kidke\\AppData\\Local\\Temp\\ccnUsOWa.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_78878.exe C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_78878.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
         GNU ld (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r1) 2.45
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_acb3e.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_acb3e.'
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_78878.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_78878.'
         
       exitCode: 0
   -
@@ -3882,10 +4242,10 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: 'C:/Users/kidke/OneDrive/Desktop/Best Wii/wiigc_fusion/forge_core/build/CMakeFiles/CMakeScratch/TryCompile-1y2mnk']
+        ignore line: [Change Dir: 'C:/Users/kidke/OneDrive/Desktop/Best Wii/Orbiit/forge_core/build/CMakeFiles/CMakeScratch/TryCompile-1fzquh']
         ignore line: []
-        ignore line: [Run Build Command(s): C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/ninja.exe -v cmTC_acb3e]
-        ignore line: [[1/2] C:\\Users\\kidke\\Downloads\\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\\mingw64\\bin\\c++.exe   -v -o CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj -c C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Run Build Command(s): C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/ninja.exe -v cmTC_78878]
+        ignore line: [[1/2] C:\\Users\\kidke\\Downloads\\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\\mingw64\\bin\\c++.exe   -v -o CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj -c C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\Users\\kidke\\Downloads\\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\\mingw64\\bin\\c++.exe]
         ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
@@ -3894,8 +4254,8 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib zstd]
         ignore line: [gcc version 15.2.0 (MinGW-W64 x86_64-msvcrt-posix-seh  built by Brecht Sanders  r1) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_acb3e.dir/']
-        ignore line: [ C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_acb3e.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o C:\\Users\\kidke\\AppData\\Local\\Temp\\ccBnNgxa.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_78878.dir/']
+        ignore line: [ C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_78878.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o C:\\Users\\kidke\\AppData\\Local\\Temp\\cc0o5Ho3.s]
         ignore line: [GNU C++17 (MinGW-W64 x86_64-msvcrt-posix-seh  built by Brecht Sanders  r1) version 15.2.0 (x86_64-w64-mingw32)]
         ignore line: [	compiled by GNU C version 15.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.27-GMP]
         ignore line: []
@@ -3920,8 +4280,8 @@ events:
         ignore line: [ C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: 43a2d58255b90554ada10a53fa1a7228]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_acb3e.dir/']
-        ignore line: [ C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\kidke\\AppData\\Local\\Temp\\ccBnNgxa.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_78878.dir/']
+        ignore line: [ C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\kidke\\AppData\\Local\\Temp\\cc0o5Ho3.s]
         ignore line: [GNU assembler version 2.45 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64  built by Brecht Sanders  r1) 2.45]
         ignore line: [COMPILER_PATH=C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/]
         ignore line: [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/]
@@ -3932,8 +4292,8 @@ events:
         ignore line: [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
         ignore line: [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.']
-        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Users\\kidke\\Downloads\\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\\mingw64\\bin\\c++.exe  -v -Wl -v CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_acb3e.exe -Wl --out-implib libcmTC_acb3e.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Users\\kidke\\Downloads\\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\\mingw64\\bin\\c++.exe  -v -Wl -v CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_78878.exe -Wl --out-implib libcmTC_78878.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\Users\\kidke\\Downloads\\winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1\\mingw64\\bin\\c++.exe]
         ignore line: [COLLECT_LTO_WRAPPER=C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe]
@@ -3952,13 +4312,13 @@ events:
         ignore line: [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
         ignore line: [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_acb3e.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_acb3e.']
-        link line: [ C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\kidke\\AppData\\Local\\Temp\\ccfbK5vd.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_acb3e.exe C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_acb3e.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_78878.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_78878.']
+        link line: [ C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\kidke\\AppData\\Local\\Temp\\ccnUsOWa.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_78878.exe C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_78878.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
           arg [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe] ==> ignore
           arg [-plugin] ==> ignore
           arg [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll] ==> ignore
           arg [-plugin-opt=C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe] ==> ignore
-          arg [-plugin-opt=-fresolution=C:\\Users\\kidke\\AppData\\Local\\Temp\\ccfbK5vd.res] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\kidke\\AppData\\Local\\Temp\\ccnUsOWa.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
@@ -3980,7 +4340,7 @@ events:
           arg [i386pep] ==> ignore
           arg [-Bdynamic] ==> search dynamic
           arg [-o] ==> ignore
-          arg [cmTC_acb3e.exe] ==> ignore
+          arg [cmTC_78878.exe] ==> ignore
           arg [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o] ==> obj [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o]
           arg [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o] ==> obj [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o]
           arg [-LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0] ==> dir [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0]
@@ -3990,9 +4350,9 @@ events:
           arg [-LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib] ==> dir [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib]
           arg [-LC:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..] ==> dir [C:/Users/kidke/Downloads/winlibs-x86_64-posix-seh-gcc-15.2.0-mingw-w64msvcrt-13.0.0-r1/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_acb3e.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+          arg [CMakeFiles/cmTC_78878.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_acb3e.dll.a] ==> ignore
+          arg [libcmTC_78878.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore

@@ -7,16 +7,17 @@
 **Your Personal Collection. Elevated.**
 
 [![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?style=for-the-badge&logo=windows)](https://github.com/drewk312/Orbiit/releases)
-[![Version](https://img.shields.io/badge/Version-v1.0.0-FF6B6B?style=for-the-badge)](https://github.com/drewk312/Orbiit/releases)
+[![Version](https://img.shields.io/badge/Version-v1.0.0_Beta-FF6B6B?style=for-the-badge)](https://github.com/drewk312/Orbiit/releases)
 [![License](https://img.shields.io/badge/License-MIT-4ECDC4?style=for-the-badge)](LICENSE)
 [![Flutter](https://img.shields.io/badge/Flutter-3.0+-02569B?style=for-the-badge&logo=flutter)](https://flutter.dev)
 
-[📥 **Download**](https://github.com/drewk312/Orbiit/releases) • [📖 **Documentation**](docs/) • [💬 **Community**](https://github.com/drewk312/Orbiit/discussions) • [⚖️ **Legal**](LEGAL.md)
+[📥 **Download Beta**](https://github.com/drewk312/Orbiit/releases) • [📖 **Documentation**](docs/) • [💬 **Community**](https://github.com/drewk312/Orbiit/discussions) • [⚖️ **Legal**](LEGAL.md)
 
 ---
 
-### 🌟 *The Ultimate Personal Game Archive*
+### 🌟 *The Ultimate Personal Game Archive - Now in Open Beta!*
 
+**Orbiit is currently in Open Beta.** We are actively seeking testers to help us polish the experience.  
 Orbiit transforms how you organize and manage **your personal game backups**.  
 Built with Flutter & C++, combining luxury design with enterprise-grade performance.
 

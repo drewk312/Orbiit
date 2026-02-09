@@ -42,6 +42,7 @@ import 'myrient_service.dart';
 import 'vimm_service.dart';
 import '../core/app_logger.dart';
 import 'archive_org_service.dart';
+import 'gamebrew_service.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CONFIGURATION
@@ -105,6 +106,7 @@ class UnifiedSearchService {
   final MyrientService _myrient = MyrientService();
   final VimmService _vimm = VimmService();
   final ArchiveOrgService _archive = ArchiveOrgService();
+  final GameBrewService _gameBrew = GameBrewService();
 
   // ─────────────────────────────────────────────────────────────────────────
   // Search Statistics
@@ -182,9 +184,9 @@ class UnifiedSearchService {
       'Myrient': _searchMyrient(cleanQuery, platform),
       'Vimm': _searchVimm(cleanQuery, platform),
       'Archive.org': _searchArchiveOrg(cleanQuery, platform),
+      'GameBrew': _searchGameBrew(cleanQuery, platform),
     };
 
-    // ── Await All Results ──
     final searchResults = await Future.wait(
       futures.entries.map((entry) async {
         final providerStopwatch = Stopwatch()..start();
@@ -221,6 +223,11 @@ class UnifiedSearchService {
     final archiveResults = allResults['Archive.org'] ?? [];
     results.addAll(archiveResults);
     _log('  Archive.org: ${archiveResults.length} results');
+
+    // ── Priority 5: GameBrew (Rom Hacks) ──
+    final gameBrewResults = allResults['GameBrew'] ?? [];
+    results.addAll(gameBrewResults);
+    _log('  GameBrew: ${gameBrewResults.length} results');
 
     // ── Deduplicate Results ──
     final uniqueResults = _deduplicateResults(results);
@@ -284,6 +291,26 @@ class UnifiedSearchService {
       return [];
     } catch (e) {
       _log('[Archive.org] Search error: $e');
+      return [];
+    }
+  }
+
+  /// Search GameBrew for ROM hacks
+  Future<List<GameResult>> _searchGameBrew(
+      String query, String? platform) async {
+    try {
+      final results = await _gameBrew.searchGames(query);
+      if (platform != null) {
+        return results
+            .where((r) => r.platform.toLowerCase() == platform.toLowerCase())
+            .toList();
+      }
+      return results;
+    } on TimeoutException {
+      _log('[GameBrew] Search timed out');
+      return [];
+    } catch (e) {
+      _log('[GameBrew] Search error: $e');
       return [];
     }
   }
@@ -378,6 +405,7 @@ class UnifiedSearchService {
       _checkService('Myrient', () => _myrient.search('test')),
       _checkService('Vimm', () => _vimm.search('test')),
       _checkService('Archive.org', () => _searchArchiveOrg('test', null)),
+      _checkService('GameBrew', () => _searchGameBrew('test', null)),
     ]);
 
     for (final check in checks) {

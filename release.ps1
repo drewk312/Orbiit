@@ -19,7 +19,7 @@ if ($LASTEXITCODE -ne 0) {
 # 2. Prepare Release Folder
 $buildDir = "build\windows\x64\runner\release"
 $releaseDir = "release"
-$zipName = "Orbiit_v1.0.0_Windows.zip"
+$zipName = "Orbiit_v1.0.0-beta_Windows.zip"
 
 if (Test-Path $releaseDir) {
     Remove-Item $releaseDir -Recurse -Force

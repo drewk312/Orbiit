@@ -17,6 +17,7 @@ import '../models/game_result.dart';
 import '../services/project_plus_service.dart';
 import '../services/riivolution_service.dart';
 import '../services/dlc_manager_service.dart';
+import '../services/homebrew_automation_service.dart';
 import 'package:file_picker/file_picker.dart';
 
 /// Call from header (e.g. NavigationWrapper) to show Wiiload connection dialog (connect only, no send).
@@ -415,9 +416,6 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
           // Utilities Section
           _buildWiiUSection(
               'Utilities', _getWiiUUtilities(), const Color(0xFF8B5CF6)),
-
-          const SizedBox(height: 24),
-          _buildDLCManagerCard(), // DLC Manager Card
         ],
       ),
     );
@@ -483,6 +481,85 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
     );
   }
 
+  Future<void> _handleBatchUpdate(OSCProvider provider) async {
+    final sdCard = await _pickSDCard(context);
+    if (sdCard == null) return;
+
+    // Show progress dialog
+    if (!mounted) return;
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => _BatchUpdateProgressDialog(
+        games: provider.homebrewResults,
+        sdCard: sdCard,
+      ),
+    );
+  }
+
+  Future<Directory?> _pickSDCard(BuildContext context) async {
+    final result = await FilePicker.platform.getDirectoryPath(
+      dialogTitle: 'Select your SD Card Root',
+      lockParentWindow: true,
+    );
+
+    if (result != null) {
+      return Directory(result);
+    }
+    return null;
+  }
+
+  Widget _buildEssentialsAutomationCard(OSCProvider provider) {
+    return GlassCard(
+      padding: const EdgeInsets.all(20),
+      borderRadius: BorderRadius.circular(FusionRadius.xl),
+      // height: 100, // Let it adjust
+      child: Row(
+        children: [
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: Colors.cyanAccent.withValues(alpha: 0.2),
+              shape: BoxShape.circle,
+            ),
+            child: const Icon(Icons.auto_awesome, color: Colors.cyanAccent, size: 32),
+          ),
+          const SizedBox(width: 20),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Essentials Update',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Auto-install or update all recommended homebrew apps to your SD card in one go.',
+                  style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.7), fontSize: 13),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 16),
+          GlowButton(
+            label: 'UPDATE ALL',
+            icon: Icons.system_update_alt,
+            color: Colors.cyanAccent,
+            onPressed: provider.isLoading ? null : () => _handleBatchUpdate(provider),
+          ),
+        ],
+      ),
+    );
+  }
+
   /// Recommended Section with Project+ Banner and curated apps
   Widget _buildRecommendedSection(OSCProvider provider) {
     return SingleChildScrollView(
@@ -492,6 +569,11 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
           _buildProjectPlusBanner(),
           const SizedBox(height: 24),
           _buildRiivolutionCard(),
+          const SizedBox(height: 24),
+          _buildDLCManagerCard(),
+          const SizedBox(height: 24),
+          // Essentials Automation Card
+          _buildEssentialsAutomationCard(provider),
           const SizedBox(height: 32),
           if (provider.isLoading)
             _buildLoadingState()
@@ -2768,3 +2850,99 @@ class _DLCManagerDialogState extends State<_DLCManagerDialog> {
     );
   }
 }
+
+class _BatchUpdateProgressDialog extends StatefulWidget {
+  final List<GameResult> games;
+  final Directory sdCard;
+
+  const _BatchUpdateProgressDialog({
+    required this.games,
+    required this.sdCard,
+  });
+
+  @override
+  State<_BatchUpdateProgressDialog> createState() => _BatchUpdateProgressDialogState();
+}
+
+class _BatchUpdateProgressDialogState extends State<_BatchUpdateProgressDialog> {
+  String _status = 'Initializing...';
+  double _progress = 0.0;
+  final HomebrewAutomationService _service = HomebrewAutomationService();
+
+  @override
+  void initState() {
+    super.initState();
+    _startBatch();
+  }
+
+  Future<void> _startBatch() async {
+    try {
+      await _service.installBatch(
+        games: widget.games,
+        sdCardRoot: widget.sdCard,
+        onStatus: (msg, p) {
+          if (mounted) {
+            setState(() {
+              _status = msg;
+              _progress = p;
+            });
+          }
+        },
+      );
+      if (mounted) {
+        Navigator.of(context).pop();
+        ScaffoldMessenger.of(context).showSnackBar(
+           const SnackBar(content: Text('All essential apps updated successfully!')),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+         setState(() {
+           _status = 'Error: ' + e.toString();
+           _progress = 0.0; 
+         });
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+       backgroundColor: Colors.transparent,
+       child: GlassCard(
+         borderRadius: BorderRadius.circular(20),
+         padding: const EdgeInsets.all(24),
+         child: Column(
+           mainAxisSize: MainAxisSize.min,
+           children: [
+             Text(
+               'Updating Essentials',
+               style: FusionText.headlineLarge.copyWith(color: FusionColors.nebulaCyan),
+             ),
+             const SizedBox(height: 20),
+             Text(
+               _status,
+               textAlign: TextAlign.center,
+               style: FusionText.bodyMedium.copyWith(color: Colors.white70),
+             ),
+             const SizedBox(height: 20),
+             LinearProgressIndicator(
+               value: _progress > 0 ? _progress : null, 
+               backgroundColor: Colors.white12,
+               valueColor: const AlwaysStoppedAnimation(FusionColors.nebulaCyan),
+             ),
+             const SizedBox(height: 20),
+             if (_status.startsWith('Error'))
+               GlowButton(
+                 label: 'CLOSE',
+                 color: Colors.redAccent,
+                 icon: Icons.close,
+                 onPressed: () => Navigator.of(context).pop(),
+               )
+           ],
+         ),
+       ),
+    );
+  }
+}
+

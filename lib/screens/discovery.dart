@@ -34,6 +34,7 @@ class _DiscoveryScreenState extends State<DiscoveryScreen>
     'GameCube',
     'Wii U',
     'Retro', // GBA, N64, SNES, NES, NDS, Genesis, PS1, PSP, etc.
+    'Rom Hacks',
   ];
 
   @override
@@ -199,7 +200,12 @@ class _DiscoveryScreenState extends State<DiscoveryScreen>
             p != 'gamecube' &&
             p != 'gc' &&
             p != 'wii u' &&
-            p != 'wiiu';
+            p != 'wiiu' &&
+            r.provider != 'Rom Hacks' &&
+            r.region != 'ROM Hack';
+      }
+      if (category == 'Rom Hacks') {
+        return r.provider == 'Rom Hacks' || r.region == 'ROM Hack';
       }
       return true;
     }
