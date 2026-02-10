@@ -94,17 +94,18 @@ jobs:
       - name: Repair Project
         run: flutter create --platforms=linux .
 
-      - name: Build Native Library
-        run: |
-          cmake -S native -B native/build -DCMAKE_BUILD_TYPE=Release
-          cmake --build native/build --config Release
-          cp native/build/lib/libforge_core.so build/linux/x64/release/bundle/lib/
-
       - name: Get dependencies
         run: flutter pub get
 
       - name: Build Linux
         run: flutter build linux --release
+
+      - name: Build Native Library
+        run: |
+          cmake -S native -B native/build -DCMAKE_BUILD_TYPE=Release
+          cmake --build native/build --config Release
+          mkdir -p build/linux/x64/release/bundle/lib/
+          cp native/build/lib/libforge_core.so build/linux/x64/release/bundle/lib/
 
       - name: Setup AppImage Tools
         run: |

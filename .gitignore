@@ -58,6 +58,7 @@ libforge_core.dll
 
 # Logs and temp files
 *.txt
+!CMakeLists.txt
 !README.md
 !LICENSE.txt
 !CHANGELOG.md
