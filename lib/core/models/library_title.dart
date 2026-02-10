@@ -84,8 +84,9 @@ class LibraryTitle {
         'sha1_full': sha1Full,
         'added_timestamp': addedTimestamp.millisecondsSinceEpoch ~/ 1000,
         'modified_timestamp': modifiedTimestamp.millisecondsSinceEpoch ~/ 1000,
-        'last_verified':
-            lastVerified != null ? lastVerified!.millisecondsSinceEpoch ~/ 1000 : null,
+        'last_verified': lastVerified != null
+            ? lastVerified!.millisecondsSinceEpoch ~/ 1000
+            : null,
         'health_status': healthStatus.toString().split('.').last,
         'has_cover': hasCover ? 1 : 0,
         'has_metadata': hasMetadata ? 1 : 0,

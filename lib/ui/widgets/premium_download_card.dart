@@ -491,4 +491,3 @@ class _PremiumButtonState extends State<_PremiumButton> {
     );
   }
 }
-

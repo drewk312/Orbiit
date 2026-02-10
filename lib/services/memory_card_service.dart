@@ -9,8 +9,8 @@ class MemoryCardService {
   MemoryCardService._internal();
 
   /// Constants for memory card sizes
-  static const int size59 = 512 * 1024;    // 512KB (Standard 59 blocks)
-  static const int size123 = 1024 * 1024;  // 1MB
+  static const int size59 = 512 * 1024; // 512KB (Standard 59 blocks)
+  static const int size123 = 1024 * 1024; // 1MB
   static const int size251 = 2 * 1024 * 1024; // 2MB (Standard 251 blocks)
   static const int size507 = 4 * 1024 * 1024; // 4MB
   static const int size1019 = 8 * 1024 * 1024; // 8MB
@@ -30,7 +30,8 @@ class MemoryCardService {
 
   /// Creates a new formatted memory card file (blank .raw)
   /// Nintendont creates them automatically, but power users might want shared cards (ninmem.raw)
-  Future<File> createBlankCard(Directory libraryRoot, String filename, int sizeBytes) async {
+  Future<File> createBlankCard(
+      Directory libraryRoot, String filename, int sizeBytes) async {
     final savesDir = Directory(path.join(libraryRoot.path, 'saves'));
     if (!savesDir.existsSync()) savesDir.createSync(recursive: true);
 
@@ -40,17 +41,18 @@ class MemoryCardService {
     // Create blank file filled with zeros (effectively unformatted, Nintendont will format)
     // Or we could try to write a valid header if needed, but Nintendont handles raw zero-filled files fine usually.
     // Writing 16MB of zeros might be slow in pure Dart, but acceptable.
-    
+
     final sink = file.openWrite();
     // distinct implementation for speed?
     // let's just create sparse file if OS supports or write blocks
-    
+
     final raf = await file.open(mode: FileMode.write);
     await raf.setPosition(sizeBytes - 1);
     await raf.writeByte(0); // Sets length
     await raf.close();
 
-    AppLogger.instance.info('Created memory card: ${file.path} ($sizeBytes bytes)');
+    AppLogger.instance
+        .info('Created memory card: ${file.path} ($sizeBytes bytes)');
     return file;
   }
 
@@ -59,9 +61,11 @@ class MemoryCardService {
     final backupDir = Directory(path.join(card.parent.path, 'backups'));
     if (!backupDir.existsSync()) backupDir.createSync();
 
-    final timestamp = DateTime.now().toIso8601String().replaceAll(':', '-').split('.').first;
-    final backupName = '${path.basenameWithoutExtension(card.path)}_$timestamp${path.extension(card.path)}';
-    
+    final timestamp =
+        DateTime.now().toIso8601String().replaceAll(':', '-').split('.').first;
+    final backupName =
+        '${path.basenameWithoutExtension(card.path)}_$timestamp${path.extension(card.path)}';
+
     final backupFile = File(path.join(backupDir.path, backupName));
     return card.copy(backupFile.path);
   }

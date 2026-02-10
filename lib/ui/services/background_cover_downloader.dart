@@ -9,12 +9,13 @@ import 'package:path_provider/path_provider.dart';
 
 /// Background cover downloader - automatically downloads missing covers
 /// in parallel using isolates for maximum performance
-/// 
+///
 /// Based on TinyWii's approach but faster with Flutter isolates
 class BackgroundCoverDownloader {
   static const int _maxConcurrentDownloads = 3; // Reduced for stability
-  static const Duration _timeout = Duration(milliseconds: 500); // Fast like TinyWii
-  
+  static const Duration _timeout =
+      Duration(milliseconds: 500); // Fast like TinyWii
+
   // Cover URL templates - OPTIMIZED FOR SPEED (smallest files first)
   static const List<String> _coverUrlTemplates = [
     // 2D covers (smallest, fastest)
@@ -27,7 +28,8 @@ class BackgroundCoverDownloader {
 
   /// Start background download of missing covers
   /// Returns a stream of progress updates
-  static Stream<DownloadProgress> startDownloading(List<CoverDownloadTask> tasks) async* {
+  static Stream<DownloadProgress> startDownloading(
+      List<CoverDownloadTask> tasks) async* {
     if (tasks.isEmpty) {
       yield DownloadProgress(
         total: 0,
@@ -68,14 +70,15 @@ class BackgroundCoverDownloader {
   static Future<void> _downloadIsolate(_IsolateParams params) async {
     // Initialize binary messenger for platform channels in isolate
     BackgroundIsolateBinaryMessenger.ensureInitialized(params.rootIsolateToken);
-    
+
     int completed = 0;
     int failed = 0;
     final total = params.tasks.length;
 
     // Get cache directory
     final appDir = await getApplicationDocumentsDirectory();
-    final coverDir = Directory(path.join(appDir.path, 'wiigc_fusion', 'covers'));
+    final coverDir =
+        Directory(path.join(appDir.path, 'wiigc_fusion', 'covers'));
     if (!await coverDir.exists()) {
       await coverDir.create(recursive: true);
     }
@@ -86,7 +89,8 @@ class BackgroundCoverDownloader {
 
     while (taskQueue.isNotEmpty || activeTasks.isNotEmpty) {
       // Fill up to maxConcurrent tasks
-      while (activeTasks.length < params.maxConcurrent && taskQueue.isNotEmpty) {
+      while (
+          activeTasks.length < params.maxConcurrent && taskQueue.isNotEmpty) {
         final task = taskQueue.removeAt(0);
         activeTasks.add(_downloadCoverForTask(task, coverDir).then((success) {
           if (success) {
@@ -94,7 +98,7 @@ class BackgroundCoverDownloader {
           } else {
             failed++;
           }
-          
+
           // Send progress update
           params.sendPort.send(DownloadProgress(
             total: total,
@@ -129,7 +133,7 @@ class BackgroundCoverDownloader {
     Directory coverDir,
   ) async {
     final region = task.region ?? 'US';
-    
+
     // Try each URL template until one works
     for (final template in _coverUrlTemplates) {
       final url = template
@@ -138,7 +142,7 @@ class BackgroundCoverDownloader {
 
       try {
         final response = await http.get(Uri.parse(url)).timeout(_timeout);
-        
+
         if (response.statusCode == 200 && response.bodyBytes.isNotEmpty) {
           // Success! Save the cover
           final file = File(path.join(coverDir.path, '${task.gameId}.png'));
@@ -159,19 +163,22 @@ class BackgroundCoverDownloader {
     List<GameInfo> games,
   ) async {
     final appDir = await getApplicationDocumentsDirectory();
-    final coverDir = Directory(path.join(appDir.path, 'wiigc_fusion', 'covers'));
-    
+    final coverDir =
+        Directory(path.join(appDir.path, 'wiigc_fusion', 'covers'));
+
     if (!await coverDir.exists()) {
       // All covers are missing if directory doesn't exist
-      return games.map((g) => CoverDownloadTask(
-        gameId: g.gameId,
-        title: g.title,
-        region: g.region,
-      )).toList();
+      return games
+          .map((g) => CoverDownloadTask(
+                gameId: g.gameId,
+                title: g.title,
+                region: g.region,
+              ))
+          .toList();
     }
 
     final missingTasks = <CoverDownloadTask>[];
-    
+
     for (final game in games) {
       final coverFile = File(path.join(coverDir.path, '${game.gameId}.png'));
       if (!await coverFile.exists()) {

@@ -68,7 +68,7 @@ class LibraryStateService {
 
       if (await cacheFile.exists()) {
         final jsonStr = await cacheFile.readAsString();
-        
+
         // Use isolate for JSON parsing
         final data = await compute(_parseLibraryData, jsonStr);
 

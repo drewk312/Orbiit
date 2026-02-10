@@ -12,7 +12,8 @@ class CoverDownloadProvider extends ChangeNotifier {
   bool get isDownloading => _isDownloading;
   bool get hasDownloadedRecently {
     if (_lastDownloadTime == null) return false;
-    return DateTime.now().difference(_lastDownloadTime!) < const Duration(hours: 1);
+    return DateTime.now().difference(_lastDownloadTime!) <
+        const Duration(hours: 1);
   }
 
   /// Start automatic background download for missing covers
@@ -25,8 +26,9 @@ class CoverDownloadProvider extends ChangeNotifier {
 
     try {
       // Find which covers are missing
-      final missingCovers = await BackgroundCoverDownloader.findMissingCovers(games);
-      
+      final missingCovers =
+          await BackgroundCoverDownloader.findMissingCovers(games);
+
       if (missingCovers.isEmpty) {
         debugPrint('All covers already downloaded!');
         _isDownloading = false;
@@ -35,15 +37,18 @@ class CoverDownloadProvider extends ChangeNotifier {
         return;
       }
 
-      debugPrint('Starting background download of ${missingCovers.length} missing covers...');
+      debugPrint(
+          'Starting background download of ${missingCovers.length} missing covers...');
 
       // Start parallel downloads in background
-      await for (final progress in BackgroundCoverDownloader.startDownloading(missingCovers)) {
+      await for (final progress
+          in BackgroundCoverDownloader.startDownloading(missingCovers)) {
         _currentProgress = progress;
         notifyListeners();
 
         if (progress.isComplete) {
-          debugPrint('Cover download complete! ${progress.completed}/${progress.total} succeeded, ${progress.failed} failed');
+          debugPrint(
+              'Cover download complete! ${progress.completed}/${progress.total} succeeded, ${progress.failed} failed');
           _lastDownloadTime = DateTime.now();
           break;
         }

@@ -131,7 +131,8 @@ class _AnimatedBackgroundState extends State<AnimatedBackground>
         Positioned.fill(
           child: IgnorePointer(
             child: CustomPaint(
-              painter: _ScanlinesPainter(color: primary.withValues(alpha: 0.015)),
+              painter:
+                  _ScanlinesPainter(color: primary.withValues(alpha: 0.015)),
             ),
           ),
         ),
@@ -183,8 +184,8 @@ class _ParticlePainter extends CustomPainter {
       final offsetY = math.sin((progress * 2 * math.pi * speed) + i) * 20;
       final offsetX = math.cos((progress * 2 * math.pi * speed * 0.5) + i) * 10;
 
-      paint.color = color.withValues(alpha: 
-          opacity * (0.5 + 0.5 * math.sin(progress * 2 * math.pi + i)));
+      paint.color = color.withValues(
+          alpha: opacity * (0.5 + 0.5 * math.sin(progress * 2 * math.pi + i)));
 
       canvas.drawCircle(
           Offset(baseX + offsetX, baseY + offsetY), particleSize, paint);

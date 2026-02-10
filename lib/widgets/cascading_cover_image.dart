@@ -45,11 +45,11 @@ class _CascadingCoverImageState extends State<CascadingCoverImage> {
       _verifyPrimary();
     }
   }
-  
+
   Future<void> _verifyPrimary() async {
     final exists = await _checkUrl(_currentUrl);
     if (!mounted) return;
-    
+
     if (exists) {
       setState(() => _isChecking = false);
     } else {
@@ -66,10 +66,10 @@ class _CascadingCoverImageState extends State<CascadingCoverImage> {
       _retryStage = 0;
       _isHunting = false;
       if (_currentUrl.startsWith('http')) {
-         _isChecking = true;
-         _verifyPrimary();
+        _isChecking = true;
+        _verifyPrimary();
       } else {
-         _isChecking = false;
+        _isChecking = false;
       }
     }
   }

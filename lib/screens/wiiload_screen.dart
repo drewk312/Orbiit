@@ -858,7 +858,8 @@ class _WiiLoadScreenState extends State<WiiLoadScreen>
                                       Text(
                                         _selectedFilePath!,
                                         style: TextStyle(
-                                          color: Colors.white.withValues(alpha: 0.4),
+                                          color: Colors.white
+                                              .withValues(alpha: 0.4),
                                           fontSize: 10,
                                         ),
                                         maxLines: 1,
@@ -893,14 +894,16 @@ class _WiiLoadScreenState extends State<WiiLoadScreen>
                                       Text(
                                         'Click to select a DOL or ELF file',
                                         style: TextStyle(
-                                          color: Colors.white.withValues(alpha: 0.5),
+                                          color: Colors.white
+                                              .withValues(alpha: 0.5),
                                           fontSize: 13,
                                         ),
                                       ),
                                       Text(
                                         'Supports .dol and .elf homebrew files',
                                         style: TextStyle(
-                                          color: Colors.white.withValues(alpha: 0.3),
+                                          color: Colors.white
+                                              .withValues(alpha: 0.3),
                                           fontSize: 11,
                                         ),
                                       ),
@@ -947,7 +950,8 @@ class _WiiLoadScreenState extends State<WiiLoadScreen>
                             borderRadius: BorderRadius.circular(4),
                             child: LinearProgressIndicator(
                               value: _currentProgress!.progress,
-                              backgroundColor: Colors.white.withValues(alpha: 0.1),
+                              backgroundColor:
+                                  Colors.white.withValues(alpha: 0.1),
                               valueColor:
                                   const AlwaysStoppedAnimation(Colors.cyan),
                               minHeight: 6,

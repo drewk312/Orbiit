@@ -19,7 +19,8 @@ class GameDetailScreen extends StatefulWidget {
   State<GameDetailScreen> createState() => _GameDetailScreenState();
 }
 
-class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerProviderStateMixin {
+class _GameDetailScreenState extends State<GameDetailScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -39,8 +40,9 @@ class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerPr
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.1),
       end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _animController, curve: Curves.easeOutCubic));
-    
+    ).animate(
+        CurvedAnimation(parent: _animController, curve: Curves.easeOutCubic));
+
     _animController.forward();
     _loadMetadata();
   }
@@ -74,11 +76,14 @@ class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerPr
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isWii = widget.title.platform == 'wii';
-    final primaryColor = isWii ? const Color(0xFF00C2FF) : const Color(0xFFB000FF);
-    final sizeGB = (widget.title.fileSizeBytes / 1024 / 1024 / 1024).toStringAsFixed(2);
-    
+    final primaryColor =
+        isWii ? const Color(0xFF00C2FF) : const Color(0xFFB000FF);
+    final sizeGB =
+        (widget.title.fileSizeBytes / 1024 / 1024 / 1024).toStringAsFixed(2);
+
     return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF0A0A14) : const Color(0xFFF5F5F5),
+      backgroundColor:
+          isDark ? const Color(0xFF0A0A14) : const Color(0xFFF5F5F5),
       body: FadeTransition(
         opacity: _fadeAnimation,
         child: SlideTransition(
@@ -89,7 +94,8 @@ class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerPr
               SliverAppBar(
                 expandedHeight: 280,
                 pinned: true,
-                backgroundColor: isDark ? const Color(0xFF16162A) : Colors.white,
+                backgroundColor:
+                    isDark ? const Color(0xFF16162A) : Colors.white,
                 leading: IconButton(
                   icon: const Icon(Icons.arrow_back),
                   onPressed: () => Navigator.pop(context),
@@ -105,7 +111,8 @@ class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerPr
                             end: Alignment.bottomCenter,
                             colors: [
                               primaryColor.withValues(alpha: 0.3),
-                              (isDark ? const Color(0xFF16162A) : Colors.white).withValues(alpha: 0.9),
+                              (isDark ? const Color(0xFF16162A) : Colors.white)
+                                  .withValues(alpha: 0.9),
                             ],
                           ),
                         ),
@@ -149,10 +156,11 @@ class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerPr
                         ),
                       ),
                       const SizedBox(height: 8),
-                      
+
                       // Platform badge
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
                           color: primaryColor.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(20),
@@ -161,7 +169,9 @@ class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerPr
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(
-                              isWii ? Icons.sports_esports : Icons.videogame_asset,
+                              isWii
+                                  ? Icons.sports_esports
+                                  : Icons.videogame_asset,
                               size: 16,
                               color: primaryColor,
                             ),
@@ -177,15 +187,16 @@ class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerPr
                           ],
                         ),
                       ),
-                      
+
                       const SizedBox(height: 24),
-                      
+
                       // WiiTDB Metadata Section
                       if (_metadata != null) ...[
-                        MetadataSection(metadata: _metadata!, primaryColor: primaryColor),
+                        MetadataSection(
+                            metadata: _metadata!, primaryColor: primaryColor),
                         const SizedBox(height: 24),
                       ],
-                      
+
                       // Technical Info Header
                       Text(
                         'Technical Info',
@@ -196,7 +207,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerPr
                         ),
                       ),
                       const SizedBox(height: 12),
-                      
+
                       // Info cards
                       _InfoCard(
                         icon: Icons.public,
@@ -205,7 +216,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerPr
                         color: primaryColor,
                       ),
                       const SizedBox(height: 12),
-                      
+
                       _InfoCard(
                         icon: Icons.storage,
                         label: 'File Size',
@@ -213,7 +224,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerPr
                         color: primaryColor,
                       ),
                       const SizedBox(height: 12),
-                      
+
                       _InfoCard(
                         icon: Icons.insert_drive_file,
                         label: 'Format',
@@ -221,7 +232,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerPr
                         color: primaryColor,
                       ),
                       const SizedBox(height: 12),
-                      
+
                       _InfoCard(
                         icon: Icons.qr_code,
                         label: 'Game ID',
@@ -229,7 +240,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerPr
                         color: primaryColor,
                       ),
                       const SizedBox(height: 12),
-                      
+
                       _InfoCard(
                         icon: Icons.folder_open,
                         label: 'File Path',
@@ -237,7 +248,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerPr
                         color: primaryColor,
                         copyable: true,
                       ),
-                      
+
                       if (_issues.isNotEmpty) ...[
                         const SizedBox(height: 24),
                         Text(
@@ -250,9 +261,9 @@ class _GameDetailScreenState extends State<GameDetailScreen> with SingleTickerPr
                         ),
                         const SizedBox(height: 12),
                         ..._issues.map((issue) => _IssueCard(
-                          issue: issue,
-                          isDark: isDark,
-                        )),
+                              issue: issue,
+                              isDark: isDark,
+                            )),
                       ],
                     ],
                   ),
@@ -284,7 +295,7 @@ class _InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(

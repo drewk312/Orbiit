@@ -299,7 +299,9 @@ class _NintendontControllerScreenState extends State<NintendontControllerScreen>
         decoration: BoxDecoration(
           color: isSelected
               ? color.withValues(alpha: 0.2)
-              : (isDark ? Colors.white.withValues(alpha: 0.05) : Colors.grey[100]),
+              : (isDark
+                  ? Colors.white.withValues(alpha: 0.05)
+                  : Colors.grey[100]),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: isSelected ? color : Colors.transparent,
@@ -725,7 +727,8 @@ class _NintendontControllerScreenState extends State<NintendontControllerScreen>
                   ? Colors.blue.withValues(alpha: 0.3)
                   : Colors.red.withValues(alpha: 0.1),
               border: Border.all(
-                color: isMapped ? Colors.blue : Colors.red.withValues(alpha: 0.5),
+                color:
+                    isMapped ? Colors.blue : Colors.red.withValues(alpha: 0.5),
                 width: 1,
               ),
               borderRadius: BorderRadius.circular(8),

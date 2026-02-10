@@ -152,7 +152,8 @@ class MetadataSection extends StatelessWidget {
                   runSpacing: 8,
                   children: metadata.wifiFeatures.map((feature) {
                     return Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
                         color: primaryColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(16),

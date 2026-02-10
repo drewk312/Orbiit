@@ -27,7 +27,7 @@ if (Test-Path $releaseDir) {
 New-Item -ItemType Directory -Force -Path $releaseDir | Out-Null
 
 # 3. Copy Native DLLs
-$forgeCoreSrc = "native\build\x64\Release\forge_core.dll"
+$forgeCoreSrc = "native\build\bin\libforge_core.dll"
 $forgeCoreDest = "$buildDir\forge_core.dll"
 
 if (Test-Path $forgeCoreSrc) {

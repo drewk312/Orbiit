@@ -141,23 +141,19 @@ class OSCProvider with ChangeNotifier {
     required Function(String status, double progress) onStatus,
   }) async {
     if (_homebrewResults.isEmpty) return;
-    
+
     _isLoading = true;
     notifyListeners();
 
     try {
       await HomebrewAutomationService().installBatch(
-        games: _homebrewResults, 
-        sdCardRoot: sdCardRoot, 
-        onStatus: onStatus
-      );
+          games: _homebrewResults, sdCardRoot: sdCardRoot, onStatus: onStatus);
       onStatus('ALL ESSENTIALS UPDATED', 1.0);
     } catch (e) {
-       _error = 'Batch update failed: $e';
+      _error = 'Batch update failed: $e';
     } finally {
       _isLoading = false;
       notifyListeners();
     }
   }
 }
-

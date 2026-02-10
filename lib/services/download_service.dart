@@ -299,33 +299,36 @@ class DownloadService {
   Future<void> _processQueue() async {
     // Prevent re-entry if already fully saturated
     if (_isActive) {
-      final activeCount = _queue.where((t) => t.status == DownloadStatus.downloading).length;
+      final activeCount =
+          _queue.where((t) => t.status == DownloadStatus.downloading).length;
       if (activeCount >= _Config.maxConcurrent) return;
     }
-    
+
     _isActive = true;
 
     while (true) {
-      final activeCount = _queue.where((t) => t.status == DownloadStatus.downloading).length;
-      final pendingTaskIndex = _queue.indexWhere((t) => t.status == DownloadStatus.pending);
+      final activeCount =
+          _queue.where((t) => t.status == DownloadStatus.downloading).length;
+      final pendingTaskIndex =
+          _queue.indexWhere((t) => t.status == DownloadStatus.pending);
 
       if (pendingTaskIndex == -1) {
         // No more pending tasks
         if (activeCount == 0) _isActive = false;
-        break; 
+        break;
       }
 
       if (activeCount < _Config.maxConcurrent) {
         final task = _queue[pendingTaskIndex];
-        // Start download WITHOUT awaiting so the loop continues to start others 
+        // Start download WITHOUT awaiting so the loop continues to start others
         // if slots are available
         _executeDownload(task).then((_) {
-            // Recursively trigger queue check when a download finishes to fill the slot
-            _processQueue(); 
+          // Recursively trigger queue check when a download finishes to fill the slot
+          _processQueue();
         });
       } else {
         // Wait for a slot to free up (handled by the .then callback above)
-        break; 
+        break;
       }
     }
   }
@@ -372,30 +375,33 @@ class DownloadService {
         ..headers['Accept'] = '*/*'
         ..headers['Accept-Encoding'] = 'identity'
         ..headers['Cache-Control'] = 'no-cache';
-      
+
       if (existingBytes > 0) {
         request.headers['Range'] = 'bytes=$existingBytes-';
         debugPrint('[DownloadService] Resuming from byte $existingBytes');
       }
 
       // Only timeout the initial connection
-      response = await _httpClient.send(request).timeout(_Config.connectionTimeout);
+      response =
+          await _httpClient.send(request).timeout(_Config.connectionTimeout);
 
       debugPrint('[DownloadService] HTTP ${response.statusCode}');
 
       // Handle server not supporting ranges (returns 200 instead of 206)
       if (existingBytes > 0 && response.statusCode == 200) {
-         debugPrint('[DownloadService] Server ignored Range header. Restarting download.');
-         existingBytes = 0;
-         await file.delete();
-         await file.create();
+        debugPrint(
+            '[DownloadService] Server ignored Range header. Restarting download.');
+        existingBytes = 0;
+        await file.delete();
+        await file.create();
       } else if (response.statusCode == 416) {
-         // Range not satisfiable - assume complete
-         debugPrint('[DownloadService] Range not satisfiable. Assuming file complete.');
-         task.status = DownloadStatus.completed;
-         task.progress = 1.0;
-         _notifyQueueUpdate();
-         return;
+        // Range not satisfiable - assume complete
+        debugPrint(
+            '[DownloadService] Range not satisfiable. Assuming file complete.');
+        task.status = DownloadStatus.completed;
+        task.progress = 1.0;
+        _notifyQueueUpdate();
+        return;
       } else if (response.statusCode >= 400) {
         throw DownloadException('HTTP ${response.statusCode}');
       }
@@ -403,22 +409,23 @@ class DownloadService {
       // Get content length
       int contentLength = response.contentLength ?? 0;
       if (contentLength == 0) {
-        contentLength = int.tryParse(response.headers['content-length'] ?? '0') ?? 0;
+        contentLength =
+            int.tryParse(response.headers['content-length'] ?? '0') ?? 0;
       }
       // If 206, content-length is usually just the chunk, so look at content-range if needed
       // But usually simply adding existingBytes works purely for progress calc
       if (response.statusCode == 206) {
-         // Headers usually show full size in Content-Range: bytes START-END/TOTAL
-         final rangeHeader = response.headers['content-range'];
-         if (rangeHeader != null) {
-            final parts = rangeHeader.split('/');
-            if (parts.length > 1) {
-              final total = int.tryParse(parts[1]);
-              if (total != null) task.totalBytes = total;
-            }
-         }
-      } 
-      
+        // Headers usually show full size in Content-Range: bytes START-END/TOTAL
+        final rangeHeader = response.headers['content-range'];
+        if (rangeHeader != null) {
+          final parts = rangeHeader.split('/');
+          if (parts.length > 1) {
+            final total = int.tryParse(parts[1]);
+            if (total != null) task.totalBytes = total;
+          }
+        }
+      }
+
       // Fallback if totalBytes not set from range
       if (task.totalBytes == 0 && contentLength > 0) {
         task.totalBytes = contentLength + existingBytes;
@@ -429,7 +436,7 @@ class DownloadService {
 
       task.downloadedBytes = existingBytes;
       var lastProgressUpdate = DateTime.now();
-      
+
       // Speed calculation vars
       int bytesAtLastInterval = existingBytes;
 
@@ -441,16 +448,18 @@ class DownloadService {
           // But if "cancelled" usually means delete.
           // Let's assume cancel = delete for now unless we add specific "Pause" state handling
           if (task.status == DownloadStatus.cancelled) {
-             try { await file.delete(); } catch (_) {}
+            try {
+              await file.delete();
+            } catch (_) {}
           }
           return;
         }
-        
+
         // Handle Pause during stream
         if (task.status == DownloadStatus.paused) {
-           await sink.flush();
-           await sink.close();
-           return; 
+          await sink.flush();
+          await sink.close();
+          return;
         }
 
         sink.add(chunk);
@@ -463,14 +472,15 @@ class DownloadService {
           if (task.totalBytes > 0) {
             task.progress = task.downloadedBytes / task.totalBytes;
           }
-          
+
           // Speed
-          final durationSeconds = now.difference(lastProgressUpdate).inMilliseconds / 1000.0;
+          final durationSeconds =
+              now.difference(lastProgressUpdate).inMilliseconds / 1000.0;
           if (durationSeconds > 0) {
-             final bytesDiff = task.downloadedBytes - bytesAtLastInterval;
-             task.currentSpeed = (bytesDiff / durationSeconds).round();
+            final bytesDiff = task.downloadedBytes - bytesAtLastInterval;
+            task.currentSpeed = (bytesDiff / durationSeconds).round();
           }
-          
+
           bytesAtLastInterval = task.downloadedBytes;
           lastProgressUpdate = now;
           _notifyQueueUpdate();
@@ -491,11 +501,10 @@ class DownloadService {
       task.progress = 1.0;
       task._endTime = DateTime.now();
       _notifyQueueUpdate();
-      
+
       // Attempt to clean up next item immediately
       _isActive = false; // Flag this slot as free logic wise
       // But _processQueue recursion handles finding next task
-      
     } catch (e) {
       if (sink != null) await sink.close();
       debugPrint('[DownloadService] Error: $e');

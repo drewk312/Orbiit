@@ -128,7 +128,8 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: FusionColors.bgSurface,
-        title: Text('Delete $count Games?', style: const TextStyle(color: Colors.white)),
+        title: Text('Delete $count Games?',
+            style: const TextStyle(color: Colors.white)),
         content: const Text(
           'This will permanently delete the selected game files from your drive. This action cannot be undone.',
           style: TextStyle(color: Colors.white70),
@@ -139,7 +140,8 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
             child: const Text('Cancel'),
           ),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: FusionColors.error),
+            style:
+                ElevatedButton.styleFrom(backgroundColor: FusionColors.error),
             onPressed: () => Navigator.of(context).pop(true),
             child: const Text('Delete', style: TextStyle(color: Colors.white)),
           ),
@@ -151,35 +153,36 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
 
     // Perform Deletion logic here
     int deleted = 0;
-    for (final id in _selectedGameIds.toList()) { // Copy list to avoid concurrent modification
-       final game = _scannedGamesMap[id];
-       if (game != null) {
-         try {
-           final file = File(game.path);
-           if (await file.exists()) {
-             await file.delete();
-             deleted++;
-           }
-           // Remove from logic
-           _games.removeWhere((g) => g.id == id);
-           _scannedGamesMap.remove(id);
-         } catch (e) {
-           AppLogger.error('Failed to delete game ${game.title}: $e');
-         }
-       }
+    for (final id in _selectedGameIds.toList()) {
+      // Copy list to avoid concurrent modification
+      final game = _scannedGamesMap[id];
+      if (game != null) {
+        try {
+          final file = File(game.path);
+          if (await file.exists()) {
+            await file.delete();
+            deleted++;
+          }
+          // Remove from logic
+          _games.removeWhere((g) => g.id == id);
+          _scannedGamesMap.remove(id);
+        } catch (e) {
+          AppLogger.error('Failed to delete game ${game.title}: $e');
+        }
+      }
     }
 
     setState(() {
-       _selectedGameIds.clear();
-       _isSelectionMode = false; // Exit mode
+      _selectedGameIds.clear();
+      _isSelectionMode = false; // Exit mode
     });
     _filterAndSortGames(); // Refresh UI
-    
+
     if (mounted) {
-       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-         content: Text('Deleted $deleted games.'),
-         backgroundColor: FusionColors.success,
-       ));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Deleted $deleted games.'),
+        backgroundColor: FusionColors.success,
+      ));
     }
   }
 
@@ -335,7 +338,8 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
           case RegionFilter.jp:
             return r == 'JA' || r == 'JPN' || r == 'J';
           case RegionFilter.other:
-            return !['US', 'USA', 'E', 'EU', 'EUR', 'P', 'JA', 'JPN', 'J'].contains(r);
+            return !['US', 'USA', 'E', 'EU', 'EUR', 'P', 'JA', 'JPN', 'J']
+                .contains(r);
           default:
             return true;
         }
@@ -430,17 +434,22 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
               const SizedBox(width: 16),
               Container(height: 24, width: 1, color: Colors.white24),
               const SizedBox(width: 16),
-              IconButton( // Delete
-                icon: const Icon(Icons.delete_outline, color: FusionColors.error),
+              IconButton(
+                // Delete
+                icon:
+                    const Icon(Icons.delete_outline, color: FusionColors.error),
                 tooltip: 'Delete Selected',
                 onPressed: _deleteSelectedGames,
               ),
-              IconButton( // Select All
-                icon: const Icon(Icons.select_all, color: FusionColors.nebulaCyan),
+              IconButton(
+                // Select All
+                icon: const Icon(Icons.select_all,
+                    color: FusionColors.nebulaCyan),
                 tooltip: 'Select All',
                 onPressed: _selectAll,
               ),
-              IconButton( // Close
+              IconButton(
+                // Close
                 icon: const Icon(Icons.close, color: Colors.white70),
                 tooltip: 'Cancel',
                 onPressed: _toggleSelectionMode,
@@ -627,9 +636,13 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
           // Selection Mode Toggle (Added for Batch Operations)
           IconButton(
             icon: Icon(
-              _isSelectionMode ? Icons.check_circle : Icons.checklist_rtl_rounded,
+              _isSelectionMode
+                  ? Icons.check_circle
+                  : Icons.checklist_rtl_rounded,
             ),
-            color: _isSelectionMode ? FusionColors.nebulaCyan : FusionColors.textMuted,
+            color: _isSelectionMode
+                ? FusionColors.nebulaCyan
+                : FusionColors.textMuted,
             tooltip: _isSelectionMode ? 'Exit Selection Mode' : 'Batch Actions',
             onPressed: _toggleSelectionMode,
           ),
@@ -680,10 +693,14 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
           icon: const Icon(Icons.public, color: OrbColors.textMuted, size: 18),
           style: OrbText.labelMedium.copyWith(color: OrbColors.textPrimary),
           items: const [
-            DropdownMenuItem(value: RegionFilter.all, child: Text('All Regions')),
-            DropdownMenuItem(value: RegionFilter.us, child: Text('NTSC-U (USA)')),
-            DropdownMenuItem(value: RegionFilter.eu, child: Text('PAL (Europe)')),
-            DropdownMenuItem(value: RegionFilter.jp, child: Text('NTSC-J (Japan)')),
+            DropdownMenuItem(
+                value: RegionFilter.all, child: Text('All Regions')),
+            DropdownMenuItem(
+                value: RegionFilter.us, child: Text('NTSC-U (USA)')),
+            DropdownMenuItem(
+                value: RegionFilter.eu, child: Text('PAL (Europe)')),
+            DropdownMenuItem(
+                value: RegionFilter.jp, child: Text('NTSC-J (Japan)')),
             DropdownMenuItem(value: RegionFilter.other, child: Text('Other')),
           ],
           onChanged: (value) {

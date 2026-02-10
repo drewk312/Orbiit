@@ -335,7 +335,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'GameCube',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/',
+        pageUrl:
+            'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/',
         downloadUrl:
             'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/Super%20Smash%20Bros.%20Melee%20%28USA%29%20%28En%2CJa%29%20%28Rev%202%29.iso',
         size: '1.4 GB',
@@ -347,7 +348,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'GameCube',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/',
+        pageUrl:
+            'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/',
         downloadUrl:
             'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/Super%20Mario%20Sunshine%20%28USA%29.iso',
         size: '1.4 GB',
@@ -359,7 +361,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'GameCube',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/',
+        pageUrl:
+            'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/',
         downloadUrl:
             'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/Mario%20Kart%20-%20Double%20Dash%21%21%20%28USA%29.iso',
         size: '1.4 GB',
@@ -371,7 +374,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'GameCube',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/',
+        pageUrl:
+            'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/',
         downloadUrl:
             'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/Luigi%27s%20Mansion%20%28USA%29.iso',
         size: '1.1 GB',
@@ -383,7 +387,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'GameCube',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/',
+        pageUrl:
+            'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/',
         downloadUrl:
             'https://archive.org/download/nIntendo-gamecube-iso-usa-redump.org-2019-10-23/Legend%20of%20Zelda%2C%20The%20-%20The%20Wind%20Waker%20%28USA%29.iso',
         size: '1.4 GB',
@@ -563,7 +568,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'N64',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Nintendo%20-%20Nintendo%2064%20%28BigEndian%29%20%282016-01-03%29.zip/Super%20Mario%2064%20%28USA%29.z64',
         size: '8 MB',
@@ -576,7 +582,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'N64',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Nintendo%20-%20Nintendo%2064%20%28BigEndian%29%20%282016-01-03%29.zip/Legend%20of%20Zelda%2C%20The%20-%20Ocarina%20of%20Time%20%28USA%29%20%28Rev%202%29.z64',
         size: '32 MB',
@@ -589,7 +596,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'N64',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Nintendo%20-%20Nintendo%2064%20%28BigEndian%29%20%282016-01-03%29.zip/Mario%20Kart%2064%20%28USA%29.z64',
         size: '12 MB',
@@ -604,7 +612,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'GBA',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Nintendo%20-%20Game%20Boy%20Advance%20%282016-02-15%29.zip/Pokemon%20-%20Emerald%20Version%20%28USA%2C%20Europe%29.gba',
         size: '16 MB',
@@ -618,7 +627,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'GBA',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Nintendo%20-%20Game%20Boy%20Advance%20%282016-02-15%29.zip/Pokemon%20-%20FireRed%20Version%20%28USA%2C%20Europe%29%20%28Rev%201%29.gba',
         size: '16 MB',
@@ -632,7 +642,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'GBA',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Nintendo%20-%20Game%20Boy%20Advance%20%282016-02-15%29.zip/Legend%20of%20Zelda%2C%20The%20-%20The%20Minish%20Cap%20%28USA%2C%20Australia%29.gba',
         size: '8 MB',
@@ -646,7 +657,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'GBA',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Nintendo%20-%20Game%20Boy%20Advance%20%282016-02-15%29.zip/Metroid%20Fusion%20%28USA%2C%20Australia%29.gba',
         size: '8 MB',
@@ -660,7 +672,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'GBA',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Nintendo%20-%20Game%20Boy%20Advance%20%282016-02-15%29.zip/Fire%20Emblem%20%28USA%2C%20Australia%29.gba',
         size: '8 MB',
@@ -674,7 +687,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'GBA',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Nintendo%20-%20Game%20Boy%20Advance%20%282016-02-15%29.zip/Kirby%20%26%20the%20Amazing%20Mirror%20%28USA%29.gba',
         size: '8 MB',
@@ -688,7 +702,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'SNES',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System%20%282016-01-03%29.zip/Super%20Metroid%20%28USA%2C%20Europe%29%20%28En%2CJa%29.sfc',
         size: '3 MB',
@@ -700,7 +715,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'SNES',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System%20%282016-01-03%29.zip/Legend%20of%20Zelda%2C%20The%20-%20A%20Link%20to%20the%20Past%20%28USA%29.sfc',
         size: '1 MB',
@@ -714,7 +730,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'SNES',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System%20%282016-01-03%29.zip/Chrono%20Trigger%20%28USA%29.sfc',
         size: '4 MB',
@@ -730,7 +747,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'NES',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Nintendo%20-%20Nintendo%20Entertainment%20System%20%28Headered%29%20%282016-01-06%29.zip/Super%20Mario%20Bros.%203%20%28USA%29.nes',
         size: '384 KB',
@@ -744,7 +762,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'NES',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Nintendo%20-%20Nintendo%20Entertainment%20System%20%28Headered%29%20%282016-01-06%29.zip/Legend%20of%20Zelda%2C%20The%20%28USA%29.nes',
         size: '128 KB',
@@ -760,7 +779,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'Genesis',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Sega%20-%20Mega%20Drive%20-%20Genesis%20%282016-03-19%29.zip/Sonic%20the%20Hedgehog%202%20%28World%29.md',
         size: '1 MB',
@@ -774,7 +794,8 @@ class DiscoveryProvider extends ChangeNotifier {
         platform: 'Genesis',
         region: 'USA',
         provider: 'Archive.org',
-        pageUrl: 'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
+        pageUrl:
+            'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/',
         downloadUrl:
             'https://archive.org/download/No-Intro-Collection_2016-01-03_Fixed/Sega%20-%20Mega%20Drive%20-%20Genesis%20%282016-03-19%29.zip/Sonic%20the%20Hedgehog%203%20%28USA%29.md',
         size: '2 MB',

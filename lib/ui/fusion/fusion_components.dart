@@ -70,8 +70,8 @@ class _GlowButtonState extends State<GlowButton>
               duration: FusionAnimations.fast,
               padding: padding,
               decoration: BoxDecoration(
-                color: baseColor
-                    .withValues(alpha: isDisabled ? 0.5 : (isHovered ? 1.0 : 0.8)),
+                color: baseColor.withValues(
+                    alpha: isDisabled ? 0.5 : (isHovered ? 1.0 : 0.8)),
                 borderRadius: BorderRadius.circular(FusionRadius.full),
                 boxShadow: [
                   if (isHovered && !isDisabled)
@@ -86,16 +86,19 @@ class _GlowButtonState extends State<GlowButton>
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(widget.icon,
-                      color: Colors.white.withValues(alpha: isDisabled ? 0.7 : 1.0),
+                      color: Colors.white
+                          .withValues(alpha: isDisabled ? 0.7 : 1.0),
                       size: widget.isCompact ? 16 : 20),
                   const SizedBox(width: 8),
                   Text(
                     widget.label,
                     style: widget.isCompact
                         ? FusionText.labelLarge.copyWith(
-                            color: Colors.white.withValues(alpha: isDisabled ? 0.7 : 1.0))
+                            color: Colors.white
+                                .withValues(alpha: isDisabled ? 0.7 : 1.0))
                         : FusionText.bodyMedium.copyWith(
-                            color: Colors.white.withValues(alpha: isDisabled ? 0.7 : 1.0),
+                            color: Colors.white
+                                .withValues(alpha: isDisabled ? 0.7 : 1.0),
                             fontWeight: FontWeight.bold),
                   ),
                 ],

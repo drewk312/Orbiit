@@ -133,8 +133,8 @@ class _GameInfoPanelState extends State<GameInfoPanel>
                   accentColor.withValues(alpha: 0.12),
                 ],
               ),
-              border:
-                  Border.all(color: accentColor.withValues(alpha: 0.25), width: 1),
+              border: Border.all(
+                  color: accentColor.withValues(alpha: 0.25), width: 1),
             ),
             child: Icon(
               widget.disc.isWii
@@ -370,4 +370,3 @@ class _GameInfoPanelState extends State<GameInfoPanel>
     );
   }
 }
-

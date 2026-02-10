@@ -10,8 +10,8 @@ class SDCardService {
     'apps',
     'private',
     'savegames',
-    'wbfs',      // Standard Wii games folder
-    'games',     // Nintendont/GameCube games folder
+    'wbfs', // Standard Wii games folder
+    'games', // Nintendont/GameCube games folder
   ];
 
   /// Optional folders for specific mods
@@ -19,8 +19,8 @@ class SDCardService {
     'Project+',
     'codes',
     'riivolution',
-    'sneek',     // NAND emulation
-    'wad',       // WAD files
+    'sneek', // NAND emulation
+    'wad', // WAD files
   ];
 
   /// Detects all removable drives that might be SD cards or USB drives
@@ -47,7 +47,7 @@ class SDCardService {
       if (result.exitCode == 0 && result.stdout.toString().trim().isNotEmpty) {
         final output = result.stdout.toString().trim();
         List<dynamic> drives = [];
-        
+
         try {
           if (output.startsWith('[')) {
             drives = jsonDecode(output);
@@ -55,14 +55,16 @@ class SDCardService {
             drives = [jsonDecode(output)];
           }
         } catch (jsonErr) {
-           logger.warning('Failed to parse drive JSON: $jsonErr');
-           // Fall through to legacy method
+          logger.warning('Failed to parse drive JSON: $jsonErr');
+          // Fall through to legacy method
         }
 
         if (drives.isNotEmpty) {
           for (final d in drives) {
             final deviceId = d['DeviceID']?.toString() ?? ''; // "C:"
-            final driveType = d['DriveType'] is int ? d['DriveType'] : int.tryParse(d['DriveType'].toString()) ?? 0;
+            final driveType = d['DriveType'] is int
+                ? d['DriveType']
+                : int.tryParse(d['DriveType'].toString()) ?? 0;
             final label = d['VolumeName']?.toString() ?? '';
             final path = '$deviceId\\';
 
@@ -85,7 +87,7 @@ class SDCardService {
               logger.warning('Drive $path detected but not accessible: $e');
             }
           }
-          
+
           if (cards.isNotEmpty) return cards;
         }
       }
@@ -96,7 +98,7 @@ class SDCardService {
     // METHOD 2: Legacy Fallback (A-Z Loop)
     // Only use this if PowerShell failed completely
     logger.info('Falling back to legacy drive scan...');
-    
+
     for (int i = 65; i <= 90; i++) {
       final driveLetter = String.fromCharCode(i);
       final drivePath = '$driveLetter:\\';
@@ -109,7 +111,7 @@ class SDCardService {
           // Check if it's a supported drive
           final driveInfo = await _getDriveInfoLegacy(drivePath);
           if (driveInfo.isRemovable) {
-             cards.add(await _buildCardInfo(drivePath, driveInfo.label, 2));
+            cards.add(await _buildCardInfo(drivePath, driveInfo.label, 2));
           }
         }
       } catch (e) {
@@ -119,17 +121,18 @@ class SDCardService {
 
     return cards;
   }
-  
-  Future<SDCardInfo> _buildCardInfo(String path, String label, int driveType) async {
-      return SDCardInfo(
-        path: path,
-        label: label.isEmpty 
-            ? (driveType == 2 ? 'Removable Disk' : 'Local Disk') 
-            : label,
-        isWiiReady: await _isWiiReady(path),
-        hasBootElf: await File(p.join(path, 'boot.elf')).exists(),
-        existingFolders: await _getExistingFolders(path),
-      );
+
+  Future<SDCardInfo> _buildCardInfo(
+      String path, String label, int driveType) async {
+    return SDCardInfo(
+      path: path,
+      label: label.isEmpty
+          ? (driveType == 2 ? 'Removable Disk' : 'Local Disk')
+          : label,
+      isWiiReady: await _isWiiReady(path),
+      hasBootElf: await File(p.join(path, 'boot.elf')).exists(),
+      existingFolders: await _getExistingFolders(path),
+    );
   }
 
   /// Checks if drive has proper Wii folder structure
@@ -179,7 +182,8 @@ class SDCardService {
       );
 
       final output = result.stdout.toString();
-      final lines = output.split('\n').where((l) => l.trim().isNotEmpty).toList();
+      final lines =
+          output.split('\n').where((l) => l.trim().isNotEmpty).toList();
 
       if (lines.length > 1) {
         final parts = lines[1].trim().split(RegExp(r'\s{2,}'));
@@ -204,7 +208,6 @@ class SDCardService {
     }
     return _DriveInfo(isRemovable: false, label: '');
   }
-
 
   /// Check if a drive path is the system drive (C:)
   bool _isSystemDrive(String drivePath) {

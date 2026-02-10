@@ -30,12 +30,15 @@ class SmartDownloadButton extends StatelessWidget {
                     strokeWidth: 3.0,
                     color: const Color(0xFF00C2FF),
                   ),
-                  Text('${(forge.progress * 100).toInt()}%', style: const TextStyle(fontSize: 10, color: Colors.white)),
+                  Text('${(forge.progress * 100).toInt()}%',
+                      style:
+                          const TextStyle(fontSize: 10, color: Colors.white)),
                 ],
               ),
             ),
             const SizedBox(width: 8),
-            Text(forge.statusMessage, style: const TextStyle(fontSize: 12, color: Colors.white70)),
+            Text(forge.statusMessage,
+                style: const TextStyle(fontSize: 12, color: Colors.white70)),
           ],
         );
       }
@@ -49,7 +52,8 @@ class SmartDownloadButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.grey.shade700,
             foregroundColor: Colors.white70,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           ),
         );
       }
@@ -63,9 +67,11 @@ class SmartDownloadButton extends StatelessWidget {
           foregroundColor: Colors.black,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
-        onPressed: onPressed ?? () {
-          Provider.of<ForgeProvider>(context, listen: false).startForge(game);
-        },
+        onPressed: onPressed ??
+            () {
+              Provider.of<ForgeProvider>(context, listen: false)
+                  .startForge(game);
+            },
       );
     });
   }

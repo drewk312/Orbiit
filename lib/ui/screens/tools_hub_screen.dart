@@ -241,10 +241,14 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
               Expanded(
                 child: _buildFeaturedCard(
                   title: 'Memory Card Manager',
-                  description: 'Backup, restore, and create GameCube memory cards (.raw/.gcp) for Nintendont.',
+                  description:
+                      'Backup, restore, and create GameCube memory cards (.raw/.gcp) for Nintendont.',
                   icon: Icons.sd_storage_rounded,
                   gradient: [const Color(0xFFE11D48), const Color(0xFFBE123C)],
-                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const MemoryCardManagerScreen())),
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const MemoryCardManagerScreen())),
                 ),
               ),
             ],
@@ -365,7 +369,8 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
                   const SizedBox(height: 6),
                   Text(
                     description,
-                    style: UiType.bodySmall.copyWith(color: UiColors.textSecondary),
+                    style: UiType.bodySmall
+                        .copyWith(color: UiColors.textSecondary),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -408,10 +413,10 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
               runSpacing: 12,
               children: [
                 _buildQuickTool(
-                   'New Controller',
-                   Icons.add_circle_outline,
-                   const Color(0xFF6B4EFF),
-                   _openControllerWizard,
+                  'New Controller',
+                  Icons.add_circle_outline,
+                  const Color(0xFF6B4EFF),
+                  _openControllerWizard,
                 ),
                 _buildQuickTool(
                   'Download WiiTDB',
@@ -611,8 +616,7 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
   void _openControllerMapper() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context) => const ControllerForgeScreen()),
+      MaterialPageRoute(builder: (context) => const ControllerForgeScreen()),
     );
   }
 
@@ -1141,19 +1145,20 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
   }
 
   Future<void> _downloadBanners() async {
-     final result = await FilePicker.platform.getDirectoryPath(dialogTitle: "Select Folder for Banners");
-     if (result != null) {
-       // Open the folder in explorer
-       // Also offer to open GameTDB
-       final uri = Uri.parse("https://www.gametdb.com/Wii/Downloads");
-       if (await canLaunchUrl(uri)) {
-         await launchUrl(uri);
-       }
-       // Open local folder
-       if (Platform.isWindows) {
-         Process.run('explorer', [result]);
-       }
-     }
+    final result = await FilePicker.platform
+        .getDirectoryPath(dialogTitle: "Select Folder for Banners");
+    if (result != null) {
+      // Open the folder in explorer
+      // Also offer to open GameTDB
+      final uri = Uri.parse("https://www.gametdb.com/Wii/Downloads");
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+      }
+      // Open local folder
+      if (Platform.isWindows) {
+        Process.run('explorer', [result]);
+      }
+    }
   }
 
   void _downloadCheats() {
@@ -1186,18 +1191,19 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
 
   Future<void> _showDatabaseInfo() async {
     final cached = await WiiTDBService.isDatabaseCached();
-    
+
     if (!mounted) return;
 
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: const Color(0xFF1A1D24),
-        title: const Text('WiiTDB Database Info', style: TextStyle(color: Colors.white)),
+        title: const Text('WiiTDB Database Info',
+            style: TextStyle(color: Colors.white)),
         content: Text(
-          cached 
-            ? 'Database is cached and ready.\nLocation: Internal Storage\nStatus: Active'
-            : 'Database not found.\nClick "Download WiiTDB" to fetch metadata.',
+          cached
+              ? 'Database is cached and ready.\nLocation: Internal Storage\nStatus: Active'
+              : 'Database not found.\nClick "Download WiiTDB" to fetch metadata.',
           style: const TextStyle(color: Colors.white70),
         ),
         actions: [

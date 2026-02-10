@@ -72,10 +72,8 @@ class ThemeSettingsScreen extends StatelessWidget {
                   'Choose your personality',
                   style: TextStyle(
                     fontSize: 14,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withAlpha(150),
+                    color:
+                        Theme.of(context).colorScheme.onSurface.withAlpha(150),
                   ),
                 ),
               ],
@@ -96,7 +94,8 @@ class ThemeSettingsScreen extends StatelessWidget {
               ],
             ),
             child: Text(
-              themeProvider.currentTheme.preset.name.replaceAll('WiiGCThemePreset.', ''),
+              themeProvider.currentTheme.preset.name
+                  .replaceAll('WiiGCThemePreset.', ''),
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,

@@ -37,7 +37,8 @@ class PremiumGameInfoPanel extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(disc?.title ?? 'Game Details', style: Theme.of(context).textTheme.titleLarge),
+                  Text(disc?.title ?? 'Game Details',
+                      style: Theme.of(context).textTheme.titleLarge),
                   IconButton(
                     icon: const Icon(Icons.close),
                     onPressed: onClose ?? () => Navigator.of(context).pop(),
@@ -54,13 +55,22 @@ class PremiumGameInfoPanel extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  TextButton(onPressed: onOpenFolder ?? () {}, child: const Text('Open Folder')),
+                  TextButton(
+                      onPressed: onOpenFolder ?? () {},
+                      child: const Text('Open Folder')),
                   const SizedBox(width: 8),
-                  TextButton(onPressed: onVerify ?? () {}, child: const Text('Verify')),
+                  TextButton(
+                      onPressed: onVerify ?? () {},
+                      child: const Text('Verify')),
                   const SizedBox(width: 8),
-                  TextButton(onPressed: onConvert ?? () {}, child: const Text('Convert')),
+                  TextButton(
+                      onPressed: onConvert ?? () {},
+                      child: const Text('Convert')),
                   const SizedBox(width: 8),
-                  TextButton(onPressed: onDelete ?? () {}, child: const Text('Delete'), style: TextButton.styleFrom(foregroundColor: Colors.red)),
+                  TextButton(
+                      onPressed: onDelete ?? () {},
+                      child: const Text('Delete'),
+                      style: TextButton.styleFrom(foregroundColor: Colors.red)),
                 ],
               )
             ],

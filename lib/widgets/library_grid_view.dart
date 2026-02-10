@@ -11,7 +11,7 @@ class LibraryGameTile extends StatefulWidget {
   final String platform;
   final String? filePath;
   final VoidCallback? onTap;
-  
+
   const LibraryGameTile({
     super.key,
     required this.gameId,
@@ -20,7 +20,7 @@ class LibraryGameTile extends StatefulWidget {
     this.filePath,
     this.onTap,
   });
-  
+
   @override
   State<LibraryGameTile> createState() => _LibraryGameTileState();
 }
@@ -28,34 +28,34 @@ class LibraryGameTile extends StatefulWidget {
 class _LibraryGameTileState extends State<LibraryGameTile> {
   String? _coverPath;
   bool _loading = false;
-  
+
   @override
   void initState() {
     super.initState();
     _loadCoverArt();
   }
-  
+
   Future<void> _loadCoverArt() async {
     if (_loading) return;
-    
+
     setState(() => _loading = true);
-    
+
     final coverProvider = context.read<CoverArtProvider>();
-    
+
     // Convert platform string to GamePlatform enum
     final platform = _parsePlatform(widget.platform);
     if (platform == null) {
       setState(() => _loading = false);
       return;
     }
-    
+
     try {
       final coverPath = await coverProvider.downloadCover(
         gameTitle: widget.title,
         platform: platform,
         gameId: widget.gameId,
       );
-      
+
       if (mounted) {
         setState(() {
           _coverPath = coverPath;
@@ -68,7 +68,7 @@ class _LibraryGameTileState extends State<LibraryGameTile> {
       }
     }
   }
-  
+
   GamePlatform? _parsePlatform(String platformStr) {
     switch (platformStr.toLowerCase()) {
       case 'wii':
@@ -86,7 +86,7 @@ class _LibraryGameTileState extends State<LibraryGameTile> {
         return null;
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -134,7 +134,7 @@ class _LibraryGameTileState extends State<LibraryGameTile> {
       ),
     );
   }
-  
+
   Widget _buildCoverArt() {
     if (_loading) {
       return Container(
@@ -144,7 +144,7 @@ class _LibraryGameTileState extends State<LibraryGameTile> {
         ),
       );
     }
-    
+
     if (_coverPath != null && File(_coverPath!).existsSync()) {
       return Image.file(
         File(_coverPath!),
@@ -154,10 +154,10 @@ class _LibraryGameTileState extends State<LibraryGameTile> {
         },
       );
     }
-    
+
     return _buildPlaceholder();
   }
-  
+
   Widget _buildPlaceholder() {
     return Container(
       color: Colors.grey[800],
@@ -184,7 +184,7 @@ class _LibraryGameTileState extends State<LibraryGameTile> {
       ),
     );
   }
-  
+
   IconData _getPlatformIcon() {
     switch (widget.platform.toLowerCase()) {
       case 'wii':
@@ -208,13 +208,13 @@ class _LibraryGameTileState extends State<LibraryGameTile> {
 class LibraryGridView extends StatelessWidget {
   final List<GameGridItem> games;
   final Function(GameGridItem game)? onGameTap;
-  
+
   const LibraryGridView({
     super.key,
     required this.games,
     this.onGameTap,
   });
-  
+
   @override
   Widget build(BuildContext context) {
     if (games.isEmpty) {
@@ -247,7 +247,7 @@ class LibraryGridView extends StatelessWidget {
         ),
       );
     }
-    
+
     return GridView.builder(
       padding: const EdgeInsets.all(16),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -278,7 +278,7 @@ class GameGridItem {
   final String platform;
   final String? filePath;
   final int? fileSizeBytes;
-  
+
   GameGridItem({
     required this.gameId,
     required this.title,

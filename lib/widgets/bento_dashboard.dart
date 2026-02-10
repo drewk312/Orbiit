@@ -34,7 +34,8 @@ class BentoDashboard extends StatelessWidget {
                 selectedIndex: selectedIndex,
                 onDestinationSelected: onDestinationSelected,
                 labelType: labelType,
-                backgroundColor: isDark ? const Color(0xFF16161F) : Colors.white,
+                backgroundColor:
+                    isDark ? const Color(0xFF16161F) : Colors.white,
                 indicatorColor: primaryColor.withValues(alpha: 0.15),
                 destinations: [
                   const NavigationRailDestination(
@@ -58,21 +59,21 @@ class BentoDashboard extends StatelessWidget {
                     label: Text('Hardware'),
                   ),
                 ],
-            leading: Column(
-              children: [
-                const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: primaryColor.withValues(alpha: 0.1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(Icons.gamepad, color: primaryColor, size: 24),
+                leading: Column(
+                  children: [
+                    const SizedBox(height: 16),
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: primaryColor.withValues(alpha: 0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(Icons.gamepad, color: primaryColor, size: 24),
+                    ),
+                    const SizedBox(height: 32),
+                  ],
                 ),
-                const SizedBox(height: 32),
-              ],
-            ),
-                );
+              );
             },
           ),
 

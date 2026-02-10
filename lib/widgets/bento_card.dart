@@ -116,7 +116,8 @@ class _PulsingDiscState extends State<_PulsingDisc>
           child: Center(
             child: Icon(
               Icons.blur_on,
-              color: widget.color.withValues(alpha: 0.7 + (0.3 * _controller.value)),
+              color: widget.color
+                  .withValues(alpha: 0.7 + (0.3 * _controller.value)),
               size: 40,
             ),
           ),

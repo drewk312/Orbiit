@@ -74,7 +74,8 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
         _isSettingUp = false;
         if (result.success) {
           _setupSuccess = true;
-          _setupStatus = 'Successfully created ${result.created.length} folders!';
+          _setupStatus =
+              'Successfully created ${result.created.length} folders!';
           Future.delayed(const Duration(seconds: 1), () {
             _nextPage();
           });
@@ -115,7 +116,7 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context).currentTheme;
-    
+
     return Scaffold(
       backgroundColor: theme.backgroundColor,
       body: Stack(
@@ -138,7 +139,7 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
               ),
             ),
           ),
-          
+
           SafeArea(
             child: Column(
               children: [
@@ -215,7 +216,8 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
             onPressed: _nextPage,
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 20),
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             child: const Text('Start Setup'),
           ),
@@ -240,11 +242,10 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
             style: theme.textTheme.bodyMedium,
           ),
           const SizedBox(height: 32),
-          
           if (_isScanning)
             const Center(child: CircularProgressIndicator())
           else if (_drives.isEmpty)
-             _buildNoDrivesFound(theme)
+            _buildNoDrivesFound(theme)
           else
             Expanded(
               child: ListView.separated(
@@ -253,7 +254,7 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
                 itemBuilder: (context, index) {
                   final drive = _drives[index];
                   final isSelected = _selectedDrivePath == drive.path;
-                  
+
                   return InkWell(
                     onTap: () {
                       setState(() {
@@ -263,11 +264,13 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: isSelected 
-                            ? theme.primaryColor.withValues(alpha: 0.1) 
+                        color: isSelected
+                            ? theme.primaryColor.withValues(alpha: 0.1)
                             : theme.surfaceColor,
                         border: Border.all(
-                          color: isSelected ? theme.primaryColor : Colors.transparent,
+                          color: isSelected
+                              ? theme.primaryColor
+                              : Colors.transparent,
                           width: 2,
                         ),
                         borderRadius: BorderRadius.circular(12),
@@ -275,7 +278,9 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
                       child: Row(
                         children: [
                           Icon(
-                            drive.busType == 'USB' ? Icons.usb : Icons.sd_storage,
+                            drive.busType == 'USB'
+                                ? Icons.usb
+                                : Icons.sd_storage,
                             color: theme.textColor,
                             size: 32,
                           ),
@@ -304,27 +309,29 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
                 },
               ),
             ),
-            
           const SizedBox(height: 24),
           if (_setupStatus.isNotEmpty)
-             Container(
-               padding: const EdgeInsets.all(12),
-               decoration: BoxDecoration(
-                 color: _setupSuccess ? Colors.green.withValues(alpha: 0.1) : Colors.red.withValues(alpha: 0.1),
-                 borderRadius: BorderRadius.circular(8),
-               ),
-               child: Row(
-                 children: [
-                   Icon(
-                     _setupSuccess ? Icons.check : Icons.info,
-                     color: _setupSuccess ? Colors.green : Colors.red,
-                   ),
-                   const SizedBox(width: 12),
-                   Expanded(child: Text(_setupStatus, style: theme.textTheme.bodyMedium)),
-                 ],
-               ),
-             ),
-             
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: _setupSuccess
+                    ? Colors.green.withValues(alpha: 0.1)
+                    : Colors.red.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    _setupSuccess ? Icons.check : Icons.info,
+                    color: _setupSuccess ? Colors.green : Colors.red,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                      child: Text(_setupStatus,
+                          style: theme.textTheme.bodyMedium)),
+                ],
+              ),
+            ),
           const SizedBox(height: 24),
           SizedBox(
             width: double.infinity,
@@ -332,12 +339,12 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
               onPressed: _selectedDrivePath != null && !_isSettingUp
                   ? _setupDrive
                   : null,
-              child: _isSettingUp 
+              child: _isSettingUp
                   ? const SizedBox(
-                      width: 24, 
-                      height: 24, 
-                      child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2)
-                    )
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(
+                          color: Colors.white, strokeWidth: 2))
                   : const Text('Set Up Drive'),
             ),
           ),
@@ -351,7 +358,8 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.usb_off, size: 48, color: theme.textColor.withValues(alpha: 0.5)),
+          Icon(Icons.usb_off,
+              size: 48, color: theme.textColor.withValues(alpha: 0.5)),
           const SizedBox(height: 16),
           Text(
             'No valid drives found',
@@ -409,7 +417,8 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
             onPressed: _finishSetup,
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 20),
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle:
+                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             child: const Text('Launch Orbiit'),
           ),

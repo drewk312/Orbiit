@@ -32,7 +32,8 @@ class _ShimmerCardState extends State<ShimmerCard>
   @override
   Widget build(BuildContext context) {
     final base = Theme.of(context).cardColor.withAlpha((0.06 * 255).round());
-    final highlight = Theme.of(context).cardColor.withAlpha((0.12 * 255).round());
+    final highlight =
+        Theme.of(context).cardColor.withAlpha((0.12 * 255).round());
 
     return AnimatedBuilder(
       animation: _controller,

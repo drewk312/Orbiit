@@ -9,7 +9,8 @@ import 'dart:developer' as developer;
 
 /// Comprehensive service for managing Homebrew installation and updates
 class HomebrewAutomationService {
-  static final HomebrewAutomationService _instance = HomebrewAutomationService._internal();
+  static final HomebrewAutomationService _instance =
+      HomebrewAutomationService._internal();
   factory HomebrewAutomationService() => _instance;
   HomebrewAutomationService._internal();
 
@@ -22,18 +23,18 @@ class HomebrewAutomationService {
     for (var i = 0; i < games.length; i++) {
       final game = games[i];
       final stepPrefix = '[${i + 1}/${games.length}]';
-      
+
       try {
         await installToSD(
           game: game,
           sdCardRoot: sdCardRoot,
           onProgress: (p) {
-             // Sub-progress within the batch item
-             final globalProgress = (i + p) / games.length;
-             onStatus('$stepPrefix Installing ${game.title}...', globalProgress);
+            // Sub-progress within the batch item
+            final globalProgress = (i + p) / games.length;
+            onStatus('$stepPrefix Installing ${game.title}...', globalProgress);
           },
           onStatus: (msg) {
-             onStatus('$stepPrefix $msg', i / games.length);
+            onStatus('$stepPrefix $msg', i / games.length);
           },
         );
       } catch (e) {
@@ -57,10 +58,11 @@ class HomebrewAutomationService {
     }
 
     final tempDir = await getTemporaryDirectory();
-    final downloadDir = await Directory(path.join(tempDir.path, 'hb_dl_${game.title.hashCode}'))
+    final downloadDir =
+        await Directory(path.join(tempDir.path, 'hb_dl_${game.title.hashCode}'))
             .create(recursive: true);
     final zipFile = File(path.join(downloadDir.path, 'package.zip'));
-    
+
     // Sometimes archives don't have a top level folder, creating mess.
     // We extract to a specific folder first.
     final extractDir = Directory(path.join(downloadDir.path, 'extracted'));
@@ -68,7 +70,8 @@ class HomebrewAutomationService {
     try {
       // 1. Download
       onStatus('Downloading ${game.title}...');
-      await _downloadFile(game.downloadUrl!, zipFile, (p) => onProgress(p * 0.4));
+      await _downloadFile(
+          game.downloadUrl!, zipFile, (p) => onProgress(p * 0.4));
 
       // 2. Extract
       onStatus('Extracting content...');
@@ -76,7 +79,7 @@ class HomebrewAutomationService {
       extractDir.createSync();
 
       // Use compute/isolate for heavy extraction if possible, or just standard
-      // For now, synchronous archive_io is reliable but blocking. 
+      // For now, synchronous archive_io is reliable but blocking.
       // Wrapping in Future to allow UI updates if loop allows (it won't really yield event loop in sync code though).
       await extractFileToDisk(zipFile.path, extractDir.path);
       onProgress(0.7);
@@ -84,7 +87,7 @@ class HomebrewAutomationService {
       // 3. Smart Install
       onStatus('Installing to SD Card...');
       await _smartMergeToSD(extractDir, sdCardRoot, game.slug ?? 'unknown_app');
-      
+
       onStatus('Refining setup...');
       onProgress(1.0);
     } finally {
@@ -97,7 +100,8 @@ class HomebrewAutomationService {
     }
   }
 
-  Future<void> _downloadFile(String url, File target, Function(double) onProgress) async {
+  Future<void> _downloadFile(
+      String url, File target, Function(double) onProgress) async {
     final client = http.Client();
     try {
       final request = http.Request('GET', Uri.parse(url));
@@ -128,21 +132,24 @@ class HomebrewAutomationService {
 
   /// Consolidates extraction logic to ensure files end up in SD:/apps/{slug}/
   /// or SD:/{root}/ if strictly defined structure.
-  Future<void> _smartMergeToSD(Directory source, Directory sdRoot, String appSlug) async {
+  Future<void> _smartMergeToSD(
+      Directory source, Directory sdRoot, String appSlug) async {
     // Structure Detection:
     // 1. Does it have an 'apps' folder? -> Merge logic.
     // 2. Is it a loose 'boot.dol' + 'icon.png'? -> Wrap in 'apps/{slug}'.
     // 3. Is it a folder named '{slug}'? -> Move to 'apps/'.
-    
+
     final appsDir = Directory(path.join(sdRoot.path, 'apps'));
     if (!appsDir.existsSync()) appsDir.createSync();
 
     final contents = source.listSync();
-    
+
     // Case 1: Root contains 'apps' folder (Standard HBC format) or 'wiiu' folder (Wii U format)
-    bool hasAppsFolder = contents.any((e) => path.basename(e.path).toLowerCase() == 'apps');
-    bool hasWiiUFolder = contents.any((e) => path.basename(e.path).toLowerCase() == 'wiiu');
-    
+    bool hasAppsFolder =
+        contents.any((e) => path.basename(e.path).toLowerCase() == 'apps');
+    bool hasWiiUFolder =
+        contents.any((e) => path.basename(e.path).toLowerCase() == 'wiiu');
+
     if (hasAppsFolder || hasWiiUFolder) {
       // Merge blindly as the structure is likely correct (SD root style)
       await _copyDirectory(source, sdRoot);
@@ -170,10 +177,10 @@ class HomebrewAutomationService {
       final subDir = contents.first as Directory;
       // If the subdir is named 'apps', we recurse to merge logic
       if (path.basename(subDir.path).toLowerCase() == 'apps') {
-         await _copyDirectory(subDir, appsDir);
-         return;
+        await _copyDirectory(subDir, appsDir);
+        return;
       }
-      
+
       // If the subdir seems to be the app itself, check inside
       final subContents = subDir.listSync();
       bool subIsApp = subContents.any((e) {
@@ -182,8 +189,8 @@ class HomebrewAutomationService {
       });
 
       if (subIsApp) {
-        // We'll trust this folder is the app folder. 
-        // We move it to apps/. WE keep the folder name provided by the zip usually, 
+        // We'll trust this folder is the app folder.
+        // We move it to apps/. WE keep the folder name provided by the zip usually,
         // to avoid breaking internal paths, unless we really want {slug}.
         // Let's use the zip's folder name for compatibility.
         final folderName = path.basename(subDir.path);
@@ -205,13 +212,14 @@ class HomebrewAutomationService {
     // standard recursive copy
     await for (final entity in source.list(recursive: false)) {
       if (entity is Directory) {
-        final newDirectory = Directory(path.join(dest.path, path.basename(entity.path)));
+        final newDirectory =
+            Directory(path.join(dest.path, path.basename(entity.path)));
         if (!newDirectory.existsSync()) newDirectory.createSync();
         await _copyDirectory(entity, newDirectory);
       } else if (entity is File) {
         final name = path.basename(entity.path);
         if (name.startsWith('.') || name == 'Thumbs.db') continue;
-        
+
         await entity.copy(path.join(dest.path, name));
       }
     }

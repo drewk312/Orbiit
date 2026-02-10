@@ -109,7 +109,8 @@ class FusionErrorWidget extends StatelessWidget {
                   OutlinedButton.icon(
                     onPressed: () {
                       Clipboard.setData(ClipboardData(
-                        text: 'Orbiit Error:\n${details.exceptionAsString()}\n\nStack Trace:\n${details.stack}',
+                        text:
+                            'Orbiit Error:\n${details.exceptionAsString()}\n\nStack Trace:\n${details.stack}',
                       ));
                     },
                     icon: const Icon(Icons.copy, size: 16),
@@ -117,7 +118,8 @@ class FusionErrorWidget extends StatelessWidget {
                     style: OutlinedButton.styleFrom(
                       foregroundColor: FusionColors.textSecondary,
                       side: const BorderSide(color: FusionColors.border),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
                     ),
                   ),
                   if (onRestart != null) ...[
@@ -129,7 +131,8 @@ class FusionErrorWidget extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: FusionColors.nebulaCyan,
                         foregroundColor: Colors.black,
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 12),
                       ),
                     ),
                   ],

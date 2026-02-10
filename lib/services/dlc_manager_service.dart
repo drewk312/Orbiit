@@ -28,7 +28,7 @@ class DLCManagerService {
     'Just Dance 2014': '00010000534A4F',
     'Just Dance 2015': '00010000534533',
     'Rock Band 2': '00010000535A41',
-    'Rock Band 3': '00010000535A42', 
+    'Rock Band 3': '00010000535A42',
     'The Beatles: Rock Band': '0001000052394A',
     'Green Day: Rock Band': '00010000535A41',
     'Guitar Hero: World Tour': '00010000535841',
@@ -100,10 +100,11 @@ class DLCManagerService {
 
   /// Organizes the output files from wad2bin to the SD card structure
   /// wad2bin output usually goes to /private/wii/data/... locally or in output dir
-  Future<void> installContentToSD(Directory sourceContent, Directory sdRoot) async {
+  Future<void> installContentToSD(
+      Directory sourceContent, Directory sdRoot) async {
     final privateDir = Directory(path.join(sdRoot.path, 'private'));
     if (!privateDir.existsSync()) privateDir.createSync(recursive: true);
-    
+
     // Copy the 'private' folder from source if exists, or merge
     // Assuming sourceContent IS the folder containing 'private' or the '000...bin' files
     // The guide says: "Make sure that it created a folder with .bin files in a subfolder of /private/wii/data/"
@@ -111,10 +112,10 @@ class DLCManagerService {
       await _copyDirectory(sourceContent, privateDir);
     } else {
       // Try to find 'private' inside source
-       final subPrivate = Directory(path.join(sourceContent.path, 'private'));
-       if (subPrivate.existsSync()) {
-         await _copyDirectory(subPrivate, privateDir);
-       }
+      final subPrivate = Directory(path.join(sourceContent.path, 'private'));
+      if (subPrivate.existsSync()) {
+        await _copyDirectory(subPrivate, privateDir);
+      }
     }
   }
 
@@ -122,7 +123,8 @@ class DLCManagerService {
     // Standard recursive copy
     await for (final entity in source.list(recursive: false)) {
       if (entity is Directory) {
-        final newDirectory = Directory(path.join(dest.path, path.basename(entity.path)));
+        final newDirectory =
+            Directory(path.join(dest.path, path.basename(entity.path)));
         if (!newDirectory.existsSync()) newDirectory.createSync();
         await _copyDirectory(entity, newDirectory);
       } else if (entity is File) {

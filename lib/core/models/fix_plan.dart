@@ -18,10 +18,12 @@ class FixPlan {
               ?.map((a) => FixAction.fromJson(a as Map<String, dynamic>))
               .toList() ??
           [],
-      projectedScoreImprovement: json['projected_score_improvement'] as int? ?? 0,
+      projectedScoreImprovement:
+          json['projected_score_improvement'] as int? ?? 0,
       projectedSpaceSavings: json['projected_space_savings'] as int? ?? 0,
       generated: json['generated'] != null
-          ? DateTime.fromMillisecondsSinceEpoch((json['generated'] as int) * 1000)
+          ? DateTime.fromMillisecondsSinceEpoch(
+              (json['generated'] as int) * 1000)
           : DateTime.now(),
     );
   }

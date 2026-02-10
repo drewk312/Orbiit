@@ -29,7 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen>
   late AnimationController _toggleController;
   late Animation<double> _rotationAnim;
   late Animation<double> _scaleAnim;
-  
+
   // Update Logic
   bool _checkingForUpdate = false;
   String _updateStatus = '';
@@ -89,17 +89,20 @@ class _SettingsScreenState extends State<SettingsScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Downloads', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              const Text('Downloads',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
               SwitchListTile(
                 title: const Text('Auto-start persisted queue'),
-                subtitle: const Text('Automatically start queued downloads from previous sessions'),
+                subtitle: const Text(
+                    'Automatically start queued downloads from previous sessions'),
                 value: forge.autoStartPersistedQueue,
                 onChanged: (v) => forge.autoStartPersistedQueue = v,
               ),
               SwitchListTile(
                 title: const Text('Allow resume at offset'),
-                subtitle: const Text('Attempt to resume interrupted downloads when supported by source/native'),
+                subtitle: const Text(
+                    'Attempt to resume interrupted downloads when supported by source/native'),
                 value: forge.allowResumeAtOffset,
                 onChanged: (v) => forge.allowResumeAtOffset = v,
               ),
@@ -215,87 +218,100 @@ class _SettingsScreenState extends State<SettingsScreen>
     );
   }
 
-  Widget _buildUpdateCard(BuildContext context, Color primaryColor, bool isDark) {
+  Widget _buildUpdateCard(
+      BuildContext context, Color primaryColor, bool isDark) {
     return Card(
       child: Padding(
-         padding: const EdgeInsets.all(16),
-         child: Row(
-           children: [
-             Container(
-               padding: const EdgeInsets.all(12),
-               decoration: BoxDecoration(
-                 color: _updateAvailable != null ? Colors.green.withValues(alpha: 0.1) : primaryColor.withValues(alpha: 0.1),
-                 borderRadius: BorderRadius.circular(12),
-               ),
-               child: Icon(
-                 _updateAvailable != null ? Icons.system_update : Icons.system_update_alt, 
-                 color: _updateAvailable != null ? Colors.green : primaryColor,
-               ),
-             ),
-             const SizedBox(width: 16),
-             Expanded(
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Text(
-                     _updateAvailable != null ? 'Update Available!' : 'Application Version',
-                     style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                   ),
-                   const SizedBox(height: 4),
-                   if (_updateAvailable != null)
-                     Text('Version ${_updateAvailable!.tagName} is ready.', style: const TextStyle(fontSize: 13, color: Colors.grey))
-                   else
-                     Text('Current: ${AppConfig.version} ${_updateStatus.isNotEmpty ? '• $_updateStatus' : ''}', style: const TextStyle(fontSize: 13, color: Colors.grey)),
-                     
-                   if (_updateProgress != null) ...[
-                      const SizedBox(height: 8),
-                      LinearProgressIndicator(value: _updateProgress),
-                   ]
-                 ],
-               ),
-             ),
-             if (_updateProgress == null)
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: _updateAvailable != null
+                    ? Colors.green.withValues(alpha: 0.1)
+                    : primaryColor.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(
+                _updateAvailable != null
+                    ? Icons.system_update
+                    : Icons.system_update_alt,
+                color: _updateAvailable != null ? Colors.green : primaryColor,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    _updateAvailable != null
+                        ? 'Update Available!'
+                        : 'Application Version',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  const SizedBox(height: 4),
+                  if (_updateAvailable != null)
+                    Text('Version ${_updateAvailable!.tagName} is ready.',
+                        style:
+                            const TextStyle(fontSize: 13, color: Colors.grey))
+                  else
+                    Text(
+                        'Current: ${AppConfig.version} ${_updateStatus.isNotEmpty ? '• $_updateStatus' : ''}',
+                        style:
+                            const TextStyle(fontSize: 13, color: Colors.grey)),
+                  if (_updateProgress != null) ...[
+                    const SizedBox(height: 8),
+                    LinearProgressIndicator(value: _updateProgress),
+                  ]
+                ],
+              ),
+            ),
+            if (_updateProgress == null)
               ElevatedButton(
                 onPressed: _checkingForUpdate ? null : _handleUpdateCheck,
                 child: Text(_updateAvailable != null ? 'UPDATE' : 'CHECK'),
               ),
-           ],
-         ),
+          ],
+        ),
       ),
     );
   }
 
   Future<void> _handleUpdateCheck() async {
     if (_updateAvailable != null) {
-       // Perform update
-       setState(() {
-         _checkingForUpdate = true;
-         _updateProgress = 0.0;
-       });
-       try {
-         await UpdateService().downloadAndInstall(_updateAvailable!, (progress) {
-            if (mounted) setState(() => _updateProgress = progress);
-         });
-       } catch (e) {
-          if (mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Update failed: $e')));
-            setState(() {
-               _checkingForUpdate = false;
-               _updateProgress = null;
-            });
-          }
-       }
-       return;
+      // Perform update
+      setState(() {
+        _checkingForUpdate = true;
+        _updateProgress = 0.0;
+      });
+      try {
+        await UpdateService().downloadAndInstall(_updateAvailable!, (progress) {
+          if (mounted) setState(() => _updateProgress = progress);
+        });
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Update failed: $e')));
+          setState(() {
+            _checkingForUpdate = false;
+            _updateProgress = null;
+          });
+        }
+      }
+      return;
     }
-    
+
     // Check
     setState(() {
       _checkingForUpdate = true;
       _updateStatus = 'Checking...';
     });
-    
+
     final release = await UpdateService().checkForUpdates();
-    
+
     if (mounted) {
       if (release != null) {
         setState(() {
@@ -308,7 +324,7 @@ class _SettingsScreenState extends State<SettingsScreen>
           _updateStatus = 'Up to date';
           _checkingForUpdate = false;
         });
-        
+
         // Clear status after delay
         Future.delayed(const Duration(seconds: 3), () {
           if (mounted) setState(() => _updateStatus = '');

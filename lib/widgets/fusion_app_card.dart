@@ -271,7 +271,8 @@ class _FusionAppCardState extends State<FusionAppCard> {
     }
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 8, 8, 0), // Reduced padding to prevent overflow
+      padding: const EdgeInsets.fromLTRB(
+          8, 8, 8, 0), // Reduced padding to prevent overflow
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

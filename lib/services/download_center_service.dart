@@ -18,7 +18,8 @@ import 'package:archive/archive_io.dart';
 import '../core/app_logger.dart';
 
 class DownloadCenterService {
-  static final DownloadCenterService _instance = DownloadCenterService._internal();
+  static final DownloadCenterService _instance =
+      DownloadCenterService._internal();
   factory DownloadCenterService() => _instance;
   DownloadCenterService._internal();
 
@@ -28,15 +29,16 @@ class DownloadCenterService {
   /// Scans a "Downloads" folder for known game archives
   Future<List<File>> scanForGameArchives(Directory downloadDir) async {
     if (!downloadDir.existsSync()) return [];
-    
+
     // Extensions we care about for "Get Games" flow
     // Temporarily removed .7z and .rar as pure Dart extraction is limited.
     const extensions = ['.zip', '.rvz', '.wbfs', '.iso'];
-    
+
     return downloadDir.listSync().whereType<File>().where((file) {
       final ext = path.extension(file.path).toLowerCase();
       // Skip incomplete downloads
-      if (file.path.endsWith('.part') || file.path.endsWith('.crdownload')) return false;
+      if (file.path.endsWith('.part') || file.path.endsWith('.crdownload'))
+        return false;
       return extensions.contains(ext);
     }).toList();
   }
@@ -53,16 +55,16 @@ class DownloadCenterService {
   }) async {
     final fileName = path.basename(archiveFile.path);
     onStatus('Analyzing $fileName...');
-    
+
     // 1. Extraction (Prepare Temp)
     final tempDir = await Directory.systemTemp.createTemp('wii_extract_');
     try {
       if (_isArchive(archiveFile)) {
-         onStatus('Extracting $fileName (this may take a while)...');
-         await _extractArchive(archiveFile, tempDir, onProgress);
+        onStatus('Extracting $fileName (this may take a while)...');
+        await _extractArchive(archiveFile, tempDir, onProgress);
       } else {
         // It's already a raw file (iso/wbfs/rvz)? Copy to temp or just use it?
-        // If it's on same drive, we can maybe just move. 
+        // If it's on same drive, we can maybe just move.
         // For safety, let's treat it as the "source" file.
         // But if we want to "Process" it, we likely want to move/rename it.
         // Copying huge files to system temp is bad if drives differ.
@@ -71,7 +73,8 @@ class DownloadCenterService {
       }
 
       // 2. Search extracted files for Game Image
-      final gameFiles = tempDir.listSync(recursive: true).whereType<File>().where((f) {
+      final gameFiles =
+          tempDir.listSync(recursive: true).whereType<File>().where((f) {
         final ext = path.extension(f.path).toLowerCase();
         return ['.iso', '.wbfs', '.rvz', '.gcm', '.ciso'].contains(ext);
       }).toList();
@@ -88,18 +91,20 @@ class DownloadCenterService {
       // 3. Identify Game ID
       onStatus('Identifying Game...');
       String? gameId = await _readGameIdDisplay(gameFile);
-      String gameTitle = path.basenameWithoutExtension(fileName); // Fallback title
-      
+      String gameTitle =
+          path.basenameWithoutExtension(fileName); // Fallback title
+
       if (gameId == null) {
-        onStatus('Warning: Could not read Game ID from header. Using filename.');
+        onStatus(
+            'Warning: Could not read Game ID from header. Using filename.');
         // Try to regex filename? e.g. "Super Mario Galaxy [RMGE01]"
         final match = RegExp(r'\[([A-Za-z0-9]{6})\]').firstMatch(fileName);
         if (match != null) {
           gameId = match.group(1);
         } else {
-           // Generate a fake ID or ask user? 
-           // For automation, we might skip generic logic.
-           gameId = 'UNKNOWN'; 
+          // Generate a fake ID or ask user?
+          // For automation, we might skip generic logic.
+          gameId = 'UNKNOWN';
         }
       } else {
         // We have a real ID, lets try to fetch real title?
@@ -115,12 +120,12 @@ class DownloadCenterService {
       final safeTitle = gameTitle.replaceAll(RegExp(r'[<>:"/\\|?*]'), '');
       final finalFolderName = '$safeTitle [$gameId]';
       final finalFileName = '$gameId${path.extension(gameFile.path)}';
-      
+
       final gameFolder = Directory(path.join(libFolder.path, finalFolderName));
       if (!gameFolder.existsSync()) gameFolder.createSync();
 
       final finalPath = path.join(gameFolder.path, finalFileName);
-      
+
       // Move/Copy
       // Cross-device move fallback
       try {
@@ -132,7 +137,6 @@ class DownloadCenterService {
       }
 
       onStatus('Success! Installed to $finalFolderName');
-
     } finally {
       // Cleanup Temp
       if (tempDir.existsSync()) tempDir.deleteSync(recursive: true);
@@ -144,26 +148,28 @@ class DownloadCenterService {
     return ['.zip'].contains(path.extension(f.path).toLowerCase());
   }
 
-  Future<void> _extractArchive(File zip, Directory target, Function(double) onProgress) async {
-    // Basic zip support via 'archive' package. 
+  Future<void> _extractArchive(
+      File zip, Directory target, Function(double) onProgress) async {
+    // Basic zip support via 'archive' package.
     // WARNING: 'archive' package is pure dart and SLOW for large files.
     // Recommended: Use system 7z/tar if available, or isolate.
     // Phase 5 optimization: Check for external tools or use synchronous chunks?
-    
+
     // For large ISOs (4GB+), Dart heap might crash with standard 'decodeZip'.
     // Must use inputStream.
-    
+
     final inputStream = InputFileStream(zip.path);
     final archive = ZipDecoder().decodeBuffer(inputStream);
-    
+
     int totalFiles = archive.length;
     int processed = 0;
 
     for (final file in archive) {
       if (file.isFile) {
-         final outputStream = OutputFileStream(path.join(target.path, file.name));
-         file.writeContent(outputStream);
-         outputStream.close();
+        final outputStream =
+            OutputFileStream(path.join(target.path, file.name));
+        file.writeContent(outputStream);
+        outputStream.close();
       }
       processed++;
       onProgress(processed / totalFiles);
@@ -180,7 +186,7 @@ class DownloadCenterService {
       // Standard ISO: bytes 0-5 are ID.
       final bytes = await handle.read(6);
       await handle.close();
-      
+
       final id = String.fromCharCodes(bytes);
       // Valid ID? (Alphanumeric 6 chars)
       if (RegExp(r'^[A-Za-z0-9]{6}$').hasMatch(id)) {

@@ -90,10 +90,10 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
                 children: [
                   // Left: Cover Art & Actions
                   _buildLeftPanel(),
-                  
+
                   // Vertical Divider
                   Container(width: 1, color: OrbColors.border),
-                  
+
                   // Right: Details & Metadata
                   Expanded(child: _buildRightPanel()),
                 ],
@@ -107,7 +107,7 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
 
   Widget _buildHeader(BuildContext context) {
     final platformColor = _getPlatformColor(widget.game.platform);
-    
+
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Row(
@@ -126,7 +126,7 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
             ),
           ),
           const SizedBox(width: 16),
-          
+
           // Title
           Expanded(
             child: Column(
@@ -151,7 +151,7 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
               ],
             ),
           ),
-          
+
           // Loading indicator
           if (_isLoading) ...[
             SizedBox(
@@ -164,7 +164,7 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
             ),
             const SizedBox(width: 16),
           ],
-          
+
           // Close button
           IconButton(
             onPressed: () => Navigator.of(context).pop(),
@@ -178,7 +178,7 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
 
   Widget _buildLeftPanel() {
     final platformColor = _getPlatformColor(widget.game.platform);
-    
+
     return Container(
       width: 300,
       padding: const EdgeInsets.all(24),
@@ -200,7 +200,9 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(OrbRadius.lg),
                 child: CascadingCoverImage(
-                  primaryUrl: _metadata?.coverUrl ?? widget.game.coverUrl ?? 'https://placeholder.invalid/none.png',
+                  primaryUrl: _metadata?.coverUrl ??
+                      widget.game.coverUrl ??
+                      'https://placeholder.invalid/none.png',
                   gameId: widget.game.gameId,
                   platform: widget.game.platform,
                   title: widget.game.title,
@@ -213,7 +215,7 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
             ),
           ),
           const SizedBox(height: 24),
-          
+
           // Primary Action Button
           SizedBox(
             width: double.infinity,
@@ -243,7 +245,7 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
         // === ABOUT SECTION ===
         _buildSectionTitle('About this game', Icons.info_outline),
         const SizedBox(height: 16),
-        
+
         // Smart description
         if (_isLoading)
           _buildLoadingPlaceholder()
@@ -255,7 +257,7 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
               height: 1.6,
             ),
           ),
-        
+
         // Wikipedia link if available
         if (_metadata?.wikiUrl != null) ...[
           const SizedBox(height: 12),
@@ -277,16 +279,16 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
             ),
           ),
         ],
-        
+
         const SizedBox(height: 32),
 
         // === DETAILS SECTION ===
         _buildSectionTitle('Details', Icons.list_alt),
         const SizedBox(height: 16),
         _buildDetailGrid(),
-        
+
         const SizedBox(height: 32),
-        
+
         // === GENRES (if available) ===
         if (_metadata != null && _metadata!.genres.isNotEmpty) ...[
           _buildSectionTitle('Genres', Icons.category_outlined),
@@ -294,7 +296,9 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: _metadata!.genres.map((genre) => _buildGenreChip(genre)).toList(),
+            children: _metadata!.genres
+                .map((genre) => _buildGenreChip(genre))
+                .toList(),
           ),
           const SizedBox(height: 32),
         ],
@@ -341,7 +345,7 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
       _DetailData('Game ID', widget.game.gameId ?? 'Unknown'),
       _DetailData('Format', widget.game.format ?? 'ROM'),
     ];
-    
+
     // Add metadata details if available
     if (_metadata?.releaseDate != null) {
       details.add(_DetailData('Released', _metadata!.releaseDate!));
@@ -430,17 +434,22 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                  color: widget.game.requiresBrowser 
+                  color: widget.game.requiresBrowser
                       ? OrbColors.needsFix.withValues(alpha: 0.2)
                       : OrbColors.ready.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(OrbRadius.sm),
                 ),
                 child: Text(
-                  widget.game.requiresBrowser ? 'Browser Required' : 'Direct Download',
+                  widget.game.requiresBrowser
+                      ? 'Browser Required'
+                      : 'Direct Download',
                   style: OrbText.caption.copyWith(
-                    color: widget.game.requiresBrowser ? OrbColors.needsFix : OrbColors.ready,
+                    color: widget.game.requiresBrowser
+                        ? OrbColors.needsFix
+                        : OrbColors.ready,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -600,7 +609,13 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
 
   IconData _getPlatformIcon(String platform) {
     final p = platform.toLowerCase();
-    if (p == 'gba' || p == 'gbc' || p == 'gb' || p == 'nds' || p == 'ds' || p == '3ds' || p == 'psp') {
+    if (p == 'gba' ||
+        p == 'gbc' ||
+        p == 'gb' ||
+        p == 'nds' ||
+        p == 'ds' ||
+        p == '3ds' ||
+        p == 'psp') {
       return Icons.phone_android_rounded;
     }
     return Icons.sports_esports_rounded;

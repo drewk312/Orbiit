@@ -11,16 +11,16 @@ import '../globals.dart';
 sealed class AppError implements Exception {
   /// Technical error message for logging
   String get message;
-  
+
   /// User-friendly error message for display
   String get userMessage;
-  
+
   /// Optional underlying error
   Object? get cause;
-  
+
   /// Optional stack trace
   StackTrace? get stackTrace;
-  
+
   @override
   String toString() => '$runtimeType: $message';
 }
@@ -32,7 +32,7 @@ sealed class AppError implements Exception {
 /// Errors related to network operations
 sealed class NetworkError extends AppError {
   final String url;
-  
+
   NetworkError({required this.url});
 }
 
@@ -40,13 +40,13 @@ sealed class NetworkError extends AppError {
 final class HttpError extends NetworkError {
   final int statusCode;
   final String? responseBody;
-  
+
   @override
   final Object? cause;
-  
+
   @override
   final StackTrace? stackTrace;
-  
+
   HttpError({
     required super.url,
     required this.statusCode,
@@ -54,10 +54,10 @@ final class HttpError extends NetworkError {
     this.cause,
     this.stackTrace,
   });
-  
+
   @override
   String get message => 'HTTP $statusCode for $url';
-  
+
   @override
   String get userMessage {
     if (statusCode == 404) return 'Resource not found';
@@ -65,13 +65,13 @@ final class HttpError extends NetworkError {
     if (statusCode >= 500) return 'Server error. Please try again later.';
     return 'Network request failed (Error $statusCode)';
   }
-  
+
   /// Check if this is a client error (4xx)
   bool get isClientError => statusCode >= 400 && statusCode < 500;
-  
+
   /// Check if this is a server error (5xx)
   bool get isServerError => statusCode >= 500;
-  
+
   /// Check if this error is likely temporary and retry makes sense
   bool get isRetryable => statusCode >= 500 || statusCode == 429;
 }
@@ -80,43 +80,44 @@ final class HttpError extends NetworkError {
 final class ConnectionError extends NetworkError {
   @override
   final Object? cause;
-  
+
   @override
   final StackTrace? stackTrace;
-  
+
   ConnectionError({
     required super.url,
     this.cause,
     this.stackTrace,
   });
-  
+
   @override
   String get message => 'Connection failed for $url: $cause';
-  
+
   @override
-  String get userMessage => 'Could not connect. Check your internet connection.';
+  String get userMessage =>
+      'Could not connect. Check your internet connection.';
 }
 
 /// Request timed out
 final class TimeoutError extends NetworkError {
   final Duration timeout;
-  
+
   @override
   final Object? cause;
-  
+
   @override
   final StackTrace? stackTrace;
-  
+
   TimeoutError({
     required super.url,
     required this.timeout,
     this.cause,
     this.stackTrace,
   });
-  
+
   @override
   String get message => 'Request to $url timed out after ${timeout.inSeconds}s';
-  
+
   @override
   String get userMessage => 'Request timed out. Please try again.';
 }
@@ -128,7 +129,7 @@ final class TimeoutError extends NetworkError {
 /// Errors related to file operations
 sealed class FileError extends AppError {
   final String path;
-  
+
   FileError({required this.path});
 }
 
@@ -136,19 +137,19 @@ sealed class FileError extends AppError {
 final class FileNotFoundError extends FileError {
   @override
   final Object? cause;
-  
+
   @override
   final StackTrace? stackTrace;
-  
+
   FileNotFoundError({
     required super.path,
     this.cause,
     this.stackTrace,
   });
-  
+
   @override
   String get message => 'File not found: $path';
-  
+
   @override
   String get userMessage => 'File not found';
 }
@@ -157,19 +158,19 @@ final class FileNotFoundError extends FileError {
 final class FileAccessError extends FileError {
   @override
   final Object? cause;
-  
+
   @override
   final StackTrace? stackTrace;
-  
+
   FileAccessError({
     required super.path,
     this.cause,
     this.stackTrace,
   });
-  
+
   @override
   String get message => 'Access denied for: $path';
-  
+
   @override
   String get userMessage => 'Cannot access file. Check permissions.';
 }
@@ -177,23 +178,23 @@ final class FileAccessError extends FileError {
 /// File is corrupted or invalid
 final class FileCorruptError extends FileError {
   final String reason;
-  
+
   @override
   final Object? cause;
-  
+
   @override
   final StackTrace? stackTrace;
-  
+
   FileCorruptError({
     required super.path,
     required this.reason,
     this.cause,
     this.stackTrace,
   });
-  
+
   @override
   String get message => 'Corrupted file at $path: $reason';
-  
+
   @override
   String get userMessage => 'File appears to be corrupted.';
 }
@@ -202,13 +203,13 @@ final class FileCorruptError extends FileError {
 final class InsufficientSpaceError extends FileError {
   final int requiredBytes;
   final int availableBytes;
-  
+
   @override
   final Object? cause;
-  
+
   @override
   final StackTrace? stackTrace;
-  
+
   InsufficientSpaceError({
     required super.path,
     required this.requiredBytes,
@@ -216,10 +217,11 @@ final class InsufficientSpaceError extends FileError {
     this.cause,
     this.stackTrace,
   });
-  
+
   @override
-  String get message => 'Insufficient space at $path: need $requiredBytes, have $availableBytes';
-  
+  String get message =>
+      'Insufficient space at $path: need $requiredBytes, have $availableBytes';
+
   @override
   String get userMessage => 'Not enough disk space.';
 }
@@ -232,7 +234,7 @@ final class InsufficientSpaceError extends FileError {
 sealed class DownloadError extends AppError {
   final String url;
   final String? gameTitle;
-  
+
   DownloadError({required this.url, this.gameTitle});
 }
 
@@ -240,20 +242,20 @@ sealed class DownloadError extends AppError {
 final class DownloadCancelledError extends DownloadError {
   @override
   final Object? cause;
-  
+
   @override
   final StackTrace? stackTrace;
-  
+
   DownloadCancelledError({
     required super.url,
     super.gameTitle,
     this.cause,
     this.stackTrace,
   });
-  
+
   @override
   String get message => 'Download cancelled: ${gameTitle ?? url}';
-  
+
   @override
   String get userMessage => 'Download was cancelled';
 }
@@ -262,13 +264,13 @@ final class DownloadCancelledError extends DownloadError {
 final class DownloadTooSmallError extends DownloadError {
   final int actualSize;
   final int minimumSize;
-  
+
   @override
   final Object? cause;
-  
+
   @override
   final StackTrace? stackTrace;
-  
+
   DownloadTooSmallError({
     required super.url,
     super.gameTitle,
@@ -277,10 +279,11 @@ final class DownloadTooSmallError extends DownloadError {
     this.cause,
     this.stackTrace,
   });
-  
+
   @override
-  String get message => 'Downloaded file too small: $actualSize bytes (minimum: $minimumSize)';
-  
+  String get message =>
+      'Downloaded file too small: $actualSize bytes (minimum: $minimumSize)';
+
   @override
   String get userMessage => 'Download failed - file is incomplete or invalid.';
 }
@@ -289,20 +292,20 @@ final class DownloadTooSmallError extends DownloadError {
 final class NoSourceError extends DownloadError {
   @override
   final Object? cause;
-  
+
   @override
   final StackTrace? stackTrace;
-  
+
   NoSourceError({
     required super.url,
     super.gameTitle,
     this.cause,
     this.stackTrace,
   });
-  
+
   @override
   String get message => 'No download source available for: ${gameTitle ?? url}';
-  
+
   @override
   String get userMessage => 'No download source found for this game.';
 }
@@ -317,47 +320,48 @@ sealed class NativeError extends AppError {}
 /// Native library not found
 final class NativeLibraryNotFoundError extends NativeError {
   final String libraryName;
-  
+
   @override
   final Object? cause;
-  
+
   @override
   final StackTrace? stackTrace;
-  
+
   NativeLibraryNotFoundError({
     required this.libraryName,
     this.cause,
     this.stackTrace,
   });
-  
+
   @override
   String get message => 'Native library not found: $libraryName';
-  
+
   @override
-  String get userMessage => 'Core library missing. Please reinstall the application.';
+  String get userMessage =>
+      'Core library missing. Please reinstall the application.';
 }
 
 /// Native function call failed
 final class NativeCallError extends NativeError {
   final String function;
   final String reason;
-  
+
   @override
   final Object? cause;
-  
+
   @override
   final StackTrace? stackTrace;
-  
+
   NativeCallError({
     required this.function,
     required this.reason,
     this.cause,
     this.stackTrace,
   });
-  
+
   @override
   String get message => 'Native call to $function failed: $reason';
-  
+
   @override
   String get userMessage => 'Operation failed. Please try again.';
 }
@@ -372,45 +376,46 @@ sealed class ValidationError extends AppError {}
 /// Invalid game ID format
 final class InvalidGameIdError extends ValidationError {
   final String gameId;
-  
+
   @override
   final Object? cause;
-  
+
   @override
   final StackTrace? stackTrace;
-  
+
   InvalidGameIdError({
     required this.gameId,
     this.cause,
     this.stackTrace,
   });
-  
+
   @override
   String get message => 'Invalid game ID format: $gameId';
-  
+
   @override
-  String get userMessage => 'Invalid game ID. Expected 6-character code (e.g., RMGE01).';
+  String get userMessage =>
+      'Invalid game ID. Expected 6-character code (e.g., RMGE01).';
 }
 
 /// Invalid URL format
 final class InvalidUrlError extends ValidationError {
   final String url;
-  
+
   @override
   final Object? cause;
-  
+
   @override
   final StackTrace? stackTrace;
-  
+
   InvalidUrlError({
     required this.url,
     this.cause,
     this.stackTrace,
   });
-  
+
   @override
   String get message => 'Invalid URL format: $url';
-  
+
   @override
   String get userMessage => 'Invalid URL provided.';
 }

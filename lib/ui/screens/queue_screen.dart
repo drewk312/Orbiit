@@ -146,7 +146,8 @@ class _TaskCard extends StatelessWidget {
                 const SizedBox(width: 12),
                 Text(
                   '${task.progressPercent.toStringAsFixed(1)}%',
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -229,7 +230,7 @@ class _StateIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (color, icon) = _getStateInfo();
-    
+
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(

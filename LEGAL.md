@@ -1,68 +1,143 @@
-# Legal Notice
+# Legal Disclaimer
 
-## Important Disclaimer
+**Last Updated**: February 9, 2026
 
-**Orbiit** is a game library management tool designed for organizing and managing **your personal game backups**. 
+## Purpose of Orbiit
 
-### Intended Use
+**Orbiit** is a personal game library management tool designed to help users **organize, catalog, and manage backup copies of video games they legally own**. This software is intended solely for personal, non-commercial use.
 
-This software is intended ONLY for:
-- Managing backups of games you legally own
-- Organizing your personal game collection
-- Archiving games for preservation purposes
+## Important Legal Notice
 
-### What This Software Does NOT Do
+### What Orbiit IS:
+✅ A library management and organization tool  
+✅ A metadata fetcher for personal game collections  
+✅ A backup file organizer for your legally owned games  
+✅ A homebrew application browser and installer  
 
-- Orbiit does NOT provide, distribute, or facilitate piracy of copyrighted games
-- Orbiit does NOT include any copyrighted game files, ROMs, or ISOs
-- Orbiit does NOT bypass copy protection or DRM systems
-- Orbiit does NOT encourage or enable illegal downloading
+### What Orbiit IS NOT:
+❌ A source of copyrighted game content  
+❌ A tool for circumventing copy protection  
+❌ A platform for piracy or illegal distribution  
+❌ A replacement for purchasing games legally  
 
-### User Responsibility
+## User Responsibilities
 
-**YOU, the user, are solely responsible for:**
-- Ensuring you own legal copies of all games you manage with Orbiit
-- Complying with all applicable copyright laws in your jurisdiction
-- Obtaining games through legal means only
-- Understanding that creating backups may not be legal in all regions
+By using Orbiit, you acknowledge and agree that:
 
-### Copyright Notice
+1. **You are solely responsible** for ensuring you have the legal right to possess and create backup copies of any games you manage with Orbiit.
 
-- Nintendo®, Wii™, GameCube™, and related marks are trademarks of Nintendo Co., Ltd.
-- Orbiit is an independent project and is NOT affiliated with, endorsed by, or sponsored by Nintendo Co., Ltd.
-- All game names, logos, and brands are property of their respective owners
+2. **You understand** that downloading, distributing, or possessing unauthorized copies of copyrighted games is illegal in most jurisdictions.
 
-### No Warranty
+3. **You will comply** with all applicable copyright laws, terms of service, and licensing agreements in your country/region.
 
-THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. THE AUTHORS SHALL NOT BE LIABLE FOR ANY DAMAGES ARISING FROM THE USE OF THIS SOFTWARE.
+4. **You will not use** Orbiit for any illegal purposes, including but not limited to copyright infringement or piracy.
 
-### Compliance
+5. **You acknowledge** that the developers of Orbiit are not responsible for your use or misuse of this software.
 
-Users must comply with:
-- The Digital Millennium Copyright Act (DMCA) in the United States
-- European Copyright Directive in the EU
-- All applicable local copyright and intellectual property laws
+## Third-Party Content
 
-### Game Sources
+### Metadata and Cover Art
 
-Orbiit may connect to third-party game archive services. The authors of Orbiit:
-- Do NOT control, operate, or endorse these third-party services
-- Are NOT responsible for content provided by third-party sources
-- Assume NO liability for how users obtain game files
+Orbiit fetches game metadata (titles, descriptions, cover art) from third-party sources including:
+- **GameTDB** - A community-maintained game database
+- **Online CDN Services** - For cover art and game information
 
-### Fair Use & Preservation
+This metadata is used solely for **personal organization purposes**. Orbiit does not claim ownership of any copyrighted images, descriptions, or other content fetched from these sources.
 
-This software supports legitimate uses including:
-- Personal backups under fair use provisions (where applicable)
-- Game preservation efforts for historical/educational purposes
-- Organization of legally acquired game collections
+### Homebrew Applications
 
-### If You Disagree
+Orbiit provides access to a curated list of **homebrew applications** - software created by independent developers for use on gaming consoles. These applications are typically open-source or freeware. Users are responsible for ensuring they have the right to use any homebrew software they install.
 
-If you do not agree with these terms or cannot comply with applicable laws in your jurisdiction, **DO NOT USE THIS SOFTWARE**.
+## No Affiliation
+
+Orbiit is an **independent, open-source project** and is not affiliated with, endorsed by, or connected to:
+- Nintendo Co., Ltd.
+- Any video game publishers or developers
+- Any console manufacturers
+- Any game distribution platforms
+
+All trademarks, logos, and brand names mentioned in Orbiit or its documentation are the property of their respective owners.
+
+## Disclaimer of Warranties
+
+Orbiit is provided **"AS IS"** without warranty of any kind, either expressed or implied, including but not limited to the implied warranties of merchantability and fitness for a particular purpose.
+
+The developers of Orbiit do not warrant that:
+- The software will meet your requirements
+- The software will be uninterrupted, timely, secure, or error-free
+- Any errors in the software will be corrected
+- The software is free of viruses or other harmful components
+
+## Limitation of Liability
+
+In no event shall the developers, contributors, or copyright holders of Orbiit be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the software or the use or other dealings in the software.
+
+This includes, but is not limited to:
+- Loss of data
+- Loss of profits
+- Legal consequences resulting from misuse
+- Damage to computer systems
+- Any other direct, indirect, incidental, special, or consequential damages
+
+## Jurisdictional Compliance
+
+Users are responsible for determining whether their use of Orbiit complies with local laws and regulations. Some jurisdictions have specific rules regarding:
+- Creation of backup copies ("fair use" provisions)
+- Circumvention of copy protection
+- Possession of game copies
+- Homebrew software usage
+
+**If you are unsure about the legality of any action, consult with a legal professional in your jurisdiction.**
+
+## Content Removal Requests
+
+If you are a copyright holder and believe that Orbiit:
+- Links to infringing content
+- Improperly uses your intellectual property
+- Violates your rights in any way
+
+Please open an issue on our [GitHub Issues page](https://github.com/drewk312/Orbiit/issues) with:
+- Detailed description of the copyrighted material
+- Information reasonably sufficient to locate the material
+- Your contact information
+- A statement of good faith belief
+
+We will investigate and respond promptly to legitimate requests.
+
+## Changes to This Disclaimer
+
+We reserve the right to modify this legal disclaimer at any time. Changes will be effective immediately upon posting to this repository. Your continued use of Orbiit after changes are posted constitutes acceptance of the modified terms.
+
+## Open Source License
+
+Orbiit is released under the **MIT License**. See the [LICENSE](LICENSE) file for full license text.
+
+The MIT License grants users the right to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, subject to the conditions in the license.
+
+## Contact
+
+For legal inquiries, concerns, or takedown requests:
+
+- **GitHub Issues**: [https://github.com/drewk312/Orbiit/issues](https://github.com/drewk312/Orbiit/issues)
+- **GitHub Discussions**: [https://github.com/drewk312/Orbiit/discussions](https://github.com/drewk312/Orbiit/discussions)
 
 ---
 
-**By using Orbiit, you acknowledge that you have read, understood, and agree to comply with this legal notice.**
+## Regional Legal Information
 
-*Last Updated: February 4, 2026*
+### United States
+Under **17 U.S.C. § 117**, owners of copies of computer programs may make backup copies for archival purposes. However, this provision has specific limitations and does not provide blanket authorization for all backup activities.
+
+### European Union
+The **EU Copyright Directive (2001/29/EC)** permits certain acts of reproduction for personal use, but these exceptions vary by member state.
+
+### Other Jurisdictions
+Legal provisions regarding backup copies vary significantly worldwide. Users should research their local laws.
+
+---
+
+**By using Orbiit, you agree to this disclaimer and acknowledge that you have read, understood, and will comply with all applicable laws.**
+
+---
+
+*This document does not constitute legal advice. For specific legal questions, consult a qualified attorney in your jurisdiction.*

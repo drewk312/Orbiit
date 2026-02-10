@@ -20,22 +20,33 @@ class WiiGCTheme {
   final Duration animationDuration;
   final bool reducedMotion;
   final double fontScale;
-  
+
   // TextTheme proxy to allow easy access in UI
   TextTheme get textTheme {
-      // Use a consistent text theme based on lightness/darkness
-      final isDark = backgroundColor.computeLuminance() < 0.5;
-      final base = isDark ? Typography.material2021().englishLike : Typography.material2021().black;
-      
-      return base.copyWith(
-          displayLarge: base.displayLarge?.copyWith(fontFamily: 'Orbitron', color: textColor),
-          displayMedium: base.displayMedium?.copyWith(fontFamily: 'Orbitron', color: textColor),
-          displaySmall: base.displaySmall?.copyWith(fontFamily: 'Orbitron', color: textColor),
-          headlineMedium: base.headlineMedium?.copyWith(fontFamily: 'Orbitron', color: textColor, fontWeight: FontWeight.bold),
-          titleLarge: base.titleLarge?.copyWith(color: textColor, fontWeight: FontWeight.bold),
-          bodyLarge: base.bodyLarge?.copyWith(color: textColor.withValues(alpha: 0.9)),
-          bodyMedium: base.bodyMedium?.copyWith(color: textColor.withValues(alpha: 0.8)),
-      );
+    // Use a consistent text theme based on lightness/darkness
+    final isDark = backgroundColor.computeLuminance() < 0.5;
+    final base = isDark
+        ? Typography.material2021().englishLike
+        : Typography.material2021().black;
+
+    return base.copyWith(
+      displayLarge:
+          base.displayLarge?.copyWith(fontFamily: 'Orbitron', color: textColor),
+      displayMedium: base.displayMedium
+          ?.copyWith(fontFamily: 'Orbitron', color: textColor),
+      displaySmall:
+          base.displaySmall?.copyWith(fontFamily: 'Orbitron', color: textColor),
+      headlineMedium: base.headlineMedium?.copyWith(
+          fontFamily: 'Orbitron',
+          color: textColor,
+          fontWeight: FontWeight.bold),
+      titleLarge: base.titleLarge
+          ?.copyWith(color: textColor, fontWeight: FontWeight.bold),
+      bodyLarge:
+          base.bodyLarge?.copyWith(color: textColor.withValues(alpha: 0.9)),
+      bodyMedium:
+          base.bodyMedium?.copyWith(color: textColor.withValues(alpha: 0.8)),
+    );
   }
 
   const WiiGCTheme({

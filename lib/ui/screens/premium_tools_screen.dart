@@ -7,7 +7,8 @@ class PremiumToolsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Premium Tools (stub)', style: Theme.of(context).textTheme.titleLarge),
+      child: Text('Premium Tools (stub)',
+          style: Theme.of(context).textTheme.titleLarge),
     );
   }
 }

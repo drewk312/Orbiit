@@ -7,7 +7,8 @@ class PremiumDownloadManager extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Premium Download Manager (stub)', style: Theme.of(context).textTheme.titleLarge),
+      child: Text('Premium Download Manager (stub)',
+          style: Theme.of(context).textTheme.titleLarge),
     );
   }
 }

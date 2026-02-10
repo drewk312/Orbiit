@@ -12,7 +12,7 @@ class NintendontConfig {
 
   // For the UI to know what to ask next
   static const List<String> mappingOrder = [
-    'A', 'B', 'X', 'Y', 'Z', 
+    'A', 'B', 'X', 'Y', 'Z',
     'L', 'R', 'Start',
     'Up', 'Down', 'Left', 'Right', // D-Pad
     'Stick X', 'Stick Y', // Main Analog
@@ -28,7 +28,7 @@ class NintendontConfig {
     buffer.writeln('Polltype=$pollType');
     buffer.writeln('DPAD=$dpadType');
     buffer.writeln('DigitalLR=$digitalLR');
-    
+
     // Write stick radii (standard defaults)
     buffer.writeln('StickX=64');
     buffer.writeln('StickY=64');

@@ -47,17 +47,28 @@ class DiscoveryStorefront {
   }
 
   // Myrient base URLs for direct downloads
-  static const String _myrientWiiRvz = 'https://myrient.erista.me/files/Redump/Nintendo%20-%20Wii%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/';
-  static const String _myrientGcRvz = 'https://myrient.erista.me/files/Redump/Nintendo%20-%20GameCube%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/';
-  static const String _myrientWiiU = 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Wii%20U%20(Digital)%20(CDN)/';
-  static const String _myrientGba = 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/';
-  static const String _myrientN64 = 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%2064%20(BigEndian)/';
-  static const String _myrientSnes = 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/';
-  static const String _myrientNes = 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20Entertainment%20System%20(Headered)/';
-  static const String _myrientGenesis = 'https://myrient.erista.me/files/No-Intro/Sega%20-%20Mega%20Drive%20-%20Genesis/';
-  static const String _myrientNds = 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20DS%20(Decrypted)/';
-  static const String _myrientPsp = 'https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%20Portable/';
-  static const String _myrientPs1 = 'https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation/';
+  static const String _myrientWiiRvz =
+      'https://myrient.erista.me/files/Redump/Nintendo%20-%20Wii%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/';
+  static const String _myrientGcRvz =
+      'https://myrient.erista.me/files/Redump/Nintendo%20-%20GameCube%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/';
+  static const String _myrientWiiU =
+      'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Wii%20U%20(Digital)%20(CDN)/';
+  static const String _myrientGba =
+      'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/';
+  static const String _myrientN64 =
+      'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%2064%20(BigEndian)/';
+  static const String _myrientSnes =
+      'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/';
+  static const String _myrientNes =
+      'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20Entertainment%20System%20(Headered)/';
+  static const String _myrientGenesis =
+      'https://myrient.erista.me/files/No-Intro/Sega%20-%20Mega%20Drive%20-%20Genesis/';
+  static const String _myrientNds =
+      'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20DS%20(Decrypted)/';
+  static const String _myrientPsp =
+      'https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%20Portable/';
+  static const String _myrientPs1 =
+      'https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation/';
 
   /// Get popular featured games for all platforms - using DIRECT Myrient download URLs
   List<GameResult> getPopularGames() {
@@ -69,44 +80,52 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: '${_myrientWiiRvz}Mario%20Kart%20Wii%20(USA)%20(En,Fr,Es).zip',
-        downloadUrl: '${_myrientWiiRvz}Mario%20Kart%20Wii%20(USA)%20(En,Fr,Es).zip',
+        downloadUrl:
+            '${_myrientWiiRvz}Mario%20Kart%20Wii%20(USA)%20(En,Fr,Es).zip',
         requiresBrowser: false,
         gameId: 'RMCE01',
         fileSizeMb: 2700,
         size: '2.7 GB',
         format: 'ZIP',
         coverUrl: _gameTDBCover('RMCE01', 'Wii'),
-        description: 'Race against friends and foes in the ultimate kart racing experience on Wii.',
+        description:
+            'Race against friends and foes in the ultimate kart racing experience on Wii.',
       ),
       GameResult(
         title: 'Super Mario Galaxy (USA)',
         platform: 'Wii',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientWiiRvz}Super%20Mario%20Galaxy%20(USA)%20(En,Fr,Es).zip',
-        downloadUrl: '${_myrientWiiRvz}Super%20Mario%20Galaxy%20(USA)%20(En,Fr,Es).zip',
+        pageUrl:
+            '${_myrientWiiRvz}Super%20Mario%20Galaxy%20(USA)%20(En,Fr,Es).zip',
+        downloadUrl:
+            '${_myrientWiiRvz}Super%20Mario%20Galaxy%20(USA)%20(En,Fr,Es).zip',
         requiresBrowser: false,
         gameId: 'RMGE01',
         fileSizeMb: 3300,
         size: '3.3 GB',
         format: 'ZIP',
         coverUrl: _gameTDBCover('RMGE01', 'Wii'),
-        description: 'Embark on a cosmic adventure through galaxies in this groundbreaking 3D platformer.',
+        description:
+            'Embark on a cosmic adventure through galaxies in this groundbreaking 3D platformer.',
       ),
       GameResult(
         title: 'New Super Mario Bros. Wii (USA)',
         platform: 'Wii',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientWiiRvz}New%20Super%20Mario%20Bros.%20Wii%20(USA)%20(En,Fr,Es)%20(Rev%202).zip',
-        downloadUrl: '${_myrientWiiRvz}New%20Super%20Mario%20Bros.%20Wii%20(USA)%20(En,Fr,Es)%20(Rev%202).zip',
+        pageUrl:
+            '${_myrientWiiRvz}New%20Super%20Mario%20Bros.%20Wii%20(USA)%20(En,Fr,Es)%20(Rev%202).zip',
+        downloadUrl:
+            '${_myrientWiiRvz}New%20Super%20Mario%20Bros.%20Wii%20(USA)%20(En,Fr,Es)%20(Rev%202).zip',
         requiresBrowser: false,
         gameId: 'SMNE01',
         fileSizeMb: 420,
         size: '420 MB',
         format: 'ZIP',
         coverUrl: _gameTDBCover('SMNE01', 'Wii'),
-        description: 'Classic side-scrolling Mario action with up to 4 players simultaneously.',
+        description:
+            'Classic side-scrolling Mario action with up to 4 players simultaneously.',
       ),
       GameResult(
         title: 'Wii Sports (USA)',
@@ -121,67 +140,80 @@ class DiscoveryStorefront {
         size: '420 MB',
         format: 'ZIP',
         coverUrl: _gameTDBCover('RSPE01', 'Wii'),
-        description: 'The iconic game that brought motion controls to the masses with tennis, bowling, golf and more.',
+        description:
+            'The iconic game that brought motion controls to the masses with tennis, bowling, golf and more.',
       ),
       GameResult(
         title: 'Legend of Zelda: Twilight Princess (USA)',
         platform: 'Wii',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientWiiRvz}Legend%20of%20Zelda%2C%20The%20-%20Twilight%20Princess%20(USA).zip',
-        downloadUrl: '${_myrientWiiRvz}Legend%20of%20Zelda%2C%20The%20-%20Twilight%20Princess%20(USA).zip',
+        pageUrl:
+            '${_myrientWiiRvz}Legend%20of%20Zelda%2C%20The%20-%20Twilight%20Princess%20(USA).zip',
+        downloadUrl:
+            '${_myrientWiiRvz}Legend%20of%20Zelda%2C%20The%20-%20Twilight%20Princess%20(USA).zip',
         requiresBrowser: false,
         gameId: 'RZDE01',
         fileSizeMb: 1400,
         size: '1.4 GB',
         format: 'ZIP',
         coverUrl: _gameTDBCover('RZDE01', 'Wii'),
-        description: 'Link embarks on his darkest adventure yet in this epic action-adventure.',
+        description:
+            'Link embarks on his darkest adventure yet in this epic action-adventure.',
       ),
       GameResult(
         title: 'Super Smash Bros. Brawl (USA)',
         platform: 'Wii',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientWiiRvz}Super%20Smash%20Bros.%20Brawl%20(USA)%20(Rev%201).zip',
-        downloadUrl: '${_myrientWiiRvz}Super%20Smash%20Bros.%20Brawl%20(USA)%20(Rev%201).zip',
+        pageUrl:
+            '${_myrientWiiRvz}Super%20Smash%20Bros.%20Brawl%20(USA)%20(Rev%201).zip',
+        downloadUrl:
+            '${_myrientWiiRvz}Super%20Smash%20Bros.%20Brawl%20(USA)%20(Rev%201).zip',
         requiresBrowser: false,
         gameId: 'RSBE01',
         fileSizeMb: 2500,
         size: '2.5 GB',
         format: 'ZIP',
         coverUrl: _gameTDBCover('RSBE01', 'Wii'),
-        description: 'Nintendo all-stars battle it out in the ultimate crossover fighting game.',
+        description:
+            'Nintendo all-stars battle it out in the ultimate crossover fighting game.',
       ),
       GameResult(
         title: 'Metroid Prime 3: Corruption (USA)',
         platform: 'Wii',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientWiiRvz}Metroid%20Prime%203%20-%20Corruption%20(USA).zip',
-        downloadUrl: '${_myrientWiiRvz}Metroid%20Prime%203%20-%20Corruption%20(USA).zip',
+        pageUrl:
+            '${_myrientWiiRvz}Metroid%20Prime%203%20-%20Corruption%20(USA).zip',
+        downloadUrl:
+            '${_myrientWiiRvz}Metroid%20Prime%203%20-%20Corruption%20(USA).zip',
         requiresBrowser: false,
         gameId: 'RM3E01',
         fileSizeMb: 1700,
         size: '1.7 GB',
         format: 'ZIP',
         coverUrl: _gameTDBCover('RM3E01', 'Wii'),
-        description: 'Samus faces her greatest threat in this epic conclusion to the Prime trilogy.',
+        description:
+            'Samus faces her greatest threat in this epic conclusion to the Prime trilogy.',
       ),
       GameResult(
         title: 'Donkey Kong Country Returns (USA)',
         platform: 'Wii',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientWiiRvz}Donkey%20Kong%20Country%20Returns%20(USA)%20(En,Fr,Es)%20(Rev%201).zip',
-        downloadUrl: '${_myrientWiiRvz}Donkey%20Kong%20Country%20Returns%20(USA)%20(En,Fr,Es)%20(Rev%201).zip',
+        pageUrl:
+            '${_myrientWiiRvz}Donkey%20Kong%20Country%20Returns%20(USA)%20(En,Fr,Es)%20(Rev%201).zip',
+        downloadUrl:
+            '${_myrientWiiRvz}Donkey%20Kong%20Country%20Returns%20(USA)%20(En,Fr,Es)%20(Rev%201).zip',
         requiresBrowser: false,
         gameId: 'SF8E01',
         fileSizeMb: 1800,
         size: '1.8 GB',
         format: 'ZIP',
         coverUrl: _gameTDBCover('SF8E01', 'Wii'),
-        description: 'DK and Diddy swing back into action in this challenging platformer.',
+        description:
+            'DK and Diddy swing back into action in this challenging platformer.',
       ),
 
       // === GAMECUBE GAMES (RVZ format from Myrient) ===
@@ -190,45 +222,54 @@ class DiscoveryStorefront {
         platform: 'GameCube',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientGcRvz}Super%20Smash%20Bros.%20Melee%20(USA)%20(En,Ja)%20(Rev%202).zip',
-        downloadUrl: '${_myrientGcRvz}Super%20Smash%20Bros.%20Melee%20(USA)%20(En,Ja)%20(Rev%202).zip',
+        pageUrl:
+            '${_myrientGcRvz}Super%20Smash%20Bros.%20Melee%20(USA)%20(En,Ja)%20(Rev%202).zip',
+        downloadUrl:
+            '${_myrientGcRvz}Super%20Smash%20Bros.%20Melee%20(USA)%20(En,Ja)%20(Rev%202).zip',
         requiresBrowser: false,
         gameId: 'GALE01',
         fileSizeMb: 500,
         size: '500 MB',
         format: 'ZIP',
         coverUrl: _gameTDBCover('GALE01', 'GameCube'),
-        description: 'The legendary fighting game that started a competitive phenomenon.',
+        description:
+            'The legendary fighting game that started a competitive phenomenon.',
       ),
       GameResult(
         title: 'Legend of Zelda: Wind Waker (USA)',
         platform: 'GameCube',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientGcRvz}Legend%20of%20Zelda%2C%20The%20-%20The%20Wind%20Waker%20(USA%2C%20Canada).zip',
-        downloadUrl: '${_myrientGcRvz}Legend%20of%20Zelda%2C%20The%20-%20The%20Wind%20Waker%20(USA%2C%20Canada).zip',
+        pageUrl:
+            '${_myrientGcRvz}Legend%20of%20Zelda%2C%20The%20-%20The%20Wind%20Waker%20(USA%2C%20Canada).zip',
+        downloadUrl:
+            '${_myrientGcRvz}Legend%20of%20Zelda%2C%20The%20-%20The%20Wind%20Waker%20(USA%2C%20Canada).zip',
         requiresBrowser: false,
         gameId: 'GZLE01',
         fileSizeMb: 550,
         size: '550 MB',
         format: 'RVZ',
         coverUrl: _gameTDBCover('GZLE01', 'GameCube'),
-        description: 'Set sail across a vast ocean in this cel-shaded Zelda adventure.',
+        description:
+            'Set sail across a vast ocean in this cel-shaded Zelda adventure.',
       ),
       GameResult(
         title: 'Mario Kart: Double Dash!! (USA)',
         platform: 'GameCube',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientGcRvz}Mario%20Kart%20-%20Double%20Dash!!%20(USA).rvz',
-        downloadUrl: '${_myrientGcRvz}Mario%20Kart%20-%20Double%20Dash!!%20(USA).rvz',
+        pageUrl:
+            '${_myrientGcRvz}Mario%20Kart%20-%20Double%20Dash!!%20(USA).rvz',
+        downloadUrl:
+            '${_myrientGcRvz}Mario%20Kart%20-%20Double%20Dash!!%20(USA).rvz',
         requiresBrowser: false,
         gameId: 'GM4E01',
         fileSizeMb: 550,
         size: '550 MB',
         format: 'RVZ',
         coverUrl: _gameTDBCover('GM4E01', 'GameCube'),
-        description: 'Two drivers, one kart! The most unique Mario Kart experience.',
+        description:
+            'Two drivers, one kart! The most unique Mario Kart experience.',
       ),
       GameResult(
         title: 'Super Mario Sunshine (USA)',
@@ -243,7 +284,8 @@ class DiscoveryStorefront {
         size: '550 MB',
         format: 'RVZ',
         coverUrl: _gameTDBCover('GMSE01', 'GameCube'),
-        description: 'Mario cleans up Isle Delfino with his trusty water pack FLUDD.',
+        description:
+            'Mario cleans up Isle Delfino with his trusty water pack FLUDD.',
       ),
       GameResult(
         title: 'Metroid Prime (USA)',
@@ -258,22 +300,26 @@ class DiscoveryStorefront {
         size: '550 MB',
         format: 'RVZ',
         coverUrl: _gameTDBCover('GM8E01', 'GameCube'),
-        description: 'Samus Aran\'s first-person adventure that redefined the franchise.',
+        description:
+            'Samus Aran\'s first-person adventure that redefined the franchise.',
       ),
       GameResult(
         title: 'Paper Mario: Thousand-Year Door (USA)',
         platform: 'GameCube',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientGcRvz}Paper%20Mario%20-%20The%20Thousand-Year%20Door%20(USA).rvz',
-        downloadUrl: '${_myrientGcRvz}Paper%20Mario%20-%20The%20Thousand-Year%20Door%20(USA).rvz',
+        pageUrl:
+            '${_myrientGcRvz}Paper%20Mario%20-%20The%20Thousand-Year%20Door%20(USA).rvz',
+        downloadUrl:
+            '${_myrientGcRvz}Paper%20Mario%20-%20The%20Thousand-Year%20Door%20(USA).rvz',
         requiresBrowser: false,
         gameId: 'G8ME01',
         fileSizeMb: 550,
         size: '550 MB',
         format: 'RVZ',
         coverUrl: _gameTDBCover('G8ME01', 'GameCube'),
-        description: 'The beloved RPG where Mario flattens his way through a charming story.',
+        description:
+            'The beloved RPG where Mario flattens his way through a charming story.',
       ),
       GameResult(
         title: 'Luigi\'s Mansion (USA)',
@@ -287,7 +333,8 @@ class DiscoveryStorefront {
         fileSizeMb: 1100,
         size: '1.1 GB',
         coverUrl: _gameTDBCover('GLME01', 'GameCube'),
-        description: 'Luigi hunts ghosts with his Poltergust 3000 in his first solo adventure.',
+        description:
+            'Luigi hunts ghosts with his Poltergust 3000 in his first solo adventure.',
       ),
       GameResult(
         title: 'F-Zero GX (USA)',
@@ -302,7 +349,8 @@ class DiscoveryStorefront {
         size: '550 MB',
         format: 'RVZ',
         coverUrl: _gameTDBCover('GFZE01', 'GameCube'),
-        description: 'Blistering fast futuristic racing at 60fps - the ultimate F-Zero.',
+        description:
+            'Blistering fast futuristic racing at 60fps - the ultimate F-Zero.',
       ),
 
       // === WII U GAMES (Note: Wii U downloads require Cemu emulator) ===
@@ -319,37 +367,44 @@ class DiscoveryStorefront {
         size: '5.3 GB',
         format: 'WUX',
         coverUrl: _gameTDBCover('AMKE01', 'Wii U'),
-        description: 'Anti-gravity kart racing with stunning HD visuals and 48 tracks.',
+        description:
+            'Anti-gravity kart racing with stunning HD visuals and 48 tracks.',
       ),
       GameResult(
         title: 'Super Smash Bros. for Wii U (USA)',
         platform: 'Wii U',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientWiiU}Super%20Smash%20Bros.%20for%20Wii%20U%20(USA).wux',
-        downloadUrl: '${_myrientWiiU}Super%20Smash%20Bros.%20for%20Wii%20U%20(USA).wux',
+        pageUrl:
+            '${_myrientWiiU}Super%20Smash%20Bros.%20for%20Wii%20U%20(USA).wux',
+        downloadUrl:
+            '${_myrientWiiU}Super%20Smash%20Bros.%20for%20Wii%20U%20(USA).wux',
         requiresBrowser: false,
         gameId: 'AXFE01',
         fileSizeMb: 15600,
         size: '15.6 GB',
         format: 'WUX',
         coverUrl: _gameTDBCover('AXFE01', 'Wii U'),
-        description: 'The ultimate Smash experience with 58 fighters and 8-player battles.',
+        description:
+            'The ultimate Smash experience with 58 fighters and 8-player battles.',
       ),
       GameResult(
         title: 'Legend of Zelda: Breath of the Wild (USA)',
         platform: 'Wii U',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientWiiU}Legend%20of%20Zelda%2C%20The%20-%20Breath%20of%20the%20Wild%20(USA).wux',
-        downloadUrl: '${_myrientWiiU}Legend%20of%20Zelda%2C%20The%20-%20Breath%20of%20the%20Wild%20(USA).wux',
+        pageUrl:
+            '${_myrientWiiU}Legend%20of%20Zelda%2C%20The%20-%20Breath%20of%20the%20Wild%20(USA).wux',
+        downloadUrl:
+            '${_myrientWiiU}Legend%20of%20Zelda%2C%20The%20-%20Breath%20of%20the%20Wild%20(USA).wux',
         requiresBrowser: false,
         gameId: 'ALZE01',
         fileSizeMb: 13000,
         size: '13.0 GB',
         format: 'WUX',
         coverUrl: _gameTDBCover('ALZE01', 'Wii U'),
-        description: 'Explore a vast open world in this revolutionary Zelda adventure.',
+        description:
+            'Explore a vast open world in this revolutionary Zelda adventure.',
       ),
       GameResult(
         title: 'Super Mario 3D World (USA)',
@@ -364,7 +419,8 @@ class DiscoveryStorefront {
         size: '1.7 GB',
         format: 'WUX',
         coverUrl: _gameTDBCover('ARDE01', 'Wii U'),
-        description: 'Four-player 3D platforming fun with the cat suit power-up.',
+        description:
+            'Four-player 3D platforming fun with the cat suit power-up.',
       ),
       GameResult(
         title: 'Splatoon (USA)',
@@ -379,7 +435,8 @@ class DiscoveryStorefront {
         size: '1.9 GB',
         format: 'WUX',
         coverUrl: _gameTDBCover('AGME01', 'Wii U'),
-        description: 'Ink-splattering team battles in this unique multiplayer shooter.',
+        description:
+            'Ink-splattering team battles in this unique multiplayer shooter.',
       ),
       GameResult(
         title: 'Bayonetta 2 (USA)',
@@ -394,7 +451,8 @@ class DiscoveryStorefront {
         size: '14.2 GB',
         format: 'WUX',
         coverUrl: _gameTDBCover('AQUE01', 'Wii U'),
-        description: 'Stylish action as the Umbra Witch returns with intense combat.',
+        description:
+            'Stylish action as the Umbra Witch returns with intense combat.',
       ),
       GameResult(
         title: 'Xenoblade Chronicles X (USA)',
@@ -409,7 +467,8 @@ class DiscoveryStorefront {
         size: '22.8 GB',
         format: 'WUX',
         coverUrl: _gameTDBCover('AX5E01', 'Wii U'),
-        description: 'Explore a massive alien planet with mechs in this open-world RPG.',
+        description:
+            'Explore a massive alien planet with mechs in this open-world RPG.',
       ),
       GameResult(
         title: 'Pikmin 3 (USA)',
@@ -424,7 +483,8 @@ class DiscoveryStorefront {
         size: '3.2 GB',
         format: 'WUX',
         coverUrl: _gameTDBCover('AC3E01', 'Wii U'),
-        description: 'Command an army of tiny Pikmin to solve puzzles and battle creatures.',
+        description:
+            'Command an army of tiny Pikmin to solve puzzles and battle creatures.',
       ),
 
       // === RETRO: GBA GAMES (Direct Myrient Downloads) ===
@@ -433,42 +493,51 @@ class DiscoveryStorefront {
         platform: 'GBA',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientGba}Pokemon%20-%20Emerald%20Version%20(USA%2C%20Europe).zip',
-        downloadUrl: '${_myrientGba}Pokemon%20-%20Emerald%20Version%20(USA%2C%20Europe).zip',
+        pageUrl:
+            '${_myrientGba}Pokemon%20-%20Emerald%20Version%20(USA%2C%20Europe).zip',
+        downloadUrl:
+            '${_myrientGba}Pokemon%20-%20Emerald%20Version%20(USA%2C%20Europe).zip',
         requiresBrowser: false,
         gameId: 'BPEE',
         fileSizeMb: 16,
         size: '16 MB',
         format: 'ZIP',
-        description: 'The definitive Gen 3 Pokemon experience with the Battle Frontier.',
+        description:
+            'The definitive Gen 3 Pokemon experience with the Battle Frontier.',
       ),
       GameResult(
         title: 'Pokemon FireRed (USA)',
         platform: 'GBA',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientGba}Pokemon%20-%20FireRed%20Version%20(USA%2C%20Europe)%20(Rev%201).zip',
-        downloadUrl: '${_myrientGba}Pokemon%20-%20FireRed%20Version%20(USA%2C%20Europe)%20(Rev%201).zip',
+        pageUrl:
+            '${_myrientGba}Pokemon%20-%20FireRed%20Version%20(USA%2C%20Europe)%20(Rev%201).zip',
+        downloadUrl:
+            '${_myrientGba}Pokemon%20-%20FireRed%20Version%20(USA%2C%20Europe)%20(Rev%201).zip',
         requiresBrowser: false,
         gameId: 'BPRE',
         fileSizeMb: 16,
         size: '16 MB',
         format: 'ZIP',
-        description: 'Relive the Kanto adventure in this enhanced remake of Pokemon Red.',
+        description:
+            'Relive the Kanto adventure in this enhanced remake of Pokemon Red.',
       ),
       GameResult(
         title: 'Legend of Zelda: Minish Cap (USA)',
         platform: 'GBA',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientGba}Legend%20of%20Zelda%2C%20The%20-%20The%20Minish%20Cap%20(USA).zip',
-        downloadUrl: '${_myrientGba}Legend%20of%20Zelda%2C%20The%20-%20The%20Minish%20Cap%20(USA).zip',
+        pageUrl:
+            '${_myrientGba}Legend%20of%20Zelda%2C%20The%20-%20The%20Minish%20Cap%20(USA).zip',
+        downloadUrl:
+            '${_myrientGba}Legend%20of%20Zelda%2C%20The%20-%20The%20Minish%20Cap%20(USA).zip',
         requiresBrowser: false,
         gameId: 'BZME',
         fileSizeMb: 16,
         size: '16 MB',
         format: 'ZIP',
-        description: 'Link shrinks down to help the Picori in this charming adventure.',
+        description:
+            'Link shrinks down to help the Picori in this charming adventure.',
       ),
       GameResult(
         title: 'Metroid Fusion (USA)',
@@ -482,7 +551,8 @@ class DiscoveryStorefront {
         fileSizeMb: 8,
         size: '8 MB',
         format: 'ZIP',
-        description: 'Samus battles the X parasites in this tense, story-driven adventure.',
+        description:
+            'Samus battles the X parasites in this tense, story-driven adventure.',
       ),
       GameResult(
         title: 'Metroid Zero Mission (USA)',
@@ -496,7 +566,8 @@ class DiscoveryStorefront {
         fileSizeMb: 8,
         size: '8 MB',
         format: 'ZIP',
-        description: 'The original Metroid remade with modern gameplay and new content.',
+        description:
+            'The original Metroid remade with modern gameplay and new content.',
       ),
       GameResult(
         title: 'Fire Emblem (USA)',
@@ -510,21 +581,25 @@ class DiscoveryStorefront {
         fileSizeMb: 16,
         size: '16 MB',
         format: 'ZIP',
-        description: 'The first Fire Emblem released in the West, featuring tactical RPG battles.',
+        description:
+            'The first Fire Emblem released in the West, featuring tactical RPG battles.',
       ),
       GameResult(
         title: 'Fire Emblem: Sacred Stones (USA)',
         platform: 'GBA',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientGba}Fire%20Emblem%20-%20The%20Sacred%20Stones%20(USA%2C%20Australia).zip',
-        downloadUrl: '${_myrientGba}Fire%20Emblem%20-%20The%20Sacred%20Stones%20(USA%2C%20Australia).zip',
+        pageUrl:
+            '${_myrientGba}Fire%20Emblem%20-%20The%20Sacred%20Stones%20(USA%2C%20Australia).zip',
+        downloadUrl:
+            '${_myrientGba}Fire%20Emblem%20-%20The%20Sacred%20Stones%20(USA%2C%20Australia).zip',
         requiresBrowser: false,
         gameId: 'BE8E',
         fileSizeMb: 16,
         size: '16 MB',
         format: 'ZIP',
-        description: 'A standalone Fire Emblem with branching promotions and world map.',
+        description:
+            'A standalone Fire Emblem with branching promotions and world map.',
       ),
       GameResult(
         title: 'Golden Sun (USA)',
@@ -538,35 +613,42 @@ class DiscoveryStorefront {
         fileSizeMb: 8,
         size: '8 MB',
         format: 'ZIP',
-        description: 'Epic RPG with Djinn-based combat and stunning GBA visuals.',
+        description:
+            'Epic RPG with Djinn-based combat and stunning GBA visuals.',
       ),
       GameResult(
         title: 'Golden Sun: The Lost Age (USA)',
         platform: 'GBA',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientGba}Golden%20Sun%20-%20The%20Lost%20Age%20(USA%2C%20Europe).zip',
-        downloadUrl: '${_myrientGba}Golden%20Sun%20-%20The%20Lost%20Age%20(USA%2C%20Europe).zip',
+        pageUrl:
+            '${_myrientGba}Golden%20Sun%20-%20The%20Lost%20Age%20(USA%2C%20Europe).zip',
+        downloadUrl:
+            '${_myrientGba}Golden%20Sun%20-%20The%20Lost%20Age%20(USA%2C%20Europe).zip',
         requiresBrowser: false,
         gameId: 'AGFE',
         fileSizeMb: 16,
         size: '16 MB',
         format: 'ZIP',
-        description: 'Continue the journey with new heroes and expanded Psynergy abilities.',
+        description:
+            'Continue the journey with new heroes and expanded Psynergy abilities.',
       ),
       GameResult(
         title: 'Castlevania: Aria of Sorrow (USA)',
         platform: 'GBA',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientGba}Castlevania%20-%20Aria%20of%20Sorrow%20(USA).zip',
-        downloadUrl: '${_myrientGba}Castlevania%20-%20Aria%20of%20Sorrow%20(USA).zip',
+        pageUrl:
+            '${_myrientGba}Castlevania%20-%20Aria%20of%20Sorrow%20(USA).zip',
+        downloadUrl:
+            '${_myrientGba}Castlevania%20-%20Aria%20of%20Sorrow%20(USA).zip',
         requiresBrowser: false,
         gameId: 'ACBE',
         fileSizeMb: 8,
         size: '8 MB',
         format: 'ZIP',
-        description: 'Soma Cruz collects monster souls in this acclaimed metroidvania.',
+        description:
+            'Soma Cruz collects monster souls in this acclaimed metroidvania.',
       ),
 
       // === N64 GAMES ===
@@ -581,33 +663,40 @@ class DiscoveryStorefront {
         fileSizeMb: 8,
         size: '8 MB',
         format: 'ZIP',
-        description: 'The revolutionary 3D platformer that defined a generation.',
+        description:
+            'The revolutionary 3D platformer that defined a generation.',
       ),
       GameResult(
         title: 'Legend of Zelda: Ocarina of Time (USA)',
         platform: 'N64',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientN64}Legend%20of%20Zelda%2C%20The%20-%20Ocarina%20of%20Time%20(USA).zip',
-        downloadUrl: '${_myrientN64}Legend%20of%20Zelda%2C%20The%20-%20Ocarina%20of%20Time%20(USA).zip',
+        pageUrl:
+            '${_myrientN64}Legend%20of%20Zelda%2C%20The%20-%20Ocarina%20of%20Time%20(USA).zip',
+        downloadUrl:
+            '${_myrientN64}Legend%20of%20Zelda%2C%20The%20-%20Ocarina%20of%20Time%20(USA).zip',
         requiresBrowser: false,
         fileSizeMb: 32,
         size: '32 MB',
         format: 'ZIP',
-        description: 'The epic adventure that set the standard for 3D Zelda games.',
+        description:
+            'The epic adventure that set the standard for 3D Zelda games.',
       ),
       GameResult(
         title: 'Legend of Zelda: Majora\'s Mask (USA)',
         platform: 'N64',
         region: 'USA',
         provider: 'Myrient',
-        pageUrl: '${_myrientN64}Legend%20of%20Zelda%2C%20The%20-%20Majora\'s%20Mask%20(USA).zip',
-        downloadUrl: '${_myrientN64}Legend%20of%20Zelda%2C%20The%20-%20Majora\'s%20Mask%20(USA).zip',
+        pageUrl:
+            '${_myrientN64}Legend%20of%20Zelda%2C%20The%20-%20Majora\'s%20Mask%20(USA).zip',
+        downloadUrl:
+            '${_myrientN64}Legend%20of%20Zelda%2C%20The%20-%20Majora\'s%20Mask%20(USA).zip',
         requiresBrowser: false,
         fileSizeMb: 32,
         size: '32 MB',
         format: 'ZIP',
-        description: 'A dark, time-bending Zelda adventure with transforming masks.',
+        description:
+            'A dark, time-bending Zelda adventure with transforming masks.',
       ),
       GameResult(
         title: 'GoldenEye 007 (USA)',
@@ -633,7 +722,8 @@ class DiscoveryStorefront {
         fileSizeMb: 12,
         size: '12 MB',
         format: 'ZIP',
-        description: 'Four-player kart racing mayhem that defined multiplayer gaming.',
+        description:
+            'Four-player kart racing mayhem that defined multiplayer gaming.',
       ),
       GameResult(
         title: 'Super Smash Bros. (USA)',
@@ -646,7 +736,8 @@ class DiscoveryStorefront {
         fileSizeMb: 16,
         size: '16 MB',
         format: 'ZIP',
-        description: 'The original crossover fighting game that started a phenomenon.',
+        description:
+            'The original crossover fighting game that started a phenomenon.',
       ),
       GameResult(
         title: 'Banjo-Kazooie (USA)',
@@ -659,7 +750,8 @@ class DiscoveryStorefront {
         fileSizeMb: 16,
         size: '16 MB',
         format: 'ZIP',
-        description: 'Rare\'s beloved collect-a-thon platformer with a bear and bird duo.',
+        description:
+            'Rare\'s beloved collect-a-thon platformer with a bear and bird duo.',
       ),
       GameResult(
         title: 'Paper Mario (USA)',
@@ -672,7 +764,8 @@ class DiscoveryStorefront {
         fileSizeMb: 40,
         size: '40 MB',
         format: 'ZIP',
-        description: 'The charming RPG where Mario becomes paper-thin to save the day.',
+        description:
+            'The charming RPG where Mario becomes paper-thin to save the day.',
       ),
 
       // === SNES GAMES ===
@@ -686,7 +779,8 @@ class DiscoveryStorefront {
         requiresBrowser: false,
         fileSizeMb: 1,
         size: '512 KB',
-        description: 'The SNES launch title that introduced Yoshi and set new standards.',
+        description:
+            'The SNES launch title that introduced Yoshi and set new standards.',
       ),
       GameResult(
         title: 'Legend of Zelda: A Link to the Past (USA)',
@@ -694,11 +788,13 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientSnes,
-        downloadUrl: '${_myrientSnes}Legend%20of%20Zelda,%20The%20-%20A%20Link%20to%20the%20Past%20(USA).zip',
+        downloadUrl:
+            '${_myrientSnes}Legend%20of%20Zelda,%20The%20-%20A%20Link%20to%20the%20Past%20(USA).zip',
         requiresBrowser: false,
         fileSizeMb: 1,
         size: '1 MB',
-        description: 'The definitive top-down Zelda adventure with Light and Dark Worlds.',
+        description:
+            'The definitive top-down Zelda adventure with Light and Dark Worlds.',
       ),
       GameResult(
         title: 'Super Metroid (USA)',
@@ -706,11 +802,13 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientSnes,
-        downloadUrl: '${_myrientSnes}Super%20Metroid%20(Japan,%20USA)%20(En,Ja).zip',
+        downloadUrl:
+            '${_myrientSnes}Super%20Metroid%20(Japan,%20USA)%20(En,Ja).zip',
         requiresBrowser: false,
         fileSizeMb: 3,
         size: '3 MB',
-        description: 'The atmospheric masterpiece that defined the metroidvania genre.',
+        description:
+            'The atmospheric masterpiece that defined the metroidvania genre.',
       ),
       GameResult(
         title: 'Chrono Trigger (USA)',
@@ -730,11 +828,13 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientSnes,
-        downloadUrl: '${_myrientSnes}Final%20Fantasy%20III%20(USA)%20(Rev%201).zip',
+        downloadUrl:
+            '${_myrientSnes}Final%20Fantasy%20III%20(USA)%20(Rev%201).zip',
         requiresBrowser: false,
         fileSizeMb: 3,
         size: '3 MB',
-        description: 'Epic RPG with a memorable cast fighting against the mad clown Kefka.',
+        description:
+            'Epic RPG with a memorable cast fighting against the mad clown Kefka.',
       ),
       GameResult(
         title: 'Super Mario RPG (USA)',
@@ -742,11 +842,13 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientSnes,
-        downloadUrl: '${_myrientSnes}Super%20Mario%20RPG%20-%20Legend%20of%20the%20Seven%20Stars%20(USA).zip',
+        downloadUrl:
+            '${_myrientSnes}Super%20Mario%20RPG%20-%20Legend%20of%20the%20Seven%20Stars%20(USA).zip',
         requiresBrowser: false,
         fileSizeMb: 4,
         size: '4 MB',
-        description: 'Mario\'s first RPG, developed with Square\'s magic touch.',
+        description:
+            'Mario\'s first RPG, developed with Square\'s magic touch.',
       ),
       GameResult(
         title: 'Donkey Kong Country (USA)',
@@ -758,7 +860,8 @@ class DiscoveryStorefront {
         requiresBrowser: false,
         fileSizeMb: 4,
         size: '4 MB',
-        description: 'Revolutionary pre-rendered graphics in this platforming classic.',
+        description:
+            'Revolutionary pre-rendered graphics in this platforming classic.',
       ),
       GameResult(
         title: 'EarthBound (USA)',
@@ -784,7 +887,8 @@ class DiscoveryStorefront {
         requiresBrowser: false,
         fileSizeMb: 1,
         size: '384 KB',
-        description: 'The ultimate NES platformer with world maps and power suits.',
+        description:
+            'The ultimate NES platformer with world maps and power suits.',
       ),
       GameResult(
         title: 'Legend of Zelda (USA)',
@@ -796,7 +900,8 @@ class DiscoveryStorefront {
         requiresBrowser: false,
         fileSizeMb: 1,
         size: '128 KB',
-        description: 'The original adventure that started the legendary series.',
+        description:
+            'The original adventure that started the legendary series.',
       ),
       GameResult(
         title: 'Mega Man 2 (USA)',
@@ -808,7 +913,8 @@ class DiscoveryStorefront {
         requiresBrowser: false,
         fileSizeMb: 1,
         size: '256 KB',
-        description: 'The Blue Bomber\'s finest hour with iconic robot masters.',
+        description:
+            'The Blue Bomber\'s finest hour with iconic robot masters.',
       ),
       GameResult(
         title: 'Castlevania III: Dracula\'s Curse (USA)',
@@ -816,7 +922,8 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientNes,
-        downloadUrl: '${_myrientNes}Castlevania%20III%20-%20Dracula\'s%20Curse%20(USA).zip',
+        downloadUrl:
+            '${_myrientNes}Castlevania%20III%20-%20Dracula\'s%20Curse%20(USA).zip',
         requiresBrowser: false,
         fileSizeMb: 1,
         size: '384 KB',
@@ -830,11 +937,13 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientGenesis,
-        downloadUrl: '${_myrientGenesis}Sonic%20The%20Hedgehog%202%20(World).zip',
+        downloadUrl:
+            '${_myrientGenesis}Sonic%20The%20Hedgehog%202%20(World).zip',
         requiresBrowser: false,
         fileSizeMb: 1,
         size: '1 MB',
-        description: 'Sonic and Tails\' high-speed adventure through Chemical Plant and beyond.',
+        description:
+            'Sonic and Tails\' high-speed adventure through Chemical Plant and beyond.',
       ),
       GameResult(
         title: 'Sonic the Hedgehog 3 & Knuckles (USA)',
@@ -842,11 +951,13 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientGenesis,
-        downloadUrl: '${_myrientGenesis}Sonic%20%26%20Knuckles%20%2B%20Sonic%20The%20Hedgehog%203%20(USA)%20(Lock-on%20Combination).zip',
+        downloadUrl:
+            '${_myrientGenesis}Sonic%20%26%20Knuckles%20%2B%20Sonic%20The%20Hedgehog%203%20(USA)%20(Lock-on%20Combination).zip',
         requiresBrowser: false,
         fileSizeMb: 4,
         size: '4 MB',
-        description: 'The complete Sonic 3 experience with all characters unlocked.',
+        description:
+            'The complete Sonic 3 experience with all characters unlocked.',
       ),
       GameResult(
         title: 'Streets of Rage 2 (USA)',
@@ -858,7 +969,8 @@ class DiscoveryStorefront {
         requiresBrowser: false,
         fileSizeMb: 2,
         size: '2 MB',
-        description: 'The pinnacle of beat-em-up action with an incredible soundtrack.',
+        description:
+            'The pinnacle of beat-em-up action with an incredible soundtrack.',
       ),
       GameResult(
         title: 'Gunstar Heroes (USA)',
@@ -880,12 +992,14 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientPs1,
-        downloadUrl: '${_myrientPs1}Final%20Fantasy%20VII%20(USA)%20(Disc%201).zip',
+        downloadUrl:
+            '${_myrientPs1}Final%20Fantasy%20VII%20(USA)%20(Disc%201).zip',
         requiresBrowser: false,
         fileSizeMb: 500,
         size: '500 MB',
         format: 'ZIP',
-        description: 'The legendary RPG that brought JRPGs to the mainstream. (Disc 1)',
+        description:
+            'The legendary RPG that brought JRPGs to the mainstream. (Disc 1)',
       ),
       GameResult(
         title: 'Castlevania: Symphony of the Night (USA)',
@@ -893,12 +1007,14 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientPs1,
-        downloadUrl: '${_myrientPs1}Castlevania%20-%20Symphony%20of%20the%20Night%20(USA).zip',
+        downloadUrl:
+            '${_myrientPs1}Castlevania%20-%20Symphony%20of%20the%20Night%20(USA).zip',
         requiresBrowser: false,
         fileSizeMb: 500,
         size: '500 MB',
         format: 'ZIP',
-        description: 'Alucard explores Dracula\'s castle in this genre-defining classic.',
+        description:
+            'Alucard explores Dracula\'s castle in this genre-defining classic.',
       ),
       GameResult(
         title: 'Metal Gear Solid (USA)',
@@ -906,7 +1022,8 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientPs1,
-        downloadUrl: '${_myrientPs1}Metal%20Gear%20Solid%20(USA)%20(Disc%201).zip',
+        downloadUrl:
+            '${_myrientPs1}Metal%20Gear%20Solid%20(USA)%20(Disc%201).zip',
         requiresBrowser: false,
         fileSizeMb: 800,
         size: '800 MB',
@@ -919,7 +1036,8 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientPs1,
-        downloadUrl: '${_myrientPs1}Resident%20Evil%202%20(USA)%20(Disc%201).zip',
+        downloadUrl:
+            '${_myrientPs1}Resident%20Evil%202%20(USA)%20(Disc%201).zip',
         requiresBrowser: false,
         fileSizeMb: 700,
         size: '700 MB',
@@ -947,7 +1065,8 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientNds,
-        downloadUrl: '${_myrientNds}Pokemon%20-%20HeartGold%20Version%20(USA).zip',
+        downloadUrl:
+            '${_myrientNds}Pokemon%20-%20HeartGold%20Version%20(USA).zip',
         requiresBrowser: false,
         fileSizeMb: 128,
         size: '128 MB',
@@ -985,12 +1104,14 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientPsp,
-        downloadUrl: '${_myrientPsp}God%20of%20War%20-%20Chains%20of%20Olympus%20(USA).zip',
+        downloadUrl:
+            '${_myrientPsp}God%20of%20War%20-%20Chains%20of%20Olympus%20(USA).zip',
         requiresBrowser: false,
         fileSizeMb: 1200,
         size: '1.2 GB',
         format: 'ZIP',
-        description: 'Kratos\' brutal adventure before the original God of War.',
+        description:
+            'Kratos\' brutal adventure before the original God of War.',
       ),
       GameResult(
         title: 'Monster Hunter Freedom Unite (USA)',
@@ -998,7 +1119,8 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientPsp,
-        downloadUrl: '${_myrientPsp}Monster%20Hunter%20Freedom%20Unite%20(USA).zip',
+        downloadUrl:
+            '${_myrientPsp}Monster%20Hunter%20Freedom%20Unite%20(USA).zip',
         requiresBrowser: false,
         fileSizeMb: 1500,
         size: '1.5 GB',
@@ -1011,12 +1133,14 @@ class DiscoveryStorefront {
         region: 'USA',
         provider: 'Myrient',
         pageUrl: _myrientPsp,
-        downloadUrl: '${_myrientPsp}Crisis%20Core%20-%20Final%20Fantasy%20VII%20(USA).zip',
+        downloadUrl:
+            '${_myrientPsp}Crisis%20Core%20-%20Final%20Fantasy%20VII%20(USA).zip',
         requiresBrowser: false,
         fileSizeMb: 1800,
         size: '1.8 GB',
         format: 'ZIP',
-        description: 'Zack Fair\'s story as a SOLDIER before the events of FF7.',
+        description:
+            'Zack Fair\'s story as a SOLDIER before the events of FF7.',
       ),
     ];
   }

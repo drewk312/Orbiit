@@ -6,9 +6,9 @@ class PremiumDownloadTile extends StatelessWidget {
   final String title;
   final String status;
   final double progress; // 0.0 to 1.0
-  final String speed;    // e.g. "12.5 MB/s"
-  final String eta;      // e.g. "45s"
-  final String size;     // e.g. "1.2 GB"
+  final String speed; // e.g. "12.5 MB/s"
+  final String eta; // e.g. "45s"
+  final String size; // e.g. "1.2 GB"
   final VoidCallback? onCancel;
 
   const PremiumDownloadTile({
@@ -60,7 +60,8 @@ class PremiumDownloadTile extends StatelessWidget {
                             color: SpaceColors.cyanNeon.withOpacity(0.15),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const Icon(Icons.download_rounded, color: SpaceColors.cyanNeon, size: 20),
+                          child: const Icon(Icons.download_rounded,
+                              color: SpaceColors.cyanNeon, size: 20),
                         ),
                         const SizedBox(width: 12),
                         // Title
@@ -96,7 +97,7 @@ class PremiumDownloadTile extends StatelessWidget {
                           "${(animatedProgress * 100).toStringAsFixed(1)}%",
                           style: const TextStyle(
                             color: Colors.white,
-                            fontFamily: 'monospace', 
+                            fontFamily: 'monospace',
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
                           ),
@@ -106,7 +107,8 @@ class PremiumDownloadTile extends StatelessWidget {
                         if (onCancel != null)
                           GestureDetector(
                             onTap: onCancel,
-                            child: const Icon(Icons.close, color: Colors.white38, size: 18),
+                            child: const Icon(Icons.close,
+                                color: Colors.white38, size: 18),
                           ),
                       ],
                     ),
@@ -133,12 +135,16 @@ class PremiumDownloadTile extends StatelessWidget {
                               width: constraints.maxWidth * animatedProgress,
                               decoration: BoxDecoration(
                                 gradient: const LinearGradient(
-                                  colors: [SpaceColors.cyanNeon, Color(0xFF3B82F6)],
+                                  colors: [
+                                    SpaceColors.cyanNeon,
+                                    Color(0xFF3B82F6)
+                                  ],
                                 ),
                                 borderRadius: BorderRadius.circular(3),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: SpaceColors.cyanNeon.withOpacity(0.5),
+                                    color:
+                                        SpaceColors.cyanNeon.withOpacity(0.5),
                                     blurRadius: 6,
                                     spreadRadius: 0,
                                   )
@@ -156,8 +162,10 @@ class PremiumDownloadTile extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildStatItem(Icons.speed, speed.isEmpty ? "-- MB/s" : speed),
-                        _buildStatItem(Icons.timer_outlined, eta.isEmpty ? "--:--" : eta),
+                        _buildStatItem(
+                            Icons.speed, speed.isEmpty ? "-- MB/s" : speed),
+                        _buildStatItem(
+                            Icons.timer_outlined, eta.isEmpty ? "--:--" : eta),
                         _buildStatItem(Icons.data_usage, size),
                       ],
                     ),

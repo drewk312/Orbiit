@@ -48,7 +48,6 @@ class HandshakeOverlay extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
               const SizedBox(height: 16),
-
               Text(
                 'THE HANDSHAKE',
                 style: TextStyle(
@@ -59,14 +58,12 @@ class HandshakeOverlay extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-
               Text(
                 statusMessage,
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 14),
               ),
               const SizedBox(height: 24),
-
               LinearProgressIndicator(
                 value: progress,
                 backgroundColor:
@@ -75,7 +72,6 @@ class HandshakeOverlay extends StatelessWidget {
                   Theme.of(context).primaryColor,
                 ),
               ),
-
               if (statusMessage.contains("RomsGames")) ...[
                 const SizedBox(height: 12),
                 Text(

@@ -21,7 +21,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _checkingForUpdate = false;
   String _updateStatus = '';
   UpdateRelease? _updateAvailable;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +36,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(color: OrbColors.border)),
+                  border: Border(bottom: BorderSide(color: OrbColors.border)),
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -63,8 +62,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Command Center',
-                              style: OrbText.headlineMedium),
+                          Text('Command Center', style: OrbText.headlineMedium),
                           Text('Configure your Orbiit experience',
                               style: OrbText.bodyMedium
                                   .copyWith(color: OrbColors.textSecondary)),
@@ -138,8 +136,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   },
                             style: OutlinedButton.styleFrom(
                               foregroundColor: OrbColors.corrupt,
-                              side: const BorderSide(
-                                  color: OrbColors.corrupt),
+                              side: const BorderSide(color: OrbColors.corrupt),
                             ),
                             child: const Text('Clear'),
                           ),
@@ -233,12 +230,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   ],
                                 ),
                                 border: Border.all(
-                                  color: OrbColors.orbitCyan.withValues(alpha: 0.4),
+                                  color: OrbColors.orbitCyan
+                                      .withValues(alpha: 0.4),
                                   width: 2,
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: OrbColors.orbitCyan.withValues(alpha: 0.2),
+                                    color: OrbColors.orbitCyan
+                                        .withValues(alpha: 0.2),
                                     blurRadius: 20,
                                     spreadRadius: 4,
                                   ),
@@ -271,7 +270,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                         color: OrbColors.orbitCyan,
                                         boxShadow: [
                                           BoxShadow(
-                                            color: OrbColors.orbitCyan.withValues(alpha: 0.8),
+                                            color: OrbColors.orbitCyan
+                                                .withValues(alpha: 0.8),
                                             blurRadius: 8,
                                           ),
                                         ],
@@ -290,7 +290,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                         color: OrbColors.orbitPurple,
                                         boxShadow: [
                                           BoxShadow(
-                                            color: OrbColors.orbitPurple.withValues(alpha: 0.8),
+                                            color: OrbColors.orbitPurple
+                                                .withValues(alpha: 0.8),
                                             blurRadius: 8,
                                           ),
                                         ],
@@ -370,7 +371,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   if (mounted) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                          content: Text('Could not launch URL')),
+                                          content:
+                                              Text('Could not launch URL')),
                                     );
                                   }
                                 }
@@ -390,13 +392,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildUpdateTile() {
     return _buildSettingTile(
-      title: _updateAvailable != null ? 'Update Available!' : 'Check for Updates',
+      title:
+          _updateAvailable != null ? 'Update Available!' : 'Check for Updates',
       subtitle: _updateAvailable != null
           ? 'Version ${_updateAvailable!.tagName} is ready.'
           : _updateStatus.isNotEmpty
               ? _updateStatus
               : 'Current Version: ${AppConfig.version}',
-      icon: _updateAvailable != null ? Icons.system_update : Icons.system_update_alt,
+      icon: _updateAvailable != null
+          ? Icons.system_update
+          : Icons.system_update_alt,
       action: OutlinedButton(
         onPressed: _checkingForUpdate ? null : _handleUpdateCheck,
         style: _updateAvailable != null
@@ -447,7 +452,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             _updateStatus = 'You are up to date.';
           });
           Future.delayed(const Duration(seconds: 3), () {
-            if (mounted && _updateAvailable == null) setState(() => _updateStatus = '');
+            if (mounted && _updateAvailable == null)
+              setState(() => _updateStatus = '');
           });
         }
       }

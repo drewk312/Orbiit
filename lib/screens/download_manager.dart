@@ -27,7 +27,7 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
   final DownloadCenterService _downloadCenter = DownloadCenterService();
   List<File> _detectedArchives = [];
   bool _scanning = false;
-  
+
   // Processing State
   bool _isProcessing = false;
   String _processStatus = '';
@@ -56,7 +56,8 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
       }
 
       if (downloadsDir != null) {
-        final archives = await _downloadCenter.scanForGameArchives(downloadsDir);
+        final archives =
+            await _downloadCenter.scanForGameArchives(downloadsDir);
         if (mounted) {
           setState(() {
             _detectedArchives = archives;
@@ -71,7 +72,7 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
     // Determine destination (assume last used SD or ask?)
     // For automation, let's pick the first available "Game Library" drive or ask user?
     // Let's ask user for Library Root for now, or use a saved preference.
-    
+
     final result = await FilePicker.platform.getDirectoryPath(
       dialogTitle: 'Select Game Library Root (where "wbfs" folder is)',
       lockParentWindow: true,
@@ -92,26 +93,29 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
         archiveFile: file,
         destinationRoot: destRoot,
         onStatus: (s) {
-           if (mounted) setState(() => _processStatus = s);
+          if (mounted) setState(() => _processStatus = s);
         },
         onProgress: (p) {
-           if (mounted) setState(() => _processProgress = p);
+          if (mounted) setState(() => _processProgress = p);
         },
       );
-      
+
       // Success
       if (mounted) {
-         ScaffoldMessenger.of(context).showSnackBar(
-           SnackBar(content: Text('Successfully imported ${path.basename(file.path)}')),
-         );
-         // Refresh list?
-         _scanDownloads();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content:
+                  Text('Successfully imported ${path.basename(file.path)}')),
+        );
+        // Refresh list?
+        _scanDownloads();
       }
     } catch (e) {
       if (mounted) {
-         ScaffoldMessenger.of(context).showSnackBar(
-           SnackBar(content: Text('Import Failed: $e'), backgroundColor: Colors.red),
-         );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text('Import Failed: $e'), backgroundColor: Colors.red),
+        );
       }
     } finally {
       if (mounted) {
@@ -139,15 +143,23 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
                   Icon(Icons.download_rounded, color: FusionColors.textPrimary),
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.folder_open, color: FusionColors.nebulaCyan),
+                  icon: const Icon(Icons.folder_open,
+                      color: FusionColors.nebulaCyan),
                   tooltip: 'Import from File',
                   onPressed: () async {
                     final result = await FilePicker.platform.pickFiles(
-                       type: FileType.custom,
-                       allowedExtensions: ['zip', '7z', 'rar', 'iso', 'wbfs', 'rvz'],
+                      type: FileType.custom,
+                      allowedExtensions: [
+                        'zip',
+                        '7z',
+                        'rar',
+                        'iso',
+                        'wbfs',
+                        'rvz'
+                      ],
                     );
                     if (result != null && result.files.single.path != null) {
-                       _importFile(File(result.files.single.path!));
+                      _importFile(File(result.files.single.path!));
                     }
                   },
                 ),
@@ -172,24 +184,29 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                       children: [
-                         const CircularProgressIndicator(strokeWidth: 3),
-                         const SizedBox(width: 16),
-                         Expanded(
-                           child: Column(
-                             crossAxisAlignment: CrossAxisAlignment.start,
-                             children: [
-                               Text('Importing: ${path.basename(_processingFile?.path ?? "")}', 
-                                 style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-                               Text(_processStatus, 
-                                 style: const TextStyle(color: Colors.white70)),
-                             ],
-                           ),
-                         )
-                       ],
+                      children: [
+                        const CircularProgressIndicator(strokeWidth: 3),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                  'Importing: ${path.basename(_processingFile?.path ?? "")}',
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)),
+                              Text(_processStatus,
+                                  style:
+                                      const TextStyle(color: Colors.white70)),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
                     const SizedBox(height: 12),
-                    LinearProgressIndicator(value: _processProgress > 0 ? _processProgress : null),
+                    LinearProgressIndicator(
+                        value: _processProgress > 0 ? _processProgress : null),
                   ],
                 ),
               ),
@@ -200,12 +217,13 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
                 children: [
                   // Section: Detected Archives (Phase 5)
                   if (_detectedArchives.isNotEmpty) ...[
-                     Row(
+                    Row(
                       children: [
                         const Icon(Icons.save_alt,
                             color: FusionColors.nebulaCyan, size: 20),
                         const SizedBox(width: 8),
-                        Text('Ready to Import', style: FusionTypography.headlineMedium),
+                        Text('Ready to Import',
+                            style: FusionTypography.headlineMedium),
                         const Spacer(),
                         Container(
                           padding: const EdgeInsets.symmetric(
@@ -223,7 +241,8 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    ..._detectedArchives.map((file) => _buildDetectedItem(file)),
+                    ..._detectedArchives
+                        .map((file) => _buildDetectedItem(file)),
                     const SizedBox(height: 32),
                   ],
 
@@ -251,7 +270,10 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
                     ),
                     const SizedBox(height: 32),
                   ] else ...[
-                    if (forge.downloadQueue.isEmpty && _detectedArchives.isEmpty && !_isProcessing) _buildEmptyState(context),
+                    if (forge.downloadQueue.isEmpty &&
+                        _detectedArchives.isEmpty &&
+                        !_isProcessing)
+                      _buildEmptyState(context),
                   ],
 
                   // Section: Queue
@@ -306,7 +328,7 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
       child: Row(
         children: [
           Container(
-            width: 48, 
+            width: 48,
             height: 48,
             decoration: BoxDecoration(
               color: Colors.blueAccent.withOpacity(0.2),
@@ -321,7 +343,8 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
               children: [
                 Text(
                   path.basename(file.path),
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
@@ -372,7 +395,7 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
             Text('No Active Downloads', style: FusionTypography.displayLarge),
             const SizedBox(height: 8),
             if (_detectedArchives.isNotEmpty)
-               Text(
+              Text(
                 'But we found files in your Downloads folder!\nClick IMPORT to organize them.',
                 style: FusionTypography.bodyLarge
                     .copyWith(color: FusionColors.nebulaCyan),

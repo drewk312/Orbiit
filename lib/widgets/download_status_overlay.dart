@@ -42,7 +42,7 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
         _isDismissed = false;
         _isMinimized = false;
       }
-      
+
       if (!forge.isForging || forge.currentGame == null || _isDismissed) {
         return const SizedBox.shrink();
       }
@@ -86,9 +86,11 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
                 borderRadius: BorderRadius.circular(16),
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                  child: _isMinimized 
-                      ? _buildMinimizedView(title, progress, progressPercent, forge)
-                      : _buildExpandedView(title, progress, progressPercent, forge),
+                  child: _isMinimized
+                      ? _buildMinimizedView(
+                          title, progress, progressPercent, forge)
+                      : _buildExpandedView(
+                          title, progress, progressPercent, forge),
                 ),
               ),
             ),
@@ -98,7 +100,8 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
     });
   }
 
-  Widget _buildMinimizedView(String title, double progress, String percent, ForgeProvider forge) {
+  Widget _buildMinimizedView(
+      String title, double progress, String percent, ForgeProvider forge) {
     return InkWell(
       onTap: () => setState(() => _isMinimized = false),
       child: Padding(
@@ -125,7 +128,7 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
               },
             ),
             const SizedBox(width: 10),
-            
+
             // Progress info
             Expanded(
               child: Column(
@@ -156,7 +159,7 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
               ),
             ),
             const SizedBox(width: 8),
-            
+
             // Percentage
             Text(
               '$percent%',
@@ -171,7 +174,8 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
     );
   }
 
-  Widget _buildExpandedView(String title, double progress, String percent, ForgeProvider forge) {
+  Widget _buildExpandedView(
+      String title, double progress, String percent, ForgeProvider forge) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -198,7 +202,7 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
                 ),
               ),
               const SizedBox(width: 12),
-              
+
               // Title
               Expanded(
                 child: Text(
@@ -211,7 +215,7 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              
+
               // Minimize button
               _buildIconButton(
                 icon: Icons.remove_rounded,
@@ -219,7 +223,7 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
                 tooltip: 'Minimize',
               ),
               const SizedBox(width: 4),
-              
+
               // Close button
               _buildIconButton(
                 icon: Icons.close_rounded,
@@ -228,9 +232,9 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
               ),
             ],
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // Progress bar
           Stack(
             children: [
@@ -263,28 +267,29 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
               ),
             ],
           ),
-          
+
           const SizedBox(height: 12),
-          
+
           // Status row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // Status text - simplified, no "pipeline" jargon
               Text(
-                progress < 0.01 
+                progress < 0.01
                     ? 'Starting download...'
-                    : progress < 1.0 
+                    : progress < 1.0
                         ? 'Downloading...'
                         : 'Complete!',
                 style: OrbText.bodySmall.copyWith(
                   color: OrbColors.textSecondary,
                 ),
               ),
-              
+
               // Percentage badge
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: OrbColors.orbitCyan.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(8),
@@ -299,9 +304,9 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
               ),
             ],
           ),
-          
+
           const SizedBox(height: 12),
-          
+
           // Action Buttons
           Row(
             children: [
@@ -316,7 +321,8 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
                     }
                   },
                   style: TextButton.styleFrom(
-                    backgroundColor: OrbColors.orbitYellow.withValues(alpha: 0.1),
+                    backgroundColor:
+                        OrbColors.orbitYellow.withValues(alpha: 0.1),
                     foregroundColor: OrbColors.orbitYellow,
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     shape: RoundedRectangleBorder(
@@ -370,7 +376,8 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
                     children: [
                       Icon(Icons.stop_rounded, size: 18),
                       const SizedBox(width: 6),
-                      Text('Cancel', style: TextStyle(fontWeight: FontWeight.w600)),
+                      Text('Cancel',
+                          style: TextStyle(fontWeight: FontWeight.w600)),
                     ],
                   ),
                 ),

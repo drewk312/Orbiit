@@ -437,9 +437,9 @@ class ForgeProvider extends ChangeNotifier {
         unawaited(_saveQueueToDisk());
         // Simple heuristic: If platform is Wii Homebrew, recurse homebrew install
         if (next.platform == 'Wii Homebrew') {
-            unawaited(startHomebrewInstall(next));
+          unawaited(startHomebrewInstall(next));
         } else {
-            unawaited(startForge(next));
+          unawaited(startForge(next));
         }
       }
     }
@@ -498,30 +498,32 @@ class ForgeProvider extends ChangeNotifier {
       notifyListeners();
 
       // ⚡ Handle External Browser Requirements (Rom Hacks / Manual Downloads)
-      if (game.requiresBrowser || (game.description?.contains('requires browser') ?? false)) {
+      if (game.requiresBrowser ||
+          (game.description?.contains('requires browser') ?? false)) {
         _statusMessage = 'Opening external download page...';
         notifyListeners();
-        
+
         final url = game.pageUrl ?? game.downloadUrl;
         if (url != null && url.isNotEmpty) {
           try {
-             await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
-             _statusMessage = 'Opened in browser';
-             _currentStatus = ForgeStatus.ready;
+            await launchUrl(Uri.parse(url),
+                mode: LaunchMode.externalApplication);
+            _statusMessage = 'Opened in browser';
+            _currentStatus = ForgeStatus.ready;
           } catch (e) {
-             _error = 'Could not open browser: $e';
-             _currentStatus = ForgeStatus.error;
+            _error = 'Could not open browser: $e';
+            _currentStatus = ForgeStatus.error;
           }
         } else {
-             _error = 'No URL available to open';
-             _currentStatus = ForgeStatus.error;
+          _error = 'No URL available to open';
+          _currentStatus = ForgeStatus.error;
         }
 
         // Complete the "forge" immediately
         _isForging = false;
         _progress = 1.0;
         notifyListeners();
-        
+
         // Process next item in queue after delay
         await Future.delayed(const Duration(seconds: 1));
         if (_downloadQueue.isNotEmpty) {
@@ -989,7 +991,8 @@ class ForgeProvider extends ChangeNotifier {
           final file = File(downloadPathToDelete);
           if (await file.exists()) {
             await file.delete();
-            debugPrint('[ForgeProvider] ✓ Deleted partial download: $downloadPathToDelete');
+            debugPrint(
+                '[ForgeProvider] ✓ Deleted partial download: $downloadPathToDelete');
           }
         } catch (e) {
           debugPrint('[ForgeProvider] ✗ Failed to delete partial download: $e');

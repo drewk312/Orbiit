@@ -19,7 +19,8 @@ class SpaceRocketLoader extends StatelessWidget {
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 0, end: progress.clamp(0.0, 1.0)),
       duration: const Duration(milliseconds: 500),
-      curve: Curves.easeOutBack, // Slight overshoot makes the rocket feel heavy/real
+      curve: Curves
+          .easeOutBack, // Slight overshoot makes the rocket feel heavy/real
       builder: (context, animatedProgress, child) {
         return SizedBox(
           height: height,
@@ -44,7 +45,8 @@ class _ParticleEngineState extends State<_ParticleEngine>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   // We use a list of random values to make the smoke look chaotic but consistent
-  final List<double> _randomSeeds = List.generate(20, (index) => math.Random().nextDouble());
+  final List<double> _randomSeeds =
+      List.generate(20, (index) => math.Random().nextDouble());
 
   @override
   void initState() {
@@ -91,26 +93,27 @@ class SpaceRocketPainter extends CustomPainter {
     // Calculate rocket nose position
     final rocketTipX = size.width * progress;
     // How long the rocket is (visual scale)
-    const rocketLength = 40.0; 
-    
+    const rocketLength = 40.0;
+
     // 1. Draw The "Space Track" (Background)
     // Instead of a solid line, let's draw a series of faint dots (stars)
     final trackPaint = Paint()
       ..color = Colors.white.withOpacity(0.2)
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.fill;
-    
+
     // Draw 10 "stars" along the path
     for (int i = 0; i < 10; i++) {
       double starX = (size.width / 10) * i + (size.width / 20);
-      if (starX > rocketTipX) { // Only draw stars ahead of the rocket
+      if (starX > rocketTipX) {
+        // Only draw stars ahead of the rocket
         canvas.drawCircle(Offset(starX, centerY), 1.5, trackPaint);
       }
     }
 
     // 2. Draw The Exhaust (Fire & Smoke)
     if (progress > 0.01) {
-       _drawExhaust(canvas, rocketTipX - rocketLength + 5, centerY, size.height);
+      _drawExhaust(canvas, rocketTipX - rocketLength + 5, centerY, size.height);
     }
 
     // 3. Draw The Retro Rocket
@@ -120,17 +123,18 @@ class SpaceRocketPainter extends CustomPainter {
     canvas.restore();
   }
 
-  void _drawExhaust(Canvas canvas, double tailX, double centerY, double maxHeight) {
+  void _drawExhaust(
+      Canvas canvas, double tailX, double centerY, double maxHeight) {
     final loop = animationValue.value;
-    
+
     // A. The Core Flame (High energy, close to tail)
     // We draw a jittery triangle
     final flamePath = Path();
     flamePath.moveTo(0, 0); // At rocket tail
-    
+
     // Fluctuate flame length
-    double flameLen = -15.0 - (math.sin(loop * math.pi * 4) * 4); 
-    
+    double flameLen = -15.0 - (math.sin(loop * math.pi * 4) * 4);
+
     flamePath.lineTo(flameLen, -3);
     flamePath.lineTo(flameLen - 2, 0); // Tip of flame
     flamePath.lineTo(flameLen, 3);
@@ -138,19 +142,19 @@ class SpaceRocketPainter extends CustomPainter {
 
     // Shift flame to world coordinates
     final flameMatrix = Matrix4.identity()..translate(tailX, centerY);
-    
-    canvas.drawPath(
-      flamePath.transform(flameMatrix.storage), 
-      Paint()..color = const Color(0xFFFF5722) // Deep Orange
-             ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 2)
-    );
 
     canvas.drawPath(
-      flamePath.transform(flameMatrix.storage), 
-      Paint()..color = const Color(0xFFFFC107) // Yellow Core
-             ..style = PaintingStyle.stroke
-             ..strokeWidth = 1
-    );
+        flamePath.transform(flameMatrix.storage),
+        Paint()
+          ..color = const Color(0xFFFF5722) // Deep Orange
+          ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 2));
+
+    canvas.drawPath(
+        flamePath.transform(flameMatrix.storage),
+        Paint()
+          ..color = const Color(0xFFFFC107) // Yellow Core
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1);
 
     // B. The Smoke Plume (Expanding clouds)
     // We use the seeds to draw expanding circles trailing behind
@@ -158,18 +162,18 @@ class SpaceRocketPainter extends CustomPainter {
       // Create a "time" value for this particle based on loop + index
       // This creates the "conveyor belt" effect of smoke moving backwards
       double t = (loop + (i / randomSeeds.length)) % 1.0;
-      
+
       // Position: Moves from tail (0) backwards
       // We limit the trail length based on progress so smoke doesn't appear at x=0 instantly
-      double maxTrail = math.min(100.0, tailX); 
-      double dx = t * maxTrail; 
-      
+      double maxTrail = math.min(100.0, tailX);
+      double dx = t * maxTrail;
+
       double currentX = tailX - dx;
       if (currentX < 0) continue; // Don't draw off screen
 
       // Turbulence: Random Y offset that grows as it gets further away
       // randomSeeds[i] gives us a consistent "lane" for this particle
-      double turbulence = (randomSeeds[i] - 0.5) * 20 * t; 
+      double turbulence = (randomSeeds[i] - 0.5) * 20 * t;
       double currentY = centerY + turbulence;
 
       // Size: Grows as it moves away
@@ -182,22 +186,19 @@ class SpaceRocketPainter extends CustomPainter {
       } else {
         smokeColor = Colors.grey.shade400;
       }
-      
+
       // Opacity: Fades out at the end
       double opacity = (1.0 - t).clamp(0.0, 1.0);
 
-      canvas.drawCircle(
-        Offset(currentX, currentY), 
-        radius, 
-        Paint()..color = smokeColor.withOpacity(opacity * 0.5)
-      );
+      canvas.drawCircle(Offset(currentX, currentY), radius,
+          Paint()..color = smokeColor.withOpacity(opacity * 0.5));
     }
   }
 
   void _drawCoolRocket(Canvas canvas, double length) {
     // Scale everything relative to length (approx 40px)
     // Drawing a classic Sci-Fi "Tintin" style rocket
-    
+
     // We are at (0,0) which is the NOSE of the rocket.
     // So we draw backwards (negative X).
 
@@ -215,14 +216,14 @@ class SpaceRocketPainter extends CustomPainter {
     pathFins.moveTo(-25, 6);
     pathFins.lineTo(-35, 12);
     pathFins.lineTo(-30, 4);
-    
+
     canvas.drawPath(pathFins, paintRed);
 
     // 2. Main Body (Teardrop shape)
     final pathBody = Path();
     pathBody.moveTo(0, 0); // Nose
     pathBody.quadraticBezierTo(-10, -8, -30, -8); // Top curve
-    pathBody.lineTo(-32, -8); 
+    pathBody.lineTo(-32, -8);
     pathBody.lineTo(-32, 8); // Back engine block
     pathBody.lineTo(-30, 8);
     pathBody.quadraticBezierTo(-10, 8, 0, 0); // Bottom curve
@@ -238,14 +239,16 @@ class SpaceRocketPainter extends CustomPainter {
     canvas.drawPath(pathBody, paintBody);
 
     // 3. Porthole Window
-    canvas.drawCircle(const Offset(-15, 0), 4, Paint()..color = Colors.grey.shade300); // Rim
+    canvas.drawCircle(
+        const Offset(-15, 0), 4, Paint()..color = Colors.grey.shade300); // Rim
     canvas.drawCircle(const Offset(-15, 0), 3, paintWindow); // Glass
     // Glint on window
-    canvas.drawCircle(const Offset(-16, -1), 1, Paint()..color = Colors.white); 
+    canvas.drawCircle(const Offset(-16, -1), 1, Paint()..color = Colors.white);
   }
 
   @override
   bool shouldRepaint(covariant SpaceRocketPainter oldDelegate) {
-    return oldDelegate.progress != progress || oldDelegate.animationValue != animationValue;
+    return oldDelegate.progress != progress ||
+        oldDelegate.animationValue != animationValue;
   }
 }

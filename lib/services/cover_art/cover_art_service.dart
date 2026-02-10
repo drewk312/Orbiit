@@ -286,11 +286,14 @@ class CoverArtService {
         if (gameId != null && gameId.length == 6) {
           result = await source.getByGameId(gameId, platform);
         }
-        
+
         // ✨ Fallback: Fuzzy search by title if ID failed or is generic (like Rom Hacks)
-        if (result == null && (gameId == null || gameId.length != 6 || platform == GamePlatform.wii)) {
-             // For Rom Hacks specifically or just failed lookups
-             result = await source.searchByTitle(gameTitle, platform);
+        if (result == null &&
+            (gameId == null ||
+                gameId.length != 6 ||
+                platform == GamePlatform.wii)) {
+          // For Rom Hacks specifically or just failed lookups
+          result = await source.searchByTitle(gameTitle, platform);
         }
 
         if (result != null) {

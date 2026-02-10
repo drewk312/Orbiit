@@ -6,7 +6,7 @@ import '../core/app_logger.dart';
 /// Global error handler for the app
 class ErrorHandler {
   static final AppLogger _logger = AppLogger.instance;
-  
+
   /// Show error dialog to user
   static Future<void> showErrorDialog(
     BuildContext context,
@@ -16,9 +16,9 @@ class ErrorHandler {
     VoidCallback? onRetry,
   }) async {
     _logger.error('Showing error dialog: $title - $message');
-    
+
     if (!context.mounted) return;
-    
+
     await showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -67,7 +67,8 @@ class ErrorHandler {
                 // Save diagnostics to app documents directory
                 try {
                   final dir = await getApplicationDocumentsDirectory();
-                  final fname = 'wiigc_scan_diag_${DateTime.now().toIso8601String().replaceAll(':', '-')}.txt';
+                  final fname =
+                      'wiigc_scan_diag_${DateTime.now().toIso8601String().replaceAll(':', '-')}.txt';
                   final file = File('${dir.path}/$fname');
                   await file.writeAsString(details);
 
@@ -122,7 +123,7 @@ class ErrorHandler {
       ),
     );
   }
-  
+
   /// Show success dialog
   static Future<void> showSuccessDialog(
     BuildContext context,
@@ -130,9 +131,9 @@ class ErrorHandler {
     String message,
   ) async {
     _logger.info('Showing success dialog: $title - $message');
-    
+
     if (!context.mounted) return;
-    
+
     await showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
@@ -153,7 +154,7 @@ class ErrorHandler {
       ),
     );
   }
-  
+
   /// Show warning dialog
   static Future<void> showWarningDialog(
     BuildContext context,
@@ -162,9 +163,9 @@ class ErrorHandler {
     VoidCallback? onContinue,
   }) async {
     _logger.warning('Showing warning dialog: $title - $message');
-    
+
     if (!context.mounted) return;
-    
+
     await showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
@@ -193,7 +194,7 @@ class ErrorHandler {
       ),
     );
   }
-  
+
   /// Handle async operation with error handling
   static Future<T?> handleAsync<T>(
     BuildContext context,
@@ -220,24 +221,24 @@ class ErrorHandler {
           ),
         );
       }
-      
+
       // Perform operation
       final result = await operation();
-      
+
       // Close loading dialog
       if (context.mounted) {
         Navigator.of(context).pop();
       }
-      
+
       return result;
     } catch (e) {
       // Close loading dialog
       if (context.mounted) {
         Navigator.of(context).pop();
       }
-      
+
       _logger.error('Async operation failed', error: e);
-      
+
       // Show error dialog
       if (context.mounted) {
         await showErrorDialog(
@@ -248,7 +249,7 @@ class ErrorHandler {
           onRetry: onRetry,
         );
       }
-      
+
       return null;
     }
   }

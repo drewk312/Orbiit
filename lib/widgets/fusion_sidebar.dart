@@ -153,7 +153,8 @@ class _FusionSidebarState extends State<FusionSidebar> {
                         color: selected
                             ? FusionColors.textPrimary
                             : FusionColors.textSecondary,
-                        fontWeight: selected ? FontWeight.w700 : FontWeight.w500),
+                        fontWeight:
+                            selected ? FontWeight.w700 : FontWeight.w500),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

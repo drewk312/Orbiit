@@ -56,7 +56,10 @@ class BackgroundTask {
 
   bool get canPause => state == TaskState.running;
   bool get canResume => state == TaskState.paused;
-  bool get canCancel => state == TaskState.running || state == TaskState.paused || state == TaskState.queued;
+  bool get canCancel =>
+      state == TaskState.running ||
+      state == TaskState.paused ||
+      state == TaskState.queued;
   bool get canRetry => state == TaskState.failed;
   bool get isComplete => state == TaskState.completed;
   bool get isFailed => state == TaskState.failed;

@@ -222,11 +222,11 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
                         ? _buildRomHacksSection()
                         : provider.isLoading
                             ? _buildLoadingState()
-                        : provider.error.isNotEmpty
-                            ? _buildErrorState(provider.error, provider)
-                            : provider.homebrewResults.isEmpty
-                                ? _buildEmptyState()
-                                : _buildHomebrewGrid(provider),
+                            : provider.error.isNotEmpty
+                                ? _buildErrorState(provider.error, provider)
+                                : provider.homebrewResults.isEmpty
+                                    ? _buildEmptyState()
+                                    : _buildHomebrewGrid(provider),
           ),
         ],
       ),
@@ -532,7 +532,8 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
               color: Colors.cyanAccent.withValues(alpha: 0.2),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.auto_awesome, color: Colors.cyanAccent, size: 32),
+            child: const Icon(Icons.auto_awesome,
+                color: Colors.cyanAccent, size: 32),
           ),
           const SizedBox(width: 20),
           Expanded(
@@ -562,7 +563,8 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
             label: 'UPDATE ALL',
             icon: Icons.system_update_alt,
             color: Colors.cyanAccent,
-            onPressed: provider.isLoading ? null : () => _handleBatchUpdate(provider),
+            onPressed:
+                provider.isLoading ? null : () => _handleBatchUpdate(provider),
           ),
         ],
       ),
@@ -572,7 +574,7 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
   Future<void> _loadRomHacks() async {
     if (_romHacks.isNotEmpty) return;
     if (mounted) setState(() => _loadingRomHacks = true);
-    
+
     try {
       final hacks = await _gameBrewService.fetchHomebrew();
       if (mounted) {
@@ -608,7 +610,7 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
               game: hack,
               onInfo: () => _handleRomHackAction(hack),
               onForge: () => _handleRomHackAction(hack),
-              onArchive: null, 
+              onArchive: null,
             );
           },
         );
@@ -617,8 +619,8 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
   }
 
   void _handleRomHackAction(GameResult hack) {
-      final url = hack.pageUrl;
-      launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+    final url = hack.pageUrl;
+    launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
   }
 
   /// Recommended Section with Project+ Banner and curated apps
@@ -1361,10 +1363,8 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
             showDialog(
               context: context,
               barrierDismissible: false,
-              builder: (_) => _BatchUpdateProgressDialog(
-                games: [homebrew], 
-                sdCard: sdCard
-              ),
+              builder: (_) =>
+                  _BatchUpdateProgressDialog(games: [homebrew], sdCard: sdCard),
             );
           }
         },
@@ -2052,11 +2052,13 @@ class _HomebrewInfoDialog extends StatelessWidget {
                             () {
                               Navigator.pop(context);
                               if (homebrew.downloadUrl != null) {
-                                Provider.of<ForgeProvider>(context, listen: false)
+                                Provider.of<ForgeProvider>(context,
+                                        listen: false)
                                     .startHomebrewInstall(homebrew);
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text('Downloading ${homebrew.title}...'),
+                                    content: Text(
+                                        'Downloading ${homebrew.title}...'),
                                     backgroundColor: FusionColors.nebulaCyan,
                                   ),
                                 );
@@ -2746,12 +2748,13 @@ class _DLCManagerDialogState extends State<_DLCManagerDialog> {
   bool _hasKeys = false;
   String _status = '';
   double _progress = 0.0;
-  
+
   // Game Selection
   String _selectedGame = 'Rock Band 3';
   String _selectedRegion = 'US';
-  
-  String get _calculatedId => _service.calculateTitleId(_selectedGame, _selectedRegion);
+
+  String get _calculatedId =>
+      _service.calculateTitleId(_selectedGame, _selectedRegion);
 
   @override
   void initState() {
@@ -2891,11 +2894,11 @@ class _DLCManagerDialogState extends State<_DLCManagerDialog> {
                           _hasKeys ? () {} : _installXyzzy,
                           color: _hasKeys ? Colors.green : null),
                       const SizedBox(height: 16),
-                      
-                      const Text('2. Generate Title ID (for wad2bin)', 
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      const Text('2. Generate Title ID (for wad2bin)',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
                       const SizedBox(height: 8),
-                      
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
@@ -2911,10 +2914,16 @@ class _DLCManagerDialogState extends State<_DLCManagerDialog> {
                                     value: _selectedGame,
                                     dropdownColor: const Color(0xFF1E293B),
                                     isExpanded: true,
-                                    items: DLCManagerService.supportedGames.keys.map((g) {
-                                      return DropdownMenuItem(value: g, child: Text(g, style: const TextStyle(color: Colors.white)));
+                                    items: DLCManagerService.supportedGames.keys
+                                        .map((g) {
+                                      return DropdownMenuItem(
+                                          value: g,
+                                          child: Text(g,
+                                              style: const TextStyle(
+                                                  color: Colors.white)));
                                     }).toList(),
-                                    onChanged: (v) => setState(() => _selectedGame = v!),
+                                    onChanged: (v) =>
+                                        setState(() => _selectedGame = v!),
                                     underline: Container(),
                                   ),
                                 ),
@@ -2923,9 +2932,14 @@ class _DLCManagerDialogState extends State<_DLCManagerDialog> {
                                   value: _selectedRegion,
                                   dropdownColor: const Color(0xFF1E293B),
                                   items: ['US', 'EU'].map((r) {
-                                    return DropdownMenuItem(value: r, child: Text(r, style: const TextStyle(color: Colors.white)));
+                                    return DropdownMenuItem(
+                                        value: r,
+                                        child: Text(r,
+                                            style: const TextStyle(
+                                                color: Colors.white)));
                                   }).toList(),
-                                  onChanged: (v) => setState(() => _selectedRegion = v!),
+                                  onChanged: (v) =>
+                                      setState(() => _selectedRegion = v!),
                                   underline: Container(),
                                 ),
                               ],
@@ -2934,21 +2948,24 @@ class _DLCManagerDialogState extends State<_DLCManagerDialog> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text('Title ID to copy:', style: TextStyle(color: Colors.white70)),
+                                const Text('Title ID to copy:',
+                                    style: TextStyle(color: Colors.white70)),
                                 SelectableText(
                                   _calculatedId,
                                   style: const TextStyle(
-                                    color: FusionColors.nebulaCyan, 
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16
-                                  ),
+                                      color: FusionColors.nebulaCyan,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
                                 ),
                                 IconButton(
-                                  icon: const Icon(Icons.copy, size: 20, color: Colors.white54),
+                                  icon: const Icon(Icons.copy,
+                                      size: 20, color: Colors.white54),
                                   onPressed: () {
-                                    Clipboard.setData(ClipboardData(text: _calculatedId));
+                                    Clipboard.setData(
+                                        ClipboardData(text: _calculatedId));
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(content: Text('ID Copied!')),
+                                      const SnackBar(
+                                          content: Text('ID Copied!')),
                                     );
                                   },
                                 ),
@@ -2957,24 +2974,24 @@ class _DLCManagerDialogState extends State<_DLCManagerDialog> {
                           ],
                         ),
                       ),
-                      
                       const SizedBox(height: 16),
                       _buildStepRow(
                         '3. Get wad2bin Tool',
                         'Download the tool to convert WADs.',
                         Icons.open_in_new,
                         () => launchUrl(
-                            Uri.parse('https://github.com/DarkMatterCore/wad2bin/releases'),
+                            Uri.parse(
+                                'https://github.com/DarkMatterCore/wad2bin/releases'),
                             mode: LaunchMode.externalApplication),
                       ),
-                      
                       const SizedBox(height: 16),
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
                           color: Colors.blue.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.blue.withValues(alpha: 0.3)),
+                          border: Border.all(
+                              color: Colors.blue.withValues(alpha: 0.3)),
                         ),
                         child: const Text(
                           'Automation Tip: Copy the Title ID above, open wad2bin, paste it, select your WAD, and run. Move the output "private" folder to your SD root.',
@@ -2993,7 +3010,8 @@ class _DLCManagerDialogState extends State<_DLCManagerDialog> {
   }
 
   Widget _buildStepRow(
-      String title, String desc, IconData icon, VoidCallback onTap, {Color? color}) {
+      String title, String desc, IconData icon, VoidCallback onTap,
+      {Color? color}) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
@@ -3046,10 +3064,12 @@ class _BatchUpdateProgressDialog extends StatefulWidget {
   });
 
   @override
-  State<_BatchUpdateProgressDialog> createState() => _BatchUpdateProgressDialogState();
+  State<_BatchUpdateProgressDialog> createState() =>
+      _BatchUpdateProgressDialogState();
 }
 
-class _BatchUpdateProgressDialogState extends State<_BatchUpdateProgressDialog> {
+class _BatchUpdateProgressDialogState
+    extends State<_BatchUpdateProgressDialog> {
   String _status = 'Initializing...';
   double _progress = 0.0;
   final HomebrewAutomationService _service = HomebrewAutomationService();
@@ -3077,15 +3097,16 @@ class _BatchUpdateProgressDialogState extends State<_BatchUpdateProgressDialog> 
       if (mounted) {
         Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(
-           const SnackBar(content: Text('All essential apps updated successfully!')),
+          const SnackBar(
+              content: Text('All essential apps updated successfully!')),
         );
       }
     } catch (e) {
       if (mounted) {
-         setState(() {
-           _status = 'Error: ' + e.toString();
-           _progress = 0.0; 
-         });
+        setState(() {
+          _status = 'Error: ' + e.toString();
+          _progress = 0.0;
+        });
       }
     }
   }
@@ -3093,42 +3114,42 @@ class _BatchUpdateProgressDialogState extends State<_BatchUpdateProgressDialog> 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-       backgroundColor: Colors.transparent,
-       child: GlassCard(
-         color: FusionColors.bgSurface, // Opaque for readability
-         borderRadius: BorderRadius.circular(20),
-         padding: const EdgeInsets.all(24),
-         child: Column(
-           mainAxisSize: MainAxisSize.min,
-           children: [
-             Text(
-               'Updating Essentials',
-               style: FusionText.headlineLarge.copyWith(color: FusionColors.nebulaCyan),
-             ),
-             const SizedBox(height: 20),
-             Text(
-               _status,
-               textAlign: TextAlign.center,
-               style: FusionText.bodyMedium.copyWith(color: Colors.white70),
-             ),
-             const SizedBox(height: 20),
-             LinearProgressIndicator(
-               value: _progress > 0 ? _progress : null, 
-               backgroundColor: Colors.white12,
-               valueColor: const AlwaysStoppedAnimation(FusionColors.nebulaCyan),
-             ),
-             const SizedBox(height: 20),
-             if (_status.startsWith('Error'))
-               GlowButton(
-                 label: 'CLOSE',
-                 color: Colors.redAccent,
-                 icon: Icons.close,
-                 onPressed: () => Navigator.of(context).pop(),
-               )
-           ],
-         ),
-       ),
+      backgroundColor: Colors.transparent,
+      child: GlassCard(
+        color: FusionColors.bgSurface, // Opaque for readability
+        borderRadius: BorderRadius.circular(20),
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Updating Essentials',
+              style: FusionText.headlineLarge
+                  .copyWith(color: FusionColors.nebulaCyan),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              _status,
+              textAlign: TextAlign.center,
+              style: FusionText.bodyMedium.copyWith(color: Colors.white70),
+            ),
+            const SizedBox(height: 20),
+            LinearProgressIndicator(
+              value: _progress > 0 ? _progress : null,
+              backgroundColor: Colors.white12,
+              valueColor: const AlwaysStoppedAnimation(FusionColors.nebulaCyan),
+            ),
+            const SizedBox(height: 20),
+            if (_status.startsWith('Error'))
+              GlowButton(
+                label: 'CLOSE',
+                color: Colors.redAccent,
+                icon: Icons.close,
+                onPressed: () => Navigator.of(context).pop(),
+              )
+          ],
+        ),
+      ),
     );
   }
 }
-

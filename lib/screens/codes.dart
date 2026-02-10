@@ -218,7 +218,8 @@ class _TxtCodesScreenState extends State<TxtCodesScreen> {
   Widget build(BuildContext context) {
     if (widget.embedInWrapper) return _buildContent();
     return Container(
-      decoration: const BoxDecoration(color: Color(0xFF000000)), // FusionColors.void_
+      decoration:
+          const BoxDecoration(color: Color(0xFF000000)), // FusionColors.void_
       child: ImmersiveAppShell(
         title: 'CHEAT CODES',
         leading: IconButton(

@@ -107,7 +107,8 @@ class ThemeSettingsScreen extends StatelessWidget {
               children: [
                 // Current theme badge content simplified (using ThemeProvider)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
                     color: primaryColor,
                     borderRadius: BorderRadius.circular(20),
@@ -120,7 +121,8 @@ class ThemeSettingsScreen extends StatelessWidget {
                     ],
                   ),
                   child: Text(
-                    themeProvider.currentTheme.preset.name.replaceAll('WiiGCThemePreset.', ''),
+                    themeProvider.currentTheme.preset.name
+                        .replaceAll('WiiGCThemePreset.', ''),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,

@@ -41,9 +41,11 @@ class BentoDashboard extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: UiColors.wiiCyan.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: UiColors.wiiCyan.withValues(alpha: 0.3)),
+                    border: Border.all(
+                        color: UiColors.wiiCyan.withValues(alpha: 0.3)),
                   ),
-                  child: const Icon(Icons.favorite_rounded, color: UiColors.wiiCyan),
+                  child: const Icon(Icons.favorite_rounded,
+                      color: UiColors.wiiCyan),
                 ),
                 const SizedBox(width: 12),
                 const Text(
@@ -75,7 +77,8 @@ class BentoDashboard extends StatelessWidget {
               ),
               delegate: SliverChildListDelegate([
                 // Health Score Tile
-                _HealthScoreTile(score: healthScore, onFixPressed: onFixIssuesPressed),
+                _HealthScoreTile(
+                    score: healthScore, onFixPressed: onFixIssuesPressed),
 
                 // Top Issues Tile
                 _TopIssuesTile(issues: topIssues),
@@ -84,7 +87,8 @@ class BentoDashboard extends StatelessWidget {
                 _SpaceSavingsTile(healthScore: healthScore),
 
                 // Active Tasks Tile
-                _ActiveTasksTile(tasks: activeTasks, onViewQueue: onViewQueuePressed),
+                _ActiveTasksTile(
+                    tasks: activeTasks, onViewQueue: onViewQueuePressed),
               ]),
             ),
           ),
@@ -105,10 +109,12 @@ class _HealthScoreTile extends StatelessWidget {
     // Determine color based on score
     final displayScore = score?.score ?? 0;
     final grade = score?.grade ?? 'N/A';
-    
+
     Color accent = UiColors.textTertiary;
-    if (displayScore >= 90) accent = UiColors.success;
-    else if (displayScore >= 70) accent = UiColors.warning;
+    if (displayScore >= 90)
+      accent = UiColors.success;
+    else if (displayScore >= 70)
+      accent = UiColors.warning;
     else if (displayScore > 0) accent = UiColors.error;
 
     return GlassCard(
@@ -142,7 +148,8 @@ class _HealthScoreTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     decoration: BoxDecoration(
                       color: accent.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
@@ -185,7 +192,8 @@ class _TopIssuesTile extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.warning_amber_rounded, size: 16, color: UiColors.warning),
+              Icon(Icons.warning_amber_rounded,
+                  size: 16, color: UiColors.warning),
               const SizedBox(width: 8),
               Text(
                 'TOP ISSUES',
@@ -200,7 +208,8 @@ class _TopIssuesTile extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.check_circle_outline, size: 32, color: UiColors.success),
+                    Icon(Icons.check_circle_outline,
+                        size: 32, color: UiColors.success),
                     const SizedBox(height: 8),
                     Text(
                       'All Clear!',
@@ -223,7 +232,8 @@ class _TopIssuesTile extends StatelessWidget {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: _getSeverityColor(issue.severity).withValues(alpha: 0.5),
+                              color: _getSeverityColor(issue.severity)
+                                  .withValues(alpha: 0.5),
                               blurRadius: 4,
                             ),
                           ],
@@ -235,7 +245,8 @@ class _TopIssuesTile extends StatelessWidget {
                           issue.description,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: UiType.bodyMedium.copyWith(color: UiColors.textSecondary),
+                          style: UiType.bodyMedium
+                              .copyWith(color: UiColors.textSecondary),
                         ),
                       ),
                     ],
@@ -287,7 +298,8 @@ class _SpaceSavingsTile extends StatelessWidget {
           const Spacer(),
           Text(
             savings,
-            style: UiType.displayMedium.copyWith(color: UiColors.textPrimary, fontSize: 40),
+            style: UiType.displayMedium
+                .copyWith(color: UiColors.textPrimary, fontSize: 40),
           ),
           const SizedBox(height: 8),
           Text(
@@ -315,7 +327,8 @@ class _ActiveTasksTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final runningTasks = tasks.where((t) => t.state == TaskState.running).length;
+    final runningTasks =
+        tasks.where((t) => t.state == TaskState.running).length;
     final hasRunning = runningTasks > 0;
 
     return GlassCard(
@@ -326,11 +339,14 @@ class _ActiveTasksTile extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.bolt_rounded, size: 16, color: hasRunning ? UiColors.cyan : UiColors.textTertiary),
+              Icon(Icons.bolt_rounded,
+                  size: 16,
+                  color: hasRunning ? UiColors.cyan : UiColors.textTertiary),
               const SizedBox(width: 8),
               Text(
                 'ACTIVE TASKS',
-                style: UiType.labelMedium.copyWith(color: hasRunning ? UiColors.cyan : UiColors.textTertiary),
+                style: UiType.labelMedium.copyWith(
+                    color: hasRunning ? UiColors.cyan : UiColors.textTertiary),
               ),
             ],
           ),
@@ -343,11 +359,13 @@ class _ActiveTasksTile extends StatelessWidget {
                 children: [
                   Text(
                     '$runningTasks',
-                    style: UiType.displayMedium.copyWith(color: UiColors.textPrimary, fontSize: 40),
+                    style: UiType.displayMedium
+                        .copyWith(color: UiColors.textPrimary, fontSize: 40),
                   ),
                   Text(
                     'running now',
-                    style: UiType.bodyMedium.copyWith(color: UiColors.textSecondary),
+                    style: UiType.bodyMedium
+                        .copyWith(color: UiColors.textSecondary),
                   ),
                 ],
               ),
@@ -355,7 +373,8 @@ class _ActiveTasksTile extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white.withValues(alpha: 0.1),
-                  border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+                  border:
+                      Border.all(color: Colors.white.withValues(alpha: 0.1)),
                 ),
                 child: IconButton(
                   onPressed: onViewQueue,

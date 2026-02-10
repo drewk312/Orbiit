@@ -33,7 +33,8 @@ class HealthScore {
       totalSizeBytes: json['total_size_bytes'] as int? ?? 0,
       potentialSavingsBytes: json['potential_savings_bytes'] as int? ?? 0,
       timestamp: json['timestamp'] != null
-          ? DateTime.fromMillisecondsSinceEpoch((json['timestamp'] as int) * 1000)
+          ? DateTime.fromMillisecondsSinceEpoch(
+              (json['timestamp'] as int) * 1000)
           : DateTime.now(),
     );
   }
@@ -66,5 +67,6 @@ class HealthScore {
 
   int get totalIssues => duplicateCount + corruptedCount + missingMetadataCount;
 
-  double get healthPercentage => totalTitles > 0 ? (healthyCount / totalTitles) * 100 : 0;
+  double get healthPercentage =>
+      totalTitles > 0 ? (healthyCount / totalTitles) * 100 : 0;
 }

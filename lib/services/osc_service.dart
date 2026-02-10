@@ -93,11 +93,11 @@ class OSCService {
         'wiixplorer',
         'savegame_manager_gx',
         'cleanrip',
-        'fceugx', 
+        'fceugx',
         'snes9xgx',
         'vbagx',
         'genplus-gx',
-        'not64', 
+        'not64',
         'wiimednafen',
         'wiistation',
         'd2x-cios-installer',
@@ -111,28 +111,33 @@ class OSCService {
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as List;
-        
+
         // 1. Find all recommended apps first (to float them to top)
         for (final slug in popularSlugs) {
           try {
             final match = data.firstWhere(
-              (item) => item['slug'] == slug || item['name'].toString().toLowerCase().contains(slug.replaceAll('_', ' ')),
+              (item) =>
+                  item['slug'] == slug ||
+                  item['name']
+                      .toString()
+                      .toLowerCase()
+                      .contains(slug.replaceAll('_', ' ')),
               orElse: () => null,
             );
-            
+
             if (match != null) {
               final game = _parseOSCItem(match);
               if (game != null) results.add(game);
             }
           } catch (_) {}
         }
-        
+
         // 2. Add other high-rated items to fill the list
         for (final item in data.take(50)) {
-           final game = _parseOSCItem(item);
-           if (game != null && !results.any((r) => r.pageUrl == game.pageUrl)) {
-             results.add(game);
-           }
+          final game = _parseOSCItem(item);
+          if (game != null && !results.any((r) => r.pageUrl == game.pageUrl)) {
+            results.add(game);
+          }
         }
       }
 
@@ -192,10 +197,15 @@ class OSCService {
       final response = await client.get(Uri.parse('$_baseUrl/contents'));
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as List;
-         for (final slug in recommendedSlugs) {
+        for (final slug in recommendedSlugs) {
           try {
             final match = data.firstWhere(
-              (item) => item['slug'] == slug || item['name'].toString().toLowerCase().contains(slug.replaceAll('_', ' ')),
+              (item) =>
+                  item['slug'] == slug ||
+                  item['name']
+                      .toString()
+                      .toLowerCase()
+                      .contains(slug.replaceAll('_', ' ')),
               orElse: () => null,
             );
             if (match != null) {

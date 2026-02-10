@@ -344,19 +344,20 @@ class _ControllerCustomizationScreenState
             ),
           ),
           if (_selectedConsole == ConsoleTarget.gamecube)
-             Padding(
+            Padding(
               padding: const EdgeInsets.only(left: 16),
               child: ElevatedButton.icon(
                 icon: const Icon(Icons.auto_fix_high, size: 18),
                 label: const Text("Wizard"),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: accentColor.withValues(alpha: 0.8),
-                  foregroundColor: Colors.white, 
+                  foregroundColor: Colors.white,
                 ),
                 onPressed: () {
                   Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder: (_) => const ControllerWizardScreen()),
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const ControllerWizardScreen()),
                   );
                 },
               ),

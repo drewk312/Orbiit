@@ -53,6 +53,7 @@ This roadmap outlines planned features and improvements for Orbiit. Timelines ar
 ### Major Features
 - [x] **macOS Support**: Native macOS build
 - [x] **Linux Support**: Native Linux build
+- [ ] **AppImage Release**: Portable Linux package distributed as AppImage
 - [ ] **Emulator Integration**: Launch games directly in Dolphin
 - [ ] **Achievement System**: Track game completion and milestones
 - [ ] **Batch Converter**: Convert multiple files simultaneously
