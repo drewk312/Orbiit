@@ -13,6 +13,7 @@ import '../../screens/codes.dart';
 import '../../screens/homebrew.dart';
 import '../../screens/hardware_wizard.dart';
 import '../../screens/file_import_screen.dart';
+import 'memory_card_manager_screen.dart'; // Phase 1.1 Pro
 import '../services/wiitdb_service.dart';
 import '../services/checksum_service.dart';
 import '../services/archive_service.dart' show ArchiveExtractionService;
@@ -234,6 +235,16 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
                   icon: Icons.wifi,
                   gradient: [const Color(0xFF06B6D4), const Color(0xFF0891B2)],
                   onTap: _openWiiLoad,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: _buildFeaturedCard(
+                  title: 'Memory Card Manager',
+                  description: 'Backup, restore, and create GameCube memory cards (.raw/.gcp) for Nintendont.',
+                  icon: Icons.sd_storage_rounded,
+                  gradient: [const Color(0xFFE11D48), const Color(0xFFBE123C)],
+                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const MemoryCardManagerScreen())),
                 ),
               ),
             ],

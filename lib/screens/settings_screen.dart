@@ -3,6 +3,9 @@ import 'package:provider/provider.dart';
 import '../ui/fusion/design_system.dart';
 import '../providers/forge_provider.dart';
 import '../providers/discovery_provider.dart';
+import '../services/update_service.dart';
+import '../main.dart'; // For AppConfig
+import 'theme_settings_new.dart'; // Import theme settings
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,6 +17,11 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  // Update Logic
+  bool _checkingForUpdate = false;
+  String _updateStatus = '';
+  UpdateRelease? _updateAvailable;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +80,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: ListView(
                   padding: const EdgeInsets.all(24),
                   children: [
+                    // --- APPEARANCE SECTION ---
+                    _buildSectionTitle('Appearance'),
+                    const SizedBox(height: 16),
+                    _buildSettingTile(
+                      title: 'Themes & Visuals',
+                      subtitle: 'Customize accent colors and interface style',
+                      icon: Icons.palette_rounded,
+                      action: OutlinedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const ThemeSettingsScreen()),
+                          );
+                        },
+                        child: const Text('Customize'),
+                      ),
+                    ),
+
+                    const SizedBox(height: 32),
+
                     // --- LIBRARY SECTION ---
                     _buildSectionTitle('Library & Storage'),
                     const SizedBox(height: 16),
@@ -116,6 +146,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         );
                       },
                     ),
+
+                    const SizedBox(height: 32),
+
+                    // --- PERSONALIZATION SECTION ---
+                    _buildSectionTitle('Personalization'),
+                    const SizedBox(height: 16),
+                    _buildSettingTile(
+                      title: 'Appearance',
+                      subtitle: 'Themes, scaling, and motion',
+                      icon: Icons.palette_rounded,
+                      action: OutlinedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ThemeSettingsScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text('Customize'),
+                      ),
+                    ),
+
+                    const SizedBox(height: 32),
+
+                    // --- APPLICATION SECTION ---
+                    _buildSectionTitle('Application'),
+                    const SizedBox(height: 16),
+                    _buildUpdateTile(),
 
                     const SizedBox(height: 32),
 
@@ -327,6 +386,79 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ),
     );
+  }
+
+  Widget _buildUpdateTile() {
+    return _buildSettingTile(
+      title: _updateAvailable != null ? 'Update Available!' : 'Check for Updates',
+      subtitle: _updateAvailable != null
+          ? 'Version ${_updateAvailable!.tagName} is ready.'
+          : _updateStatus.isNotEmpty
+              ? _updateStatus
+              : 'Current Version: ${AppConfig.version}',
+      icon: _updateAvailable != null ? Icons.system_update : Icons.system_update_alt,
+      action: OutlinedButton(
+        onPressed: _checkingForUpdate ? null : _handleUpdateCheck,
+        style: _updateAvailable != null
+            ? OutlinedButton.styleFrom(
+                foregroundColor: OrbColors.orbitCyan,
+                side: BorderSide(color: OrbColors.orbitCyan),
+              )
+            : null,
+        child: _checkingForUpdate
+            ? const SizedBox(
+                width: 16,
+                height: 16,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
+            : Text(_updateAvailable != null ? 'Update' : 'Check'),
+      ),
+    );
+  }
+
+  Future<void> _handleUpdateCheck() async {
+    if (_updateAvailable != null) {
+      // Launch update
+      final url = _updateAvailable!.htmlUrl; // Or use assets loop logic
+      // Ideally show the dialog from NavigationWrapper, but launching browser is safe for now
+      if (await canLaunchUrl(Uri.parse(url))) {
+        launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+      }
+      return;
+    }
+
+    setState(() {
+      _checkingForUpdate = true;
+      _updateStatus = 'Checking...';
+    });
+
+    try {
+      final release = await UpdateService().checkForUpdates();
+      if (mounted) {
+        if (release != null) {
+          setState(() {
+            _updateAvailable = release;
+            _checkingForUpdate = false;
+            _updateStatus = 'New version found!';
+          });
+        } else {
+          setState(() {
+            _checkingForUpdate = false;
+            _updateStatus = 'You are up to date.';
+          });
+          Future.delayed(const Duration(seconds: 3), () {
+            if (mounted && _updateAvailable == null) setState(() => _updateStatus = '');
+          });
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _checkingForUpdate = false;
+          _updateStatus = 'Check failed.';
+        });
+      }
+    }
   }
 
   Widget _buildSectionTitle(String title) {

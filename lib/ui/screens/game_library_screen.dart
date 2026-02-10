@@ -11,6 +11,7 @@ import '../fusion/game_cover_card.dart';
 import '../widgets/premium_game_info_panel.dart';
 import '../../widgets/empty_state.dart' as ws;
 import '../../services/scanner_service.dart';
+import '../../globals.dart';
 
 /// Filter options
 enum PlatformFilter {
@@ -18,6 +19,15 @@ enum PlatformFilter {
   wii,
   gamecube,
   wiiu,
+}
+
+/// Region filter options
+enum RegionFilter {
+  all,
+  us,
+  eu,
+  jp,
+  other,
 }
 
 /// Sort options
@@ -56,6 +66,7 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
   // Filters & Search
   final TextEditingController _searchController = TextEditingController();
   PlatformFilter _platformFilter = PlatformFilter.all;
+  RegionFilter _regionFilter = RegionFilter.all;
   SortOption _sortOption = SortOption.nameAsc;
 
   // Animation
@@ -65,6 +76,10 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
   int _wiiCount = 0;
   int _gcCount = 0;
   String _totalSize = '0 GB';
+
+  // Selection Mode State
+  bool _isSelectionMode = false;
+  final Set<String> _selectedGameIds = {};
 
   @override
   void initState() {
@@ -79,6 +94,93 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
     setState(() {
       _isLoading = false;
     });
+  }
+
+  void _toggleSelectionMode() {
+    setState(() {
+      _isSelectionMode = !_isSelectionMode;
+      _selectedGameIds.clear();
+    });
+  }
+
+  void _toggleGameSelection(String gameId) {
+    setState(() {
+      if (_selectedGameIds.contains(gameId)) {
+        _selectedGameIds.remove(gameId);
+        // Auto-exit if empty? No, keep user in mode until explicit exit
+      } else {
+        _selectedGameIds.add(gameId);
+      }
+    });
+  }
+
+  void _selectAll() {
+    setState(() {
+      _selectedGameIds.addAll(_filteredGames.map((g) => g.id));
+    });
+  }
+
+  void _deleteSelectedGames() async {
+    final count = _selectedGameIds.length;
+    if (count == 0) return;
+
+    final confirmation = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: FusionColors.bgSurface,
+        title: Text('Delete $count Games?', style: const TextStyle(color: Colors.white)),
+        content: const Text(
+          'This will permanently delete the selected game files from your drive. This action cannot be undone.',
+          style: TextStyle(color: Colors.white70),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: FusionColors.error),
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Delete', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmation != true) return;
+
+    // Perform Deletion logic here
+    int deleted = 0;
+    for (final id in _selectedGameIds.toList()) { // Copy list to avoid concurrent modification
+       final game = _scannedGamesMap[id];
+       if (game != null) {
+         try {
+           final file = File(game.path);
+           if (await file.exists()) {
+             await file.delete();
+             deleted++;
+           }
+           // Remove from logic
+           _games.removeWhere((g) => g.id == id);
+           _scannedGamesMap.remove(id);
+         } catch (e) {
+           AppLogger.error('Failed to delete game ${game.title}: $e');
+         }
+       }
+    }
+
+    setState(() {
+       _selectedGameIds.clear();
+       _isSelectionMode = false; // Exit mode
+    });
+    _filterAndSortGames(); // Refresh UI
+    
+    if (mounted) {
+       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+         content: Text('Deleted $deleted games.'),
+         backgroundColor: FusionColors.success,
+       ));
+    }
   }
 
   @override
@@ -221,6 +323,25 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
           .toList();
     }
 
+    // Region filter
+    if (_regionFilter != RegionFilter.all) {
+      filtered = filtered.where((g) {
+        final r = g.region?.toUpperCase() ?? 'OTHER';
+        switch (_regionFilter) {
+          case RegionFilter.us:
+            return r == 'US' || r == 'USA' || r == 'E';
+          case RegionFilter.eu:
+            return r == 'EU' || r == 'EUR' || r == 'P';
+          case RegionFilter.jp:
+            return r == 'JA' || r == 'JPN' || r == 'J';
+          case RegionFilter.other:
+            return !['US', 'USA', 'E', 'EU', 'EUR', 'P', 'JA', 'JPN', 'J'].contains(r);
+          default:
+            return true;
+        }
+      }).toList();
+    }
+
     // Sort
     switch (_sortOption) {
       case SortOption.nameAsc:
@@ -263,9 +384,70 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
                 ? _buildLoadingState()
                 : _filteredGames.isEmpty
                     ? _buildEmptyState()
-                    : _buildGameGrid(),
+                    : Stack(
+                        children: [
+                          _buildGameGrid(),
+                          if (_isSelectionMode && _selectedGameIds.isNotEmpty)
+                            _buildSelectionBar(),
+                        ],
+                      ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildSelectionBar() {
+    return Positioned(
+      bottom: 24,
+      left: 0,
+      right: 0,
+      child: Center(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          decoration: BoxDecoration(
+            color: FusionColors.bgSecondary,
+            borderRadius: BorderRadius.circular(50),
+            border: Border.all(color: FusionColors.nebulaCyan.withOpacity(0.5)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.5),
+                blurRadius: 20,
+                offset: const Offset(0, 10),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                '${_selectedGameIds.length} Selected',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Container(height: 24, width: 1, color: Colors.white24),
+              const SizedBox(width: 16),
+              IconButton( // Delete
+                icon: const Icon(Icons.delete_outline, color: FusionColors.error),
+                tooltip: 'Delete Selected',
+                onPressed: _deleteSelectedGames,
+              ),
+              IconButton( // Select All
+                icon: const Icon(Icons.select_all, color: FusionColors.nebulaCyan),
+                tooltip: 'Select All',
+                onPressed: _selectAll,
+              ),
+              IconButton( // Close
+                icon: const Icon(Icons.close, color: Colors.white70),
+                tooltip: 'Cancel',
+                onPressed: _toggleSelectionMode,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -441,6 +623,18 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
           _buildInlineStat(Icons.storage_rounded, _totalSize),
 
           const SizedBox(width: 24),
+
+          // Selection Mode Toggle (Added for Batch Operations)
+          IconButton(
+            icon: Icon(
+              _isSelectionMode ? Icons.check_circle : Icons.checklist_rtl_rounded,
+            ),
+            color: _isSelectionMode ? FusionColors.nebulaCyan : FusionColors.textMuted,
+            tooltip: _isSelectionMode ? 'Exit Selection Mode' : 'Batch Actions',
+            onPressed: _toggleSelectionMode,
+          ),
+
+          const SizedBox(width: 24),
           Container(
               width: 1, height: 24, color: OrbColors.glassBorder), // Divider
           const SizedBox(width: 24),
@@ -462,8 +656,43 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
           const SizedBox(width: 16),
 
           // Sort Button
+          _buildRegionFilterButton(),
+          const SizedBox(width: 8),
           _buildSortButton(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildRegionFilterButton() {
+    return Container(
+      height: 36,
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      decoration: BoxDecoration(
+        color: OrbColors.bgSecondary.withValues(alpha: 0.5),
+        borderRadius: BorderRadius.circular(OrbRadius.full),
+        border: Border.all(color: OrbColors.glassBorder),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<RegionFilter>(
+          value: _regionFilter,
+          dropdownColor: OrbColors.bgSecondary,
+          icon: const Icon(Icons.public, color: OrbColors.textMuted, size: 18),
+          style: OrbText.labelMedium.copyWith(color: OrbColors.textPrimary),
+          items: const [
+            DropdownMenuItem(value: RegionFilter.all, child: Text('All Regions')),
+            DropdownMenuItem(value: RegionFilter.us, child: Text('NTSC-U (USA)')),
+            DropdownMenuItem(value: RegionFilter.eu, child: Text('PAL (Europe)')),
+            DropdownMenuItem(value: RegionFilter.jp, child: Text('NTSC-J (Japan)')),
+            DropdownMenuItem(value: RegionFilter.other, child: Text('Other')),
+          ],
+          onChanged: (value) {
+            if (value != null) {
+              setState(() => _regionFilter = value);
+              _filterAndSortGames();
+            }
+          },
+        ),
       ),
     );
   }
@@ -552,8 +781,8 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
   Widget _buildGameGrid() {
     return GameCoverGrid(
       games: _filteredGames,
-      onGameTap: (game) => _showGameDetails(game),
-      onGameInfo: (game) => _showGameDetails(game),
+      onGameTap: (game) => _showGameDetails(context, game),
+      onGameInfo: (game) => _showGameDetails(context, game),
       onGameDownload: (game) => _downloadCover(game),
       onGameDelete: (game) => _confirmDelete(game),
     );
@@ -644,7 +873,7 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
     );
   }
 
-  void _showGameDetails(GameCardData game) {
+  void _showGameDetails(BuildContext context, GameCardData game) {
     // Get full metadata from stored scanned games
     final scannedGame = _scannedGamesMap[game.id];
 

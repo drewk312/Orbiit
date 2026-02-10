@@ -1,6 +1,7 @@
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
@@ -18,6 +19,7 @@ import '../services/project_plus_service.dart';
 import '../services/riivolution_service.dart';
 import '../services/dlc_manager_service.dart';
 import '../services/homebrew_automation_service.dart';
+import '../services/gamebrew_service.dart';
 import 'package:file_picker/file_picker.dart';
 
 /// Call from header (e.g. NavigationWrapper) to show Wiiload connection dialog (connect only, no send).
@@ -177,6 +179,11 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
   String _pplusStatus = '';
   final ProjectPlusService _projectPlusService = ProjectPlusService();
 
+  // GameBrew (Rom Hacks) State
+  final GameBrewService _gameBrewService = GameBrewService();
+  List<GameResult> _romHacks = [];
+  bool _loadingRomHacks = false;
+
   @override
   void initState() {
     super.initState();
@@ -211,8 +218,10 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
                 ? _buildWiiUHomebrewSection()
                 : _selectedCategory == 'recommended'
                     ? _buildRecommendedSection(provider)
-                    : provider.isLoading
-                        ? _buildLoadingState()
+                    : _selectedCategory == 'rom_hacks'
+                        ? _buildRomHacksSection()
+                        : provider.isLoading
+                            ? _buildLoadingState()
                         : provider.error.isNotEmpty
                             ? _buildErrorState(provider.error, provider)
                             : provider.homebrewResults.isEmpty
@@ -558,6 +567,58 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> _loadRomHacks() async {
+    if (_romHacks.isNotEmpty) return;
+    if (mounted) setState(() => _loadingRomHacks = true);
+    
+    try {
+      final hacks = await _gameBrewService.fetchHomebrew();
+      if (mounted) {
+        setState(() {
+          _romHacks = hacks;
+          _loadingRomHacks = false;
+        });
+      }
+    } catch (e) {
+      AppLogger.instance.error("Error loading rom hacks: $e");
+      if (mounted) setState(() => _loadingRomHacks = false);
+    }
+  }
+
+  Widget _buildRomHacksSection() {
+    if (_loadingRomHacks) return _buildLoadingState();
+    if (_romHacks.isEmpty) return _buildEmptyState();
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return GridView.builder(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 220,
+            childAspectRatio: 0.75,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+          ),
+          itemCount: _romHacks.length,
+          itemBuilder: (context, index) {
+            final hack = _romHacks[index];
+            return FusionAppCard(
+              game: hack,
+              onInfo: () => _handleRomHackAction(hack),
+              onForge: () => _handleRomHackAction(hack),
+              onArchive: null, 
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _handleRomHackAction(GameResult hack) {
+      final url = hack.pageUrl;
+      launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
   }
 
   /// Recommended Section with Project+ Banner and curated apps
@@ -1117,6 +1178,10 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
           _buildCategoryTab('All', '', provider),
           const SizedBox(width: 12),
 
+          // Rom Hacks tab (Custom via GameBrew)
+          _buildCategoryTab('Rom Hacks', 'rom_hacks', provider),
+          const SizedBox(width: 12),
+
           // Category tabs
           ...categories.entries.map((entry) => Padding(
                 padding: const EdgeInsets.only(right: 12),
@@ -1139,6 +1204,8 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
 
         if (category == 'recommended') {
           provider.loadRecommendedHomebrew();
+        } else if (category == 'rom_hacks') {
+          _loadRomHacks(); // Load from GameBrew
         } else if (category.isEmpty) {
           provider.loadPopularHomebrew();
         } else {
@@ -1285,7 +1352,23 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
     AppLogger.instance.info("[Homebrew] Showing info for: ${homebrew.title}");
     showDialog(
       context: context,
-      builder: (context) => _HomebrewInfoDialog(homebrew: homebrew),
+      builder: (ctx) => _HomebrewInfoDialog(
+        homebrew: homebrew,
+        onInstallToSD: () async {
+          Navigator.of(ctx).pop();
+          final sdCard = await _pickSDCard(context);
+          if (sdCard != null && mounted) {
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (_) => _BatchUpdateProgressDialog(
+                games: [homebrew], 
+                sdCard: sdCard
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 
@@ -1730,8 +1813,12 @@ class _PulsingHomebrewIconState extends State<_PulsingHomebrewIcon>
 /// Premium Homebrew Info Dialog
 class _HomebrewInfoDialog extends StatelessWidget {
   final GameResult homebrew;
+  final VoidCallback? onInstallToSD;
 
-  const _HomebrewInfoDialog({required this.homebrew});
+  const _HomebrewInfoDialog({
+    required this.homebrew,
+    this.onInstallToSD,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1984,15 +2071,25 @@ class _HomebrewInfoDialog extends StatelessWidget {
                             },
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        const SizedBox(width: 8),
                         Expanded(
                           child: _buildActionButton(
-                            'Send to Wii',
+                            'Wiiload',
                             Icons.send_rounded,
                             const Color(0xFF00D4AA),
                             () {
                               Navigator.pop(context);
+                              // TODO: Connect Wiiload action here if feasible
                             },
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: _buildActionButton(
+                            'SD Install',
+                            Icons.sd_storage,
+                            const Color(0xFFF59E0B),
+                            onInstallToSD ?? () {},
                           ),
                         ),
                       ],
@@ -2648,6 +2745,12 @@ class _DLCManagerDialogState extends State<_DLCManagerDialog> {
   bool _hasKeys = false;
   String _status = '';
   double _progress = 0.0;
+  
+  // Game Selection
+  String _selectedGame = 'Rock Band 3';
+  String _selectedRegion = 'US';
+  
+  String get _calculatedId => _service.calculateTitleId(_selectedGame, _selectedRegion);
 
   @override
   void initState() {
@@ -2771,35 +2874,115 @@ class _DLCManagerDialogState extends State<_DLCManagerDialog> {
             if (_isBusy) ...[
               Text(_status,
                   style: const TextStyle(color: FusionColors.nebulaCyan)),
+              const SizedBox(height: 8),
               LinearProgressIndicator(value: _progress),
             ] else ...[
-              // Steps
-              _buildStepRow(
-                  '1. Install Key Dumper',
-                  'Installs xyzzy-mod to apps/. Run this on your Wii first.',
-                  Icons.download,
-                  _installXyzzy),
-              const SizedBox(height: 16),
-              _buildStepRow(
-                '2. Get wad2bin Tool',
-                'Download the tool to convert WADs to SD-compatible files.',
-                Icons.open_in_new,
-                () => launchUrl(
-                    Uri.parse(
-                        'https://github.com/DarkMatterCore/wad2bin/releases'),
-                    mode: LaunchMode.externalApplication),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildStepRow(
+                          '1. Install Key Dumper',
+                          'Installs xyzzy-mod to apps/. Run on Wii first.',
+                          _hasKeys ? Icons.check_circle : Icons.download,
+                          _hasKeys ? () {} : _installXyzzy,
+                          color: _hasKeys ? Colors.green : null),
+                      const SizedBox(height: 16),
+                      
+                      const Text('2. Generate Title ID (for wad2bin)', 
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 8),
+                      
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.05),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: DropdownButton<String>(
+                                    value: _selectedGame,
+                                    dropdownColor: const Color(0xFF1E293B),
+                                    isExpanded: true,
+                                    items: DLCManagerService.supportedGames.keys.map((g) {
+                                      return DropdownMenuItem(value: g, child: Text(g, style: const TextStyle(color: Colors.white)));
+                                    }).toList(),
+                                    onChanged: (v) => setState(() => _selectedGame = v!),
+                                    underline: Container(),
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                DropdownButton<String>(
+                                  value: _selectedRegion,
+                                  dropdownColor: const Color(0xFF1E293B),
+                                  items: ['US', 'EU'].map((r) {
+                                    return DropdownMenuItem(value: r, child: Text(r, style: const TextStyle(color: Colors.white)));
+                                  }).toList(),
+                                  onChanged: (v) => setState(() => _selectedRegion = v!),
+                                  underline: Container(),
+                                ),
+                              ],
+                            ),
+                            const Divider(color: Colors.white24),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text('Title ID to copy:', style: TextStyle(color: Colors.white70)),
+                                SelectableText(
+                                  _calculatedId,
+                                  style: const TextStyle(
+                                    color: FusionColors.nebulaCyan, 
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.copy, size: 20, color: Colors.white54),
+                                  onPressed: () {
+                                    Clipboard.setData(ClipboardData(text: _calculatedId));
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(content: Text('ID Copied!')),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      
+                      const SizedBox(height: 16),
+                      _buildStepRow(
+                        '3. Get wad2bin Tool',
+                        'Download the tool to convert WADs.',
+                        Icons.open_in_new,
+                        () => launchUrl(
+                            Uri.parse('https://github.com/DarkMatterCore/wad2bin/releases'),
+                            mode: LaunchMode.externalApplication),
+                      ),
+                      
+                      const SizedBox(height: 16),
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.blue.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.blue.withValues(alpha: 0.3)),
+                        ),
+                        child: const Text(
+                          'Automation Tip: Copy the Title ID above, open wad2bin, paste it, select your WAD, and run. Move the output "private" folder to your SD root.',
+                          style: TextStyle(color: Colors.white70, fontSize: 13),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              const SizedBox(height: 16),
-              _buildStepRow(
-                  '3. Open SD Card',
-                  'Open folder to manage files manually.',
-                  Icons.folder_open, () async {
-                final downloadsDir = await getDownloadsDirectory();
-                final sdRoot = Directory(
-                    path.join(downloadsDir?.path ?? '', 'Wii_SD_Card_Root'));
-                if (!sdRoot.existsSync()) sdRoot.createSync();
-                launchUrl(Uri.file(sdRoot.path));
-              }),
             ],
           ],
         ),
@@ -2808,7 +2991,7 @@ class _DLCManagerDialogState extends State<_DLCManagerDialog> {
   }
 
   Widget _buildStepRow(
-      String title, String desc, IconData icon, VoidCallback onTap) {
+      String title, String desc, IconData icon, VoidCallback onTap, {Color? color}) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),

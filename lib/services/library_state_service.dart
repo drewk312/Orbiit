@@ -68,24 +68,14 @@ class LibraryStateService {
 
       if (await cacheFile.exists()) {
         final jsonStr = await cacheFile.readAsString();
-        final data = json.decode(jsonStr);
+        
+        // Use isolate for JSON parsing
+        final data = await compute(_parseLibraryData, jsonStr);
 
-        _lastScannedPath = data['lastPath'];
+        _lastScannedPath = data['lastPath'] as String?;
         final gamesList = data['games'] as List;
 
-        _games = gamesList
-            .map((g) => ScannedGame(
-                  path: g['path'],
-                  fileName: g['fileName'],
-                  title: g['title'],
-                  gameId: g['gameId'],
-                  platform: g['platform'],
-                  sizeBytes: g['sizeBytes'],
-                  extension: g['extension'],
-                  health: g['health'] ?? 100,
-                  verified: g['verified'] ?? true,
-                ))
-            .toList();
+        _games = gamesList.map((g) => ScannedGame.fromMap(g)).toList();
       }
     } catch (e) {
       AppLogger.instance.error('[LibraryState] Error loading cache: $e');
@@ -100,26 +90,29 @@ class LibraryStateService {
       final dir = await getApplicationDocumentsDirectory();
       final cacheFile = File('${dir.path}/wiigc_fusion_library.json');
 
+      // Prepare data map
       final data = {
         'lastPath': _lastScannedPath,
-        'games': _games
-            .map((g) => {
-                  'path': g.path,
-                  'fileName': g.fileName,
-                  'title': g.title,
-                  'gameId': g.gameId,
-                  'platform': g.platform,
-                  'sizeBytes': g.sizeBytes,
-                  'extension': g.extension,
-                  'health': g.health,
-                  'verified': g.verified,
-                })
-            .toList(),
+        'games': _games.map((g) => g.toMap()).toList(),
       };
 
-      await cacheFile.writeAsString(json.encode(data));
+      // Use isolate for JSON encoding
+      final jsonStr = await compute(_encodeLibraryData, data);
+      await cacheFile.writeAsString(jsonStr);
     } catch (e) {
       AppLogger.instance.error('[LibraryState] Error saving cache: $e');
     }
   }
+}
+
+// ── Isolate Functions ──
+
+/// Parse JSON in background isolate
+Map<String, dynamic> _parseLibraryData(String jsonStr) {
+  return json.decode(jsonStr) as Map<String, dynamic>;
+}
+
+/// Encode JSON in background isolate
+String _encodeLibraryData(Map<String, dynamic> data) {
+  return json.encode(data);
 }

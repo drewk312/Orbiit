@@ -177,11 +177,18 @@ class OSCService {
       'doom-wii',
       'blobby-volley-2',
       'super-mario-war-wii',
+      'riivolution',
+      'wiiflow',
+      'retroarch-wii',
+      'newersmbw',
+      'scummvm',
+      'wii64',
+      'helium-boy',
     ];
 
+    final client = http.Client();
     try {
       final results = <GameResult>[];
-      final client = http.Client();
       final response = await client.get(Uri.parse('$_baseUrl/contents'));
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as List;
@@ -198,11 +205,12 @@ class OSCService {
           } catch (_) {}
         }
       }
-      client.close();
       return results;
     } catch (e) {
       developer.log('[OSC] Recommended fetch failed: $e');
       return [];
+    } finally {
+      client.close();
     }
   }
 

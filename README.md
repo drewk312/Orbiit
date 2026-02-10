@@ -25,6 +25,18 @@ Built with Flutter & C++, combining luxury design with enterprise-grade performa
 
 ---
 
+## 📸 Screenshots
+
+<div align="center">
+  <img src="screenshots/dashboard.png" width="48%" />
+  <img src="screenshots/discovery.png" width="48%" />
+  <br>
+  <img src="screenshots/details.png" width="48%" />
+  <img src="screenshots/homebrew.png" width="48%" />
+</div>
+
+---
+
 ## ✨ Premium Features
 
 <div align="center">

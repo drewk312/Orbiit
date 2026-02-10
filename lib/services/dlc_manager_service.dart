@@ -20,6 +20,22 @@ class DLCManagerService {
   static const String _xyzzyDownloadUrl =
       'https://oscwii.org/library/app/$_xyzzySlug/zip';
 
+  // Game Title IDs (Base - without region suffix)
+  static const Map<String, String> supportedGames = {
+    'Just Dance 2': '00010000534432',
+    'Just Dance 3': '00010000534A44',
+    'Just Dance 4': '00010000534A58',
+    'Just Dance 2014': '00010000534A4F',
+    'Just Dance 2015': '00010000534533',
+    'Rock Band 2': '00010000535A41',
+    'Rock Band 3': '00010000535A42', 
+    'The Beatles: Rock Band': '0001000052394A',
+    'Green Day: Rock Band': '00010000535A41',
+    'Guitar Hero: World Tour': '00010000535841',
+    'Guitar Hero 5': '00010000535845',
+    'Guitar Hero: Warriors of Rock': '00010000535849',
+  };
+
   /// checks if keys.txt and device.cert exist at SD root
   Future<bool> hasKeys(Directory sdRoot) async {
     final keys = File(path.join(sdRoot.path, 'keys.txt'));
@@ -68,6 +84,50 @@ class DLCManagerService {
     } catch (e) {
       _logger.severe('xyzzy install failed', e);
       rethrow;
+    }
+  }
+
+  String calculateTitleId(String gameName, String region) {
+    if (!supportedGames.containsKey(gameName)) return '';
+    final baseId = supportedGames[gameName]!;
+    // Suffix: 45 for US, 50 for EU
+    final suffix = (region == 'EU') ? '50' : '45';
+    // Rock Band 2 uses base ID + suffix?
+    // According to guide: "Rock Band 3 would be 00010000535A4245"
+    // So usually just append.
+    return '$baseId$suffix';
+  }
+
+  /// Organizes the output files from wad2bin to the SD card structure
+  /// wad2bin output usually goes to /private/wii/data/... locally or in output dir
+  Future<void> installContentToSD(Directory sourceContent, Directory sdRoot) async {
+    final privateDir = Directory(path.join(sdRoot.path, 'private'));
+    if (!privateDir.existsSync()) privateDir.createSync(recursive: true);
+    
+    // Copy the 'private' folder from source if exists, or merge
+    // Assuming sourceContent IS the folder containing 'private' or the '000...bin' files
+    // The guide says: "Make sure that it created a folder with .bin files in a subfolder of /private/wii/data/"
+    if (path.basename(sourceContent.path) == 'private') {
+      await _copyDirectory(sourceContent, privateDir);
+    } else {
+      // Try to find 'private' inside source
+       final subPrivate = Directory(path.join(sourceContent.path, 'private'));
+       if (subPrivate.existsSync()) {
+         await _copyDirectory(subPrivate, privateDir);
+       }
+    }
+  }
+
+  Future<void> _copyDirectory(Directory source, Directory dest) async {
+    // Standard recursive copy
+    await for (final entity in source.list(recursive: false)) {
+      if (entity is Directory) {
+        final newDirectory = Directory(path.join(dest.path, path.basename(entity.path)));
+        if (!newDirectory.existsSync()) newDirectory.createSync();
+        await _copyDirectory(entity, newDirectory);
+      } else if (entity is File) {
+        await entity.copy(path.join(dest.path, path.basename(entity.path)));
+      }
     }
   }
 

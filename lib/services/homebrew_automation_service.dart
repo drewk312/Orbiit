@@ -139,10 +139,11 @@ class HomebrewAutomationService {
 
     final contents = source.listSync();
     
-    // Case 1: Root contains 'apps' folder (Standard HBC format)
+    // Case 1: Root contains 'apps' folder (Standard HBC format) or 'wiiu' folder (Wii U format)
     bool hasAppsFolder = contents.any((e) => path.basename(e.path).toLowerCase() == 'apps');
+    bool hasWiiUFolder = contents.any((e) => path.basename(e.path).toLowerCase() == 'wiiu');
     
-    if (hasAppsFolder) {
+    if (hasAppsFolder || hasWiiUFolder) {
       // Merge blindly as the structure is likely correct (SD root style)
       await _copyDirectory(source, sdRoot);
       return;

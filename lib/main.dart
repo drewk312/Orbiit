@@ -57,6 +57,8 @@ import 'providers/forge_provider.dart';
 import 'providers/theme_provider.dart';
 import 'ui/providers/cover_download_provider.dart';
 import 'providers/cover_art_provider.dart';
+import 'ui/widgets/fusion_error_widget.dart';
+import 'ui/fusion/design_system.dart';
 
 // ── Screens ──
 import 'screens/navigation_wrapper.dart';
@@ -75,6 +77,10 @@ import 'core/database/database.dart';
 /// Global download service instance
 final DownloadService globalDownloadService = DownloadService();
 
+/// Global ScaffoldMessenger key for showing SnackBars without context
+final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+
+//
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // APP CONFIGURATION
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -154,6 +160,11 @@ void main() async {
 
 /// Configure global error handlers for Flutter and platform errors.
 void _setupErrorHandling() {
+  // Set custom error widget for UI rendering
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    return FusionErrorWidget(details: details);
+  };
+
   // Flutter framework errors
   FlutterError.onError = (FlutterErrorDetails details) {
     AppLogger.instance.error(
@@ -161,7 +172,7 @@ void _setupErrorHandling() {
       error: details.exception,
       component: 'Flutter',
     );
-    // Show error UI in debug mode
+    // Show error UI
     FlutterError.presentError(details);
   };
 
@@ -172,6 +183,31 @@ void _setupErrorHandling() {
       error: error,
       component: 'Platform',
     );
+    
+    // Show non-intrusive notification via global key
+    rootScaffoldMessengerKey.currentState?.showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            const Icon(Icons.error_outline, color: FusionColors.starlight, size: 20),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                'Unexpected Error: ${error.toString().split('\n').first}',
+                style: const TextStyle(color: FusionColors.starlight),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: FusionColors.error.withOpacity(0.9),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        margin: const EdgeInsets.all(16),
+      ),
+    );
+
     // Return true to prevent app crash
     return true;
   };
@@ -229,6 +265,7 @@ class OrbiitApp extends StatelessWidget {
     return Consumer<ThemeProvider>(
       builder: (context, themeProvider, child) {
         return MaterialApp(
+          scaffoldMessengerKey: rootScaffoldMessengerKey,
           // ── App Identity ──
           title: AppConfig.appName,
           debugShowCheckedModeBanner: false,

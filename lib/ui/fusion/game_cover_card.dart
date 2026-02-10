@@ -44,6 +44,11 @@ class _CoverImageCache {
       return _cache[url];
     }
 
+    // Evict old entries if cache gets too big (Simple FIFO)
+    if (_cache.length > 50) {
+      _cache.remove(_cache.keys.first);
+    }
+
     // Check if already fetching
     if (_pending.containsKey(url)) {
       return _pending[url];
@@ -366,6 +371,7 @@ class _GameCoverCardState extends State<GameCoverCard>
           ? Image.file(
               File(cachedPath),
               fit: BoxFit.cover,
+              cacheWidth: 300, // Optimize memory usage
               errorBuilder: (context, error, stackTrace) => _buildPlaceholder(),
             )
           : (widget.game.coverUrl != null
@@ -917,6 +923,7 @@ class _CachedCoverImageState extends State<_CachedCoverImage>
         fit: BoxFit.cover,
         width: double.infinity,
         height: double.infinity,
+        cacheWidth: 300, // Optimize memory usage
         errorBuilder: (_, __, ___) => widget.placeholder,
       ),
     );

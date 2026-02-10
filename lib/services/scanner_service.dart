@@ -652,6 +652,36 @@ class ScannedGame {
     this.discSize,
   });
 
+  /// Create ScannedGame from Map (for JSON deserialization)
+  factory ScannedGame.fromMap(Map<String, dynamic> map) {
+    return ScannedGame(
+      path: map['path'],
+      fileName: map['fileName'],
+      title: map['title'],
+      gameId: map['gameId'],
+      platform: map['platform'],
+      sizeBytes: map['sizeBytes'],
+      extension: map['extension'],
+      health: map['health'] ?? 100,
+      verified: map['verified'] ?? true,
+    );
+  }
+
+  /// Convert to Map (for JSON serialization)
+  Map<String, dynamic> toMap() {
+    return {
+      'path': path,
+      'fileName': fileName,
+      'title': title,
+      'gameId': gameId,
+      'platform': platform,
+      'sizeBytes': sizeBytes,
+      'extension': extension,
+      'health': health,
+      'verified': verified,
+    };
+  }
+
   /// Get region from game ID (4th character)
   String? get region {
     if (gameId == null || gameId!.length < 4) return null;

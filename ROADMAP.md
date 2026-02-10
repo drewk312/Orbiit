@@ -2,18 +2,27 @@
 
 This roadmap outlines planned features and improvements for Orbiit. Timelines are approximate and subject to change.
 
+## 🚀 Pro Features (Recently Completed)
+
+### Intelligent Automation
+- [x] **Homebrew Automation**: One-click "Update All" for essential apps (USB Loader GX, Nintendont, etc.) connected to Open Shop Channel.
+- [x] **Download Center**: Auto-detects, extracts, and organizes games from zip files into correct WBFS folder structures.
+- [x] **Legacy DLC Manager**: Specialized tool for managing Rock Band / Just Dance DLC (xyzzy extraction, wad2bin helper).
+- [x] **Smart Hardware Wizard**: Drive Doctor with multi-partition detection and "Nuke & Pave" fixing for Wii compatibility.
+- [x] **Rom Hacks Integration**: Integrated GameBrew scraper for discovering and installing popular Rom Hacks (Project+, CTGP, etc.).
+
 ## 🚀 Version 1.1 (Q2 2026)
 
 ### High Priority
-- [ ] **Auto-Update System**: In-app update notifications and one-click updates
-- [ ] **Improved Error Handling**: Better error messages and recovery options
-- [ ] **Performance Optimizations**: Faster library loading and cover fetching
-- [ ] **Memory Card Manager**: Backup and restore GameCube memory cards
-- [ ] **Batch Operations**: Select multiple games for batch actions
+- [x] **Auto-Update System**: In-app update notifications and one-click updates
+- [x] **Memory Card Manager**: Create, backup, and restore GameCube memory cards for Nintendont
+- [x] **Improved Error Handling**: Better error messages and recovery options
+- [x] **Performance Optimizations**: Faster library loading and cover fetching
+- [x] **Batch Operations**: Select multiple games for batch actions
+- [x] **Advanced Filtering**: Filter by Region (NTSC-U, PAL, NTSC-J) and Status
+- [x] **Custom Themes**: User-created color schemes and UI customization
 
 ### Medium Priority
-- [ ] **Custom Themes**: User-created color schemes and UI customization
-- [ ] **Advanced Filtering**: Multiple filter combinations
 - [ ] **Collection Management**: Create custom game collections/playlists
 - [ ] **Export Library**: Export library data to CSV/JSON
 - [ ] **Cover Art Editor**: Customize cover art for games
@@ -49,7 +58,7 @@ This roadmap outlines planned features and improvements for Orbiit. Timelines ar
 - [ ] **Batch Converter**: Convert multiple files simultaneously
 
 ### Advanced Features
-- [ ] **Enhanced Mod Manager**: Organize and apply game modifications
+- [x] **Enhanced Mod Manager**: Organize and apply game modifications (Riivolution / Project+ support added)
 - [ ] **Save File Manager**: Backup, restore, and transfer saves
 - [ ] **Screenshot Gallery**: Organize game screenshots
 - [ ] **Video Library**: Gameplay video management
