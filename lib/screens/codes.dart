@@ -133,7 +133,7 @@ class _TxtCodesScreenState extends State<TxtCodesScreen> {
             child: Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.5),
+                color: const Color(0xFF20202A), // FusionColors.bgSurface
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
               ),
@@ -217,6 +217,16 @@ class _TxtCodesScreenState extends State<TxtCodesScreen> {
   @override
   Widget build(BuildContext context) {
     if (widget.embedInWrapper) return _buildContent();
-    return ImmersiveAppShell(title: 'TXTCODES', child: _buildContent());
+    return Container(
+      decoration: const BoxDecoration(color: Color(0xFF000000)), // FusionColors.void_
+      child: ImmersiveAppShell(
+        title: 'CHEAT CODES',
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        child: _buildContent(),
+      ),
+    );
   }
 }

@@ -18,15 +18,18 @@ class TxtCodesService {
       return TxtCodesResult('Loaded from codes.rc24.xyz', rc24);
     }
 
-    // Try web archive of geckocodes.org
+    // Try web archive of geckocodes.org (raw)
     final wbUrl = Uri.parse(
-        'https://web.archive.org/web/20210101000000*/http://geckocodes.org/txt.php?txt=$id');
+        'https://web.archive.org/web/20210501000000id_/http://geckocodes.org/txt.php?txt=$id');
     final wb = await _get(wbUrl);
     if (_isValidTxt(wb)) {
-      return TxtCodesResult('Loaded from geckocodes.org (web archive)', wb);
+      return TxtCodesResult('Loaded from geckocodes.org (Archive)', wb);
     }
 
-    // Try gamehacking.org (basic endpoint; may vary)
+    // Try gamehacking.org
+    // Format: https://gamehacking.org/export/gh/wii/$id
+    // But direct TXT might be tricky. Let's try the direct Gecko export if possible.
+    // Fallback to simple txt endpoint if known.
     final ghUrl = Uri.parse('https://gamehacking.org/$id.txt');
     final gh = await _get(ghUrl);
     if (_isValidTxt(gh)) {
@@ -46,8 +49,9 @@ class TxtCodesService {
   static Future<String?> _get(Uri url) async {
     try {
       final client = HttpClient();
+      client.connectionTimeout = const Duration(seconds: 10);
       client.userAgent =
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Safari';
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
       final req = await client.getUrl(url);
       final resp = await req.close();
       if (resp.statusCode == 200) {
