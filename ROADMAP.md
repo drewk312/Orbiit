@@ -45,14 +45,14 @@ This roadmap outlines planned features and improvements for Orbiit. Timelines ar
 - [ ] **Database Migration**: SQLite for better performance
 - [ ] **API Endpoints**: RESTful API for external tools
 - [ ] **Improved Logging**: Better debug and crash reporting
-- [ ] **Unit Tests**: Comprehensive test coverage
+- [x] **Unit Tests**: Initial test suite for region logic and services
 - [ ] **Performance Profiling**: Optimize bottlenecks
 
 ## 🌟 Version 2.0 (Q4 2026)
 
 ### Major Features
-- [ ] **macOS Support**: Native macOS build
-- [ ] **Linux Support**: Native Linux build
+- [x] **macOS Support**: Native macOS build
+- [x] **Linux Support**: Native Linux build
 - [ ] **Emulator Integration**: Launch games directly in Dolphin
 - [ ] **Achievement System**: Track game completion and milestones
 - [ ] **Batch Converter**: Convert multiple files simultaneously

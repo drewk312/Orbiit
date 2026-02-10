@@ -1,7 +1,7 @@
 name: wiigc_fusion
 description: "Orbiit — Your games. In orbit. Premium game library manager for Wii, GameCube, and retro collections."
 publish_to: 'none'
-version: 1.1.0+2
+version: 1.0.1+1
 
 environment:
   sdk: '>=3.5.0 <4.0.0'

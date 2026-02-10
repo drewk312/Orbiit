@@ -78,7 +78,8 @@ import 'core/database/database.dart';
 final DownloadService globalDownloadService = DownloadService();
 
 /// Global ScaffoldMessenger key for showing SnackBars without context
-final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
 
 //
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -88,7 +89,7 @@ final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey = GlobalKey<Sca
 /// Application metadata
 abstract class AppConfig {
   static const String appName = 'Orbiit';
-  static const String version = '1.0.0';
+  static const String version = '1.0.1';
   static const String codename = 'Cosmos';
   static const String tagline = 'Your games. In orbit.';
 
@@ -183,13 +184,14 @@ void _setupErrorHandling() {
       error: error,
       component: 'Platform',
     );
-    
+
     // Show non-intrusive notification via global key
     rootScaffoldMessengerKey.currentState?.showSnackBar(
       SnackBar(
         content: Row(
           children: [
-            const Icon(Icons.error_outline, color: FusionColors.starlight, size: 20),
+            const Icon(Icons.error_outline,
+                color: FusionColors.starlight, size: 20),
             const SizedBox(width: 12),
             Expanded(
               child: Text(
@@ -274,8 +276,8 @@ class OrbiitApp extends StatelessWidget {
           theme: _buildThemeData(themeProvider.currentTheme),
 
           // ── Navigation ──
-          home: showSetupWizard 
-              ? const IntroWizardScreen() 
+          home: showSetupWizard
+              ? const IntroWizardScreen()
               : const NavigationWrapper(),
         );
       },
