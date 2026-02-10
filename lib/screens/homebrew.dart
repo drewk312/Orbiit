@@ -2612,6 +2612,7 @@ class _RiivolutionManagerDialogState extends State<_RiivolutionManagerDialog> {
     return Dialog(
       backgroundColor: Colors.transparent,
       child: GlassCard(
+        color: FusionColors.bgSurface, // Opaque for readability
         width: 500,
         height: 350,
         padding: const EdgeInsets.all(24),
@@ -2803,6 +2804,7 @@ class _DLCManagerDialogState extends State<_DLCManagerDialog> {
     return Dialog(
       backgroundColor: Colors.transparent,
       child: GlassCard(
+        color: FusionColors.bgSurface, // Opaque background for readability
         width: 600,
         height: 450,
         padding: const EdgeInsets.all(24),
@@ -3093,6 +3095,7 @@ class _BatchUpdateProgressDialogState extends State<_BatchUpdateProgressDialog> 
     return Dialog(
        backgroundColor: Colors.transparent,
        child: GlassCard(
+         color: FusionColors.bgSurface, // Opaque for readability
          borderRadius: BorderRadius.circular(20),
          padding: const EdgeInsets.all(24),
          child: Column(
