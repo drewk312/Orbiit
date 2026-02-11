@@ -1,0 +1,17 @@
+platform :macosx, '10.14'
+
+_flutter_project_path = eval(File.read(File.join(File.dirname(__FILE__), 'Flutter', 'flutter_export_environment.sh')), binding)
+load File.join(_flutter_project_path, 'macos', 'Flutter', 'podhelper.rb')
+
+target 'Runner' do
+  use_frameworks!
+  use_modular_headers!
+
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+  end
+end
