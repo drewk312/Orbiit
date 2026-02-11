@@ -78,9 +78,9 @@ class UiGradients {
         begin: Alignment(-1.0 + progress * 2, 0),
         end: Alignment(-0.5 + progress * 2, 0),
         colors: [
-          UiColors.glassWhite(0.0),
+          UiColors.glassWhite(0),
           UiColors.glassWhite(0.1),
-          UiColors.glassWhite(0.0),
+          UiColors.glassWhite(0),
         ],
         stops: const [0.0, 0.5, 1.0],
       );
@@ -224,9 +224,9 @@ class SectionHeaderRow extends StatelessWidget {
   final Color? accent;
 
   const SectionHeaderRow({
-    super.key,
     required this.icon,
     required this.title,
+    super.key,
     this.subtitle,
     this.count,
     this.accent,
@@ -255,7 +255,7 @@ class SectionHeaderRow extends StatelessWidget {
               Text(
                 title,
                 style: UiType.labelLarge.copyWith(
-                  letterSpacing: 1.0,
+                  letterSpacing: 1,
                   color: UiColors.textPrimary.withValues(alpha: 0.92),
                 ),
               ),
@@ -290,8 +290,8 @@ class ChipPill extends StatelessWidget {
   final Color accent;
 
   const ChipPill({
-    super.key,
     required this.text,
+    super.key,
     this.icon,
     this.accent = UiColors.cyan,
   });
@@ -332,8 +332,8 @@ class GlassCard extends StatefulWidget {
   final VoidCallback? onTap;
 
   const GlassCard({
-    super.key,
     required this.child,
+    super.key,
     this.padding = const EdgeInsets.all(16),
     this.borderRadius = UiRadius.xl,
     this.blurSigma = 16,
@@ -418,9 +418,9 @@ class ActionButton extends StatelessWidget {
   final double? fontSize;
 
   const ActionButton({
-    super.key,
     required this.label,
     required this.icon,
+    super.key,
     this.onPressed,
     this.gradient,
     this.outlineColor,
@@ -486,7 +486,7 @@ class ShimmerBlock extends StatefulWidget {
   final double height;
   final double radius;
   const ShimmerBlock(
-      {super.key, required this.width, required this.height, this.radius = 12});
+      {required this.width, required this.height, super.key, this.radius = 12});
 
   @override
   State<ShimmerBlock> createState() => _ShimmerBlockState();
@@ -525,7 +525,7 @@ class _ShimmerBlockState extends State<ShimmerBlock>
 class LoadingOrb extends StatefulWidget {
   final Color color;
   final double size;
-  const LoadingOrb({super.key, required this.color, this.size = 56});
+  const LoadingOrb({required this.color, super.key, this.size = 56});
 
   @override
   State<LoadingOrb> createState() => _LoadingOrbState();
@@ -554,13 +554,11 @@ class _LoadingOrbState extends State<LoadingOrb>
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: SweepGradient(
-              center: Alignment.center,
-              startAngle: 0,
               endAngle: math.pi * 2 * math.max(_c.value, 0.01),
               colors: [
                 widget.color,
                 widget.color.withValues(alpha: 0.5),
-                widget.color.withValues(alpha: 0.0),
+                widget.color.withValues(alpha: 0),
                 widget.color,
               ],
               stops: const [0.0, 0.3, 0.7, 1.0],
@@ -608,8 +606,8 @@ class HoloCard extends StatelessWidget {
   final double borderRadius;
 
   const HoloCard({
-    super.key,
     required this.child,
+    super.key,
     this.padding = const EdgeInsets.all(12),
     this.borderRadius = 12,
   });

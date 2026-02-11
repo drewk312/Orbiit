@@ -6,9 +6,10 @@
 // ============================================================================
 
 import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:wiigc_fusion/services/nintendont/nintendont_controller_service.dart';
 import 'package:wiigc_fusion/services/hardware_service.dart';
+import 'package:wiigc_fusion/services/nintendont/nintendont_controller_service.dart';
 
 class NintendontControllerScreen extends StatefulWidget {
   const NintendontControllerScreen({super.key});
@@ -48,7 +49,7 @@ class _NintendontControllerScreenState extends State<NintendontControllerScreen>
       duration: const Duration(milliseconds: 1500),
     )..repeat(reverse: true);
 
-    _pulseAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
+    _pulseAnimation = Tween<double>(begin: 0.8, end: 1).animate(
       CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
     );
 
@@ -729,7 +730,6 @@ class _NintendontControllerScreenState extends State<NintendontControllerScreen>
               border: Border.all(
                 color:
                     isMapped ? Colors.blue : Colors.red.withValues(alpha: 0.5),
-                width: 1,
               ),
               borderRadius: BorderRadius.circular(8),
             ),
@@ -740,7 +740,7 @@ class _NintendontControllerScreenState extends State<NintendontControllerScreen>
                 fontSize: 10,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
-                shadows: [Shadow(blurRadius: 2, color: Colors.black)],
+                shadows: [Shadow(blurRadius: 2)],
               ),
             ),
           ),
@@ -807,8 +807,8 @@ class _NintendontControllerScreenState extends State<NintendontControllerScreen>
       if (target is GCButton) {
         final newMappings = Map<GCButton, ControllerMapping>.from(
             _currentConfig!.buttonMappings);
-        final current = newMappings[target] ??
-            ControllerMapping(targetButton: target, sourceButton: -1);
+        final current =
+            newMappings[target] ?? ControllerMapping(targetButton: target);
 
         newMappings[target] = current.copyWith(sourceButton: sourceId);
 

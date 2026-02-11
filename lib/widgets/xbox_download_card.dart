@@ -21,8 +21,8 @@ class XboxStyleDownloadCard extends StatelessWidget {
   final bool isQueued;
 
   const XboxStyleDownloadCard({
-    super.key,
     required this.gameTitle,
+    super.key,
     this.coverUrl,
     this.platform = 'wii', // Default for backward compatibility
     this.bytesDownloaded = 0,
@@ -75,7 +75,6 @@ class XboxStyleDownloadCard extends StatelessWidget {
             border: Border.all(
               color:
                   Colors.white.withValues(alpha: 0.12), // Subtle glass border
-              width: 1,
             ),
             boxShadow: [
               BoxShadow(
@@ -108,7 +107,6 @@ class XboxStyleDownloadCard extends StatelessWidget {
                       primaryUrl: coverUrl ?? '',
                       platform: platform,
                       title: gameTitle, // Activate title-based hunting
-                      fit: BoxFit.cover,
                       fallbackBuilder: (context) => PremiumFallbackCover(
                         title: gameTitle,
                         platform: platform,
@@ -281,8 +279,8 @@ class _CircleButton extends StatefulWidget {
 
   const _CircleButton({
     required this.icon,
-    this.onTap,
     required this.tooltip,
+    this.onTap,
     this.isDestructive = false,
   });
 
@@ -330,7 +328,6 @@ class _CircleButtonState extends State<_CircleButton> {
                             ? Colors.red.withValues(alpha: 0.5)
                             : Colors.white.withValues(alpha: 0.5))
                         : Colors.white.withValues(alpha: 0.2),
-                    width: 1,
                   ),
                 ),
                 child: Icon(

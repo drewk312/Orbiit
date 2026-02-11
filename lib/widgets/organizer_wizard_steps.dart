@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+
 import '../services/storage/storage_organizer_service.dart';
 
 // ============================================================================
@@ -11,8 +12,8 @@ class OrganizerStep1Selection extends StatefulWidget {
   final bool isScanning;
 
   const OrganizerStep1Selection({
-    super.key,
     required this.onPathSelected,
+    super.key,
     this.isScanning = false,
   });
 
@@ -25,7 +26,8 @@ class _OrganizerStep1SelectionState extends State<OrganizerStep1Selection> {
   String? _selectedPath;
 
   Future<void> _pickFolder() async {
-    String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
+    final String? selectedDirectory =
+        await FilePicker.platform.getDirectoryPath();
     if (selectedDirectory != null) {
       setState(() {
         _selectedPath = selectedDirectory;
@@ -172,10 +174,10 @@ class OrganizerStep2Preview extends StatelessWidget {
   final VoidCallback onCancel;
 
   const OrganizerStep2Preview({
-    super.key,
     required this.analysis,
     required this.onStartOrganization,
     required this.onCancel,
+    super.key,
   });
 
   @override
@@ -414,10 +416,10 @@ class OrganizerStep3Execution extends StatelessWidget {
   final VoidCallback onFinish;
 
   const OrganizerStep3Execution({
-    super.key,
     required this.logs,
-    this.isComplete = false,
     required this.onFinish,
+    super.key,
+    this.isComplete = false,
   });
 
   @override

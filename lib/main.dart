@@ -40,35 +40,32 @@
 //
 // ═══════════════════════════════════════════════════════════════════════════
 
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:window_manager/window_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:window_manager/window_manager.dart';
 
+import 'core/app_logger.dart';
+import 'core/database/database.dart';
 // ── Models & Theme ──
 import 'models/theme.dart';
-
+import 'providers/cover_art_provider.dart';
 // ── Providers ──
 import 'providers/discovery_provider.dart';
-import 'providers/osc_provider.dart';
-import 'providers/wiiload_provider.dart';
 import 'providers/forge_provider.dart';
+import 'providers/osc_provider.dart';
 import 'providers/theme_provider.dart';
-import 'ui/providers/cover_download_provider.dart';
-import 'providers/cover_art_provider.dart';
-import 'ui/widgets/fusion_error_widget.dart';
-import 'ui/fusion/design_system.dart';
-
+import 'providers/wiiload_provider.dart';
 // ── Screens ──
 import 'screens/navigation_wrapper.dart';
-import 'ui/screens/intro_wizard_screen.dart';
-
 // ── Core Services ──
 import 'services/download_service.dart';
 import 'services/navigation_service.dart';
-import 'core/app_logger.dart';
-import 'core/database/database.dart';
+import 'ui/fusion/design_system.dart';
+import 'ui/providers/cover_download_provider.dart';
+import 'ui/screens/intro_wizard_screen.dart';
+import 'ui/widgets/fusion_error_widget.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // GLOBAL SERVICES
@@ -236,7 +233,7 @@ Future<void> _initializeWindow() async {
     });
 
     AppLogger.instance.info('Window initialized: ${AppConfig.defaultSize}');
-  } catch (e, stack) {
+  } catch (e) {
     AppLogger.instance.error(
       'Window initialization failed',
       error: e,

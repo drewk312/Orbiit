@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import '../../core/database/database.dart' hide Title;
+
 import '../../core/database/database.dart' as db;
+import '../../core/database/database.dart' hide Title;
+import '../services/wiitdb_service.dart';
 import '../widgets/cover_art_widget.dart';
 import '../widgets/metadata_section.dart';
-import '../services/wiitdb_service.dart';
 
 class GameDetailScreen extends StatefulWidget {
   final db.Title title;
   final AppDatabase database;
 
   const GameDetailScreen({
-    super.key,
     required this.title,
     required this.database,
+    super.key,
   });
 
   @override
@@ -34,7 +35,7 @@ class _GameDetailScreenState extends State<GameDetailScreen>
       vsync: this,
       duration: const Duration(milliseconds: 400),
     );
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _animController, curve: Curves.easeOut),
     );
     _slideAnimation = Tween<Offset>(
@@ -303,7 +304,6 @@ class _InfoCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: color.withValues(alpha: 0.1),
-          width: 1,
         ),
       ),
       child: Row(

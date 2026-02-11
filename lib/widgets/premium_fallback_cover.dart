@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import '../ui/fusion/design_system.dart';
 
 class PremiumFallbackCover extends StatelessWidget {
   final String title;
   final String platform;
 
   const PremiumFallbackCover({
-    super.key,
     required this.title,
     required this.platform,
+    super.key,
   });
 
   Color _getPlatformColor() {
@@ -17,27 +16,33 @@ class PremiumFallbackCover extends StatelessWidget {
     if (p == 'wii u' || p == 'wiiu') return const Color(0xFF009AC7);
     if (p == 'wii') return const Color(0xFF00C2FF);
     if (p == 'gamecube' || p == 'gc') return const Color(0xFF6A0DAD);
-    if (p == 'n64' || p.contains('nintendo 64'))
+    if (p == 'n64' || p.contains('nintendo 64')) {
       return const Color(0xFF009B4D); // N64 green
-    if (p == 'snes' || p.contains('super nintendo'))
+    }
+    if (p == 'snes' || p.contains('super nintendo')) {
       return const Color(0xFF7B68EE); // SNES purple
+    }
     if (p == 'nes') return const Color(0xFFE60012); // NES red
-    if (p == 'gba' || p.contains('game boy advance'))
+    if (p == 'gba' || p.contains('game boy advance')) {
       return const Color(0xFF5B3694); // GBA purple
-    if (p == 'gbc' || p.contains('game boy color'))
+    }
+    if (p == 'gbc' || p.contains('game boy color')) {
       return const Color(0xFF8B00FF);
+    }
     if (p == 'gb' || p == 'game boy') return const Color(0xFF8BBD39);
     if (p == 'nds' || p == 'ds') return const Color(0xFF5A5A5A);
     if (p == '3ds') return const Color(0xFFD4002A);
     // Sega
-    if (p == 'genesis' || p.contains('mega drive'))
+    if (p == 'genesis' || p.contains('mega drive')) {
       return const Color(0xFF0060A8);
+    }
     if (p == 'dreamcast') return const Color(0xFFFF6600);
     if (p == 'saturn') return const Color(0xFF003087);
     if (p == 'game gear' || p == 'gg') return const Color(0xFF0060A8);
     // Sony
-    if (p == 'ps1' || p == 'psx' || p == 'playstation')
+    if (p == 'ps1' || p == 'psx' || p == 'playstation') {
       return const Color(0xFF003791);
+    }
     if (p == 'ps2') return const Color(0xFF003791);
     if (p == 'psp') return const Color(0xFF003791);
 
@@ -115,8 +120,9 @@ class PremiumFallbackCover extends StatelessWidget {
   IconData _getPlatformIcon() {
     final p = platform.toLowerCase();
     // Game controllers/consoles
-    if (p == 'wii' || p == 'wii u' || p == 'wiiu')
+    if (p == 'wii' || p == 'wii u' || p == 'wiiu') {
       return Icons.sports_esports_rounded;
+    }
     if (p == 'gamecube' || p == 'gc') return Icons.gamepad_rounded;
     if (p == 'n64') return Icons.gamepad_rounded;
     if (p == 'snes' || p == 'nes') return Icons.videogame_asset_rounded;

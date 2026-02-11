@@ -118,9 +118,9 @@ class PartitionInfo {
 
   PartitionInfo({
     required this.number,
-    this.driveLetter,
     required this.size,
     required this.type,
+    this.driveLetter,
   });
 
   factory PartitionInfo.fromJson(Map<String, dynamic> json) {

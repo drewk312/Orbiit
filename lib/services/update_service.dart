@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
+
 import '../main.dart'; // For AppConfig
 
 class UpdateRelease {
@@ -68,7 +69,7 @@ class UpdateService {
         final data = json.decode(response.body);
         final release = UpdateRelease.fromJson(data);
 
-        final currentVersion = AppConfig.version; // e.g., "1.0.0"
+        const currentVersion = AppConfig.version; // e.g., "1.0.0"
         final latestTag = release.tagName.replaceAll('v', ''); // e.g., "1.0.1"
 
         if (_isNewer(latestTag, currentVersion)) {

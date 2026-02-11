@@ -21,7 +21,6 @@ class PremiumDownloadCard extends StatefulWidget {
   final Widget? progressBar;
 
   const PremiumDownloadCard({
-    super.key,
     required this.coverArt,
     required this.title,
     required this.platform,
@@ -32,6 +31,7 @@ class PremiumDownloadCard extends StatefulWidget {
     required this.downloadedBytes,
     required this.totalBytes,
     required this.statusMessage,
+    super.key,
     this.isPaused = false,
     this.onPauseResume,
     this.onCancel,
@@ -265,7 +265,6 @@ class _PremiumDownloadCardState extends State<PremiumDownloadCard> {
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: Colors.white.withOpacity(0.12),
-          width: 1,
         ),
       ),
       child: Row(
@@ -309,8 +308,8 @@ class _PremiumDownloadCardState extends State<PremiumDownloadCard> {
         child: LinearProgressIndicator(
           value: widget.progress,
           backgroundColor: Colors.transparent,
-          valueColor: AlwaysStoppedAnimation(
-            const Color(0xFF00D4FF),
+          valueColor: const AlwaysStoppedAnimation(
+            Color(0xFF00D4FF),
           ),
         ),
       ),
@@ -362,7 +361,6 @@ class _PremiumDownloadCardState extends State<PremiumDownloadCard> {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: Colors.white.withOpacity(0.1),
-          width: 1,
         ),
       ),
       child: Column(

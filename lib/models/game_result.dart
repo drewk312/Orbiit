@@ -176,8 +176,9 @@ class GameResult {
   String get formattedSize {
     if (size != null && size!.isNotEmpty) return size!;
     if (fileSizeMb == null) return 'Unknown';
-    if (fileSizeMb! >= 1024)
+    if (fileSizeMb! >= 1024) {
       return '${(fileSizeMb! / 1024).toStringAsFixed(1)} GB';
+    }
     return '$fileSizeMb MB';
   }
 

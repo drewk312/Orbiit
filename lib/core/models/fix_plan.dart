@@ -49,10 +49,10 @@ class FixAction {
   FixAction({
     required this.actionType,
     required this.description,
+    required this.parameters,
     this.priority = 5,
     this.scoreImpact = 0,
     this.spaceSavings = 0,
-    required this.parameters,
   });
 
   factory FixAction.fromJson(Map<String, dynamic> json) {

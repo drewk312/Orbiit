@@ -1,10 +1,11 @@
-import 'package:flutter/foundation.dart';
-import 'dart:developer' as developer;
 import 'dart:io';
-import '../services/osc_service.dart';
+
+import 'package:flutter/foundation.dart';
+
 import '../models/game_result.dart';
 import '../services/gamebrew_service.dart';
 import '../services/homebrew_automation_service.dart';
+import '../services/osc_service.dart';
 
 /// Provider for Open Shop Channel homebrew browsing
 class OSCProvider with ChangeNotifier {
@@ -148,7 +149,7 @@ class OSCProvider with ChangeNotifier {
     try {
       await HomebrewAutomationService().installBatch(
           games: _homebrewResults, sdCardRoot: sdCardRoot, onStatus: onStatus);
-      onStatus('ALL ESSENTIALS UPDATED', 1.0);
+      onStatus('ALL ESSENTIALS UPDATED', 1);
     } catch (e) {
       _error = 'Batch update failed: $e';
     } finally {

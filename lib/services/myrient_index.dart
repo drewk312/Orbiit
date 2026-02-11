@@ -108,7 +108,7 @@ class MyrientSearchIndex {
 
     // Step 3: Fuzzy matching with trigrams (if few results)
     if (results.length < 10) {
-      final fuzzyMatches = _fuzzySearch(normalizedQuery, maxCandidates: 20);
+      final fuzzyMatches = _fuzzySearch(normalizedQuery);
       for (final title in fuzzyMatches) {
         if (_exactIndex.containsKey(title)) {
           results.addAll(_exactIndex[title]!);
@@ -150,9 +150,13 @@ class MyrientSearchIndex {
 
       // Starts with query
       if (aTitle.startsWith(normalizedQuery) &&
-          !bTitle.startsWith(normalizedQuery)) return -1;
+          !bTitle.startsWith(normalizedQuery)) {
+        return -1;
+      }
       if (bTitle.startsWith(normalizedQuery) &&
-          !aTitle.startsWith(normalizedQuery)) return 1;
+          !aTitle.startsWith(normalizedQuery)) {
+        return 1;
+      }
 
       // More query tokens matched
       final aMatches = queryTokens.where((t) => aTitle.contains(t)).length;

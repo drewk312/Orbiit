@@ -131,10 +131,10 @@ class FileOrganizer {
   Future<String> _generateTargetPath({
     required String targetRoot,
     required GamePlatform platform,
-    String? gameId,
-    String? title,
     required String sourceFileName,
     required String sourceExtension,
+    String? gameId,
+    String? title,
   }) async {
     final platformFolder = platform.folderName;
     final platformPath = p.join(targetRoot, platformFolder);
@@ -210,7 +210,7 @@ class FileOrganizer {
 
       case ConflictAction.keepBoth:
         // Generate numbered filename
-        return await _generateNumberedPath(targetPath);
+        return _generateNumberedPath(targetPath);
 
       case ConflictAction.askUser:
         // For now, default to skip (UI will handle prompting)

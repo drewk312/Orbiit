@@ -1,11 +1,12 @@
+import 'dart:developer' as developer;
 import 'dart:io';
+
 import 'package:archive/archive_io.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+
 import '../models/game_result.dart';
-import 'dart:developer' as developer;
 
 /// Comprehensive service for managing Homebrew installation and updates
 class HomebrewAutomationService {
@@ -89,7 +90,7 @@ class HomebrewAutomationService {
       await _smartMergeToSD(extractDir, sdCardRoot, game.slug ?? 'unknown_app');
 
       onStatus('Refining setup...');
-      onProgress(1.0);
+      onProgress(1);
     } finally {
       // Cleanup
       if (downloadDir.existsSync()) {
@@ -145,9 +146,9 @@ class HomebrewAutomationService {
     final contents = source.listSync();
 
     // Case 1: Root contains 'apps' folder (Standard HBC format) or 'wiiu' folder (Wii U format)
-    bool hasAppsFolder =
+    final bool hasAppsFolder =
         contents.any((e) => path.basename(e.path).toLowerCase() == 'apps');
-    bool hasWiiUFolder =
+    final bool hasWiiUFolder =
         contents.any((e) => path.basename(e.path).toLowerCase() == 'wiiu');
 
     if (hasAppsFolder || hasWiiUFolder) {
@@ -157,7 +158,7 @@ class HomebrewAutomationService {
     }
 
     // Case 2: Root looks like an app folder itself (contains boot.dol/elf or meta.xml)
-    bool isAppRoot = contents.any((e) {
+    final bool isAppRoot = contents.any((e) {
       final name = path.basename(e.path).toLowerCase();
       return name == 'boot.dol' || name == 'boot.elf' || name == 'meta.xml';
     });
@@ -183,7 +184,7 @@ class HomebrewAutomationService {
 
       // If the subdir seems to be the app itself, check inside
       final subContents = subDir.listSync();
-      bool subIsApp = subContents.any((e) {
+      final bool subIsApp = subContents.any((e) {
         final name = path.basename(e.path).toLowerCase();
         return name == 'boot.dol' || name == 'boot.elf';
       });
@@ -210,7 +211,7 @@ class HomebrewAutomationService {
 
   Future<void> _copyDirectory(Directory source, Directory dest) async {
     // standard recursive copy
-    await for (final entity in source.list(recursive: false)) {
+    await for (final entity in source.list()) {
       if (entity is Directory) {
         final newDirectory =
             Directory(path.join(dest.path, path.basename(entity.path)));

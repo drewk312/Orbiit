@@ -1,8 +1,9 @@
-import 'package:http/http.dart' as http;
-import 'package:html/parser.dart' as parser;
 import 'dart:developer' as developer;
+
+import 'package:html/parser.dart' as parser;
+import 'package:http/http.dart' as http;
+
 import '../models/game_result.dart';
-import '../core/app_logger.dart';
 
 /// Service to scrape and discover homebrew and rom hacks from GameBrew
 class GameBrewService {
@@ -50,37 +51,31 @@ class GameBrewService {
 
     // Curated list for fallback and high-quality guaranteed entries
     final curated = [
-      GameResult(
+      const GameResult(
         title: 'WiiXplorer',
         platform: 'Wii',
         region: 'Region Free',
         provider: 'GameBrew',
         pageUrl: 'https://www.gamebrew.org/wiki/WiiXplorer',
         description: 'A multi-featured file explorer for the Wii.',
-        isDirectDownload: false,
-        requiresBrowser: false,
       ),
-      GameResult(
+      const GameResult(
         title: 'USB Loader GX',
         platform: 'Wii',
         region: 'Region Free',
         provider: 'GameBrew',
         pageUrl: 'https://www.gamebrew.org/wiki/USB_Loader_GX',
         description: 'The most popular USB Loader for playing games from USB.',
-        isDirectDownload: false,
-        requiresBrowser: false,
       ),
-      GameResult(
+      const GameResult(
         title: 'Nintendont',
         platform: 'Wii',
         region: 'Region Free',
         provider: 'GameBrew',
         pageUrl: 'https://www.gamebrew.org/wiki/Nintendont',
         description: 'Runs GameCube games on Wii and Wii U from SD or USB.',
-        isDirectDownload: false,
-        requiresBrowser: false,
       ),
-      GameResult(
+      const GameResult(
         title: 'Priiloader',
         platform: 'Wii',
         region: 'Region Free',
@@ -88,31 +83,25 @@ class GameBrewService {
         pageUrl: 'https://www.gamebrew.org/wiki/Priiloader',
         description:
             'A modified version of Preloader that adds brick protection.',
-        isDirectDownload: false,
-        requiresBrowser: false,
       ),
-      GameResult(
+      const GameResult(
         title: 'SaveGame Manager GX',
         platform: 'Wii',
         region: 'Region Free',
         provider: 'GameBrew',
         pageUrl: 'https://www.gamebrew.org/wiki/SaveGame_Manager_GX',
         description: 'Manage save files and Miis with a GUI.',
-        isDirectDownload: false,
-        requiresBrowser: false,
       ),
-      GameResult(
+      const GameResult(
         title: 'CleanRip',
         platform: 'Wii',
         region: 'Region Free',
         provider: 'GameBrew',
         pageUrl: 'https://www.gamebrew.org/wiki/CleanRip',
         description: 'Create 1:1 ISO dumps of GameCube and Wii discs.',
-        isDirectDownload: false,
-        requiresBrowser: false,
       ),
       // Notable Rom Hacks that might not be easily scraped or need special URL
-      GameResult(
+      const GameResult(
         title: 'Project+',
         platform: 'Wii',
         region: 'ROM Hack',
@@ -120,10 +109,9 @@ class GameBrewService {
         pageUrl: 'https://projectplusgame.com/download',
         description:
             'The premier competitive modification for Super Smash Bros. Brawl.',
-        isDirectDownload: false,
         requiresBrowser: true,
       ),
-      GameResult(
+      const GameResult(
         title: 'Newer Super Mario Bros. Wii',
         platform: 'Wii',
         region: 'ROM Hack',
@@ -131,10 +119,9 @@ class GameBrewService {
         pageUrl: 'https://newerteam.com/wii/',
         description:
             'A full unofficial sequel to New Super Mario Bros. Wii with 128 new levels.',
-        isDirectDownload: false,
         requiresBrowser: true,
       ),
-      GameResult(
+      const GameResult(
         title: 'CTGP Revolution',
         platform: 'Wii',
         region: 'ROM Hack',
@@ -142,18 +129,15 @@ class GameBrewService {
         pageUrl: 'https://www.chadsoft.co.uk/',
         description:
             'The definitive Mario Kart Wii mod with 200+ custom tracks.',
-        isDirectDownload: false,
         requiresBrowser: true,
       ),
-      GameResult(
+      const GameResult(
         title: 'Riivolution',
         platform: 'Wii',
         region: 'Region Free',
         provider: 'GameBrew',
         pageUrl: 'https://www.gamebrew.org/wiki/Riivolution',
         description: 'On-the-fly patching engine for Wii retail discs.',
-        isDirectDownload: false,
-        requiresBrowser: false,
       ),
     ];
 
@@ -258,7 +242,6 @@ class GameBrewService {
                   version: version,
                   size: 'Unknown',
                   requiresBrowser: true,
-                  isDirectDownload: false,
                 ));
               }
             }
@@ -289,7 +272,6 @@ class GameBrewService {
                 description: '$defaultRegion from GameBrew',
                 size: 'Unknown',
                 requiresBrowser: true,
-                isDirectDownload: false,
               ));
             }
           }

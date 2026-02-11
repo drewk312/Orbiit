@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../ui/fusion/design_system.dart';
-import '../providers/forge_provider.dart';
-import '../providers/discovery_provider.dart';
-import '../services/update_service.dart';
-import '../main.dart'; // For AppConfig
-import 'theme_settings_new.dart'; // Import theme settings
-
 import 'package:url_launcher/url_launcher.dart';
+
+import '../main.dart'; // For AppConfig
+import '../providers/discovery_provider.dart';
+import '../providers/forge_provider.dart';
+import '../services/update_service.dart';
+import '../ui/fusion/design_system.dart';
+import 'theme_settings_new.dart'; // Import theme settings
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -36,7 +36,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Container(
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: OrbColors.border)),
+                  border:
+                      const Border(bottom: BorderSide(color: OrbColors.border)),
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -54,7 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         shape: BoxShape.circle,
                         color: OrbColors.orbitCyan.withValues(alpha: 0.15),
                       ),
-                      child: Icon(Icons.tune_rounded,
+                      child: const Icon(Icons.tune_rounded,
                           size: 24, color: OrbColors.orbitCyan),
                     ),
                     const SizedBox(width: 16),
@@ -62,7 +63,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Command Center', style: OrbText.headlineMedium),
+                          const Text('Command Center',
+                              style: OrbText.headlineMedium),
                           Text('Configure your Orbiit experience',
                               style: OrbText.bodyMedium
                                   .copyWith(color: OrbColors.textSecondary)),
@@ -223,7 +225,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               height: 64,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                gradient: RadialGradient(
+                                gradient: const RadialGradient(
                                   colors: [
                                     OrbColors.bgTertiary,
                                     OrbColors.void_,
@@ -343,7 +345,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   color: OrbColors.textSecondary,
                                 )),
                             const SizedBox(height: 20),
-                            Text(
+                            const Text(
                               'A premium, space-themed library manager for your\nWii, GameCube, and retro game collection.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -407,7 +409,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         style: _updateAvailable != null
             ? OutlinedButton.styleFrom(
                 foregroundColor: OrbColors.orbitCyan,
-                side: BorderSide(color: OrbColors.orbitCyan),
+                side: const BorderSide(color: OrbColors.orbitCyan),
               )
             : null,
         child: _checkingForUpdate
@@ -452,8 +454,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             _updateStatus = 'You are up to date.';
           });
           Future.delayed(const Duration(seconds: 3), () {
-            if (mounted && _updateAvailable == null)
+            if (mounted && _updateAvailable == null) {
               setState(() => _updateStatus = '');
+            }
           });
         }
       }

@@ -17,10 +17,10 @@ class CoverArtWidget extends StatelessWidget {
   final String? coverUrl;
 
   const CoverArtWidget({
-    super.key,
     required this.gameId,
     required this.platform,
     required this.region,
+    super.key,
     this.title = '',
     this.width = 140,
     this.height = 140,
@@ -72,7 +72,6 @@ class CoverArtWidget extends StatelessWidget {
       gameId: gameId,
       platform: platform,
       title: title,
-      fit: BoxFit.cover,
       fallbackBuilder: (context) => _buildFallback(context),
     );
   }

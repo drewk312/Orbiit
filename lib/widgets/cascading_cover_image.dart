@@ -14,13 +14,13 @@ class CascadingCoverImage extends StatefulWidget {
   final BlendMode? colorBlendMode;
 
   const CascadingCoverImage({
-    super.key,
     required this.primaryUrl,
-    this.gameId,
     required this.platform,
+    required this.fallbackBuilder,
+    super.key,
+    this.gameId,
     this.title,
     this.fit = BoxFit.cover,
-    required this.fallbackBuilder,
     this.color,
     this.colorBlendMode,
   });
@@ -252,7 +252,7 @@ class _CascadingCoverImageState extends State<CascadingCoverImage> {
 
   // Shared client to prevent socket exhaustion (Semaphore Timeout)
   static final HttpClient _sharedClient = HttpClient()
-    ..userAgent = "Fusion/1.0"
+    ..userAgent = 'Fusion/1.0'
     ..connectionTimeout = const Duration(seconds: 4)
     ..idleTimeout = const Duration(seconds: 15);
 
@@ -344,8 +344,9 @@ class _CascadingCoverImageState extends State<CascadingCoverImage> {
     // Wii U must come before Wii check
     if (p.contains('wii u') || p == 'wiiu') return 'wiiu';
     if (p.contains('wii')) return 'wii';
-    if (p.contains('gamecube') || p == 'gc')
+    if (p.contains('gamecube') || p == 'gc') {
       return 'wii'; // GameTDB stores GC under Wii
+    }
     if (p.contains('3ds')) return '3ds';
     if (p.contains('ds')) return 'ds';
     // GBA/SNES/N64 etc don't have GameTDB support - skip to Libretro
@@ -367,19 +368,24 @@ class _CascadingCoverImageState extends State<CascadingCoverImage> {
     final p = widget.platform.toLowerCase();
     // Wii U must come before Wii check
     if (p.contains('wii u') || p == 'wiiu') return 'Nintendo_-_Wii_U';
-    if (p.contains('n64') || p.contains('nintendo 64'))
+    if (p.contains('n64') || p.contains('nintendo 64')) {
       return 'Nintendo_-_Nintendo_64';
+    }
     if (p.contains('gamecube') || p == 'gc') return 'Nintendo_-_GameCube';
     if (p.contains('wii')) return 'Nintendo_-_Wii';
-    if (p.contains('snes') || p.contains('super nintendo'))
+    if (p.contains('snes') || p.contains('super nintendo')) {
       return 'Nintendo_-_Super_Nintendo_Entertainment_System';
-    if (p.contains('gba') || p.contains('advance'))
+    }
+    if (p.contains('gba') || p.contains('advance')) {
       return 'Nintendo_-_Game_Boy_Advance';
+    }
     if (p.contains('ds')) return 'Nintendo_-_Nintendo_DS';
-    if (p.contains('genesis') || p.contains('mega drive'))
+    if (p.contains('genesis') || p.contains('mega drive')) {
       return 'Sega_-_Mega_Drive_-_Genesis';
-    if (p.contains('nes') || p.contains('entertainment system'))
+    }
+    if (p.contains('nes') || p.contains('entertainment system')) {
       return 'Nintendo_-_Nintendo_Entertainment_System';
+    }
 
     // Default fallback to Wii if unknown (likely won't match but better than crash)
     return 'Nintendo_-_Wii';

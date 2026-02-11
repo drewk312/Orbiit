@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
 
 /// ═══════════════════════════════════════════════════════════════════════════
 /// MYRIENT CACHE - PERSISTENT STORAGE
@@ -151,7 +152,7 @@ class MyrientCache {
       _manifest!.sources[sourceKey] = CacheSourceInfo(
         fetchedAt: DateTime.now(),
         gameCount: games.length,
-        fileSize: (await cacheFile.length()),
+        fileSize: await cacheFile.length(),
         platform: platform,
       );
       await _saveManifest();

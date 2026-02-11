@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
-import '../services/hardware_service.dart';
-import '../services/drive_doctor_service.dart';
-import '../services/library_state_service.dart';
 import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../providers/forge_provider.dart';
+import '../services/drive_doctor_service.dart';
+import '../services/hardware_service.dart';
+import '../services/library_state_service.dart';
 import '../widgets/immersive_glass_header.dart';
 
 /// Hardware Wizard Screen - USB Drive Setup and Game Deployment
@@ -24,7 +26,7 @@ class _HardwareWizardScreenState extends State<HardwareWizardScreen>
   DriveInfo? _selectedDrive;
   bool _isScanning = false;
   bool _isDeploying = false;
-  double _deployProgress = 0.0;
+  double _deployProgress = 0;
 
   String _deployStatus = '';
 
@@ -245,8 +247,9 @@ class _HardwareWizardScreenState extends State<HardwareWizardScreen>
 
     try {
       final diskNum = await _doctor.getDiskNumber(drive.letter);
-      if (diskNum == null)
+      if (diskNum == null) {
         throw Exception('Could not determine physical disk number');
+      }
 
       setState(() => _deployStatus =
           'Formatting Disk $diskNum (This may take a moment)...');
@@ -424,7 +427,7 @@ class _HardwareWizardScreenState extends State<HardwareWizardScreen>
             // Drives Section
             Row(
               children: [
-                Text(
+                const Text(
                   'Detected Drives',
                   style: TextStyle(
                     fontSize: 18,

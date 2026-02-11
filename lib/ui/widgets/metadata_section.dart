@@ -6,9 +6,9 @@ class MetadataSection extends StatelessWidget {
   final Color primaryColor;
 
   const MetadataSection({
-    super.key,
     required this.metadata,
     required this.primaryColor,
+    super.key,
   });
 
   @override
@@ -188,11 +188,11 @@ class MetadataRow extends StatelessWidget {
   final Color color;
 
   const MetadataRow({
-    super.key,
     required this.icon,
     required this.label,
     required this.value,
     required this.color,
+    super.key,
   });
 
   @override

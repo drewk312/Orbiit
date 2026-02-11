@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
-import '../services/platform_detector.dart';
+
 import '../services/file_organizer.dart';
+import '../services/platform_detector.dart';
 
 /// Smart file import and organization screen
 class FileImportScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _FileImportScreenState extends State<FileImportScreen> {
   final PlatformDetector _detector = PlatformDetector();
   final FileOrganizer _organizer = FileOrganizer();
 
-  List<ImportFileEntry> _files = [];
+  final List<ImportFileEntry> _files = [];
   String? _targetDirectory;
   bool _isProcessing = false;
   bool _moveFiles = false;
@@ -68,11 +69,11 @@ class _FileImportScreenState extends State<FileImportScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            const Row(
               children: [
-                const Icon(Icons.auto_awesome, color: Colors.blue, size: 32),
-                const SizedBox(width: 12),
-                const Text(
+                Icon(Icons.auto_awesome, color: Colors.blue, size: 32),
+                SizedBox(width: 12),
+                Text(
                   'Smart Import',
                   style: TextStyle(
                     fontSize: 22,
@@ -186,7 +187,7 @@ class _FileImportScreenState extends State<FileImportScreen> {
 
             // Conflict resolution
             DropdownButtonFormField<ConflictAction>(
-              value: _conflictAction,
+              initialValue: _conflictAction,
               decoration: const InputDecoration(
                 labelText: 'If file exists',
                 border: OutlineInputBorder(),
@@ -227,7 +228,6 @@ class _FileImportScreenState extends State<FileImportScreen> {
             border: Border.all(
               color: Colors.blue.withOpacity(0.5),
               width: 2,
-              style: BorderStyle.solid,
             ),
             borderRadius: BorderRadius.circular(12),
           ),
@@ -308,7 +308,6 @@ class _FileImportScreenState extends State<FileImportScreen> {
                           style:
                               TextStyle(color: Colors.white70, fontSize: 12))),
                   const Expanded(
-                      flex: 1,
                       child: Text('Conf.',
                           style:
                               TextStyle(color: Colors.white70, fontSize: 12))),
@@ -377,7 +376,6 @@ class _FileImportScreenState extends State<FileImportScreen> {
             ),
           ),
           Expanded(
-            flex: 1,
             child: Text(
               entry.detection != null
                   ? '${(entry.detection!.confidence * 100).toInt()}%'
@@ -648,9 +646,9 @@ class ImportFileEntry {
 
   ImportFileEntry({
     required this.sourcePath,
+    required this.status,
     this.detection,
     this.targetPreview,
-    required this.status,
   });
 
   ImportFileEntry copyWith({

@@ -143,9 +143,9 @@ class VerificationResult {
     required this.md5,
     required this.sha1,
     required this.isVerified,
+    required this.fileSize,
     this.matchedEntry,
     this.errorMessage,
-    required this.fileSize,
   });
 }
 

@@ -54,17 +54,19 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:ffi' as ffi;
 import 'dart:io';
+
 import 'package:ffi/ffi.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../ffi/forge_bridge.dart';
 import '../models/game_result.dart';
 import '../services/archive_org_service.dart';
-import '../services/myrient_scraper.dart';
 import '../services/homebrew_automation_service.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../services/myrient_scraper.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CONFIGURATION
@@ -156,7 +158,7 @@ class ForgeProvider extends ChangeNotifier {
   bool _isForging = false;
 
   /// Current progress (0.0 to 1.0)
-  double _progress = 0.0;
+  double _progress = 0;
 
   /// Human-readable status message
   String _statusMessage = '';
@@ -242,12 +244,12 @@ class ForgeProvider extends ChangeNotifier {
   // ─────────────────────────────────────────────────────────────────────────
 
   DateTime? _lastProgressTimestamp;
-  double _lastProgressValue = 0.0;
+  double _lastProgressValue = 0;
   int? _lastDownloadedBytes;
   int? _lastTotalBytes;
 
   /// Progress speed in percent-per-second (0.01 = 1%/s)
-  double _progressSpeed = 0.0;
+  double _progressSpeed = 0;
 
   /// Download speed in bytes per second
   double? _downloadSpeedBps;
@@ -554,11 +556,7 @@ class ForgeProvider extends ChangeNotifier {
           if (pathSegments.isNotEmpty) {
             // Remove the file part to get the directory
             pathSegments.removeLast();
-            final baseUrl = uri
-                    .replace(
-                        pathSegments: pathSegments, query: null, fragment: null)
-                    .toString() +
-                '/';
+            final baseUrl = '${uri.replace(pathSegments: pathSegments)}/';
 
             final scraper = MyrientScraper();
             // Use the Game Title for searching, as the filename in targetUrl might be guessed/wrong
@@ -732,9 +730,9 @@ class ForgeProvider extends ChangeNotifier {
       String subfolder = 'downloads';
       final pLower = game.platform.toLowerCase();
 
-      if (pLower.contains('wii u') || pLower == 'wiiu')
+      if (pLower.contains('wii u') || pLower == 'wiiu') {
         subfolder = 'wiiu';
-      else if (pLower == 'wii')
+      } else if (pLower == 'wii')
         subfolder = 'wbfs';
       else if (pLower == 'gamecube' || pLower == 'gc')
         subfolder = 'games'; // Nintendont style
@@ -792,7 +790,7 @@ class ForgeProvider extends ChangeNotifier {
       } else {
         // User requested to use the project root directory instead of Directory.current or Documents
         // This avoids OneDrive path issues.
-        final baseDir =
+        const baseDir =
             r'C:\Users\kidke\OneDrive\Desktop\Best Wii\wiigc_fusion';
         destPath = p.join(baseDir, subfolder, fileName);
       }
@@ -1155,8 +1153,8 @@ class ForgeProvider extends ChangeNotifier {
 
     // Try to extract byte counters from message if present
     final parsed = _parseBytesFromMessage(message);
-    int? downloadedBytes = parsed?.downloaded;
-    int? totalBytes = parsed?.total;
+    final int? downloadedBytes = parsed?.downloaded;
+    final int? totalBytes = parsed?.total;
 
     // If we have bytes, compute bytes/sec using deltas and smoothing
     // BUFFER JITTER PROTECTION: Detect redundant updates from polling
@@ -1169,8 +1167,9 @@ class ForgeProvider extends ChangeNotifier {
       if (downloadedBytes != null && _lastDownloadedBytes != null) {
         if (downloadedBytes > _lastDownloadedBytes!) hasProgress = true;
       } else {
-        if ((progress - _lastProgressValue).abs() > 0.000001)
+        if ((progress - _lastProgressValue).abs() > 0.000001) {
           hasProgress = true;
+        }
       }
 
       // If no progress (redundant) and short duration (interleaved), SKIP speed calc
@@ -1215,9 +1214,10 @@ class ForgeProvider extends ChangeNotifier {
     // _lastProgressTimestamp already updated above conditionally
     _lastProgressValue = progress.clamp(0.0, 1.0);
     if (downloadedBytes != null) _lastDownloadedBytes = downloadedBytes;
-    if (totalBytes != null)
+    if (totalBytes != null) {
       _lastTotalBytes =
           totalBytes; // retain total for UI and ETA when available
+    }
 
     // compute ETA: prefer bytes/sec when available, otherwise use percent/sec
     _estimatedRemaining = null;
@@ -1232,8 +1232,9 @@ class ForgeProvider extends ChangeNotifier {
       }
     } else if (_progressSpeed > 1e-6) {
       final secs = (1.0 - _lastProgressValue) / _progressSpeed;
-      if (secs.isFinite && secs >= 0)
+      if (secs.isFinite && secs >= 0) {
         _estimatedRemaining = Duration(seconds: secs.round());
+      }
     }
 
     // set progress and status
@@ -1253,7 +1254,7 @@ class ForgeProvider extends ChangeNotifier {
     if (shouldNotify) {
       // Ensure formatted speed shows bytes/sec when known, otherwise show dash
       debugPrint(
-          '[ForgeProvider] Progress: ${(_progress * 100).toInt()}% - $_statusMessage • speed=${formattedDownloadSpeed} • eta=${formattedEta}');
+          '[ForgeProvider] Progress: ${(_progress * 100).toInt()}% - $_statusMessage • speed=$formattedDownloadSpeed • eta=$formattedEta');
 
       notifyListeners();
     }
@@ -1342,7 +1343,7 @@ class ForgeProvider extends ChangeNotifier {
     if (singleMatch != null) {
       try {
         final downloaded = int.parse(singleMatch.group(1)!);
-        return _ParsedBytes(downloaded: downloaded, total: null);
+        return _ParsedBytes(downloaded: downloaded);
       } catch (_) {}
     }
 
@@ -1365,8 +1366,9 @@ class ForgeProvider extends ChangeNotifier {
   }
 
   String _formatBytesPerSecond(double bps) {
-    if (bps >= 1024 * 1024)
+    if (bps >= 1024 * 1024) {
       return '${(bps / (1024 * 1024)).toStringAsFixed(2)} MB/s';
+    }
     if (bps >= 1024) return '${(bps / 1024).toStringAsFixed(1)} KB/s';
     return '${bps.toStringAsFixed(0)} B/s';
   }
@@ -1402,8 +1404,8 @@ class ForgeProvider extends ChangeNotifier {
   }
 
   /// Persist and load helpers
-  Future<void> persistQueueNow() async => await _saveQueueToDisk();
-  Future<void> loadQueueNow() async => await _loadQueueFromDisk();
+  Future<void> persistQueueNow() async => _saveQueueToDisk();
+  Future<void> loadQueueNow() async => _loadQueueFromDisk();
 
   Future<String> _queueFilePath() async {
     if (_persistenceDir != null && _persistenceDir.isNotEmpty) {
@@ -1455,7 +1457,7 @@ class ForgeProvider extends ChangeNotifier {
   }
 
   /// Public helper for tests
-  Future<void> persistSettingsNow() async => await _saveSettingsToDisk();
+  Future<void> persistSettingsNow() async => _saveSettingsToDisk();
 
   Future<void> _loadSettingsFromDisk() async {
     try {
@@ -1623,7 +1625,6 @@ class ForgeProvider extends ChangeNotifier {
         region: game.region,
         downloadUrl: game.downloadUrl ?? game.pageUrl,
         coverUrl: game.coverUrl,
-        status: 'queued',
       ));
     }
 

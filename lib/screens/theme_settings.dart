@@ -192,7 +192,7 @@ class ThemeFloatingButton extends StatelessWidget {
                     colors: [primaryColor, theme.secondaryColor],
                   ),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.palette_outlined,
                   size: 16,
                   color: Colors.white,

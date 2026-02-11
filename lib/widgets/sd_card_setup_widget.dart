@@ -53,8 +53,6 @@ class _SDCardSetupWidgetState extends State<SDCardSetupWidget> {
     try {
       final result = await _sdService.setupSDCard(
         card.path,
-        createRequired: true,
-        createOptional: false,
       );
 
       setState(() {
@@ -82,7 +80,7 @@ class _SDCardSetupWidgetState extends State<SDCardSetupWidget> {
     return Card(
       color: const Color(0xFF1A1A2E),
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -148,7 +146,7 @@ class _SDCardSetupWidgetState extends State<SDCardSetupWidget> {
             if (_detectedCards.isEmpty && !_isScanning)
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(32.0),
+                  padding: const EdgeInsets.all(32),
                   child: Column(
                     children: [
                       Icon(Icons.sd_card_alert,
@@ -187,7 +185,6 @@ class _SDCardSetupWidgetState extends State<SDCardSetupWidget> {
           color: card.isWiiReady
               ? Colors.green.withOpacity(0.5)
               : Colors.orange.withOpacity(0.5),
-          width: 1,
         ),
       ),
       child: Column(
@@ -325,7 +322,7 @@ class _SDCardSetupWidgetState extends State<SDCardSetupWidget> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildFileStructureItem(Icons.folder, '${card.path}',
+                      _buildFileStructureItem(Icons.folder, card.path,
                           isRoot: true),
                       ...card.existingFolders.map((folder) =>
                           _buildFileStructureItem(

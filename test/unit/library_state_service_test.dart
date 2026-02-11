@@ -75,8 +75,7 @@ void main() {
           title: 'No ID 1',
           platform: 'Wii',
           sizeBytes: 100,
-          extension: '.iso',
-          gameId: null);
+          extension: '.iso');
 
       final noId2 = ScannedGame(
           path: '/b',

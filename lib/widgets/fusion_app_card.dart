@@ -21,8 +21,8 @@ class FusionAppCard extends StatefulWidget {
   final String? localCover; // ⚡ Added for instant local display
 
   const FusionAppCard({
-    super.key,
     required this.game,
+    super.key,
     this.onInfo,
     this.onArchive,
     this.onForge,
@@ -84,7 +84,7 @@ class _FusionAppCardState extends State<FusionAppCard> {
         duration: const Duration(milliseconds: 250),
         curve: Curves.easeOutCubic,
         transform: Matrix4.identity()
-          ..scale(isHovering ? 1.02 : 1.0, isHovering ? 1.02 : 1.0, 1.0),
+          ..scale(isHovering ? 1.02 : 1.0, isHovering ? 1.02 : 1.0, 1),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -130,7 +130,6 @@ class _FusionAppCardState extends State<FusionAppCard> {
                         gameId: widget.game.gameId,
                         platform: widget.game.platform,
                         title: widget.game.title,
-                        fit: BoxFit.cover,
                         fallbackBuilder: (context) => PremiumFallbackCover(
                           title: widget.game.title,
                           platform: widget.game.platform,
@@ -200,7 +199,7 @@ class _FusionAppCardState extends State<FusionAppCard> {
                     left: 0,
                     right: 0,
                     child: Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(12),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -217,14 +216,11 @@ class _FusionAppCardState extends State<FusionAppCard> {
                               color: Colors.white,
                               shadows: [
                                 Shadow(
-                                  color: Colors.black,
                                   blurRadius: 4,
                                   offset: Offset(0, 2),
                                 ),
                                 Shadow(
-                                  color: Colors.black,
                                   blurRadius: 10,
-                                  offset: Offset(0, 0),
                                 ),
                               ],
                             ),
@@ -286,7 +282,6 @@ class _FusionAppCardState extends State<FusionAppCard> {
                   borderRadius: BorderRadius.circular(FusionRadius.sm),
                   border: Border.all(
                     color: Colors.white.withValues(alpha: 0.15),
-                    width: 1,
                   ),
                 ),
                 child: Text(
@@ -384,22 +379,22 @@ class _FusionAppCardState extends State<FusionAppCard> {
                         ),
                       ],
                     ),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.download_rounded,
                           color: Colors.white,
                           size: 22,
-                          shadows: const [
+                          shadows: [
                             Shadow(
                               color: Colors.black26,
                               blurRadius: 2,
                             ),
                           ],
                         ),
-                        const SizedBox(width: 8),
-                        const Flexible(
+                        SizedBox(width: 8),
+                        Flexible(
                           child: Text(
                             'DOWNLOAD',
                             maxLines: 1,
@@ -473,18 +468,22 @@ class _FusionAppCardState extends State<FusionAppCard> {
     if (lower == 'wii' ||
         lower.contains('wii') &&
             !lower.contains('wii u') &&
-            !lower.contains('wiiu')) return 'Wii';
+            !lower.contains('wiiu')) {
+      return 'Wii';
+    }
     if (lower == 'wii u' || lower == 'wiiu') return 'Wii U';
     if (lower == 'gamecube' || lower == 'gc') return 'GC';
     if (lower == 'n64' || lower.contains('nintendo 64')) return 'N64';
-    if (lower == 'snes' || lower.contains('super nintendo') || lower == 'sfc')
+    if (lower == 'snes' || lower.contains('super nintendo') || lower == 'sfc') {
       return 'SNES';
+    }
     if (lower == 'nes' || lower == 'famicom') return 'NES';
     if (lower == 'gba' || lower.contains('game boy advance')) return 'GBA';
     if (lower == 'gbc' || lower.contains('game boy color')) return 'GBC';
     if (lower == 'gb' || lower == 'game boy') return 'GB';
-    if (lower == 'nds' || lower == 'ds' || lower.contains('nintendo ds'))
+    if (lower == 'nds' || lower == 'ds' || lower.contains('nintendo ds')) {
       return 'NDS';
+    }
     if (lower == '3ds' || lower.contains('nintendo 3ds')) return '3DS';
 
     // Sega consoles
@@ -495,8 +494,9 @@ class _FusionAppCardState extends State<FusionAppCard> {
     if (lower == 'saturn') return 'SAT';
 
     // Sony consoles
-    if (lower == 'ps1' || lower == 'playstation' || lower == 'psx')
+    if (lower == 'ps1' || lower == 'playstation' || lower == 'psx') {
       return 'PS1';
+    }
     if (lower == 'ps2' || lower == 'playstation 2') return 'PS2';
     if (lower == 'psp' || lower.contains('playstation portable')) return 'PSP';
 
@@ -510,33 +510,41 @@ class _FusionAppCardState extends State<FusionAppCard> {
     final lower = platform.toLowerCase();
 
     // Nintendo - Blue/Cyan family
-    if (lower == 'wii' || lower.contains('wii') && !lower.contains('wii u'))
+    if (lower == 'wii' || lower.contains('wii') && !lower.contains('wii u')) {
       return OrbColors.orbitCyan;
+    }
     if (lower == 'wii u' || lower == 'wiiu') return const Color(0xFF00A8E8);
     if (lower == 'gamecube' || lower == 'gc') return OrbColors.orbitPurple;
-    if (lower == 'n64' || lower.contains('nintendo 64'))
+    if (lower == 'n64' || lower.contains('nintendo 64')) {
       return const Color(0xFF009B4D); // N64 green
-    if (lower == 'snes' || lower.contains('super nintendo'))
+    }
+    if (lower == 'snes' || lower.contains('super nintendo')) {
       return const Color(0xFF7B68EE); // SNES purple
+    }
     if (lower == 'nes') return const Color(0xFFE60012); // NES red
-    if (lower == 'gba' || lower.contains('game boy advance'))
+    if (lower == 'gba' || lower.contains('game boy advance')) {
       return const Color(0xFF5B3694); // GBA purple
-    if (lower == 'gbc' || lower.contains('game boy color'))
+    }
+    if (lower == 'gbc' || lower.contains('game boy color')) {
       return const Color(0xFF8B00FF); // GBC purple
+    }
     if (lower == 'gb') return const Color(0xFF8BBD39); // GB green
-    if (lower == 'nds' || lower == 'ds')
+    if (lower == 'nds' || lower == 'ds') {
       return const Color(0xFF5A5A5A); // DS silver
+    }
     if (lower == '3ds') return const Color(0xFFD4002A); // 3DS red
 
     // Sega - Blue family
-    if (lower == 'genesis' || lower.contains('mega drive'))
+    if (lower == 'genesis' || lower.contains('mega drive')) {
       return const Color(0xFF0060A8); // Sega blue
+    }
     if (lower == 'dreamcast') return const Color(0xFFFF6600); // DC orange
     if (lower == 'saturn') return const Color(0xFF003087); // Saturn blue
 
     // Sony - Blue family
-    if (lower == 'ps1' || lower == 'psx' || lower == 'playstation')
+    if (lower == 'ps1' || lower == 'psx' || lower == 'playstation') {
       return const Color(0xFF003791);
+    }
     if (lower == 'ps2') return const Color(0xFF003791);
     if (lower == 'psp') return const Color(0xFF003791);
 
@@ -570,7 +578,6 @@ class _FusionAppCardState extends State<FusionAppCard> {
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: color.withValues(alpha: isPrimary ? 0.85 : 0.3),
-                width: 1,
               ),
             ),
             child: Icon(

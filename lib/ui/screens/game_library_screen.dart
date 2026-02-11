@@ -3,15 +3,16 @@
 // PlayStation/Xbox-style game library with stunning visuals
 // ═══════════════════════════════════════════════════════════════════════════
 
-import 'package:flutter/material.dart';
-import 'dart:ui';
 import 'dart:io';
+
+import 'package:flutter/material.dart';
+
+import '../../globals.dart';
+import '../../services/scanner_service.dart';
+import '../../widgets/empty_state.dart' as ws;
 import '../fusion/design_system.dart';
 import '../fusion/game_cover_card.dart';
 import '../widgets/premium_game_info_panel.dart';
-import '../../widgets/empty_state.dart' as ws;
-import '../../services/scanner_service.dart';
-import '../../globals.dart';
 
 /// Filter options
 enum PlatformFilter {
@@ -55,7 +56,7 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
   // State
   List<GameCardData> _games = [];
   List<GameCardData> _filteredGames = [];
-  Map<String, ScannedGame> _scannedGamesMap =
+  final Map<String, ScannedGame> _scannedGamesMap =
       {}; // Map game ID to full metadata
   bool _isLoading = true;
   bool _isScanning = false;
@@ -120,7 +121,7 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
     });
   }
 
-  void _deleteSelectedGames() async {
+  Future<void> _deleteSelectedGames() async {
     final count = _selectedGameIds.length;
     if (count == 0) return;
 
@@ -196,7 +197,7 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
   Future<void> _loadDrives() async {
     // Detect removable drives on Windows
     final drives = <String>[];
-    for (var letter in 'DEFGHIJKLMNOPQRSTUVWXYZ'.split('')) {
+    for (final letter in 'DEFGHIJKLMNOPQRSTUVWXYZ'.split('')) {
       final path = '$letter:\\';
       if (Directory(path).existsSync()) {
         try {
@@ -298,8 +299,9 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
   String _formatSize(int bytes) {
     if (bytes < 1024) return '$bytes B';
     if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
-    if (bytes < 1024 * 1024 * 1024)
+    if (bytes < 1024 * 1024 * 1024) {
       return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
+    }
     return '${(bytes / (1024 * 1024 * 1024)).toStringAsFixed(2)} GB';
   }
 
@@ -466,7 +468,7 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
       height: 80, // Slightly taller for better spacing
       padding: const EdgeInsets.fromLTRB(32, 24, 32, 12),
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: OrbColors.glassBorder)),
+        border: const Border(bottom: BorderSide(color: OrbColors.glassBorder)),
         color: OrbColors.bgSecondary
             .withValues(alpha: 0.3), // Subtle glass overlay
       ),
@@ -491,17 +493,17 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "GAME LIBRARY",
+                'GAME LIBRARY',
                 style: OrbText.headlineMedium.copyWith(
                   letterSpacing: 1.5,
                   fontWeight: FontWeight.w700,
                 ),
               ),
               Text(
-                "${_filteredGames.length} TITLES DETECTED",
+                '${_filteredGames.length} TITLES DETECTED',
                 style: OrbText.caption.copyWith(
                   color: OrbColors.orbitCyan,
-                  letterSpacing: 2.0,
+                  letterSpacing: 2,
                   fontSize: 10,
                 ),
               ),
@@ -523,13 +525,13 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
               child: DropdownButton<String>(
                 value: _selectedDrive,
                 dropdownColor: OrbColors.bgSecondary,
-                icon: Icon(Icons.expand_more_rounded,
+                icon: const Icon(Icons.expand_more_rounded,
                     color: OrbColors.orbitCyan, size: 20),
                 style:
                     OrbText.labelMedium.copyWith(color: OrbColors.textPrimary),
                 items: _availableDrives
                     .map((d) =>
-                        DropdownMenuItem(value: d, child: Text("DRIVE $d")))
+                        DropdownMenuItem(value: d, child: Text('DRIVE $d')))
                     .toList(),
                 onChanged: (v) => setState(() => _selectedDrive = v),
               ),
@@ -568,7 +570,7 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
                       const Icon(Icons.radar_rounded,
                           color: Colors.white, size: 18),
                     const SizedBox(width: 8),
-                    Text(_isScanning ? "SCANNING" : "SCAN DRIVE",
+                    Text(_isScanning ? 'SCANNING' : 'SCAN DRIVE',
                         style: OrbText.labelMedium.copyWith(
                             color: Colors.white, fontWeight: FontWeight.w700)),
                   ],
@@ -611,7 +613,7 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         isDense: true,
-                        hintText: "Search library...",
+                        hintText: 'Search library...',
                         hintStyle: OrbText.bodyMedium
                             .copyWith(color: OrbColors.textMuted),
                       ),
@@ -625,9 +627,9 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
           const SizedBox(width: 24),
 
           // Inline Stats
-          _buildInlineStat(Icons.sports_esports_rounded, "$_wiiCount Wii"),
+          _buildInlineStat(Icons.sports_esports_rounded, '$_wiiCount Wii'),
           const SizedBox(width: 16),
-          _buildInlineStat(Icons.gamepad_rounded, "$_gcCount GC"),
+          _buildInlineStat(Icons.gamepad_rounded, '$_gcCount GC'),
           const SizedBox(width: 16),
           _buildInlineStat(Icons.storage_rounded, _totalSize),
 
@@ -656,13 +658,13 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
           Row(
             children: [
               _buildFilterIcon(
-                  Icons.grid_view_rounded, PlatformFilter.all, "Show All"),
+                  Icons.grid_view_rounded, PlatformFilter.all, 'Show All'),
               const SizedBox(width: 4),
               _buildFilterIcon(
-                  Icons.disc_full_rounded, PlatformFilter.wii, "Wii Only"),
+                  Icons.disc_full_rounded, PlatformFilter.wii, 'Wii Only'),
               const SizedBox(width: 4),
               _buildFilterIcon(Icons.videogame_asset_rounded,
-                  PlatformFilter.gamecube, "GameCube Only"),
+                  PlatformFilter.gamecube, 'GameCube Only'),
             ],
           ),
 
@@ -1002,7 +1004,7 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
     }
   }
 
-  void _convertGame(dynamic scannedGame) async {
+  Future<void> _convertGame(dynamic scannedGame) async {
     final currentExt = scannedGame.path.toLowerCase().split('.').last;
 
     // Show conversion options
@@ -1057,7 +1059,7 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
     );
   }
 
-  void _openGameFolder(String filePath) async {
+  Future<void> _openGameFolder(String filePath) async {
     try {
       final directory = File(filePath).parent.path;
       await Process.run('explorer.exe', [directory]);
@@ -1070,7 +1072,7 @@ class _GameLibraryScreenState extends State<GameLibraryScreen>
     }
   }
 
-  void _downloadCover(GameCardData game) async {
+  Future<void> _downloadCover(GameCardData game) async {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Downloading cover for ${game.title}...')),
     );
@@ -1222,7 +1224,6 @@ class _GameDetailsDialog extends StatelessWidget {
           color: FusionColors.surfaceCard,
           border: Border.all(
             color: FusionColors.borderSubtle,
-            width: 1,
           ),
         ),
         child: Column(

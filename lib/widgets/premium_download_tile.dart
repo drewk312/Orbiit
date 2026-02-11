@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
 import 'dart:ui';
+
+import 'package:flutter/material.dart';
+
 import '../ui/fusion_ui/fusion_ui.dart';
 
 class PremiumDownloadTile extends StatelessWidget {
@@ -12,13 +14,13 @@ class PremiumDownloadTile extends StatelessWidget {
   final VoidCallback? onCancel;
 
   const PremiumDownloadTile({
-    super.key,
     required this.title,
     required this.status,
     required this.progress,
     required this.speed,
     required this.eta,
     required this.size,
+    super.key,
     this.onCancel,
   });
 
@@ -44,7 +46,6 @@ class PremiumDownloadTile extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
                     color: Colors.white.withOpacity(0.08),
-                    width: 1,
                   ),
                 ),
                 child: Column(
@@ -94,7 +95,7 @@ class PremiumDownloadTile extends StatelessWidget {
                         ),
                         // Percentage Text (Monospace prevents jittering width)
                         Text(
-                          "${(animatedProgress * 100).toStringAsFixed(1)}%",
+                          '${(animatedProgress * 100).toStringAsFixed(1)}%',
                           style: const TextStyle(
                             color: Colors.white,
                             fontFamily: 'monospace',
@@ -146,7 +147,6 @@ class PremiumDownloadTile extends StatelessWidget {
                                     color:
                                         SpaceColors.cyanNeon.withOpacity(0.5),
                                     blurRadius: 6,
-                                    spreadRadius: 0,
                                   )
                                 ],
                               ),
@@ -163,9 +163,9 @@ class PremiumDownloadTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         _buildStatItem(
-                            Icons.speed, speed.isEmpty ? "-- MB/s" : speed),
+                            Icons.speed, speed.isEmpty ? '-- MB/s' : speed),
                         _buildStatItem(
-                            Icons.timer_outlined, eta.isEmpty ? "--:--" : eta),
+                            Icons.timer_outlined, eta.isEmpty ? '--:--' : eta),
                         _buildStatItem(Icons.data_usage, size),
                       ],
                     ),

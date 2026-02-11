@@ -1,8 +1,9 @@
 import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as p;
-import 'package:wiigc_fusion/services/scanner_service.dart';
 import 'package:wiigc_fusion/ffi/forge_bridge.dart';
+import 'package:wiigc_fusion/services/scanner_service.dart';
 
 // Fake ForgeBridge that forces Mock Mode
 class FakeForgeBridge implements ForgeBridge {
@@ -87,7 +88,7 @@ void main() {
     });
 
     test('Extracts ID from parent folder', () async {
-      var subPath = p.join('Smash Bros Melee [GALE01]', 'game.iso');
+      final subPath = p.join('Smash Bros Melee [GALE01]', 'game.iso');
       await createValidGameFile(subPath);
 
       final results = await scanner.scanDirectory(tempDir.path);

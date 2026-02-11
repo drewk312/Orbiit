@@ -15,15 +15,16 @@
 
 import 'dart:async';
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
-import '../ui/services/checksum_service.dart';
-import '../services/myrient_service.dart';
+
 import '../services/archive_org_service.dart';
-import '../services/vimm_service.dart';
+import '../services/myrient_service.dart';
 import '../services/unified_search_service.dart';
-import '../models/game_result.dart';
+import '../services/vimm_service.dart';
+import '../ui/services/checksum_service.dart';
 
 /// Enhanced download task with hash verification
 class EnhancedDownloadTask {
@@ -40,7 +41,7 @@ class EnhancedDownloadTask {
   String? expectedMD5;
 
   // Progress
-  double progress = 0.0;
+  double progress = 0;
   int downloadedBytes = 0;
   int totalBytes = 0;
   String? currentSource;
@@ -72,19 +73,23 @@ class EnhancedDownloadTask {
   String get formattedSize {
     if (totalBytes == 0) return 'Unknown';
     if (totalBytes < 1024) return '${totalBytes}B';
-    if (totalBytes < 1024 * 1024)
+    if (totalBytes < 1024 * 1024) {
       return '${(totalBytes / 1024).toStringAsFixed(1)}KB';
-    if (totalBytes < 1024 * 1024 * 1024)
+    }
+    if (totalBytes < 1024 * 1024 * 1024) {
       return '${(totalBytes / (1024 * 1024)).toStringAsFixed(1)}MB';
+    }
     return '${(totalBytes / (1024 * 1024 * 1024)).toStringAsFixed(2)}GB';
   }
 
   String get formattedDownloaded {
     if (downloadedBytes < 1024) return '${downloadedBytes}B';
-    if (downloadedBytes < 1024 * 1024)
+    if (downloadedBytes < 1024 * 1024) {
       return '${(downloadedBytes / 1024).toStringAsFixed(1)}KB';
-    if (downloadedBytes < 1024 * 1024 * 1024)
+    }
+    if (downloadedBytes < 1024 * 1024 * 1024) {
       return '${(downloadedBytes / (1024 * 1024)).toStringAsFixed(1)}MB';
+    }
     return '${(downloadedBytes / (1024 * 1024 * 1024)).toStringAsFixed(2)}GB';
   }
 
@@ -147,15 +152,14 @@ class EnhancedDownloadService {
   /// Add download with automatic source discovery
   Future<EnhancedDownloadTask> addDownload({
     required String title,
-    String? gameId,
+    required String destinationFolder, String? gameId,
     String? initialUrl,
-    required String destinationFolder,
     String? expectedSHA1,
     String? expectedSHA256,
     String? expectedMD5,
   }) async {
     final taskId = '${DateTime.now().millisecondsSinceEpoch}_${title.hashCode}';
-    List<String> sourceUrls = [];
+    final List<String> sourceUrls = [];
 
     // If initial URL provided, use it as first source
     if (initialUrl != null) {
@@ -367,7 +371,7 @@ class EnhancedDownloadService {
     } catch (e) {
       if (sink != null) {
         try {
-          await sink!.close();
+          await sink.close();
         } catch (_) {}
       }
       rethrow;

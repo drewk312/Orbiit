@@ -209,9 +209,9 @@ class MyrientService {
 
       final lower = name.toLowerCase();
       String format = 'ISO';
-      if (lower.endsWith('.rvz'))
+      if (lower.endsWith('.rvz')) {
         format = 'RVZ';
-      else if (lower.endsWith('.zip'))
+      } else if (lower.endsWith('.zip'))
         format = 'ZIP';
       else if (lower.endsWith('.7z'))
         format = '7Z';
@@ -235,13 +235,13 @@ class MyrientService {
     try {
       final parts = sizeStr.split(' ');
       if (parts.length < 2) return 0;
-      double value = double.tryParse(parts[0]) ?? 0;
-      String unit = parts[1].toUpperCase();
+      final double value = double.tryParse(parts[0]) ?? 0;
+      final String unit = parts[1].toUpperCase();
 
       int bytes = value.toInt();
-      if (unit.contains('GI'))
+      if (unit.contains('GI')) {
         bytes = (value * 1024 * 1024 * 1024).toInt();
-      else if (unit.contains('MI'))
+      } else if (unit.contains('MI'))
         bytes = (value * 1024 * 1024).toInt();
       else if (unit.contains('KI'))
         bytes = (value * 1024).toInt();
@@ -297,7 +297,6 @@ class MyrientService {
       pageUrl: pageUrl,
       downloadUrl: entry.url,
       isDirectDownload: true,
-      requiresBrowser: false,
       format: entry.format,
       size: _formatBytes(entry.size),
     );
@@ -307,8 +306,9 @@ class MyrientService {
     if (bytes <= 0) return 'Unknown';
     if (bytes < 1024) return '$bytes B';
     if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
-    if (bytes < 1024 * 1024 * 1024)
+    if (bytes < 1024 * 1024 * 1024) {
       return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
+    }
     return '${(bytes / (1024 * 1024 * 1024)).toStringAsFixed(1)} GB';
   }
 }

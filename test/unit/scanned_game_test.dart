@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wiigc_fusion/services/scanner_service.dart';
 import 'package:wiigc_fusion/models/disc_metadata.dart';
+import 'package:wiigc_fusion/services/scanner_service.dart';
 
 void main() {
   group('ScannedGame Model', () {

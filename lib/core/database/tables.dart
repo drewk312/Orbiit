@@ -44,7 +44,7 @@ class Tasks extends Table {
   TextColumn get state => text()();
   IntColumn get priority => integer().withDefault(const Constant(5))();
   TextColumn get payload => text()();
-  RealColumn get progressPercent => real().withDefault(const Constant(0.0))();
+  RealColumn get progressPercent => real().withDefault(const Constant(0))();
   TextColumn get progressMessage => text().nullable()();
   IntColumn get startedTimestamp => integer().nullable()();
   IntColumn get completedTimestamp => integer().nullable()();

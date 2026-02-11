@@ -1,17 +1,19 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'dart:io';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart'; // Add this dependency if missing
+import 'package:provider/provider.dart';
+
 import '../../models/game_result.dart';
 import '../../providers/forge_provider.dart';
+import '../../services/download_center_service.dart';
 import '../ui/fusion/design_system.dart';
-import '../widgets/xbox_download_card.dart';
 import '../widgets/cascading_cover_image.dart';
 import '../widgets/immersive_glass_header.dart';
 import '../widgets/premium_fallback_cover.dart';
-import '../../services/download_center_service.dart';
+import '../widgets/xbox_download_card.dart';
 
 /// Fusion Download Screen
 /// Focuses on active download with detailed progress, clear queue management,
@@ -31,7 +33,7 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
   // Processing State
   bool _isProcessing = false;
   String _processStatus = '';
-  double _processProgress = 0.0;
+  double _processProgress = 0;
   File? _processingFile;
 
   @override
@@ -139,8 +141,8 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
             ImmersiveGlassHeader(
               title: 'Downloads',
               subtitle: 'Manage your game installations',
-              leading:
-                  Icon(Icons.download_rounded, color: FusionColors.textPrimary),
+              leading: const Icon(Icons.download_rounded,
+                  color: FusionColors.textPrimary),
               actions: [
                 IconButton(
                   icon: const Icon(Icons.folder_open,
@@ -222,7 +224,7 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
                         const Icon(Icons.save_alt,
                             color: FusionColors.nebulaCyan, size: 20),
                         const SizedBox(width: 8),
-                        Text('Ready to Import',
+                        const Text('Ready to Import',
                             style: FusionTypography.headlineMedium),
                         const Spacer(),
                         Container(
@@ -248,11 +250,11 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
 
                   // Section: Active Download
                   if (active != null) ...[
-                    Row(
+                    const Row(
                       children: [
-                        const Icon(Icons.play_circle_outline,
+                        Icon(Icons.play_circle_outline,
                             color: FusionColors.wiiBlue, size: 20),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Text('Downloading Now',
                             style: FusionTypography.headlineMedium),
                       ],
@@ -265,7 +267,6 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
                       bytesDownloaded: forge.currentDownloadedBytes,
                       totalBytes: forge.currentTotalBytes,
                       speedBytesPerSec: forge.downloadSpeedBps ?? 0.0,
-                      isPaused: false, // Future: Implement pause
                       onCancel: forge.cancelForge,
                     ),
                     const SizedBox(height: 32),
@@ -283,7 +284,8 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
                         const Icon(Icons.queue_music,
                             color: FusionColors.textSecondary, size: 20),
                         const SizedBox(width: 8),
-                        Text('Up Next', style: FusionTypography.headlineMedium),
+                        const Text('Up Next',
+                            style: FusionTypography.headlineMedium),
                         const Spacer(),
                         Container(
                           padding: const EdgeInsets.symmetric(
@@ -392,7 +394,8 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
                   size: 48, color: FusionColors.textMuted),
             ),
             const SizedBox(height: 24),
-            Text('No Active Downloads', style: FusionTypography.displayLarge),
+            const Text('No Active Downloads',
+                style: FusionTypography.displayLarge),
             const SizedBox(height: 8),
             if (_detectedArchives.isNotEmpty)
               Text(
@@ -434,7 +437,6 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen> {
               primaryUrl: game.coverUrl ?? '',
               platform: game.platform, // Correct platform
               title: game.title, // Correct title for hunting
-              fit: BoxFit.cover,
               fallbackBuilder: (_) => PremiumFallbackCover(
                 title: game.title,
                 platform: game.platform,

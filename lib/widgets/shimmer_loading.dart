@@ -48,7 +48,7 @@ class _ShimmerLoadingState extends State<ShimmerLoading>
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
+              colors: const [
                 FusionColors.bgSecondary,
                 FusionColors.bgTertiary,
                 FusionColors.bgSecondary,
@@ -61,7 +61,6 @@ class _ShimmerLoadingState extends State<ShimmerLoading>
             ),
             border: Border.all(
               color: FusionColors.glassBorder,
-              width: 1,
             ),
           ),
         );

@@ -8,8 +8,8 @@ class VideoBackgroundWidget extends StatefulWidget {
   final Widget? overlay;
 
   const VideoBackgroundWidget({
-    super.key,
     required this.videoPath,
+    super.key,
     this.opacity = 0.5,
     this.overlay,
   });
@@ -42,7 +42,7 @@ class _VideoBackgroundWidgetState extends State<VideoBackgroundWidget> {
     try {
       await _controller.initialize();
       await _controller.setLooping(true);
-      await _controller.setVolume(0.0);
+      await _controller.setVolume(0);
       await _controller.play();
       if (mounted) {
         setState(() => _initialized = true);

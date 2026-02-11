@@ -10,10 +10,11 @@
 //   - Wii console discovery via UDP broadcast
 // ============================================================================
 
-import 'dart:io';
 import 'dart:async';
-import 'dart:typed_data';
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/foundation.dart';
 
 // ============================================================================
@@ -54,8 +55,8 @@ class DiscoveredWii {
 
   DiscoveredWii({
     required this.ipAddress,
-    this.nickname,
     required this.macAddress,
+    this.nickname,
     DateTime? discoveredAt,
     this.isOnline = true,
   }) : discoveredAt = discoveredAt ?? DateTime.now();
@@ -265,7 +266,6 @@ class WiiLoadService {
       final wii = DiscoveredWii(
         ipAddress: ip,
         macAddress: 'Unknown', // Would need ARP lookup
-        nickname: null,
       );
 
       if (!_discoveredWiis.contains(wii)) {
@@ -309,7 +309,7 @@ class WiiLoadService {
       final socket = await Socket.connect(
         wiiIp,
         WiiLoadProtocol.port,
-        timeout: Duration(seconds: WiiLoadProtocol.connectionTimeout),
+        timeout: const Duration(seconds: WiiLoadProtocol.connectionTimeout),
       );
 
       await socket.close();
@@ -364,7 +364,7 @@ class WiiLoadService {
       socket = await Socket.connect(
         wiiIp,
         WiiLoadProtocol.port,
-        timeout: Duration(seconds: WiiLoadProtocol.connectionTimeout),
+        timeout: const Duration(seconds: WiiLoadProtocol.connectionTimeout),
       );
 
       // Prepare WiiLoad header
@@ -595,7 +595,7 @@ class WiiLoadProvider extends ChangeNotifier {
   /// Test connection to selected Wii
   Future<bool> testConnection() async {
     if (_selectedWii == null) return false;
-    return await _service.testConnection(_selectedWii!.ipAddress);
+    return _service.testConnection(_selectedWii!.ipAddress);
   }
 
   /// Send executable to selected Wii

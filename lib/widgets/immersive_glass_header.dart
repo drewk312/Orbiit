@@ -1,7 +1,9 @@
 import 'dart:ui';
-import '../ui/fusion/design_system.dart';
+
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
+
+import '../ui/fusion/design_system.dart';
 
 /// ImmersiveGlassHeader - Hides native Windows title bar and provides glassmorphic header
 /// with window controls and navigation
@@ -42,20 +44,19 @@ class _ImmersiveGlassHeaderState extends State<ImmersiveGlassHeader> {
       behavior: HitTestBehavior.translucent,
       child: Container(
         height: widget.subtitle != null ? 60 : widget.height,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.transparent,
           border: Border(
             bottom: BorderSide(
               color: FusionColors.glassBorder,
-              width: 1,
             ),
           ),
         ),
         child: ClipRRect(
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
+            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 // "Midnight Aurora" Glass Header
                 color: FusionColors.glass, // 8% white base
               ),
@@ -72,7 +73,7 @@ class _ImmersiveGlassHeaderState extends State<ImmersiveGlassHeader> {
 
                   // App icon (only show if using default title)
                   if (widget.titleWidget == null) ...[
-                    _GlowIcon(
+                    const _GlowIcon(
                       icon: Icons.gamepad_rounded,
                       color: FusionColors.electricCyan,
                       size: 22,
@@ -102,7 +103,6 @@ class _ImmersiveGlassHeaderState extends State<ImmersiveGlassHeader> {
                         borderRadius: BorderRadius.circular(FusionRadius.lg),
                         border: Border.all(
                           color: FusionColors.glassBorder,
-                          width: 1,
                         ),
                         boxShadow: [
                           BoxShadow(
@@ -172,12 +172,12 @@ class _ImmersiveGlassHeaderState extends State<ImmersiveGlassHeader> {
     );
   }
 
-  void _minimizeWindow() async {
+  Future<void> _minimizeWindow() async {
     await windowManager.minimize();
   }
 
-  void _toggleMaximize() async {
-    bool isMaximized = await windowManager.isMaximized();
+  Future<void> _toggleMaximize() async {
+    final bool isMaximized = await windowManager.isMaximized();
     if (isMaximized) {
       await windowManager.unmaximize();
     } else {
@@ -188,7 +188,7 @@ class _ImmersiveGlassHeaderState extends State<ImmersiveGlassHeader> {
     });
   }
 
-  void _closeWindow() async {
+  Future<void> _closeWindow() async {
     await windowManager.close();
   }
 }
@@ -285,9 +285,9 @@ class _WindowControlButton extends StatefulWidget {
   const _WindowControlButton({
     required this.icon,
     required this.onPressed,
+    required this.size,
     this.hoverColor = const Color(0x4DFFFFFF),
     this.iconColor = const Color(0xB3FFFFFF),
-    required this.size,
   });
 
   @override
@@ -349,8 +349,8 @@ class ImmersiveAppShell extends StatelessWidget {
   final bool showWindowControls;
 
   const ImmersiveAppShell({
-    super.key,
     required this.child,
+    super.key,
     this.title = 'Orbiit',
     this.subtitle,
     this.titleWidget,

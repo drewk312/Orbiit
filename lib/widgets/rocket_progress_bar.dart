@@ -7,8 +7,8 @@ class SpaceRocketLoader extends StatelessWidget {
   final double width;
 
   const SpaceRocketLoader({
-    super.key,
     required this.progress,
+    super.key,
     this.height = 60,
     this.width = double.infinity,
   });
@@ -104,7 +104,7 @@ class SpaceRocketPainter extends CustomPainter {
 
     // Draw 10 "stars" along the path
     for (int i = 0; i < 10; i++) {
-      double starX = (size.width / 10) * i + (size.width / 20);
+      final double starX = (size.width / 10) * i + (size.width / 20);
       if (starX > rocketTipX) {
         // Only draw stars ahead of the rocket
         canvas.drawCircle(Offset(starX, centerY), 1.5, trackPaint);
@@ -133,7 +133,7 @@ class SpaceRocketPainter extends CustomPainter {
     flamePath.moveTo(0, 0); // At rocket tail
 
     // Fluctuate flame length
-    double flameLen = -15.0 - (math.sin(loop * math.pi * 4) * 4);
+    final double flameLen = -15.0 - (math.sin(loop * math.pi * 4) * 4);
 
     flamePath.lineTo(flameLen, -3);
     flamePath.lineTo(flameLen - 2, 0); // Tip of flame
@@ -161,23 +161,23 @@ class SpaceRocketPainter extends CustomPainter {
     for (int i = 0; i < randomSeeds.length; i++) {
       // Create a "time" value for this particle based on loop + index
       // This creates the "conveyor belt" effect of smoke moving backwards
-      double t = (loop + (i / randomSeeds.length)) % 1.0;
+      final double t = (loop + (i / randomSeeds.length)) % 1.0;
 
       // Position: Moves from tail (0) backwards
       // We limit the trail length based on progress so smoke doesn't appear at x=0 instantly
-      double maxTrail = math.min(100.0, tailX);
-      double dx = t * maxTrail;
+      final double maxTrail = math.min(100, tailX);
+      final double dx = t * maxTrail;
 
-      double currentX = tailX - dx;
+      final double currentX = tailX - dx;
       if (currentX < 0) continue; // Don't draw off screen
 
       // Turbulence: Random Y offset that grows as it gets further away
       // randomSeeds[i] gives us a consistent "lane" for this particle
-      double turbulence = (randomSeeds[i] - 0.5) * 20 * t;
-      double currentY = centerY + turbulence;
+      final double turbulence = (randomSeeds[i] - 0.5) * 20 * t;
+      final double currentY = centerY + turbulence;
 
       // Size: Grows as it moves away
-      double radius = 3.0 + (t * 12.0);
+      final double radius = 3.0 + (t * 12.0);
 
       // Color: Transition from Orange -> Grey -> Transparent
       Color smokeColor;
@@ -188,7 +188,7 @@ class SpaceRocketPainter extends CustomPainter {
       }
 
       // Opacity: Fades out at the end
-      double opacity = (1.0 - t).clamp(0.0, 1.0);
+      final double opacity = (1.0 - t).clamp(0.0, 1.0);
 
       canvas.drawCircle(Offset(currentX, currentY), radius,
           Paint()..color = smokeColor.withOpacity(opacity * 0.5));
@@ -234,7 +234,7 @@ class SpaceRocketPainter extends CustomPainter {
       colors: [Colors.white, Color(0xFFBDBDBD)],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-    ).createShader(Rect.fromLTWH(-40, -10, 40, 20));
+    ).createShader(const Rect.fromLTWH(-40, -10, 40, 20));
 
     canvas.drawPath(pathBody, paintBody);
 

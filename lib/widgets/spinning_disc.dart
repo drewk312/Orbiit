@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 
 /// Spinning Disc Widget - Animated loading indicator
 class SpinningDisc extends StatefulWidget {

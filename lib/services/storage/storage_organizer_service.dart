@@ -11,8 +11,9 @@
 //   - Health checks and validation
 // ============================================================================
 
-import 'dart:io';
 import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as path;
 
@@ -366,7 +367,7 @@ class StorageOrganizerService {
   /// Read game ID from file header
   Future<String?> _readGameIdFromFile(File file) async {
     try {
-      final handle = await file.open(mode: FileMode.read);
+      final handle = await file.open();
       final header = await handle.read(6);
       await handle.close();
 

@@ -33,7 +33,7 @@ class GameTDBService {
     // Wii: https://art.gametdb.com/wii/cover/US/RMGE01.png
     // GameCube: https://art.gametdb.com/wii/cover/US/GMSE01.png - YES, GC games are under /wii/ on GameTDB!
 
-    final effectivePlatform = 'wii'; // Always use 'wii' for GameTDB covers
+    const effectivePlatform = 'wii'; // Always use 'wii' for GameTDB covers
 
     return '$_baseUrl/$effectivePlatform/$type/$region/$gameId.png';
   }
@@ -80,7 +80,7 @@ class GameTDBService {
   static Future<String?> getBestCover(String gameId,
       {String platform = 'wii'}) async {
     // Try 3D cover first
-    var url = getCoverUrl(gameId, platform: platform, type: cover3D);
+    var url = getCoverUrl(gameId, platform: platform);
     if (await _checkUrl(url)) return url;
 
     // Try 2D cover

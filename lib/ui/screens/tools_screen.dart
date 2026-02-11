@@ -1,26 +1,27 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
+
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:path/path.dart' as p;
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:path/path.dart' as p;
+
 import '../../core/database/database.dart';
+import '../../screens/controller_setup_screen.dart';
 import '../../screens/cover_art_manager_screen.dart';
+import '../../screens/file_import_screen.dart';
 import '../../screens/storage_organizer_screen.dart';
 import '../../screens/wiiload_screen.dart';
-import '../../screens/controller_setup_screen.dart';
-import '../../screens/file_import_screen.dart';
-import '../services/wiitdb_service.dart';
-import '../services/checksum_service.dart';
+import '../../widgets/sd_card_setup_widget.dart';
+import '../fusion/design_system.dart'; // FusionColors
 import '../services/archive_service.dart';
 import '../services/banner_service.dart';
 import '../services/cheat_code_service.dart';
-import '../services/file_utility_service.dart';
-import '../services/file_splitter_service.dart';
+import '../services/checksum_service.dart';
 import '../services/duplicate_detection_service.dart';
-import '../../widgets/sd_card_setup_widget.dart';
-import '../fusion/design_system.dart'; // FusionColors
-import '../fusion_ui/fusion_ui.dart'; // Unified Design System
+import '../services/file_splitter_service.dart';
+import '../services/file_utility_service.dart';
+import '../services/wiitdb_service.dart';
 
 /// Tools and utilities screen
 /// Exposes all advanced features like TinyWii's tools.rs
@@ -38,7 +39,7 @@ class _ToolsScreenState extends State<ToolsScreen> {
 
   bool _isProcessing = false;
   String _statusMessage = '';
-  double _progress = 0.0;
+  double _progress = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,7 @@ class _ToolsScreenState extends State<ToolsScreen> {
   Widget _buildProcessingView() {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32.0),
+        padding: const EdgeInsets.all(32),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -1206,7 +1207,7 @@ class _WiiThemesManagerDialogState extends State<WiiThemesManagerDialog> {
   String? _sdCardPath;
   bool _isDownloading = false;
   String _status = '';
-  double _progress = 0.0;
+  double _progress = 0;
 
   final List<Map<String, String>> _themeSources = [
     {
@@ -2834,7 +2835,7 @@ class _GameBackupManagerDialogState extends State<GameBackupManagerDialog> {
   String? _sourcePath;
   String? _destPath;
   bool _isProcessing = false;
-  double _progress = 0.0;
+  double _progress = 0;
   String _statusMessage = '';
 
   Future<String?> _getGameId(String path) async {
@@ -2846,7 +2847,7 @@ class _GameBackupManagerDialogState extends State<GameBackupManagerDialog> {
       handle = await file.open();
       // Check first 4 bytes for WBFS
       final header = await handle.read(4);
-      String magic = String.fromCharCodes(header);
+      final String magic = String.fromCharCodes(header);
 
       if (magic == 'WBFS') {
         await handle.setPosition(512); // standard WBFS header is 512 bytes
@@ -2956,7 +2957,7 @@ class _GameBackupManagerDialogState extends State<GameBackupManagerDialog> {
                         'Destination (USB/SD Root)', _destPath, Icons.usb,
                         (path) {
                       setState(() => _destPath = path);
-                    }, isFile: false),
+                    }),
 
                     const SizedBox(height: 20),
 
@@ -2968,12 +2969,12 @@ class _GameBackupManagerDialogState extends State<GameBackupManagerDialog> {
                         decoration: BoxDecoration(
                             color: Colors.black.withValues(alpha: 0.3),
                             borderRadius: BorderRadius.circular(8)),
-                        child: Row(
+                        child: const Row(
                           children: [
-                            const Icon(Icons.arrow_forward,
+                            Icon(Icons.arrow_forward,
                                 color: Colors.teal, size: 16),
-                            const SizedBox(width: 8),
-                            const Expanded(
+                            SizedBox(width: 8),
+                            Expanded(
                                 child: Text(
                               'Will be copied to correct /wbfs/ or /games/ folder automatically.',
                               style: TextStyle(

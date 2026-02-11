@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import '../models/game_result.dart';
 import '../core/app_logger.dart';
+import '../models/game_result.dart';
 
 /// Represents a single file entry from Archive.org metadata
 class ArchiveFile {
@@ -14,8 +14,8 @@ class ArchiveFile {
   ArchiveFile({
     required this.name,
     required this.size,
-    this.sha1,
     required this.downloadUrl,
+    this.sha1,
   });
 }
 
@@ -120,7 +120,7 @@ class ArchiveOrgService {
 
       if (data['response'] != null && data['response']['docs'] != null) {
         final docs = data['response']['docs'] as List;
-        for (var doc in docs) {
+        for (final doc in docs) {
           final identifier = doc['identifier']?.toString() ?? '';
           final title = doc['title']?.toString() ?? 'Unknown Title';
           final collection = (doc['collection'] is List)
@@ -164,8 +164,6 @@ class ArchiveOrgService {
             pageUrl: 'https://archive.org/details/$identifier',
             downloadUrl: 'https://archive.org/download/$identifier',
             sourceIdentifier: identifier,
-            isDirectDownload: false,
-            requiresBrowser: false,
             size: _formatSize(doc['item_size']),
           ));
         }

@@ -40,8 +40,8 @@ class SkraperSource implements CoverArtSource {
     try {
       final url = Uri.parse('$baseUrl/ssuserInfos.php').replace(
         queryParameters: {
-          'devid': _devId!,
-          'devpassword': _devPassword!,
+          'devid': _devId,
+          'devpassword': _devPassword,
           'softname': 'Orbiit',
           'output': 'json',
         },
@@ -67,8 +67,8 @@ class SkraperSource implements CoverArtSource {
       if (systemId == null) return null;
 
       final queryParams = {
-        'devid': _devId!,
-        'devpassword': _devPassword!,
+        'devid': _devId,
+        'devpassword': _devPassword,
         'softname': 'Orbiit',
         'output': 'json',
         'systemeid': systemId.toString(),
@@ -76,8 +76,8 @@ class SkraperSource implements CoverArtSource {
       };
 
       if (_userLogin != null && _userPassword != null) {
-        queryParams['ssid'] = _userLogin!;
-        queryParams['sspassword'] = _userPassword!;
+        queryParams['ssid'] = _userLogin;
+        queryParams['sspassword'] = _userPassword;
       }
 
       final url = Uri.parse('$baseUrl/jeuInfos.php').replace(

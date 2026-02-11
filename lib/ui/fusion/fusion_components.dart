@@ -10,9 +10,9 @@ class GlowButton extends StatefulWidget {
   final bool isCompact; // Added
 
   const GlowButton({
-    super.key,
     required this.label,
     required this.icon,
+    super.key,
     this.onPressed, // Optional now
     this.color,
     this.glowColor,
@@ -122,8 +122,8 @@ class GlassCard extends StatelessWidget {
   final BorderRadius? borderRadius; // Added
 
   const GlassCard({
-    super.key,
     required this.child,
+    super.key,
     this.padding = const EdgeInsets.all(16),
     this.onTap,
     this.width,

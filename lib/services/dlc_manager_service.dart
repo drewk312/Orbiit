@@ -1,10 +1,11 @@
 import 'dart:io';
+
+import 'package:archive/archive.dart';
+import 'package:archive/archive_io.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as path;
-import 'package:flutter/foundation.dart';
-import 'package:archive/archive.dart';
-import 'package:archive/archive_io.dart';
 
 class DLCManagerService {
   static final DLCManagerService _instance = DLCManagerService._internal();
@@ -80,7 +81,7 @@ class DLCManagerService {
       if (tempDir.existsSync()) tempDir.deleteSync(recursive: true);
 
       onStatus('xyzzy-mod Installed!');
-      onProgress(1.0);
+      onProgress(1);
     } catch (e) {
       _logger.severe('xyzzy install failed', e);
       rethrow;
@@ -121,7 +122,7 @@ class DLCManagerService {
 
   Future<void> _copyDirectory(Directory source, Directory dest) async {
     // Standard recursive copy
-    await for (final entity in source.list(recursive: false)) {
+    await for (final entity in source.list()) {
       if (entity is Directory) {
         final newDirectory =
             Directory(path.join(dest.path, path.basename(entity.path)));

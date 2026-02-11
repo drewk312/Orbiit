@@ -1,21 +1,23 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
-import 'discovery.dart';
-import 'homebrew.dart';
-import 'home_screen.dart';
-// import '../widgets/download_status_overlay.dart';
-import '../ui/screens/tools_hub_screen.dart' show ToolsHubScreen;
-import '../ui/screens/game_library_screen.dart' show GameLibraryScreen;
-import '../ui/screens/download_center.dart' show DownloadCenterScreen;
+
 import '../screens/settings_screen.dart' show SettingsScreen;
-import '../widgets/fusion_sidebar.dart';
-import '../services/navigation_service.dart';
 import '../services/legal_notice_service.dart';
+import '../services/navigation_service.dart';
 import '../services/update_service.dart';
 import '../ui/fusion/design_system.dart';
+import '../ui/screens/download_center.dart' show DownloadCenterScreen;
+import '../ui/screens/game_library_screen.dart' show GameLibraryScreen;
+// import '../widgets/download_status_overlay.dart';
+import '../ui/screens/tools_hub_screen.dart' show ToolsHubScreen;
 import '../ui/widgets/space_background.dart';
+import '../widgets/fusion_sidebar.dart';
+import 'discovery.dart';
+import 'home_screen.dart';
+import 'homebrew.dart';
 
 /// NavigationWrapper - Orbiit's premium space-themed navigation
 /// "Your games. In orbit." — cosmic, premium, immersive
@@ -32,7 +34,7 @@ class _NavigationWrapperState extends State<NavigationWrapper>
   late AnimationController _bgAnimController;
 
   // Enable space animations for the cosmic aesthetic
-  bool _reduceMotion = false;
+  final bool _reduceMotion = false;
 
   @override
   void initState() {
@@ -74,12 +76,11 @@ class _NavigationWrapperState extends State<NavigationWrapper>
           side:
               BorderSide(color: FusionColors.nebulaCyan.withValues(alpha: 0.3)),
         ),
-        title: Row(
+        title: const Row(
           children: [
-            const Icon(Icons.rocket_launch, color: FusionColors.nebulaCyan),
-            const SizedBox(width: 12),
-            const Text('New Update Available',
-                style: TextStyle(color: Colors.white)),
+            Icon(Icons.rocket_launch, color: FusionColors.nebulaCyan),
+            SizedBox(width: 12),
+            Text('New Update Available', style: TextStyle(color: Colors.white)),
           ],
         ),
         content: Column(
@@ -135,14 +136,14 @@ class _NavigationWrapperState extends State<NavigationWrapper>
       barrierDismissible: false,
       builder: (context) => StatefulBuilder(
         builder: (context, setState) {
-          return AlertDialog(
+          return const AlertDialog(
             backgroundColor: FusionColors.bgSurface,
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const CircularProgressIndicator(color: FusionColors.nebulaCyan),
-                const SizedBox(height: 16),
-                const Text('Downloading update...',
+                CircularProgressIndicator(color: FusionColors.nebulaCyan),
+                SizedBox(height: 16),
+                Text('Downloading update...',
                     style: TextStyle(color: Colors.white)),
               ],
             ),
@@ -193,11 +194,11 @@ class _NavigationWrapperState extends State<NavigationWrapper>
     final List<Widget> screens = [
       const HomeScreen(), // 0: Home
       const DiscoveryScreen(), // 1: Store (Discovery)
-      GameLibraryScreen(), // 2: Library
+      const GameLibraryScreen(), // 2: Library
       const DownloadCenterScreen(), // 3: Downloads
-      HomebrewScreen(embedInWrapper: true), // 4: Homebrew
+      const HomebrewScreen(embedInWrapper: true), // 4: Homebrew
       const ToolsHubScreen(), // 5: Tools
-      SettingsScreen(), // 6: Settings
+      const SettingsScreen(), // 6: Settings
     ];
 
     int currentIndex = _navService.currentIndex;
@@ -228,7 +229,7 @@ class _NavigationWrapperState extends State<NavigationWrapper>
                       right: -100 +
                           (math.cos(_bgAnimController.value * 2 * math.pi) *
                               20),
-                      child: _PremiumGlow(
+                      child: const _PremiumGlow(
                         color: FusionColors.nebulaCyan,
                         size: 400,
                         opacity: 0.1,
@@ -243,7 +244,7 @@ class _NavigationWrapperState extends State<NavigationWrapper>
                       left: -100 +
                           (math.sin(_bgAnimController.value * 2 * math.pi) *
                               30),
-                      child: _PremiumGlow(
+                      child: const _PremiumGlow(
                         color: FusionColors.nebulaPurple,
                         size: 350,
                         opacity: 0.08,
@@ -311,7 +312,6 @@ class _OrbiitTitleBar extends StatelessWidget {
               border: Border(
                 bottom: BorderSide(
                   color: FusionColors.border.withValues(alpha: 0.3),
-                  width: 1,
                 ),
               ),
             ),

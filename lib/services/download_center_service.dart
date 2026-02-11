@@ -11,11 +11,9 @@
 // ═══════════════════════════════════════════════════════════════════════════
 
 import 'dart:io';
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart';
-import 'package:path/path.dart' as path;
+
 import 'package:archive/archive_io.dart';
-import '../core/app_logger.dart';
+import 'package:path/path.dart' as path;
 
 class DownloadCenterService {
   static final DownloadCenterService _instance =
@@ -37,8 +35,9 @@ class DownloadCenterService {
     return downloadDir.listSync().whereType<File>().where((file) {
       final ext = path.extension(file.path).toLowerCase();
       // Skip incomplete downloads
-      if (file.path.endsWith('.part') || file.path.endsWith('.crdownload'))
+      if (file.path.endsWith('.part') || file.path.endsWith('.crdownload')) {
         return false;
+      }
       return extensions.contains(ext);
     }).toList();
   }
@@ -91,7 +90,7 @@ class DownloadCenterService {
       // 3. Identify Game ID
       onStatus('Identifying Game...');
       String? gameId = await _readGameIdDisplay(gameFile);
-      String gameTitle =
+      final String gameTitle =
           path.basenameWithoutExtension(fileName); // Fallback title
 
       if (gameId == null) {
@@ -161,7 +160,7 @@ class DownloadCenterService {
     final inputStream = InputFileStream(zip.path);
     final archive = ZipDecoder().decodeBuffer(inputStream);
 
-    int totalFiles = archive.length;
+    final int totalFiles = archive.length;
     int processed = 0;
 
     for (final file in archive) {
@@ -180,7 +179,7 @@ class DownloadCenterService {
   // Reads the first 6 bytes of ISO/WBFS header to get ID
   Future<String?> _readGameIdDisplay(File file) async {
     try {
-      final handle = await file.open(mode: FileMode.read);
+      final handle = await file.open();
       // ISO/GCM/WBFS usually has ID at offset 0
       // WBFS sometimes has a header, then the disc header.
       // Standard ISO: bytes 0-5 are ID.

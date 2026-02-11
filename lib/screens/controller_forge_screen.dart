@@ -6,11 +6,13 @@
 // ============================================================================
 
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:wiigc_fusion/models/controller_config.dart'; // The "Brain"
+import 'package:wiigc_fusion/services/nintendont/nintendont_controller_service.dart';
+
 import '../ui/fusion/design_system.dart';
 import '../ui/screens/controller_wizard_screen.dart';
-import 'package:wiigc_fusion/services/nintendont/nintendont_controller_service.dart';
-import 'package:wiigc_fusion/models/controller_config.dart'; // The "Brain"
 
 class ControllerForgeScreen extends StatefulWidget {
   const ControllerForgeScreen({super.key});
@@ -111,7 +113,7 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
               onPressed: _exportConfig,
               backgroundColor: FusionColors.nebulaCyan,
               icon: const Icon(Icons.sd_card),
-              label: const Text("Export INI"),
+              label: const Text('Export INI'),
             )
           : null,
     );
@@ -150,11 +152,11 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "CONTROLLER FORGE",
+                'CONTROLLER FORGE',
                 style: FusionText.headlineMedium.copyWith(letterSpacing: 1.5),
               ),
               Text(
-                "Nintendont Input Mapper",
+                'Nintendont Input Mapper',
                 style: FusionText.bodySmall
                     .copyWith(color: FusionColors.nebulaCyan),
               ),
@@ -185,11 +187,11 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
                 Tab(
                     child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Text("VISUAL MAPPER"))),
+                        child: Text('VISUAL MAPPER'))),
                 Tab(
                     child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Text("ADVANCED"))),
+                        child: Text('ADVANCED'))),
               ],
             ),
           ),
@@ -239,15 +241,15 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
                     const Icon(Icons.auto_fix_high,
                         color: FusionColors.nebulaPurple, size: 32),
                     const SizedBox(width: 16),
-                    Expanded(
+                    const Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Setup Wizard",
+                          Text('Setup Wizard',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold)),
-                          Text("Auto-detect & Map",
+                          Text('Auto-detect & Map',
                               style: TextStyle(
                                   color: FusionColors.textSecondary,
                                   fontSize: 12)),
@@ -269,7 +271,7 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
             child: Row(
               children: [
-                const Text("DETECTED DEVICES",
+                const Text('DETECTED DEVICES',
                     style: TextStyle(
                         color: FusionColors.textMuted,
                         fontSize: 12,
@@ -347,7 +349,7 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
                                               ? Colors.white
                                               : FusionColors.textSecondary,
                                           fontWeight: FontWeight.w500)),
-                                  Text("${c.vendorId}:${c.productId}",
+                                  Text('${c.vendorId}:${c.productId}',
                                       style: const TextStyle(
                                           color: FusionColors.textMuted,
                                           fontSize: 10)),
@@ -374,16 +376,16 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.usb_off, size: 64, color: FusionColors.textMuted),
+            const Icon(Icons.usb_off, size: 64, color: FusionColors.textMuted),
             const SizedBox(height: 16),
-            const Text("No Controller Selected",
+            const Text('No Controller Selected',
                 style: TextStyle(color: FusionColors.textSecondary)),
             const SizedBox(height: 8),
             // Replaced ActionButton with GlowButton (wrapped)
             SizedBox(
               height: 40,
               child: GlowButton(
-                  label: "Connect & Scan",
+                  label: 'Connect & Scan',
                   icon: Icons.usb,
                   onPressed: _scanControllers,
                   color: FusionColors.nebulaCyan,
@@ -408,18 +410,18 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Mapping Configuration",
+                  const Text('Mapping Configuration',
                       style: TextStyle(
                           color: FusionColors.textSecondary, fontSize: 12)),
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      Text("VID: ${_currentConfig.vid}",
+                      Text('VID: ${_currentConfig.vid}',
                           style: const TextStyle(
                               color: FusionColors.nebulaCyan,
                               fontFamily: 'monospace')),
                       const SizedBox(width: 12),
-                      Text("PID: ${_currentConfig.pid}",
+                      Text('PID: ${_currentConfig.pid}',
                           style: const TextStyle(
                               color: FusionColors.nebulaCyan,
                               fontFamily: 'monospace')),
@@ -433,8 +435,8 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
                   value: _currentConfig.dpadType == 1,
                   onChanged: (v) =>
                       setState(() => _currentConfig.dpadType = v ? 1 : 0),
-                  activeColor: FusionColors.nebulaCyan),
-              const Text("  Hat D-Pad",
+                  activeThumbColor: FusionColors.nebulaCyan),
+              const Text('  Hat D-Pad',
                   style: TextStyle(color: FusionColors.textSecondary)),
             ],
           ),
@@ -490,29 +492,29 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
                   ),
 
                   // Interactive Buttons (GameCube Layout)
-                  _buildVisualButton("A", Alignment.centerRight,
+                  _buildVisualButton('A', Alignment.centerRight,
                       const Offset(-30, -10), Colors.green),
-                  _buildVisualButton("B", Alignment.centerRight,
+                  _buildVisualButton('B', Alignment.centerRight,
                       const Offset(-60, 20), Colors.red),
-                  _buildVisualButton("X", Alignment.centerRight,
+                  _buildVisualButton('X', Alignment.centerRight,
                       const Offset(-20, -50), Colors.grey),
-                  _buildVisualButton("Y", Alignment.centerRight,
+                  _buildVisualButton('Y', Alignment.centerRight,
                       const Offset(-60, -40), Colors.grey),
-                  _buildVisualButton("Z", Alignment.topRight,
+                  _buildVisualButton('Z', Alignment.topRight,
                       const Offset(-40, 10), Colors.purple),
 
-                  _buildVisualButton("Start", Alignment.center,
+                  _buildVisualButton('Start', Alignment.center,
                       const Offset(0, 0), Colors.grey),
 
-                  _buildVisualButton("L", Alignment.topLeft,
+                  _buildVisualButton('L', Alignment.topLeft,
                       const Offset(30, 10), Colors.grey),
-                  _buildVisualButton("R", Alignment.topRight,
+                  _buildVisualButton('R', Alignment.topRight,
                       const Offset(-30, 10), Colors.grey),
 
                   _buildVisualStick(
-                      "Stick", Alignment.centerLeft, const Offset(50, -20)),
+                      'Stick', Alignment.centerLeft, const Offset(50, -20)),
                   _buildVisualStick(
-                      "C-Stick", Alignment.centerRight, const Offset(-60, 60)),
+                      'C-Stick', Alignment.centerRight, const Offset(-60, 60)),
 
                   _buildVisualDpad(Alignment.bottomLeft, const Offset(70, -40)),
                 ],
@@ -599,7 +601,7 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
             color: FusionColors.glassWhite(0.1),
             border: Border.all(color: FusionColors.glassWhite(0.2)),
           ),
-          child: Center(
+          child: const Center(
               child: Icon(Icons.control_camera,
                   size: 24, color: FusionColors.textMuted)),
         ),
@@ -627,14 +629,14 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
 
   Widget _buildPropertyInspector() {
     if (_hoveredButton.isEmpty) {
-      return Center(
-          child: Text("Select a button\nto configure",
+      return const Center(
+          child: Text('Select a button\nto configure',
               textAlign: TextAlign.center,
               style: TextStyle(color: FusionColors.textMuted)));
     }
 
     final currentValue =
-        _currentConfig.bindings[_hoveredButton] ?? "Not Mapped";
+        _currentConfig.bindings[_hoveredButton] ?? 'Not Mapped';
 
     return Padding(
       padding: const EdgeInsets.all(20),
@@ -645,13 +647,13 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
             children: [
               Container(width: 4, height: 24, color: FusionColors.nebulaCyan),
               const SizedBox(width: 8),
-              Text("$_hoveredButton Button",
+              Text('$_hoveredButton Button',
                   style: FusionText
                       .headlineMedium), // headingSmall -> headlineMedium
             ],
           ),
           const SizedBox(height: 24),
-          Text("CURRENT MAPPING", style: FusionText.labelMedium),
+          const Text('CURRENT MAPPING', style: FusionText.labelMedium),
           const SizedBox(height: 8),
           Container(
             width: double.infinity,
@@ -666,13 +668,13 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
                     fontFamily: 'monospace', color: FusionColors.nebulaCyan)),
           ),
           const SizedBox(height: 24),
-          Text("MANUAL OVERRIDE", style: FusionText.labelMedium),
+          const Text('MANUAL OVERRIDE', style: FusionText.labelMedium),
           const SizedBox(height: 8),
           TextField(
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
-              hintText: "offset,mask",
-              hintStyle: TextStyle(color: FusionColors.textMuted),
+              hintText: 'offset,mask',
+              hintStyle: const TextStyle(color: FusionColors.textMuted),
               filled: true,
               fillColor: FusionColors.glassWhite(0.05),
               border: OutlineInputBorder(
@@ -690,7 +692,7 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
             width: double.infinity,
             child: OutlinedButton.icon(
               icon: const Icon(Icons.delete_outline, size: 16),
-              label: const Text("Clear Mapping"),
+              label: const Text('Clear Mapping'),
               style:
                   OutlinedButton.styleFrom(foregroundColor: FusionColors.error),
               onPressed: () {
@@ -733,7 +735,7 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
                   color: FusionColors.textMuted, size: 16),
               const SizedBox(width: 16),
               Expanded(
-                child: Text(val.isEmpty ? "Unmapped" : val,
+                child: Text(val.isEmpty ? 'Unmapped' : val,
                     style: TextStyle(
                         fontFamily: 'monospace',
                         color: val.isEmpty
@@ -762,7 +764,7 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
         context: context,
         builder: (ctx) => AlertDialog(
               backgroundColor: FusionColors.bgSecondary,
-              title: const Text("Configuration Output",
+              title: const Text('Configuration Output',
                   style: TextStyle(color: Colors.white)),
               content: SingleChildScrollView(
                 child: SelectableText(
@@ -774,11 +776,11 @@ class _ControllerForgeScreenState extends State<ControllerForgeScreen>
               ),
               actions: [
                 TextButton(
-                    child: const Text("Close"),
+                    child: const Text('Close'),
                     onPressed: () => Navigator.pop(ctx)),
                 ElevatedButton.icon(
                     icon: const Icon(Icons.copy),
-                    label: const Text("Copy"),
+                    label: const Text('Copy'),
                     onPressed: () {
                       // Copy to clipboard logic would go here
                       Navigator.pop(ctx);

@@ -110,7 +110,7 @@ void main() {
     });
 
     test('Cover URL Generation', () {
-      final game = DiscMetadata(
+      const game = DiscMetadata(
         filePath: 'path',
         fileName: 'name',
         fileSize: 0,
@@ -139,7 +139,7 @@ void main() {
         'format': DiscFormat.iso
       };
 
-      final small = DiscMetadata(
+      const small = DiscMetadata(
           fileSize: 500,
           filePath: 'path',
           fileName: 'name',
@@ -150,7 +150,7 @@ void main() {
           format: DiscFormat.iso);
       expect(small.formattedFileSize, '500 B');
 
-      final kb = DiscMetadata(
+      const kb = DiscMetadata(
           fileSize: 1024 * 5,
           filePath: 'path',
           fileName: 'name',
@@ -161,7 +161,7 @@ void main() {
           format: DiscFormat.iso);
       expect(kb.formattedFileSize, '5.0 KB');
 
-      final mb = DiscMetadata(
+      const mb = DiscMetadata(
           fileSize: 1024 * 1024 * 5,
           filePath: 'path',
           fileName: 'name',
@@ -172,7 +172,7 @@ void main() {
           format: DiscFormat.iso);
       expect(mb.formattedFileSize, '5.0 MB');
 
-      final gb = DiscMetadata(
+      const gb = DiscMetadata(
           fileSize: 1024 * 1024 * 1024 * 2,
           filePath: 'path',
           fileName: 'name',

@@ -1,18 +1,19 @@
 import 'dart:async';
-import 'dart:ui';
 import 'dart:math' as math;
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../services/download_service.dart';
-import '../../services/navigation_service.dart';
-import '../../services/legal_notice_service.dart';
-import '../../providers/forge_provider.dart';
-import '../../providers/discovery_provider.dart';
+
 import '../../models/game_result.dart';
+import '../../providers/discovery_provider.dart';
+import '../../providers/forge_provider.dart';
+import '../../services/download_service.dart';
+import '../../services/legal_notice_service.dart';
+import '../../services/navigation_service.dart';
+import '../fusion_ui/fusion_ui.dart';
 import '../widgets/cover_art_widget.dart';
 import '../widgets/premium_download_card.dart';
-import '../fusion_ui/fusion_ui.dart';
-import '../../widgets/rocket_progress_bar.dart';
 
 const _kStaggerCurve = Curves.easeOutCubic;
 
@@ -37,7 +38,7 @@ class _DownloadCenterScreenState extends State<DownloadCenterScreen>
   late StreamSubscription<List<DownloadTask>> _queueSubscription;
 
   // Speed history for mini graph (last 30 samples)
-  final List<double> _speedHistory = List.filled(30, 0.0);
+  final List<double> _speedHistory = List.filled(30, 0);
   int _speedIndex = 0;
 
   // Current state from DownloadService
@@ -292,7 +293,7 @@ class _DownloadCenterScreenState extends State<DownloadCenterScreen>
   String _formatBytes(int bytes) {
     if (bytes <= 0) return '0 B';
     const suffixes = ['B', 'KB', 'MB', 'GB', 'TB'];
-    var i = (math.log(bytes) / math.log(1024)).floor();
+    final i = (math.log(bytes) / math.log(1024)).floor();
     return '${(bytes / math.pow(1024, i)).toStringAsFixed(1)} ${suffixes[i]}';
   }
 
@@ -411,7 +412,7 @@ class _DownloadCenterScreenState extends State<DownloadCenterScreen>
       parent: _listStaggerController,
       curve: Interval(
         (index * 0.06).clamp(0.0, 0.94),
-        1.0,
+        1,
         curve: _kStaggerCurve,
       ),
     );
@@ -476,7 +477,7 @@ class _DownloadCenterScreenState extends State<DownloadCenterScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('DOWNLOAD CENTER',
-                    style: UiType.headingLarge.copyWith(letterSpacing: 1.0)),
+                    style: UiType.headingLarge.copyWith(letterSpacing: 1)),
                 const SizedBox(height: 4),
                 Text(
                   (activeTask != null || forgeActive != null)
@@ -484,7 +485,7 @@ class _DownloadCenterScreenState extends State<DownloadCenterScreen>
                       : queueCount > 0
                           ? '$queueCount in Queue'
                           : 'Ready to download',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: UiColors.textSecondary,
                     fontSize: 14,
                   ),
@@ -535,7 +536,6 @@ class _DownloadCenterScreenState extends State<DownloadCenterScreen>
         glowColor: UiColors.cyan,
         enableHover: false,
         padding: const EdgeInsets.all(20),
-        blurSigma: 16,
         child: Column(
           children: [
             // Top row: Cover + Info
@@ -704,8 +704,8 @@ class _DownloadCenterScreenState extends State<DownloadCenterScreen>
 
   Widget _buildProgressBar(double progress, {Color? color}) {
     final baseColor = color ?? Colors.cyan;
-    final barHeight = 14.0;
-    final radius = barHeight / 2;
+    const barHeight = 14.0;
+    const radius = barHeight / 2;
     return Column(
       children: [
         LayoutBuilder(
@@ -747,7 +747,6 @@ class _DownloadCenterScreenState extends State<DownloadCenterScreen>
                       BoxShadow(
                         color: baseColor.withValues(alpha: 0.45),
                         blurRadius: 12,
-                        spreadRadius: 0,
                       ),
                     ],
                   ),
@@ -874,7 +873,7 @@ class _DownloadCenterScreenState extends State<DownloadCenterScreen>
             label,
             style: UiType.caption.copyWith(
               color: UiColors.textTertiary,
-              letterSpacing: 1.0,
+              letterSpacing: 1,
             ),
           ),
         ],
@@ -922,8 +921,6 @@ class _DownloadCenterScreenState extends State<DownloadCenterScreen>
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
       child: GlassCard(
-        borderRadius: UiRadius.xl,
-        enableHover: true,
         blurSigma: 12,
         padding: const EdgeInsets.all(14),
         child: Row(
@@ -993,9 +990,7 @@ class _DownloadCenterScreenState extends State<DownloadCenterScreen>
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
       child: GlassCard(
-        borderRadius: UiRadius.xl,
         glowColor: UiColors.success,
-        enableHover: true,
         blurSigma: 12,
         padding: const EdgeInsets.all(14),
         child: Row(
@@ -1197,7 +1192,7 @@ class _SpeedGraphPainter extends CustomPainter {
         end: Alignment.bottomCenter,
         colors: [
           accent.withValues(alpha: 0.2), // Top opacity
-          accent.withValues(alpha: 0.0), // Fade to transparent
+          accent.withValues(alpha: 0), // Fade to transparent
         ],
       ).createShader(Rect.fromLTWH(0, 0, size.width, size.height))
       ..style = PaintingStyle.fill;

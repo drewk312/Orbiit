@@ -10,12 +10,12 @@ class QueueScreen extends StatelessWidget {
   final Function(int taskId) onRetry;
 
   const QueueScreen({
-    super.key,
     required this.tasks,
     required this.onPause,
     required this.onResume,
     required this.onCancel,
     required this.onRetry,
+    super.key,
   });
 
   @override

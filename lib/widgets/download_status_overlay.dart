@@ -67,7 +67,6 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                   color: OrbColors.orbitCyan.withValues(alpha: 0.3),
-                  width: 1,
                 ),
                 boxShadow: [
                   BoxShadow(
@@ -119,7 +118,7 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
                     color: OrbColors.orbitCyan.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Icon(
+                  child: const Icon(
                     Icons.downloading_rounded,
                     color: OrbColors.orbitCyan,
                     size: 18,
@@ -151,7 +150,8 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
                     child: LinearProgressIndicator(
                       value: progress,
                       backgroundColor: OrbColors.bgTertiary,
-                      valueColor: AlwaysStoppedAnimation(OrbColors.orbitCyan),
+                      valueColor:
+                          const AlwaysStoppedAnimation(OrbColors.orbitCyan),
                       minHeight: 3,
                     ),
                   ),
@@ -190,7 +190,7 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     colors: [OrbColors.orbitCyan, OrbColors.orbitPurple],
                   ),
                   borderRadius: BorderRadius.circular(10),
@@ -253,7 +253,7 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
                 height: 8,
                 width: progress * 328, // Approximate width
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     colors: [OrbColors.orbitCyan, OrbColors.orbitPurple],
                   ),
                   borderRadius: BorderRadius.circular(4),
@@ -344,7 +344,7 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
                       const SizedBox(width: 6),
                       Text(
                         forge.isPaused ? 'Resume' : 'Pause',
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: const TextStyle(fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
@@ -371,11 +371,11 @@ class _DownloadStatusOverlayState extends State<DownloadStatusOverlay>
                       ),
                     ),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.stop_rounded, size: 18),
-                      const SizedBox(width: 6),
+                      SizedBox(width: 6),
                       Text('Cancel',
                           style: TextStyle(fontWeight: FontWeight.w600)),
                     ],

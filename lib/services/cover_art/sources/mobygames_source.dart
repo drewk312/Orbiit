@@ -51,7 +51,7 @@ class MobyGamesSource implements CoverArtSource {
 
       // Search for game
       final searchUrl = Uri.parse('$baseUrl/games').replace(queryParameters: {
-        'api_key': _apiKey!,
+        'api_key': _apiKey,
         'title': title,
         'platform': platformId.toString(),
       });
@@ -73,7 +73,7 @@ class MobyGamesSource implements CoverArtSource {
       // Get cover art for the game
       final coverUrl =
           Uri.parse('$baseUrl/games/$gameId/platforms/$platformId').replace(
-        queryParameters: {'api_key': _apiKey!},
+        queryParameters: {'api_key': _apiKey},
       );
 
       final coverResponse = await _client.get(coverUrl).timeout(

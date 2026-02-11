@@ -1,7 +1,8 @@
 import 'dart:io';
+
 import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
 
 /// Service for downloading cheat codes for games
 /// Based on TinyWii's txtcodes.rs - downloads Gecko/Ocarina cheat codes

@@ -1,16 +1,17 @@
-import 'package:flutter/material.dart';
 import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
-import '../services/scanner_service.dart';
-import '../services/library_state_service.dart';
-import '../widgets/game_cover.dart';
-import '../widgets/spinning_disc.dart';
-import '../widgets/immersive_glass_header.dart';
-import '../ffi/forge_bridge.dart';
+import 'package:flutter/material.dart';
+
 import '../core/app_logger.dart';
-import '../core/native_library_loader.dart';
 import '../core/error_handler.dart';
+import '../core/native_library_loader.dart';
+import '../services/library_state_service.dart';
+import '../services/scanner_service.dart';
 import '../ui/widgets/cover_download_indicator.dart';
+import '../widgets/game_cover.dart';
+import '../widgets/immersive_glass_header.dart';
+import '../widgets/spinning_disc.dart';
 
 /// Manager Screen - Library view with animations and scale support
 class ManagerScreen extends StatefulWidget {
@@ -178,12 +179,12 @@ class _ManagerScreenState extends State<ManagerScreen>
           if (!mounted) return games;
 
           // Run a diagnostic scan to explain why nothing was detected and present it to the user
-          final diagnostics =
-              await _scanner.scanDirectoryDiagnostic(result, maxEntries: 1000);
+          final diagnostics = await _scanner.scanDirectoryDiagnostic(result);
           final details = diagnostics.join('\n');
 
-          if (!mounted)
+          if (!mounted) {
             return games; // Guard against using context after async gap
+          }
 
           await ErrorHandler.showErrorDialog(
             context,

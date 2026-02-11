@@ -292,8 +292,8 @@ class GameMetadata {
 
   GameMetadata({
     required this.id,
-    this.type,
     required this.locales,
+    this.type,
     this.developer,
     this.publisher,
     this.releaseYear,

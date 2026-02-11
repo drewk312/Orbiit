@@ -17,8 +17,8 @@ class PremiumBadge extends StatefulWidget {
   final List<Color>? gradientColors;
 
   const PremiumBadge({
-    super.key,
     required this.label,
+    super.key,
     this.icon,
     this.color,
     this.showPulse = false,
@@ -70,7 +70,7 @@ class _PremiumBadgeState extends State<PremiumBadge>
       duration: const Duration(milliseconds: 1500),
     );
 
-    _pulseAnimation = Tween<double>(begin: 0.6, end: 1.0).animate(
+    _pulseAnimation = Tween<double>(begin: 0.6, end: 1).animate(
       CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
     );
 
@@ -100,9 +100,10 @@ class _PremiumBadgeState extends State<PremiumBadge>
     final gradientColors = widget.gradientColors ??
         [
           widget.color ?? const Color(0xFF00D4FF),
-          widget.color != null
-              ? _darken(widget.color!, 0.1)
-              : const Color(0xFF0EA5E9),
+          if (widget.color != null)
+            _darken(widget.color!, 0.1)
+          else
+            const Color(0xFF0EA5E9),
         ];
 
     final sizeValues = _getSizeValues();
@@ -161,7 +162,7 @@ class _PremiumBadgeState extends State<PremiumBadge>
               fontSize: sizeValues.fontSize,
               fontWeight: FontWeight.w700,
               letterSpacing: sizeValues.letterSpacing,
-              height: 1.0,
+              height: 1,
             ),
           ),
         ],
@@ -196,7 +197,7 @@ class _PremiumBadgeState extends State<PremiumBadge>
           iconSize: 12,
           dotSize: 8,
           spacing: 6,
-          letterSpacing: 1.0,
+          letterSpacing: 1,
         );
       case PremiumBadgeSize.large:
         return _BadgeSizeValues(

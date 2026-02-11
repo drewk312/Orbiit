@@ -67,7 +67,7 @@ class FileUtilityService {
       // Use PowerShell on Windows to get disk info
       if (Platform.isWindows) {
         // Extract drive letter properly (e.g., "D:" -> "D")
-        String driveLetter = directoryPath.substring(0, 1).toUpperCase();
+        final String driveLetter = directoryPath.substring(0, 1).toUpperCase();
 
         final result = await Process.run(
           'powershell',

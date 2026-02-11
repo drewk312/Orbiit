@@ -13,14 +13,14 @@ class HealthIssue {
 
   HealthIssue({
     required this.id,
-    this.titleId,
     required this.issueType,
     required this.severity,
     required this.description,
+    required this.createdTimestamp,
+    this.titleId,
     this.estimatedImpactScore = 0,
     this.estimatedSpaceSavings = 0,
     this.fixAction,
-    required this.createdTimestamp,
     this.resolvedTimestamp,
   });
 

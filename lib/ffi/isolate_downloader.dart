@@ -63,7 +63,7 @@ class IsolateDownloader {
           } else if (typeStr == 'completed') {
             _streamController.add(DownloadMessage(
               type: DownloadMessageType.completed,
-              progress: 1.0,
+              progress: 1,
               message: message['message'],
               bytesDownloaded: (message['bytesDownloaded'] as num).toInt(),
               totalBytes: (message['totalBytes'] as num).toInt(),
@@ -215,10 +215,10 @@ class IsolateDownloader {
             success = true; // Loop break
             break;
           } else {
-            throw SocketException("HTTP $statusCode");
+            throw SocketException('HTTP $statusCode');
           }
 
-          int effectiveTotal = totalBytes > 0
+          final int effectiveTotal = totalBytes > 0
               ? totalBytes
               : (downloaded + response.contentLength);
 
@@ -226,7 +226,7 @@ class IsolateDownloader {
 
           DateTime lastUpdate = DateTime.now();
           int bytesSinceLast = 0;
-          double speed = 0.0;
+          double speed = 0;
 
           await for (final chunk in response) {
             sink.add(chunk);
@@ -246,9 +246,9 @@ class IsolateDownloader {
               final mbCurrent = (downloaded / 1024 / 1024).toStringAsFixed(1);
               final mbTotal = effectiveTotal > 0
                   ? (effectiveTotal / 1024 / 1024).toStringAsFixed(1)
-                  : "???";
+                  : '???';
               final speedMB = (speed / 1024 / 1024).toStringAsFixed(1);
-              final msg = "$mbCurrent / $mbTotal MB • $speedMB MB/s";
+              final msg = '$mbCurrent / $mbTotal MB • $speedMB MB/s';
 
               sendPort.send({
                 'type': 'progress',
@@ -283,7 +283,7 @@ class IsolateDownloader {
             'bytesDownloaded': downloaded,
             'totalBytes': totalBytes
           });
-          await Future.delayed(Duration(seconds: 2));
+          await Future.delayed(const Duration(seconds: 2));
         }
 
         if (success) break;
@@ -301,7 +301,7 @@ class IsolateDownloader {
           'totalBytes': totalBytes,
         });
       } else {
-        throw Exception("Download failed after max retries.");
+        throw Exception('Download failed after max retries.');
       }
 
       client.close();

@@ -9,8 +9,8 @@ class FusionErrorWidget extends StatelessWidget {
   final VoidCallback? onRestart;
 
   const FusionErrorWidget({
-    super.key,
     required this.details,
+    super.key,
     this.onRestart,
   });
 

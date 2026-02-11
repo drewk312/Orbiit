@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../models/game_result.dart';
-import '../ui/fusion/design_system.dart';
 import '../services/game_metadata_service.dart';
+import '../ui/fusion/design_system.dart';
 import 'cascading_cover_image.dart';
 import 'premium_fallback_cover.dart';
 
@@ -16,8 +17,8 @@ class GameDetailPanel extends StatefulWidget {
   final bool isLibraryMode;
 
   const GameDetailPanel({
-    super.key,
     required this.game,
+    super.key,
     this.onDownload,
     this.onPlay,
     this.onDelete,
@@ -69,12 +70,11 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
         decoration: BoxDecoration(
           color: OrbColors.bgPrimary.withValues(alpha: 0.98),
           borderRadius: BorderRadius.circular(OrbRadius.xl),
-          border: Border.all(color: OrbColors.border, width: 1),
+          border: Border.all(color: OrbColors.border),
           boxShadow: [
             BoxShadow(
               color: OrbColors.orbitCyan.withValues(alpha: 0.1),
               blurRadius: 40,
-              spreadRadius: 0,
             ),
           ],
         ),
@@ -82,7 +82,7 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
           children: [
             // Header
             _buildHeader(context),
-            Divider(height: 1, color: OrbColors.border),
+            const Divider(height: 1, color: OrbColors.border),
 
             // Content
             Expanded(
@@ -154,7 +154,7 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
 
           // Loading indicator
           if (_isLoading) ...[
-            SizedBox(
+            const SizedBox(
               width: 20,
               height: 20,
               child: CircularProgressIndicator(
@@ -168,7 +168,7 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
           // Close button
           IconButton(
             onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(Icons.close, color: OrbColors.textSecondary),
+            icon: const Icon(Icons.close, color: OrbColors.textSecondary),
             hoverColor: OrbColors.bgTertiary,
           ),
         ],
@@ -193,7 +193,6 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
                   BoxShadow(
                     color: platformColor.withValues(alpha: 0.3),
                     blurRadius: 20,
-                    spreadRadius: 0,
                   ),
                 ],
               ),
@@ -266,7 +265,8 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.open_in_new, size: 14, color: OrbColors.orbitCyan),
+                const Icon(Icons.open_in_new,
+                    size: 14, color: OrbColors.orbitCyan),
                 const SizedBox(width: 6),
                 Text(
                   'Read more on Wikipedia',
@@ -472,8 +472,9 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
   Widget _buildDeleteButton() {
     return OutlinedButton.icon(
       onPressed: widget.onDelete,
-      icon: Icon(Icons.delete_outline, size: 18, color: OrbColors.corrupt),
-      label: Text(
+      icon:
+          const Icon(Icons.delete_outline, size: 18, color: OrbColors.corrupt),
+      label: const Text(
         'Delete from Library',
         style: TextStyle(color: OrbColors.corrupt),
       ),
@@ -506,7 +507,6 @@ class _GameDetailPanelState extends State<GameDetailPanel> {
               BoxShadow(
                 color: color.withValues(alpha: 0.4),
                 blurRadius: 16,
-                spreadRadius: 0,
                 offset: const Offset(0, 4),
               ),
             ],

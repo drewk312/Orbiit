@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../core/models/health_score.dart';
+
 import '../../core/models/health_issue.dart';
+import '../../core/models/health_score.dart';
 import '../../core/models/task.dart';
 import '../fusion_ui/fusion_ui.dart';
 
@@ -14,13 +15,13 @@ class BentoDashboard extends StatelessWidget {
   final VoidCallback onFixIssuesPressed;
 
   const BentoDashboard({
+    required this.onScanPressed,
+    required this.onViewQueuePressed,
+    required this.onFixIssuesPressed,
     super.key,
     this.healthScore,
     this.topIssues = const [],
     this.activeTasks = const [],
-    required this.onScanPressed,
-    required this.onViewQueuePressed,
-    required this.onFixIssuesPressed,
   });
 
   @override
@@ -102,7 +103,7 @@ class _HealthScoreTile extends StatelessWidget {
   final HealthScore? score;
   final VoidCallback onFixPressed;
 
-  const _HealthScoreTile({this.score, required this.onFixPressed});
+  const _HealthScoreTile({required this.onFixPressed, this.score});
 
   @override
   Widget build(BuildContext context) {
@@ -111,9 +112,9 @@ class _HealthScoreTile extends StatelessWidget {
     final grade = score?.grade ?? 'N/A';
 
     Color accent = UiColors.textTertiary;
-    if (displayScore >= 90)
+    if (displayScore >= 90) {
       accent = UiColors.success;
-    else if (displayScore >= 70)
+    } else if (displayScore >= 70)
       accent = UiColors.warning;
     else if (displayScore > 0) accent = UiColors.error;
 
@@ -192,7 +193,7 @@ class _TopIssuesTile extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.warning_amber_rounded,
+              const Icon(Icons.warning_amber_rounded,
                   size: 16, color: UiColors.warning),
               const SizedBox(width: 8),
               Text(
@@ -208,7 +209,7 @@ class _TopIssuesTile extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.check_circle_outline,
+                    const Icon(Icons.check_circle_outline,
                         size: 32, color: UiColors.success),
                     const SizedBox(height: 8),
                     Text(
@@ -287,7 +288,7 @@ class _SpaceSavingsTile extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.save_outlined, size: 16, color: UiColors.purple),
+              const Icon(Icons.save_outlined, size: 16, color: UiColors.purple),
               const SizedBox(width: 8),
               Text(
                 'POTENTIAL SAVINGS',

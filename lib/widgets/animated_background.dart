@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 
 enum BackgroundType { gradient, video, particles, premium, aurora }
 
@@ -11,8 +12,8 @@ class AnimatedBackground extends StatefulWidget {
   final List<Color>? bgGradient;
 
   const AnimatedBackground({
-    super.key,
     required this.child,
+    super.key,
     this.type = BackgroundType.premium,
     this.primaryColor,
     this.secondaryColor,

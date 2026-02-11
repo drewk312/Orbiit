@@ -38,8 +38,8 @@ class FileSplitterService {
     final numChunks = (fileSize / maxChunkSize).ceil();
     final chunkPaths = <String>[];
 
-    AppLogger.info('Splitting ${fileSize} bytes into $numChunks chunks...',
-        'FileSplitter');
+    AppLogger.info(
+        'Splitting $fileSize bytes into $numChunks chunks...', 'FileSplitter');
 
     final inputStream = inputFile.openRead();
     int chunkIndex = 0;

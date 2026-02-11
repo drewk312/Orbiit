@@ -85,7 +85,6 @@ class CoverArtProvider extends ChangeNotifier {
       _downloads[game.title] = CoverArtDownloadProgress(
         gameTitle: game.title,
         platform: game.platform,
-        status: DownloadStatus.queued,
       );
     }
     notifyListeners();
@@ -133,8 +132,9 @@ class CoverArtProvider extends ChangeNotifier {
   /// Format cache size for display
   String get formattedCacheSize {
     if (_cacheSize < 1024) return '$_cacheSize B';
-    if (_cacheSize < 1024 * 1024)
+    if (_cacheSize < 1024 * 1024) {
       return '${(_cacheSize / 1024).toStringAsFixed(1)} KB';
+    }
     return '${(_cacheSize / (1024 * 1024)).toStringAsFixed(1)} MB';
   }
 

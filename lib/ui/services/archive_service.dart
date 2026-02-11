@@ -20,14 +20,14 @@ class ArchiveExtractionService {
 
     switch (extension) {
       case '.zip':
-        return await _extractZip(archivePath, outputDir, onProgress);
+        return _extractZip(archivePath, outputDir, onProgress);
       case '.7z':
-        return await _extract7z(archivePath, outputDir, onProgress);
+        return _extract7z(archivePath, outputDir, onProgress);
       case '.rar':
-        return await _extractRar(archivePath, outputDir, onProgress);
+        return _extractRar(archivePath, outputDir, onProgress);
       case '.gz':
       case '.bz2':
-        return await _extractCompressed(archivePath, outputDir, onProgress);
+        return _extractCompressed(archivePath, outputDir, onProgress);
       default:
         throw Exception('Unsupported archive format: $extension');
     }
@@ -169,7 +169,7 @@ class ArchiveExtractionService {
       await Directory(outputDir).create(recursive: true);
 
       // Remove compression extension to get output filename
-      String outputFileName = path.basenameWithoutExtension(archivePath);
+      final String outputFileName = path.basenameWithoutExtension(archivePath);
       if (outputFileName.endsWith('.tar')) {
         // Handle tar.gz / tar.bz2
         final tarArchive = TarDecoder().decodeBytes(decompressed);

@@ -42,8 +42,9 @@ class USBLoaderService {
 
       onProgress?.call(i + 1, games.length, gameId);
 
-      if (platform.toLowerCase() != 'wii')
+      if (platform.toLowerCase() != 'wii') {
         continue; // USB Loader GX is Wii only
+      }
 
       final regionCode = CoverArtService.getRegionFromGameId(gameId);
 

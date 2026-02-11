@@ -6,7 +6,7 @@ import '../providers/forge_provider.dart';
 class SmartDownloadButton extends StatelessWidget {
   final GameResult game;
   final VoidCallback? onPressed;
-  const SmartDownloadButton({super.key, required this.game, this.onPressed});
+  const SmartDownloadButton({required this.game, super.key, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class SmartDownloadButton extends StatelessWidget {
                 children: [
                   CircularProgressIndicator(
                     value: forge.progress,
-                    strokeWidth: 3.0,
+                    strokeWidth: 3,
                     color: const Color(0xFF00C2FF),
                   ),
                   Text('${(forge.progress * 100).toInt()}%',

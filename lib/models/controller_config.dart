@@ -23,7 +23,7 @@ class NintendontConfig {
   String toIni() {
     final buffer = StringBuffer();
     // Header format: [VID_PID]
-    buffer.writeln('[${vid}_${pid}]');
+    buffer.writeln('[${vid}_$pid]');
     buffer.writeln('Name=$name');
     buffer.writeln('Polltype=$pollType');
     buffer.writeln('DPAD=$dpadType');

@@ -23,8 +23,8 @@ class PremiumCard extends StatefulWidget {
   final Border? border;
 
   const PremiumCard({
-    super.key,
     required this.child,
+    super.key,
     this.padding,
     this.glowColor,
     this.enableHover = true,
@@ -54,7 +54,7 @@ class _PremiumCardState extends State<PremiumCard>
       vsync: this,
       duration: const Duration(milliseconds: 100),
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.98).animate(
+    _scaleAnimation = Tween<double>(begin: 1, end: 0.98).animate(
       CurvedAnimation(parent: _pressController, curve: Curves.easeOut),
     );
   }
@@ -218,7 +218,7 @@ class LuxuryText {
   static const displayLarge = TextStyle(
     fontSize: 48,
     fontWeight: FontWeight.w700,
-    height: 1.0,
+    height: 1,
     letterSpacing: -1.5,
     color: Colors.white,
   );
@@ -227,7 +227,7 @@ class LuxuryText {
     fontSize: 36,
     fontWeight: FontWeight.w600,
     height: 1.1,
-    letterSpacing: -1.0,
+    letterSpacing: -1,
     color: Colors.white,
   );
 

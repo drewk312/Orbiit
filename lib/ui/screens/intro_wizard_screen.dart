@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
-import '../../services/sd_card_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../models/theme.dart';
 import '../../providers/theme_provider.dart';
 import '../../screens/navigation_wrapper.dart';
+import '../../services/sd_card_service.dart';
 
 class IntroWizardScreen extends StatefulWidget {
   const IntroWizardScreen({super.key});
@@ -66,7 +67,6 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
     try {
       final result = await _sdService.setupSDCard(
         _selectedDrivePath!,
-        createRequired: true,
         createOptional: true,
       );
 
@@ -145,7 +145,7 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
               children: [
                 // Header / Progress
                 Padding(
-                  padding: const EdgeInsets.all(32.0),
+                  padding: const EdgeInsets.all(32),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(_totalPages, (index) {
@@ -190,7 +190,7 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
 
   Widget _buildWelcomeStep(WiiGCTheme theme) {
     return Padding(
-      padding: const EdgeInsets.all(48.0),
+      padding: const EdgeInsets.all(48),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -228,7 +228,7 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
 
   Widget _buildDriveStep(WiiGCTheme theme) {
     return Padding(
-      padding: const EdgeInsets.all(48.0),
+      padding: const EdgeInsets.all(48),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -384,7 +384,7 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
 
   Widget _buildFinishStep(WiiGCTheme theme) {
     return Padding(
-      padding: const EdgeInsets.all(48.0),
+      padding: const EdgeInsets.all(48),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

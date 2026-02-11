@@ -1,25 +1,25 @@
-import 'package:flutter/material.dart';
-import '../models/game_result.dart';
-import '../services/browser_agent_service.dart';
-import '../services/archive_org_service.dart';
-import '../services/myrient_service.dart';
-import 'dart:io';
-import 'package:path_provider/path_provider.dart';
-// import 'package:archive/archive.dart';
-import '../services/vimm_service.dart';
-import '../services/smart_search_service.dart';
-import '../services/archive_service.dart';
-import '../services/download_service.dart';
-import '../services/library_state_service.dart';
-import '../services/scanner_service.dart';
-import '../services/unified_search_service.dart';
-import '../ffi/forge_bridge.dart';
 import 'dart:ffi';
+import 'dart:io';
+
 import 'package:ffi/ffi.dart';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path_lib;
+import 'package:path_provider/path_provider.dart';
+
+import '../ffi/forge_bridge.dart';
+import '../models/game_result.dart';
+import '../services/archive_org_service.dart';
+import '../services/archive_service.dart';
 import '../services/cover_art/cover_art_service.dart';
 import '../services/cover_art/cover_art_source.dart';
+import '../services/download_service.dart';
 import '../services/gamebrew_service.dart';
+import '../services/library_state_service.dart';
+import '../services/scanner_service.dart';
+import '../services/smart_search_service.dart';
+import '../services/unified_search_service.dart';
+// import 'package:archive/archive.dart';
+import '../services/vimm_service.dart';
 
 class DiscoveryProvider extends ChangeNotifier {
   List<GameResult> _results = [];
@@ -77,7 +77,7 @@ class DiscoveryProvider extends ChangeNotifier {
   LibraryStateService get library => _library;
 
   // Loading state
-  bool _isLoading = false;
+  final bool _isLoading = false;
   // isLoading should be true if we are explicitly loading OR if we have a loading message active
   bool get isLoading => _isLoading || _loadingMessage != null;
   String? get loadingMessage => _loadingMessage;
@@ -180,7 +180,6 @@ class DiscoveryProvider extends ChangeNotifier {
 
       await Future.wait(
         batch.map((game) => _fetchCoverForGame(game)),
-        eagerError: false,
       );
 
       // Small delay between batches to be nice to servers
@@ -205,7 +204,7 @@ class DiscoveryProvider extends ChangeNotifier {
 
     try {
       // Normalize platform string
-      GamePlatform platform = _parsePlatform(game.platform);
+      final GamePlatform platform = _parsePlatform(game.platform);
 
       // Use the enhanced service to get/download cover
       final coverPath = await _coverArtService.getCoverArt(
@@ -229,7 +228,7 @@ class DiscoveryProvider extends ChangeNotifier {
   List<GameResult> _getPopularTitles() {
     return [
       // === WII GAMES (Archive.org - Fast & Reliable ISO) ===
-      GameResult(
+      const GameResult(
         title: 'Super Mario Galaxy',
         platform: 'Wii',
         region: 'USA',
@@ -241,7 +240,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'RMGE01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/RMGE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Super Mario Galaxy 2',
         platform: 'Wii',
         region: 'USA',
@@ -253,7 +252,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'SB4E01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/SB4E01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Super Smash Bros. Brawl',
         platform: 'Wii',
         region: 'USA',
@@ -265,7 +264,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'RSBE01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/RSBE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Mario Kart Wii',
         platform: 'Wii',
         region: 'USA',
@@ -277,7 +276,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'RMCE01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/RMCE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'New Super Mario Bros. Wii',
         platform: 'Wii',
         region: 'USA',
@@ -289,7 +288,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'SMNE01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/SMNE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Animal Crossing: City Folk',
         platform: 'Wii',
         region: 'USA',
@@ -301,7 +300,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'RUUE01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/RUUE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Xenoblade Chronicles',
         platform: 'Wii',
         region: 'USA',
@@ -313,7 +312,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'SX4E01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/SX4E01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Metroid Prime Trilogy',
         platform: 'Wii',
         region: 'USA',
@@ -330,7 +329,7 @@ class DiscoveryProvider extends ChangeNotifier {
 
   List<GameResult> _getPopularGameCubeTitles() {
     return [
-      GameResult(
+      const GameResult(
         title: 'Super Smash Bros. Melee',
         platform: 'GameCube',
         region: 'USA',
@@ -343,7 +342,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'GALE01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/GALE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Super Mario Sunshine',
         platform: 'GameCube',
         region: 'USA',
@@ -356,7 +355,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'GMSE01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/GMSE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Mario Kart: Double Dash!!',
         platform: 'GameCube',
         region: 'USA',
@@ -369,7 +368,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'GM4E01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/GM4E01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Luigi\'s Mansion',
         platform: 'GameCube',
         region: 'USA',
@@ -382,7 +381,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'GLME01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/GLME01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'The Legend of Zelda: The Wind Waker',
         platform: 'GameCube',
         region: 'USA',
@@ -401,7 +400,7 @@ class DiscoveryProvider extends ChangeNotifier {
   List<GameResult> _getPopularWiiUTitles() {
     return [
       // === WII U GAMES ===
-      GameResult(
+      const GameResult(
         title: 'The Legend of Zelda: Breath of the Wild',
         platform: 'Wii U',
         region: 'USA',
@@ -414,7 +413,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'ALZE01',
         coverUrl: 'https://art.gametdb.com/wiiu/cover3D/US/ALZE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Super Mario 3D World',
         platform: 'Wii U',
         region: 'USA',
@@ -427,7 +426,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'ARDE01',
         coverUrl: 'https://art.gametdb.com/wiiu/cover3D/US/ARDE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Mario Kart 8',
         platform: 'Wii U',
         region: 'USA',
@@ -440,7 +439,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'AMKE01',
         coverUrl: 'https://art.gametdb.com/wiiu/cover3D/US/AMKE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Super Smash Bros. for Wii U',
         platform: 'Wii U',
         region: 'USA',
@@ -453,7 +452,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'AXFE01',
         coverUrl: 'https://art.gametdb.com/wiiu/cover3D/US/AXFE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Splatoon',
         platform: 'Wii U',
         region: 'USA',
@@ -466,7 +465,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'AGME01',
         coverUrl: 'https://art.gametdb.com/wiiu/cover3D/US/AGME01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Bayonetta 2',
         platform: 'Wii U',
         region: 'USA',
@@ -479,7 +478,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'AQUE01',
         coverUrl: 'https://art.gametdb.com/wiiu/cover3D/US/AQUE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Donkey Kong Country: Tropical Freeze',
         platform: 'Wii U',
         region: 'USA',
@@ -492,7 +491,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'ARKJ01',
         coverUrl: 'https://art.gametdb.com/wiiu/cover3D/US/ARKJ01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Pikmin 3',
         platform: 'Wii U',
         region: 'USA',
@@ -505,7 +504,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'AC3E01',
         coverUrl: 'https://art.gametdb.com/wiiu/cover3D/US/AC3E01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'New Super Mario Bros. U',
         platform: 'Wii U',
         region: 'USA',
@@ -518,7 +517,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'ARPE01',
         coverUrl: 'https://art.gametdb.com/wiiu/cover3D/US/ARPE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Xenoblade Chronicles X',
         platform: 'Wii U',
         region: 'USA',
@@ -531,7 +530,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'AX5E01',
         coverUrl: 'https://art.gametdb.com/wiiu/cover3D/US/AX5E01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'The Legend of Zelda: Twilight Princess HD',
         platform: 'Wii U',
         region: 'USA',
@@ -544,7 +543,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'AZAE01',
         coverUrl: 'https://art.gametdb.com/wiiu/cover3D/US/AZAE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'The Legend of Zelda: The Wind Waker HD',
         platform: 'Wii U',
         region: 'USA',
@@ -563,7 +562,7 @@ class DiscoveryProvider extends ChangeNotifier {
   List<GameResult> _getPopularRetroTitles() {
     return [
       // === N64 ===
-      GameResult(
+      const GameResult(
         title: 'Super Mario 64',
         platform: 'N64',
         region: 'USA',
@@ -577,7 +576,7 @@ class DiscoveryProvider extends ChangeNotifier {
         coverUrl:
             'https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Super%20Mario%2064%20(USA).png',
       ),
-      GameResult(
+      const GameResult(
         title: 'The Legend of Zelda: Ocarina of Time',
         platform: 'N64',
         region: 'USA',
@@ -591,7 +590,7 @@ class DiscoveryProvider extends ChangeNotifier {
         coverUrl:
             'https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Legend%20of%20Zelda,%20The%20-%20Ocarina%20of%20Time%20(USA)%20(Rev%202).png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Mario Kart 64',
         platform: 'N64',
         region: 'USA',
@@ -607,7 +606,7 @@ class DiscoveryProvider extends ChangeNotifier {
       ),
 
       // === GBA ===
-      GameResult(
+      const GameResult(
         title: 'Pokemon Emerald',
         platform: 'GBA',
         region: 'USA',
@@ -622,7 +621,7 @@ class DiscoveryProvider extends ChangeNotifier {
         coverUrl:
             'https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy%20Advance/Named_Boxarts/Pokemon%20-%20Emerald%20Version%20(USA,%20Europe).png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Pokemon FireRed',
         platform: 'GBA',
         region: 'USA',
@@ -637,7 +636,7 @@ class DiscoveryProvider extends ChangeNotifier {
         coverUrl:
             'https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy%20Advance/Named_Boxarts/Pokemon%20-%20FireRed%20Version%20(USA,%20Europe)%20(Rev%201).png',
       ),
-      GameResult(
+      const GameResult(
         title: 'The Legend of Zelda: The Minish Cap',
         platform: 'GBA',
         region: 'USA',
@@ -652,7 +651,7 @@ class DiscoveryProvider extends ChangeNotifier {
         coverUrl:
             'https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy%20Advance/Named_Boxarts/Legend%20of%20Zelda,%20The%20-%20The%20Minish%20Cap%20(USA).png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Metroid Fusion',
         platform: 'GBA',
         region: 'USA',
@@ -667,7 +666,7 @@ class DiscoveryProvider extends ChangeNotifier {
         coverUrl:
             'https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy%20Advance/Named_Boxarts/Metroid%20Fusion%20(USA).png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Fire Emblem',
         platform: 'GBA',
         region: 'USA',
@@ -682,7 +681,7 @@ class DiscoveryProvider extends ChangeNotifier {
         coverUrl:
             'https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy%20Advance/Named_Boxarts/Fire%20Emblem%20(USA,%20Australia).png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Kirby & The Amazing Mirror',
         platform: 'GBA',
         region: 'USA',
@@ -697,7 +696,7 @@ class DiscoveryProvider extends ChangeNotifier {
       ),
 
       // === SNES ===
-      GameResult(
+      const GameResult(
         title: 'Super Metroid',
         platform: 'SNES',
         region: 'USA',
@@ -710,7 +709,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'SMTD',
         format: 'SFC',
       ),
-      GameResult(
+      const GameResult(
         title: 'The Legend of Zelda: A Link to the Past',
         platform: 'SNES',
         region: 'USA',
@@ -725,7 +724,7 @@ class DiscoveryProvider extends ChangeNotifier {
         coverUrl:
             'https://thumbnails.libretro.com/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/Named_Boxarts/Legend%20of%20Zelda,%20The%20-%20A%20Link%20to%20the%20Past%20(USA).png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Chrono Trigger',
         platform: 'SNES',
         region: 'USA',
@@ -742,7 +741,7 @@ class DiscoveryProvider extends ChangeNotifier {
       ),
 
       // === NES ===
-      GameResult(
+      const GameResult(
         title: 'Super Mario Bros. 3',
         platform: 'NES',
         region: 'USA',
@@ -757,7 +756,7 @@ class DiscoveryProvider extends ChangeNotifier {
         coverUrl:
             'https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20Entertainment%20System/Named_Boxarts/Super%20Mario%20Bros.%203%20(USA).png',
       ),
-      GameResult(
+      const GameResult(
         title: 'The Legend of Zelda',
         platform: 'NES',
         region: 'USA',
@@ -774,7 +773,7 @@ class DiscoveryProvider extends ChangeNotifier {
       ),
 
       // === Genesis ===
-      GameResult(
+      const GameResult(
         title: 'Sonic the Hedgehog 2',
         platform: 'Genesis',
         region: 'USA',
@@ -789,7 +788,7 @@ class DiscoveryProvider extends ChangeNotifier {
         coverUrl:
             'https://thumbnails.libretro.com/Sega%20-%20Mega%20Drive%20-%20Genesis/Named_Boxarts/Sonic%20the%20Hedgehog%202%20(World).png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Sonic the Hedgehog 3',
         platform: 'Genesis',
         region: 'USA',
@@ -810,7 +809,7 @@ class DiscoveryProvider extends ChangeNotifier {
   /// Curated list of latest/recent releases - ISO format for REAL Wii hardware
   List<GameResult> _getLatestTitles() {
     return [
-      GameResult(
+      const GameResult(
         title: 'Donkey Kong Country Returns',
         platform: 'Wii',
         region: 'USA',
@@ -822,7 +821,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'SF8E01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/SF8E01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Kirby\'s Return to Dream Land',
         platform: 'Wii',
         region: 'USA',
@@ -834,7 +833,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'SUKE01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/SUKE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'The Legend of Zelda: Skyward Sword',
         platform: 'Wii',
         region: 'USA',
@@ -846,7 +845,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'SOUE01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/SOUE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Resident Evil 4: Wii Edition',
         platform: 'Wii',
         region: 'USA',
@@ -858,7 +857,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'RB4E08',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/RB4E08.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Ookami',
         platform: 'Wii',
         region: 'USA',
@@ -870,7 +869,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'ROWJ08',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/ROWJ08.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'Fire Emblem: Radiant Dawn',
         platform: 'Wii',
         region: 'USA',
@@ -882,7 +881,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'RFEE01',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/RFEE01.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'MadWorld',
         platform: 'Wii',
         region: 'USA',
@@ -894,7 +893,7 @@ class DiscoveryProvider extends ChangeNotifier {
         gameId: 'RZZWE8',
         coverUrl: 'https://art.gametdb.com/wii/cover3D/US/RZZWE8.png',
       ),
-      GameResult(
+      const GameResult(
         title: 'No More Heroes',
         platform: 'Wii',
         region: 'USA',
@@ -1088,8 +1087,8 @@ class DiscoveryProvider extends ChangeNotifier {
         _isSearching = true; // Keep search mode active to show results
       }
     } catch (e) {
-      _error = "Search Failed: Connection error or scraper blocked.";
-      debugPrint("Agent Scrape Error: $e");
+      _error = 'Search Failed: Connection error or scraper blocked.';
+      debugPrint('Agent Scrape Error: $e');
       _isSearching = false; // Error, exit search mode
       _loadingMessage = null;
     } finally {
@@ -1113,7 +1112,7 @@ class DiscoveryProvider extends ChangeNotifier {
 
     try {
       final downloadDir = await getDownloadsDirectory();
-      if (downloadDir == null) throw Exception("Downloads directory not found");
+      if (downloadDir == null) throw Exception('Downloads directory not found');
 
       File? downloadedFile;
 
@@ -1149,7 +1148,7 @@ class DiscoveryProvider extends ChangeNotifier {
         }
       }
 
-      if (downloadedFile == null) throw Exception("Download failed");
+      if (downloadedFile == null) throw Exception('Download failed');
 
       // Unzipping Phase
       _downloadStatus[game.title] = 'unzipping';
@@ -1163,12 +1162,12 @@ class DiscoveryProvider extends ChangeNotifier {
         final extractedPath =
             await _archive.extractGame(downloadedFile, destinationFolder);
         if (extractedPath != null) {
-          debugPrint("Extracted to: $extractedPath");
+          debugPrint('Extracted to: $extractedPath');
           try {
             await downloadedFile.delete();
           } catch (_) {}
         } else {
-          throw Exception("Extraction failed");
+          throw Exception('Extraction failed');
         }
       }
 
@@ -1185,7 +1184,7 @@ class DiscoveryProvider extends ChangeNotifier {
     } catch (e) {
       _downloadStatus[game.title] = 'error';
       _error = e.toString();
-      debugPrint("Download Error: $e");
+      debugPrint('Download Error: $e');
       notifyListeners();
     }
   }
@@ -1194,8 +1193,7 @@ class DiscoveryProvider extends ChangeNotifier {
   Future<List<String>> runScanDiagnostic(String path) async {
     _lastDiagnostics = [];
     try {
-      final results =
-          await _scanner.scanDirectoryDiagnostic(path, maxEntries: 1000);
+      final results = await _scanner.scanDirectoryDiagnostic(path);
       _lastDiagnostics = results;
       return results;
     } catch (e) {
@@ -1296,29 +1294,36 @@ class DiscoveryProvider extends ChangeNotifier {
     // Core platforms
     if (lower == 'wii') return GamePlatform.wii;
     if (lower.contains('wii u') || lower == 'wiiu') return GamePlatform.wiiu;
-    if (lower.contains('gamecube') || lower == 'gc')
+    if (lower.contains('gamecube') || lower == 'gc') {
       return GamePlatform.gamecube;
+    }
 
     // Retro
-    if (lower.contains('n64') || lower.contains('nintendo 64'))
+    if (lower.contains('n64') || lower.contains('nintendo 64')) {
       return GamePlatform.n64;
-    if (lower.contains('snes') || lower.contains('super nintendo'))
+    }
+    if (lower.contains('snes') || lower.contains('super nintendo')) {
       return GamePlatform.snes;
+    }
     if (lower.contains('nes') || lower == 'nintendo') return GamePlatform.nes;
 
     // Handheld
-    if (lower.contains('gba') || lower.contains('game boy advance'))
+    if (lower.contains('gba') || lower.contains('game boy advance')) {
       return GamePlatform.gba;
-    if (lower.contains('gbc') || lower.contains('color'))
+    }
+    if (lower.contains('gbc') || lower.contains('color')) {
       return GamePlatform.gbc;
-    if (lower.contains('gb') || lower.contains('game boy'))
+    }
+    if (lower.contains('gb') || lower.contains('game boy')) {
       return GamePlatform.gameboy;
+    }
     if (lower.contains('3ds')) return GamePlatform.n3ds;
     if (lower.contains('ds')) return GamePlatform.nds;
 
     // Sega
-    if (lower.contains('genesis') || lower.contains('mega drive'))
+    if (lower.contains('genesis') || lower.contains('mega drive')) {
       return GamePlatform.genesis;
+    }
 
     // Use generic Wii as fallback if unknown (safest default)
     return GamePlatform.wii;

@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+
 import '../services/nintendont_config_service.dart';
 import '../services/sd_card_service.dart';
 
@@ -179,11 +180,11 @@ class _ControllerSetupScreenState extends State<ControllerSetupScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            const Row(
               children: [
-                const Icon(Icons.gamepad, color: Colors.purple, size: 32),
-                const SizedBox(width: 12),
-                const Text(
+                Icon(Icons.gamepad, color: Colors.purple, size: 32),
+                SizedBox(width: 12),
+                Text(
                   'Controller Configuration',
                   style: TextStyle(
                     fontSize: 22,
@@ -246,11 +247,11 @@ class _ControllerSetupScreenState extends State<ControllerSetupScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            const Row(
               children: [
-                const Icon(Icons.sd_card, color: Colors.orange, size: 24),
-                const SizedBox(width: 12),
-                const Text(
+                Icon(Icons.sd_card, color: Colors.orange, size: 24),
+                SizedBox(width: 12),
+                Text(
                   'SD Card Selection',
                   style: TextStyle(
                     fontSize: 18,
@@ -286,7 +287,7 @@ class _ControllerSetupScreenState extends State<ControllerSetupScreen> {
               )
             else ...[
               DropdownButtonFormField<String>(
-                value: _selectedSDCard,
+                initialValue: _selectedSDCard,
                 decoration: const InputDecoration(
                   labelText: 'Select SD Card',
                   border: OutlineInputBorder(),
@@ -362,11 +363,11 @@ class _ControllerSetupScreenState extends State<ControllerSetupScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            const Row(
               children: [
                 Icon(Icons.settings, color: Colors.blue, size: 24),
-                const SizedBox(width: 12),
-                const Text(
+                SizedBox(width: 12),
+                Text(
                   'Preset Configurations',
                   style: TextStyle(
                     fontSize: 18,

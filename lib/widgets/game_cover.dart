@@ -11,9 +11,9 @@ class GameCover extends StatefulWidget {
   final double height;
 
   const GameCover({
+    required this.title,
     super.key,
     this.gameId,
-    required this.title,
     this.platform = 'wii',
     this.width = 160,
     this.height = 224,
@@ -47,7 +47,7 @@ class _GameCoverState extends State<GameCover> {
         platform: widget.platform.toLowerCase(),
       );
     } else {
-      _coverFuture = Future.value(null);
+      _coverFuture = Future.value();
     }
   }
 
@@ -163,7 +163,6 @@ class _GameCoverState extends State<GameCover> {
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: Colors.white.withValues(alpha: 0.3),
-                        width: 1,
                       ),
                     ),
                   ),
@@ -213,9 +212,9 @@ class AnimatedGameCard extends StatefulWidget {
   final bool isVerified;
 
   const AnimatedGameCard({
+    required this.title,
     super.key,
     this.gameId,
-    required this.title,
     this.platform = 'wii',
     this.onTap,
     this.healthPercent,
@@ -240,7 +239,7 @@ class _AnimatedGameCardState extends State<AnimatedGameCard>
       duration: const Duration(milliseconds: 200),
       vsync: this,
     );
-    _scaleAnim = Tween<double>(begin: 1.0, end: 1.04).animate(
+    _scaleAnim = Tween<double>(begin: 1, end: 1.04).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic),
     );
   }
@@ -338,7 +337,7 @@ class _AnimatedGameCardState extends State<AnimatedGameCard>
                                       decoration: BoxDecoration(
                                         color: accentColor,
                                         borderRadius: BorderRadius.circular(6),
-                                        boxShadow: [
+                                        boxShadow: const [
                                           BoxShadow(
                                               color: Colors.black26,
                                               blurRadius: 4)

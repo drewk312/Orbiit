@@ -1,9 +1,11 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart' hide Title;
+
 import '../../core/database/database.dart';
-import '../widgets/cover_art_widget.dart';
 import '../../services/cover_art/cover_art_service.dart';
 import '../../services/cover_art/cover_art_source.dart';
+import '../widgets/cover_art_widget.dart';
 import 'game_detail_screen.dart';
 import 'sd_card_export_screen.dart';
 
@@ -11,7 +13,7 @@ import 'sd_card_export_screen.dart';
 class LibraryScreen extends StatefulWidget {
   final AppDatabase database;
 
-  const LibraryScreen({super.key, required this.database});
+  const LibraryScreen({required this.database, super.key});
 
   @override
   State<LibraryScreen> createState() => _LibraryScreenState();
@@ -39,11 +41,13 @@ class _LibraryScreenState extends State<LibraryScreen> {
     final duplicates = await widget.database.getDuplicateIssues();
 
     // Filter
-    var filtered = titles.where((t) {
-      if (_filterPlatform != 'all' && t.platform != _filterPlatform)
+    final filtered = titles.where((t) {
+      if (_filterPlatform != 'all' && t.platform != _filterPlatform) {
         return false;
-      if (_filterHealth != 'all' && t.healthStatus != _filterHealth)
+      }
+      if (_filterHealth != 'all' && t.healthStatus != _filterHealth) {
         return false;
+      }
       return true;
     }).toList();
 
@@ -79,9 +83,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
       barrierDismissible: false,
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) {
-          int current = 0;
-          int total = _titles.length;
-          String currentGame = '';
+          const int current = 0;
+          final int total = _titles.length;
+          const String currentGame = '';
 
           return AlertDialog(
             title: const Text('Downloading Covers'),
@@ -93,9 +97,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 Text('$current / $total games'),
                 if (currentGame.isNotEmpty) ...[
                   const SizedBox(height: 8),
-                  Text(
+                  const Text(
                     currentGame,
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    style: TextStyle(fontSize: 12, color: Colors.grey),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -387,8 +391,9 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
     if (lower == 'wii') return GamePlatform.wii;
     if (lower.contains('wii u') || lower == 'wiiu') return GamePlatform.wiiu;
-    if (lower.contains('gamecube') || lower == 'gc')
+    if (lower.contains('gamecube') || lower == 'gc') {
       return GamePlatform.gamecube;
+    }
 
     // Fallback
     return GamePlatform.wii;
@@ -643,7 +648,7 @@ class _GameGridTileState extends State<_GameGridTile>
       vsync: this,
       duration: const Duration(milliseconds: 200),
     );
-    _bounceAnimation = Tween<double>(begin: 1.0, end: 1.05).animate(
+    _bounceAnimation = Tween<double>(begin: 1, end: 1.05).animate(
       CurvedAnimation(parent: _bounceController, curve: Curves.easeOutCubic),
     );
   }
@@ -704,7 +709,6 @@ class _GameGridTileState extends State<_GameGridTile>
                         color: primaryColor.withValues(alpha: 0.2),
                         blurRadius: 40,
                         spreadRadius: 5,
-                        offset: const Offset(0, 0),
                       ),
                   ],
                 ),

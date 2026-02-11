@@ -73,8 +73,8 @@ class WiiGCTheme {
           backgroundColor: Color(0xFF1A1A1A),
           surfaceColor: Color(0xFF2A2A2A),
           textColor: Colors.white,
-          cornerRadius: 8.0,
-          spacing: 8.0,
+          cornerRadius: 8,
+          spacing: 8,
           animationDuration: Duration(milliseconds: 300),
         );
       case WiiGCThemePreset.gameCubeIndigo:
@@ -85,8 +85,8 @@ class WiiGCTheme {
           backgroundColor: Color(0xFF0F0F23),
           surfaceColor: Color(0xFF1A1A3A),
           textColor: Colors.white,
-          cornerRadius: 12.0,
-          spacing: 12.0,
+          cornerRadius: 12,
+          spacing: 12,
           animationDuration: Duration(milliseconds: 400),
         );
       case WiiGCThemePreset.oledBlack:
@@ -97,8 +97,8 @@ class WiiGCTheme {
           backgroundColor: Colors.black,
           surfaceColor: Color(0xFF111111),
           textColor: Colors.white,
-          cornerRadius: 4.0,
-          spacing: 4.0,
+          cornerRadius: 4,
+          spacing: 4,
           animationDuration: Duration(milliseconds: 200),
         );
       case WiiGCThemePreset.retroCRT:
@@ -109,8 +109,8 @@ class WiiGCTheme {
           backgroundColor: Color(0xFF000000),
           surfaceColor: Color(0xFF0A0A0A),
           textColor: Color(0xFF00FF00),
-          cornerRadius: 0.0,
-          spacing: 8.0,
+          cornerRadius: 0,
+          spacing: 8,
           animationDuration: Duration(milliseconds: 500),
         );
       case WiiGCThemePreset.minimalPro:
@@ -121,8 +121,8 @@ class WiiGCTheme {
           backgroundColor: Color(0xFFF2F2F7),
           surfaceColor: Colors.white,
           textColor: Colors.black,
-          cornerRadius: 16.0,
-          spacing: 16.0,
+          cornerRadius: 16,
+          spacing: 16,
           animationDuration: Duration(milliseconds: 250),
         );
     }

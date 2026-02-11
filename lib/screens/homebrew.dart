@@ -1,26 +1,27 @@
-import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../core/app_logger.dart';
-import '../ui/fusion/design_system.dart';
+import '../models/game_result.dart';
+import '../providers/forge_provider.dart';
 import '../providers/osc_provider.dart';
 import '../providers/wiiload_provider.dart';
-import '../providers/forge_provider.dart';
-import '../widgets/fusion_app_card.dart';
-import '../widgets/immersive_glass_header.dart';
-
-import '../models/game_result.dart';
+import '../services/dlc_manager_service.dart';
+import '../services/gamebrew_service.dart';
+import '../services/homebrew_automation_service.dart';
 import '../services/project_plus_service.dart';
 import '../services/riivolution_service.dart';
-import '../services/dlc_manager_service.dart';
-import '../services/homebrew_automation_service.dart';
-import '../services/gamebrew_service.dart';
-import 'package:file_picker/file_picker.dart';
+import '../ui/fusion/design_system.dart';
+import '../widgets/fusion_app_card.dart';
+import '../widgets/immersive_glass_header.dart';
 
 /// Call from header (e.g. NavigationWrapper) to show Wiiload connection dialog (connect only, no send).
 void showWiiloadConnectionDialog(BuildContext context) {
@@ -92,7 +93,7 @@ class _WiiloadDialogConnectOnlyState extends State<_WiiloadDialogConnectOnly> {
                     .copyWith(color: FusionColors.nebulaCyan),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(FusionRadius.md),
-                  borderSide: BorderSide(color: FusionColors.textMuted),
+                  borderSide: const BorderSide(color: FusionColors.textMuted),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(FusionRadius.md),
@@ -175,7 +176,7 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
 
   // Project+ State
   bool _downloadingPPlus = false;
-  double _pplusProgress = 0.0;
+  double _pplusProgress = 0;
   String _pplusStatus = '';
   final ProjectPlusService _projectPlusService = ProjectPlusService();
 
@@ -249,7 +250,7 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
               size: 80, color: Colors.red.withValues(alpha: 0.5)),
           const SizedBox(height: 16),
           Text(
-            "CONNECTION ERROR",
+            'CONNECTION ERROR',
             style: TextStyle(
                 color: Colors.red.withValues(alpha: 0.8),
                 fontSize: 18,
@@ -257,8 +258,8 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
                 letterSpacing: 2),
           ),
           const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40),
           ),
         ],
       ),
@@ -273,7 +274,7 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
           Icon(Icons.search_off, size: 64, color: Colors.white24),
           SizedBox(height: 16),
           Text(
-            "No homebrew apps found",
+            'No homebrew apps found',
             style: TextStyle(color: Colors.white54, fontSize: 16),
           ),
         ],
@@ -318,7 +319,6 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
                   BoxShadow(
                     color: color.withValues(alpha: 0.4),
                     blurRadius: 12,
-                    spreadRadius: 0,
                   ),
                 ]
               : null,
@@ -584,7 +584,7 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
         });
       }
     } catch (e) {
-      AppLogger.instance.error("Error loading rom hacks: $e");
+      AppLogger.instance.error('Error loading rom hacks: $e');
       if (mounted) setState(() => _loadingRomHacks = false);
     }
   }
@@ -610,7 +610,6 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
               game: hack,
               onInfo: () => _handleRomHackAction(hack),
               onForge: () => _handleRomHackAction(hack),
-              onArchive: null,
             );
           },
         );
@@ -988,7 +987,6 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
       child: SizedBox(
         width: 280,
         child: GlassCard(
-          padding: const EdgeInsets.all(16),
           glowColor: color,
           child: Row(
             children: [
@@ -1266,7 +1264,7 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
         },
         style: FusionText.bodyMedium,
         decoration: InputDecoration(
-          hintText: "SEARCH HOMEBREW...",
+          hintText: 'SEARCH HOMEBREW...',
           hintStyle:
               FusionText.bodyMedium.copyWith(color: FusionColors.textMuted),
           prefixIcon: const Padding(
@@ -1293,7 +1291,7 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
           const _PulsingHomebrewIcon(),
           const SizedBox(height: 40),
           const Text(
-            "LOADING HOMEBREW...",
+            'LOADING HOMEBREW...',
             style: TextStyle(
               fontSize: 18,
               letterSpacing: 4,
@@ -1303,14 +1301,13 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
                 Shadow(
                   color: Color(0xFFB000FF),
                   blurRadius: 15,
-                  offset: Offset(0, 0),
                 ),
               ],
             ),
           ),
           const SizedBox(height: 12),
           Text(
-            "CONNECTING TO OPEN SHOP CHANNEL...",
+            'CONNECTING TO OPEN SHOP CHANNEL...',
             style: TextStyle(
               color: Colors.white.withValues(alpha: 0.4),
               fontSize: 14,
@@ -1351,7 +1348,7 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
   }
 
   void _showHomebrewInfo(GameResult homebrew) {
-    AppLogger.instance.info("[Homebrew] Showing info for: ${homebrew.title}");
+    AppLogger.instance.info('[Homebrew] Showing info for: ${homebrew.title}');
     showDialog(
       context: context,
       builder: (ctx) => _HomebrewInfoDialog(
@@ -1373,7 +1370,7 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
   }
 
   void _archiveHomebrew(GameResult homebrew) {
-    AppLogger.instance.info("[Homebrew] Archiving: ${homebrew.title}");
+    AppLogger.instance.info('[Homebrew] Archiving: ${homebrew.title}');
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Archive: ${homebrew.title}'),
@@ -1384,7 +1381,7 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
 
   Future<void> _downloadHomebrew(GameResult homebrew) async {
     AppLogger.instance
-        .info("[Homebrew] Requesting download: ${homebrew.title}");
+        .info('[Homebrew] Requesting download: ${homebrew.title}');
 
     if (homebrew.downloadUrl == null) {
       _showSnack('Download URL not available', isError: true);
@@ -1408,8 +1405,8 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
     final url = homebrew.downloadUrl!;
 
     // Show progress
-    _showSnack('Downloading ${homebrew.title} component...', isError: false);
-    AppLogger.instance.info("[Homebrew] Downloading from $url");
+    _showSnack('Downloading ${homebrew.title} component...');
+    AppLogger.instance.info('[Homebrew] Downloading from $url');
 
     File? tempFile;
     try {
@@ -1426,26 +1423,26 @@ class _HomebrewScreenState extends State<HomebrewScreen> {
 
       await tempFile.writeAsBytes(response.bodyBytes);
       AppLogger.instance.info(
-          "[Homebrew] Downloaded to ${tempFile.path} (${response.bodyBytes.length} bytes)");
+          '[Homebrew] Downloaded to ${tempFile.path} (${response.bodyBytes.length} bytes)');
 
       // 2. Send to Wii
       if (!mounted) return;
-      _showSnack('Sending ${homebrew.title} to Wii...', isError: false);
+      _showSnack('Sending ${homebrew.title} to Wii...');
 
       final success = await wiiloadProvider.sendDolFile(tempFile.path);
 
       if (!mounted) return;
       if (success) {
         _showSnack('${homebrew.title} sent to Wii successfully!',
-            isError: false, color: const Color(0xFF00FF88));
-        AppLogger.instance.info("[Homebrew] Successfully sent to Wii");
+            color: const Color(0xFF00FF88));
+        AppLogger.instance.info('[Homebrew] Successfully sent to Wii');
       } else {
         _showSnack('Failed to send to Wii', isError: true);
-        AppLogger.instance.error("[Homebrew] Failed to send via Wiiload");
+        AppLogger.instance.error('[Homebrew] Failed to send via Wiiload');
       }
     } catch (e) {
       AppLogger.instance
-          .error("[Homebrew] Error during download/send", error: e);
+          .error('[Homebrew] Error during download/send', error: e);
       if (mounted) {
         _showSnack('Error: ${e.toString()}', isError: true);
       }
@@ -1642,7 +1639,7 @@ class _PulsingHomebrewDiscState extends State<_PulsingHomebrewDisc>
       duration: const Duration(seconds: 5),
     );
 
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.4).animate(
+    _scaleAnimation = Tween<double>(begin: 1, end: 1.4).animate(
       CurvedAnimation(
         parent: _controller,
         curve: Curves.easeInOut,
@@ -1724,17 +1721,17 @@ class _PulsingHomebrewIconState extends State<_PulsingHomebrewIcon>
       duration: const Duration(seconds: 3),
     );
 
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.15).animate(
+    _scaleAnimation = Tween<double>(begin: 1, end: 1.15).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
+        curve: const Interval(0, 0.6, curve: Curves.easeOut),
       ),
     );
 
-    _rotationAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _rotationAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.0, 1.0, curve: Curves.easeInOut),
+        curve: const Interval(0, 1, curve: Curves.easeInOut),
       ),
     );
 
@@ -1791,7 +1788,6 @@ class _PulsingHomebrewIconState extends State<_PulsingHomebrewIcon>
                       color: const Color(0xFFB000FF)
                           .withValues(alpha: _controller.value),
                       blurRadius: 25,
-                      offset: const Offset(0, 0),
                     ),
                   ],
                 ),
@@ -1857,7 +1853,6 @@ class _HomebrewInfoDialog extends StatelessWidget {
             BoxShadow(
               color: categoryColor.withValues(alpha: 0.2),
               blurRadius: 30,
-              spreadRadius: 0,
             ),
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.5),
@@ -1903,7 +1898,6 @@ class _HomebrewInfoDialog extends StatelessWidget {
                       ),
                       border: Border.all(
                         color: categoryColor.withValues(alpha: 0.3),
-                        width: 1,
                       ),
                       boxShadow: [
                         BoxShadow(
@@ -2213,8 +2207,9 @@ class _HomebrewInfoDialog extends StatelessWidget {
   String _formatSize(int bytes) {
     if (bytes < 1024) return '$bytes B';
     if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
-    if (bytes < 1024 * 1024 * 1024)
+    if (bytes < 1024 * 1024 * 1024) {
       return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
+    }
     return '${(bytes / (1024 * 1024 * 1024)).toStringAsFixed(1)} GB';
   }
 
@@ -2279,7 +2274,7 @@ class _WiiUAppInfoDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = const Color(0xFF3B82F6);
+    const color = Color(0xFF3B82F6);
     final icon = app['icon'] as IconData? ?? Icons.extension;
 
     return Dialog(
@@ -2390,7 +2385,7 @@ class _WiiUAppInfoDialog extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Description
-                    Text(
+                    const Text(
                       'Description',
                       style: TextStyle(
                         color: color,
@@ -2425,10 +2420,10 @@ class _WiiUAppInfoDialog extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
+                          const Row(
                             children: [
                               Icon(Icons.folder, size: 16, color: color),
-                              const SizedBox(width: 8),
+                              SizedBox(width: 8),
                               Text(
                                 'Install Location',
                                 style: TextStyle(
@@ -2518,7 +2513,7 @@ class _RiivolutionManagerDialog extends StatefulWidget {
 class _RiivolutionManagerDialogState extends State<_RiivolutionManagerDialog> {
   final RiivolutionService _service = RiivolutionService();
   bool _isBusy = false;
-  double _progress = 0.0;
+  double _progress = 0;
   String _status = '';
 
   Future<void> _installApp() async {
@@ -2747,7 +2742,7 @@ class _DLCManagerDialogState extends State<_DLCManagerDialog> {
   bool _isBusy = false;
   bool _hasKeys = false;
   String _status = '';
-  double _progress = 0.0;
+  double _progress = 0;
 
   // Game Selection
   String _selectedGame = 'Rock Band 3';
@@ -3071,7 +3066,7 @@ class _BatchUpdateProgressDialog extends StatefulWidget {
 class _BatchUpdateProgressDialogState
     extends State<_BatchUpdateProgressDialog> {
   String _status = 'Initializing...';
-  double _progress = 0.0;
+  double _progress = 0;
   final HomebrewAutomationService _service = HomebrewAutomationService();
 
   @override
@@ -3104,7 +3099,7 @@ class _BatchUpdateProgressDialogState
     } catch (e) {
       if (mounted) {
         setState(() {
-          _status = 'Error: ' + e.toString();
+          _status = 'Error: $e';
           _progress = 0.0;
         });
       }

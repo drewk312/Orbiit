@@ -15,8 +15,8 @@ class GameInfoPanel extends StatefulWidget {
   final double verifyProgress;
 
   const GameInfoPanel({
-    super.key,
     required this.disc,
+    super.key,
     this.onClose,
     this.onOpenFolder,
     this.onVerify,
@@ -65,7 +65,6 @@ class _GameInfoPanelState extends State<GameInfoPanel>
               color: const Color(0xFF0D0D14).withValues(alpha: 0.85),
               border: Border.all(
                 color: Colors.white.withValues(alpha: 0.10),
-                width: 1,
               ),
               boxShadow: [
                 BoxShadow(
@@ -133,8 +132,7 @@ class _GameInfoPanelState extends State<GameInfoPanel>
                   accentColor.withValues(alpha: 0.12),
                 ],
               ),
-              border: Border.all(
-                  color: accentColor.withValues(alpha: 0.25), width: 1),
+              border: Border.all(color: accentColor.withValues(alpha: 0.25)),
             ),
             child: Icon(
               widget.disc.isWii

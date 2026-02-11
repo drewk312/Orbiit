@@ -9,11 +9,11 @@ class BentoDashboard extends StatelessWidget {
   final Widget child;
 
   const BentoDashboard({
-    super.key,
     required this.themeMode,
     required this.selectedIndex,
     required this.onDestinationSelected,
     required this.child,
+    super.key,
   });
 
   @override
@@ -37,23 +37,23 @@ class BentoDashboard extends StatelessWidget {
                 backgroundColor:
                     isDark ? const Color(0xFF16161F) : Colors.white,
                 indicatorColor: primaryColor.withValues(alpha: 0.15),
-                destinations: [
-                  const NavigationRailDestination(
+                destinations: const [
+                  NavigationRailDestination(
                     icon: Icon(Icons.explore_outlined),
                     selectedIcon: Icon(Icons.explore),
                     label: Text('Discovery'),
                   ),
-                  const NavigationRailDestination(
+                  NavigationRailDestination(
                     icon: Icon(Icons.grid_view),
                     selectedIcon: Icon(Icons.grid_view_rounded),
                     label: Text('Library'),
                   ),
-                  const NavigationRailDestination(
+                  NavigationRailDestination(
                     icon: Icon(Icons.settings_outlined),
                     selectedIcon: Icon(Icons.settings),
                     label: Text('Settings'),
                   ),
-                  const NavigationRailDestination(
+                  NavigationRailDestination(
                     icon: Icon(Icons.usb_outlined),
                     selectedIcon: Icon(Icons.usb),
                     label: Text('Hardware'),

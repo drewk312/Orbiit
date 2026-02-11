@@ -3,19 +3,21 @@
 // WiiGC-Fusion - Multi-source cover art discovery and caching
 // ═══════════════════════════════════════════════════════════════════════════
 
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:async';
+
 import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
+
 import '../../globals.dart';
 import 'cover_art_source.dart';
 import 'sources/gametdb_source.dart';
 import 'sources/igdb_source.dart';
+import 'sources/libretro_source.dart';
 import 'sources/mobygames_source.dart';
 import 'sources/skraper_source.dart';
-import 'sources/libretro_source.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CONFIGURATION
@@ -226,7 +228,7 @@ class CoverArtService {
             _manifest!.entries[key] = CoverCacheEntry(
               filename: filename,
               source: source,
-              fetchedAt: (await entity.lastModified()),
+              fetchedAt: await entity.lastModified(),
             );
           }
         } catch (e) {

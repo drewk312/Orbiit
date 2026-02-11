@@ -8,10 +8,10 @@ class BentoCard extends StatelessWidget {
   final VoidCallback? onTap;
 
   const BentoCard({
-    super.key,
     required this.title,
     required this.platform,
     required this.accentColor,
+    super.key,
     this.onTap,
   });
 

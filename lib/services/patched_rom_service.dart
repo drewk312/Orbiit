@@ -11,10 +11,11 @@
 //
 // ═══════════════════════════════════════════════════════════════════════════
 
+import 'package:drift/drift.dart';
 import 'package:flutter/foundation.dart';
+
 import '../core/database/database.dart';
 import '../services/enhanced_download_service.dart';
-import 'package:drift/drift.dart';
 
 /// Service for managing pre-patched ROMs
 class PatchedRomService {
@@ -48,13 +49,13 @@ class PatchedRomService {
         patchName: 'Metroid: Other M Redux',
         patchVersion: '1.0.0',
         platform: 'Wii',
-        region: Value('NTSC-U'),
+        region: const Value('NTSC-U'),
         downloadUrl:
             'https://archive.org/download/metroid-other-m-redux/Metroid%20Other%20M%20Redux.iso',
-        archiveUrl: Value('https://archive.org/details/metroid-other-m-redux'),
-        sha256Hash: const Value.absent(),
+        archiveUrl:
+            const Value('https://archive.org/details/metroid-other-m-redux'),
         fileSizeBytes: 4699979776, // ~4.4GB
-        patchNotes: Value(
+        patchNotes: const Value(
             'Complete overhaul of Metroid: Other M with improved controls, graphics, and gameplay.'),
         createdAt: now,
         updatedAt: now,
@@ -68,13 +69,12 @@ class PatchedRomService {
         patchName: 'New Super Mario Bros. Wii Redux',
         patchVersion: '1.0.0',
         platform: 'Wii',
-        region: Value('NTSC-U'),
+        region: const Value('NTSC-U'),
         downloadUrl:
             'https://archive.org/download/nsmbw-redux/NSMBW%20Redux.iso',
-        archiveUrl: Value('https://archive.org/details/nsmbw-redux'),
-        sha256Hash: const Value.absent(),
+        archiveUrl: const Value('https://archive.org/details/nsmbw-redux'),
         fileSizeBytes: 4699979776,
-        patchNotes: Value(
+        patchNotes: const Value(
             'Enhanced version with improved graphics and gameplay tweaks.'),
         createdAt: now,
         updatedAt: now,
@@ -88,12 +88,11 @@ class PatchedRomService {
         patchName: 'Super Mario Galaxy 2 Redux',
         patchVersion: '1.0.0',
         platform: 'Wii',
-        region: Value('NTSC-U'),
+        region: const Value('NTSC-U'),
         downloadUrl: 'https://archive.org/download/smg2-redux/SMG2%20Redux.iso',
-        archiveUrl: Value('https://archive.org/details/smg2-redux'),
-        sha256Hash: const Value.absent(),
+        archiveUrl: const Value('https://archive.org/details/smg2-redux'),
         fileSizeBytes: 4699979776,
-        patchNotes: Value('Enhanced graphics and gameplay improvements.'),
+        patchNotes: const Value('Enhanced graphics and gameplay improvements.'),
         createdAt: now,
         updatedAt: now,
         isVerified: const Value(1),
@@ -115,17 +114,17 @@ class PatchedRomService {
 
   /// Get all patched ROMs
   Future<List<PatchedRom>> getAllPatches() async {
-    return await _db.getAllPatchedRoms();
+    return _db.getAllPatchedRoms();
   }
 
   /// Get patches by platform
   Future<List<PatchedRom>> getPatchesByPlatform(String platform) async {
-    return await _db.getPatchedRomsByPlatform(platform);
+    return _db.getPatchedRomsByPlatform(platform);
   }
 
   /// Get patches for a specific game
   Future<List<PatchedRom>> getPatchesForGame(String gameId) async {
-    return await _db.getPatchedRomsByBaseGame(gameId);
+    return _db.getPatchedRomsByBaseGame(gameId);
   }
 
   /// Download a patched ROM
@@ -137,7 +136,7 @@ class PatchedRomService {
     await _db.updatePatchedRomDownloadCount(patch.id);
 
     // Add to download queue with hash verification
-    return await _downloadService.addDownload(
+    return _downloadService.addDownload(
       title: patch.patchName,
       gameId: patch.baseGameId,
       initialUrl: patch.downloadUrl,

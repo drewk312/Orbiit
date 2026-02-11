@@ -55,9 +55,8 @@ class _ShimmerCardState extends State<ShimmerCard>
             gradient: gradient,
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
                   child: Container(

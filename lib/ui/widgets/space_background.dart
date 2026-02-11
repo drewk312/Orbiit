@@ -11,8 +11,8 @@ class SpaceBackground extends StatefulWidget {
   final bool enableAnimation;
 
   const SpaceBackground({
-    super.key,
     required this.child,
+    super.key,
     this.enableAnimation = true,
   });
 
@@ -141,16 +141,16 @@ class _SpaceBackgroundState extends State<SpaceBackground>
       children: [
         // Layer 1: Deep space gradient (static basis)
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: RadialGradient(
-              center: const Alignment(0.0, -0.2), // Slightly off-center
+              center: Alignment(0, -0.2), // Slightly off-center
               radius: 1.5,
               colors: [
-                const Color(0xFF1A1A24), // Center glow
+                Color(0xFF1A1A24), // Center glow
                 OrbColors.bgPrimary,
                 OrbColors.void_,
               ],
-              stops: const [0.0, 0.4, 1.0],
+              stops: [0.0, 0.4, 1.0],
             ),
           ),
         ),
@@ -206,8 +206,7 @@ class _SpaceBackgroundState extends State<SpaceBackground>
           child: Container(
             decoration: BoxDecoration(
               gradient: RadialGradient(
-                center: Alignment.center,
-                radius: 1.0,
+                radius: 1,
                 colors: [
                   Colors.transparent,
                   OrbColors.void_.withValues(alpha: 0.6),
@@ -365,21 +364,21 @@ class _NebulaPainter extends CustomPainter {
 class StaticSpaceBackground extends StatelessWidget {
   final Widget child;
 
-  const StaticSpaceBackground({super.key, required this.child});
+  const StaticSpaceBackground({required this.child, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: RadialGradient(
-          center: const Alignment(0.0, -0.2),
+          center: Alignment(0, -0.2),
           radius: 1.5,
           colors: [
-            const Color(0xFF1A1A24),
+            Color(0xFF1A1A24),
             OrbColors.bgPrimary,
             OrbColors.void_,
           ],
-          stops: const [0.0, 0.4, 1.0],
+          stops: [0.0, 0.4, 1.0],
         ),
       ),
       child: child,

@@ -146,25 +146,25 @@ abstract final class UIConfig {
   static const Curve exitCurve = Curves.easeIn;
 
   /// Card dimensions
-  static const double cardWidth = 240.0;
+  static const double cardWidth = 240;
   static const double cardAspectRatio = 0.68;
 
   /// Border radius values - Midnight Aurora luxury standard
-  static const double radiusSmall = 12.0;
-  static const double radiusMedium = 20.0;
-  static const double radiusLarge = 28.0;
+  static const double radiusSmall = 12;
+  static const double radiusMedium = 20;
+  static const double radiusLarge = 28;
 
   /// Spacing values
-  static const double spacingXs = 4.0;
-  static const double spacingSm = 8.0;
-  static const double spacingMd = 16.0;
-  static const double spacingLg = 24.0;
-  static const double spacingXl = 32.0;
+  static const double spacingXs = 4;
+  static const double spacingSm = 8;
+  static const double spacingMd = 16;
+  static const double spacingLg = 24;
+  static const double spacingXl = 32;
 
   /// Shadow blur values for layered depth
-  static const double shadowAmbient = 60.0;
-  static const double shadowGlow = 40.0;
-  static const double shadowHighlight = 20.0;
+  static const double shadowAmbient = 60;
+  static const double shadowGlow = 40;
+  static const double shadowHighlight = 20;
 
   /// Grid configuration by screen width
   static int gridColumnsForWidth(double width) {

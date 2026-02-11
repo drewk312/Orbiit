@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:file_picker/file_picker.dart';
 import 'dart:ui';
 
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../models/game_result.dart';
 import '../providers/discovery_provider.dart';
 import '../providers/forge_provider.dart';
-import '../models/game_result.dart';
-
 import '../ui/fusion/design_system.dart';
-import '../widgets/fusion_app_card.dart';
 import '../widgets/cascading_cover_image.dart';
 import '../widgets/empty_state.dart';
+import '../widgets/fusion_app_card.dart';
 import '../widgets/game_detail_panel.dart';
 import '../widgets/premium_fallback_cover.dart';
 
@@ -301,9 +301,9 @@ class _DiscoveryScreenState extends State<DiscoveryScreen>
         backgroundColor: FusionColors.bgSecondary,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(FusionRadius.xl),
-            side: BorderSide(color: FusionColors.glassBorder)),
-        title:
-            Text('Download Location', style: FusionTypography.headlineMedium),
+            side: const BorderSide(color: FusionColors.glassBorder)),
+        title: const Text('Download Location',
+            style: FusionTypography.headlineMedium),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -391,14 +391,14 @@ class _StoreHeaderDelegate extends SliverPersistentHeaderDelegate {
                   const SizedBox(width: 12),
                   // 🔄 Refresh Button
                   IconButton(
-                    icon: Icon(Icons.refresh_rounded,
+                    icon: const Icon(Icons.refresh_rounded,
                         color: FusionColors.wiiBlue),
                     tooltip: 'Refresh Catalog',
                     onPressed: () {
                       context.read<DiscoveryProvider>().refreshCatalog();
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: const Text('Refreshing catalog...'),
+                        const SnackBar(
+                          content: Text('Refreshing catalog...'),
                           backgroundColor: FusionColors.wiiBlue,
                           behavior: SnackBarBehavior.floating,
                         ),
@@ -458,7 +458,7 @@ class _FusionSearchBar extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
-              Icon(Icons.search, color: FusionColors.textMuted),
+              const Icon(Icons.search, color: FusionColors.textMuted),
               const SizedBox(width: 12),
               Expanded(
                 child: TextField(
@@ -527,7 +527,6 @@ class _StoreHero extends StatelessWidget {
                   platform: game
                       .platform, // Pass raw platform for correct Libretro mapping
                   title: game.title,
-                  fit: BoxFit.cover,
                   color: Colors.black.withValues(alpha: 0.6),
                   colorBlendMode: BlendMode.darken,
                   fallbackBuilder: (context) => PremiumFallbackCover(

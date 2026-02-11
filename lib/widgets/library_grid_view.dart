@@ -13,10 +13,10 @@ class LibraryGameTile extends StatefulWidget {
   final VoidCallback? onTap;
 
   const LibraryGameTile({
-    super.key,
     required this.gameId,
     required this.title,
     required this.platform,
+    super.key,
     this.filePath,
     this.onTap,
   });
@@ -210,8 +210,8 @@ class LibraryGridView extends StatelessWidget {
   final Function(GameGridItem game)? onGameTap;
 
   const LibraryGridView({
-    super.key,
     required this.games,
+    super.key,
     this.onGameTap,
   });
 

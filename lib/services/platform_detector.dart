@@ -87,10 +87,10 @@ class PlatformDetector {
         bytes[2] == 0x46 && // 'F'
         bytes[3] == 0x53) {
       // 'S'
-      final gameId = await _extractWiiGCGameId(bytes);
+      final gameId = _extractWiiGCGameId(bytes);
       return DetectionResult(
         platform: GamePlatform.wii,
-        confidence: 1.0,
+        confidence: 1,
         gameId: gameId,
         method: 'magic_bytes_wbfs',
       );
@@ -103,7 +103,7 @@ class PlatformDetector {
         bytes[2] == 0x5A && // 'Z'
         bytes[3] == 0x01) {
       // Need to check game ID to determine Wii vs GC
-      final gameId = await _extractWiiGCGameId(bytes);
+      final gameId = _extractWiiGCGameId(bytes);
       final platform = gameId != null && gameId[0] == 'R'
           ? GamePlatform.wii
           : GamePlatform.gamecube;
@@ -154,7 +154,7 @@ class PlatformDetector {
         final gameCode = _extractGBAGameCode(bytes);
         return DetectionResult(
           platform: GamePlatform.gba,
-          confidence: 1.0,
+          confidence: 1,
           gameId: gameCode,
           method: 'magic_bytes_gba',
         );
@@ -173,7 +173,7 @@ class PlatformDetector {
               bytes[3] == 0x80)) {
         return DetectionResult(
           platform: GamePlatform.n64,
-          confidence: 1.0,
+          confidence: 1,
           method: 'magic_bytes_n64',
         );
       }
@@ -189,7 +189,7 @@ class PlatformDetector {
       case '.wbfs':
         return DetectionResult(
           platform: GamePlatform.wii,
-          confidence: 1.0,
+          confidence: 1,
           method: 'file_extension',
         );
 
@@ -377,7 +377,7 @@ class PlatformDetector {
   // === UTILITIES ===
 
   Future<Uint8List> _readFileHeader(File file, int bytes) async {
-    final handle = await file.open(mode: FileMode.read);
+    final handle = await file.open();
     try {
       final buffer = Uint8List(bytes);
       final read = await handle.readInto(buffer);
@@ -402,16 +402,16 @@ class DetectionResult {
   DetectionResult({
     required this.platform,
     required this.confidence,
+    required this.method,
     this.gameId,
     this.detectedTitle,
-    required this.method,
     this.error,
   });
 
   factory DetectionResult.unknown(String error) {
     return DetectionResult(
       platform: GamePlatform.other,
-      confidence: 0.0,
+      confidence: 0,
       method: 'unknown',
       error: error,
     );

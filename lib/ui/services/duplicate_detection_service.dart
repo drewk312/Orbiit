@@ -1,8 +1,10 @@
 import 'dart:io';
+
 import 'package:path/path.dart' as path;
+
+import '../../core/database/database.dart';
 import '../../globals.dart';
 import 'checksum_service.dart';
-import '../../core/database/database.dart';
 
 /// Enhanced duplicate detection service
 /// Uses CRC32, file size, and game ID to detect duplicates

@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:async';
 
 class LegalDisclaimerDialog extends StatefulWidget {
   const LegalDisclaimerDialog({super.key});
@@ -230,7 +231,8 @@ class _LegalDisclaimerDialogState extends State<LegalDisclaimerDialog> {
     );
   }
 
-  static const String _disclaimerText = '''LEGAL DISCLAIMER & FAIR USE NOTICE
+  static const String _disclaimerText = '''
+LEGAL DISCLAIMER & FAIR USE NOTICE
 
 IMPORTANT: READ CAREFULLY BEFORE USING THIS SOFTWARE
 

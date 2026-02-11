@@ -7,11 +7,11 @@
 // Nintendont Config Location: SD:/controllers/{VID}_{PID}.ini
 // ============================================================================
 
-import 'dart:io';
-import 'dart:convert';
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 
 // ============================================================================
 // CONTROLLER BUTTON DEFINITIONS
@@ -305,46 +305,52 @@ class NintendontControllerService {
   static final Map<String, _ControllerPreset> _knownControllers = {
     // Xbox 360
     '045e_028e':
-        _ControllerPreset('Xbox 360 Controller', ControllerType.xbox360),
-    '045e_028f': _ControllerPreset('Xbox 360 Wireless', ControllerType.xbox360),
+        const _ControllerPreset('Xbox 360 Controller', ControllerType.xbox360),
+    '045e_028f':
+        const _ControllerPreset('Xbox 360 Wireless', ControllerType.xbox360),
 
     // Xbox One
     '045e_02d1':
-        _ControllerPreset('Xbox One Controller', ControllerType.xboxOne),
+        const _ControllerPreset('Xbox One Controller', ControllerType.xboxOne),
     '045e_02dd':
-        _ControllerPreset('Xbox One Controller', ControllerType.xboxOne),
-    '045e_02e3': _ControllerPreset('Xbox One Elite', ControllerType.xboxOne),
-    '045e_02ea':
-        _ControllerPreset('Xbox One S Controller', ControllerType.xboxOne),
+        const _ControllerPreset('Xbox One Controller', ControllerType.xboxOne),
+    '045e_02e3':
+        const _ControllerPreset('Xbox One Elite', ControllerType.xboxOne),
+    '045e_02ea': const _ControllerPreset(
+        'Xbox One S Controller', ControllerType.xboxOne),
 
     // Xbox Series
-    '045e_0b12': _ControllerPreset(
+    '045e_0b12': const _ControllerPreset(
         'Xbox Series X Controller', ControllerType.xboxSeries),
-    '045e_0b13': _ControllerPreset(
+    '045e_0b13': const _ControllerPreset(
         'Xbox Series X Controller', ControllerType.xboxSeries),
 
     // DualShock 3
-    '054c_0268': _ControllerPreset('DualShock 3', ControllerType.dualShock3),
+    '054c_0268':
+        const _ControllerPreset('DualShock 3', ControllerType.dualShock3),
 
     // DualShock 4
-    '054c_05c4': _ControllerPreset('DualShock 4', ControllerType.dualShock4),
-    '054c_09cc': _ControllerPreset('DualShock 4 V2', ControllerType.dualShock4),
+    '054c_05c4':
+        const _ControllerPreset('DualShock 4', ControllerType.dualShock4),
+    '054c_09cc':
+        const _ControllerPreset('DualShock 4 V2', ControllerType.dualShock4),
 
     // DualSense
-    '054c_0ce6': _ControllerPreset('DualSense', ControllerType.dualSense),
-    '054c_0df2': _ControllerPreset('DualSense Edge', ControllerType.dualSense),
+    '054c_0ce6': const _ControllerPreset('DualSense', ControllerType.dualSense),
+    '054c_0df2':
+        const _ControllerPreset('DualSense Edge', ControllerType.dualSense),
 
     // Nintendo Switch Pro
-    '057e_2009':
-        _ControllerPreset('Switch Pro Controller', ControllerType.switchPro),
+    '057e_2009': const _ControllerPreset(
+        'Switch Pro Controller', ControllerType.switchPro),
 
     // 8BitDo controllers
-    '2dc8_2100':
-        _ControllerPreset('8BitDo SN30 Pro', ControllerType.generic8BitDo),
-    '2dc8_2101':
-        _ControllerPreset('8BitDo SN30 Pro+', ControllerType.generic8BitDo),
+    '2dc8_2100': const _ControllerPreset(
+        '8BitDo SN30 Pro', ControllerType.generic8BitDo),
+    '2dc8_2101': const _ControllerPreset(
+        '8BitDo SN30 Pro+', ControllerType.generic8BitDo),
     '2dc8_3106':
-        _ControllerPreset('8BitDo Pro 2', ControllerType.generic8BitDo),
+        const _ControllerPreset('8BitDo Pro 2', ControllerType.generic8BitDo),
   };
 
   // ══════════════════════════════════════════════════════════════════════════
@@ -541,8 +547,6 @@ class NintendontControllerService {
         GCAxis.rAnalog: const ControllerMapping(
             sourceAxis: 5, targetAxis: GCAxis.rAnalog, deadzone: 10),
       },
-      rumbleStrength: 100,
-      analogTriggers: true,
     );
   }
 
@@ -599,8 +603,6 @@ class NintendontControllerService {
         GCAxis.rAnalog: const ControllerMapping(
             sourceAxis: 4, targetAxis: GCAxis.rAnalog, deadzone: 10),
       },
-      rumbleStrength: 100,
-      analogTriggers: true,
     );
   }
 
@@ -695,19 +697,15 @@ class NintendontControllerService {
             const ControllerMapping(sourceButton: 5, targetButton: GCButton.r),
       },
       axisMappings: {
-        GCAxis.mainX: const ControllerMapping(
-            sourceAxis: 0, targetAxis: GCAxis.mainX, deadzone: 20),
+        GCAxis.mainX:
+            const ControllerMapping(sourceAxis: 0, targetAxis: GCAxis.mainX),
         GCAxis.mainY: const ControllerMapping(
-            sourceAxis: 1,
-            targetAxis: GCAxis.mainY,
-            inverted: true,
-            deadzone: 20),
-        GCAxis.cX: const ControllerMapping(
-            sourceAxis: 2, targetAxis: GCAxis.cX, deadzone: 20),
+            sourceAxis: 1, targetAxis: GCAxis.mainY, inverted: true),
+        GCAxis.cX:
+            const ControllerMapping(sourceAxis: 2, targetAxis: GCAxis.cX),
         GCAxis.cY: const ControllerMapping(
-            sourceAxis: 3, targetAxis: GCAxis.cY, inverted: true, deadzone: 20),
+            sourceAxis: 3, targetAxis: GCAxis.cY, inverted: true),
       },
-      rumbleStrength: 100,
       analogTriggers: false,
     );
   }
@@ -786,7 +784,6 @@ class NintendontControllerService {
           buttonMappings[gcButton] = ControllerMapping(
             sourceButton: source,
             targetButton: gcButton,
-            deadzone: 20,
           );
         }
       } else if (section == 'Axes') {

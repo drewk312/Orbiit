@@ -28,11 +28,12 @@
 //
 // ═══════════════════════════════════════════════════════════════════════════
 
-import 'dart:io';
 import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // LOG LEVEL
@@ -166,7 +167,7 @@ class AppLogger {
       );
 
       _initialized = true;
-      log('Logger initialized at ${_logFile!.path}', level: LogLevel.info);
+      log('Logger initialized at ${_logFile!.path}');
     } catch (e) {
       debugPrint('[AppLogger] Failed to initialize: $e');
       // Logger can still work without file output
@@ -273,7 +274,7 @@ class AppLogger {
 
   /// Log info message
   void info(String message, {String? component}) =>
-      log(message, level: LogLevel.info, component: component);
+      log(message, component: component);
 
   /// Log warning message
   void warning(String message, {String? component}) =>
@@ -314,7 +315,7 @@ class AppLogger {
   Future<void> dispose() async {
     _writeTimer?.cancel();
     await _flushBuffer();
-    log('Logger shutting down', level: LogLevel.info);
+    log('Logger shutting down');
     await _flushBuffer();
   }
 }

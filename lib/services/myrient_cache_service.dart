@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
 
 /// ═══════════════════════════════════════════════════════════════════════════
 /// MYRIENT CACHE SERVICE - INSTANT SEARCH
@@ -31,7 +32,7 @@ class MyrientCacheService {
 
   bool _isInitialized = false;
   bool _isLoading = false;
-  double _loadProgress = 0.0;
+  double _loadProgress = 0;
   String _loadStatus = '';
 
   // Master game index: all games from all sources
@@ -54,33 +55,33 @@ class MyrientCacheService {
 
   static final List<_CacheSource> _sources = [
     // High priority - cache first
-    _CacheSource(
+    const _CacheSource(
         'wii_rvz',
         'Wii',
         'https://myrient.erista.me/files/Redump/Nintendo%20-%20Wii%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/',
         'RVZ'),
-    _CacheSource(
+    const _CacheSource(
         'gamecube_rvz',
         'GameCube',
         'https://myrient.erista.me/files/Redump/Nintendo%20-%20GameCube%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/',
         'RVZ'),
-    _CacheSource(
+    const _CacheSource(
         'n64_big',
         'N64',
         'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%2064%20%28BigEndian%29/',
         'Z64'),
-    _CacheSource(
+    const _CacheSource(
         'n64_ra',
         'N64',
         'https://myrient.erista.me/files/RetroAchievements/RA%20-%20Nintendo%2064/',
         'Z64',
         isHack: true),
-    _CacheSource(
+    const _CacheSource(
         'gba',
         'GBA',
         'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/',
         'GBA'),
-    _CacheSource(
+    const _CacheSource(
         'snes',
         'SNES',
         'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/',
@@ -246,8 +247,9 @@ class MyrientCacheService {
 
       for (final line in lines) {
         if (!line.startsWith('|') || !line.contains('](')) continue;
-        if (line.contains('File Name') || line.contains('Parent directory'))
+        if (line.contains('File Name') || line.contains('Parent directory')) {
           continue;
+        }
 
         final linkMatch = RegExp(r'\[([^\]]+)\]\(([^\s\)"]+)').firstMatch(line);
         if (linkMatch == null) continue;

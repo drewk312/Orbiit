@@ -4,7 +4,7 @@ import 'package:window_manager/window_manager.dart';
 class GlassmorphicShell extends StatelessWidget {
   final Widget child;
 
-  const GlassmorphicShell({super.key, required this.child});
+  const GlassmorphicShell({required this.child, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +166,6 @@ class _SquishyButtonState extends State<_SquishyButton> {
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: Colors.white.withValues(alpha: _isPressed ? 0.3 : 0.1),
-            width: 1,
           ),
           boxShadow: [
             if (!_isPressed)

@@ -19,18 +19,13 @@
 
 // Logging
 export 'app_logger.dart';
-
-// Functional error handling
-export 'result.dart';
-
-// Structured error types
-export 'errors.dart';
-
-// Extension methods on built-in types
-export 'extensions.dart';
-
 // Application constants and configuration
 export 'constants.dart';
-
 // Error handling utilities
 export 'error_handler.dart';
+// Structured error types
+export 'errors.dart';
+// Extension methods on built-in types
+export 'extensions.dart';
+// Functional error handling
+export 'result.dart';

@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:io';
+
+import 'package:archive/archive_io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:path/path.dart' as path;
-import 'package:archive/archive_io.dart';
 import 'package:logging/logging.dart';
+import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
 // Top-level function for isolate
@@ -58,7 +59,7 @@ class ProjectPlusService {
       if (extractDir.existsSync()) extractDir.deleteSync(recursive: true);
 
       onStatus('Installation Complete!');
-      onProgress(1.0);
+      onProgress(1);
     } catch (e) {
       _logger.severe('Installation failed', e);
       // Cleanup on fail

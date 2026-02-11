@@ -1,24 +1,24 @@
-import 'dart:ui';
 import 'dart:io';
-import 'package:flutter/material.dart';
+
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 import 'package:url_launcher/url_launcher.dart';
-import '../../ui/screens/controller_wizard_screen.dart';
-import '../../screens/cover_art_manager_screen.dart';
+
+import '../../screens/codes.dart';
 import '../../screens/controller_forge_screen.dart';
+import '../../screens/cover_art_manager_screen.dart';
+import '../../screens/file_import_screen.dart';
+import '../../screens/hardware_wizard.dart';
+import '../../screens/homebrew.dart';
 import '../../screens/storage_organizer_screen.dart';
 import '../../screens/wiiload_screen.dart';
-import '../../screens/codes.dart';
-import '../../screens/homebrew.dart';
-import '../../screens/hardware_wizard.dart';
-import '../../screens/file_import_screen.dart';
-import 'memory_card_manager_screen.dart'; // Phase 1.1 Pro
-import '../services/wiitdb_service.dart';
-import '../services/checksum_service.dart';
-import '../services/archive_service.dart' show ArchiveExtractionService;
-
+import '../../ui/screens/controller_wizard_screen.dart';
 import '../fusion_ui/fusion_ui.dart';
+import '../services/archive_service.dart' show ArchiveExtractionService;
+import '../services/checksum_service.dart';
+import '../services/wiitdb_service.dart';
+import 'memory_card_manager_screen.dart'; // Phase 1.1 Pro
 
 /// Tools Hub - sleek utilities with Wii/GameCube aesthetics
 class ToolsHubScreen extends StatefulWidget {
@@ -33,7 +33,7 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
   late AnimationController _glowController;
   bool _isProcessing = false;
   String _statusMessage = '';
-  double _progress = 0.0;
+  double _progress = 0;
 
   @override
   void initState() {
@@ -190,11 +190,11 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
                   'TOOLKIT',
                   style: UiType.headingLarge.copyWith(
                     fontSize: 28,
-                    letterSpacing: 2.0,
+                    letterSpacing: 2,
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text(
+                const Text(
                   'Advanced utilities for your Wii & GameCube library',
                   style: UiType.bodyMedium,
                 ),
@@ -322,7 +322,6 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
       child: GlassCard(
         onTap: onTap,
         glowColor: color,
-        borderRadius: UiRadius.xl,
         padding: EdgeInsets.zero, // We handle padding inside for the stack
         child: Stack(
           children: [
@@ -386,7 +385,7 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
                   color: UiColors.glassWhite(0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_forward,
                   color: UiColors.textSecondary,
                   size: 16,
@@ -782,7 +781,7 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
   // Remaining tool methods are unchanged from the previous implementation.
   // (Keeping behavior stable; only removed naming/branding terms.)
 
-  void _findDuplicates() async {
+  Future<void> _findDuplicates() async {
     final result = await FilePicker.platform.getDirectoryPath(
       dialogTitle: 'Select Game Library Folder',
     );
@@ -932,7 +931,7 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
     }
   }
 
-  void _splitFile() async {
+  Future<void> _splitFile() async {
     final result = await FilePicker.platform.pickFiles(
       dialogTitle: 'Select Large Game File to Split',
       type: FileType.custom,
@@ -988,7 +987,7 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
           partNum++;
         }
 
-        currentSink!.add(chunk);
+        currentSink.add(chunk);
         bytesWritten += chunk.length;
         totalBytesWritten += chunk.length;
 
@@ -1021,7 +1020,7 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
     }
   }
 
-  void _checkDiskSpace() async {
+  Future<void> _checkDiskSpace() async {
     final result = await FilePicker.platform.getDirectoryPath(
       dialogTitle: 'Select Drive or Folder to Check',
     );
@@ -1066,11 +1065,11 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
         context: context,
         builder: (ctx) => AlertDialog(
           backgroundColor: const Color(0xFF1A1D24),
-          title: Row(
+          title: const Row(
             children: [
-              const Icon(Icons.storage, color: Color(0xFF14B8A6)),
-              const SizedBox(width: 12),
-              const Text('Disk Space Analysis',
+              Icon(Icons.storage, color: Color(0xFF14B8A6)),
+              SizedBox(width: 12),
+              Text('Disk Space Analysis',
                   style: TextStyle(color: Colors.white)),
             ],
           ),
@@ -1146,11 +1145,11 @@ class _ToolsHubScreenState extends State<ToolsHubScreen>
 
   Future<void> _downloadBanners() async {
     final result = await FilePicker.platform
-        .getDirectoryPath(dialogTitle: "Select Folder for Banners");
+        .getDirectoryPath(dialogTitle: 'Select Folder for Banners');
     if (result != null) {
       // Open the folder in explorer
       // Also offer to open GameTDB
-      final uri = Uri.parse("https://www.gametdb.com/Wii/Downloads");
+      final uri = Uri.parse('https://www.gametdb.com/Wii/Downloads');
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri);
       }

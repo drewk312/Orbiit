@@ -50,7 +50,7 @@ class ArchiveService {
 
       // Find the game file (.wbfs, .iso, .rvz, .ciso)
       final files = destination.listSync();
-      for (var file in files) {
+      for (final file in files) {
         final ext = path.extension(file.path).toLowerCase();
         if (ext == '.wbfs' ||
             ext == '.iso' ||

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../core/database/database.dart';
-import '../services/usb_loader_service.dart';
-import '../fusion/design_system.dart';
+
 import '../../core/app_logger.dart';
+import '../../core/database/database.dart';
+import '../fusion/design_system.dart';
+import '../services/usb_loader_service.dart';
 
 /// Screen for exporting covers to SD card for jailbroken Wii USB loaders
 /// Redesigned for Midnight Aurora (Glassmorphism + OLED Black)
 class SDCardExportScreen extends StatefulWidget {
   final AppDatabase database;
 
-  const SDCardExportScreen({super.key, required this.database});
+  const SDCardExportScreen({required this.database, super.key});
 
   @override
   State<SDCardExportScreen> createState() => _SDCardExportScreenState();
@@ -119,7 +120,7 @@ class _SDCardExportScreenState extends State<SDCardExportScreen> {
       }
 
       if (mounted) {
-        _showSnack('✓ Covers exported successfully!', isError: false);
+        _showSnack('✓ Covers exported successfully!');
         AppLogger.instance.info('Cover export completed successfully');
       }
     } catch (e) {
@@ -157,7 +158,8 @@ class _SDCardExportScreenState extends State<SDCardExportScreen> {
             icon: const Icon(Icons.arrow_back, color: FusionColors.textPrimary),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: Text('Export to SD Card', style: FusionText.headlineMedium),
+          title:
+              const Text('Export to SD Card', style: FusionText.headlineMedium),
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(32),
@@ -195,7 +197,7 @@ class _SDCardExportScreenState extends State<SDCardExportScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Prepare Covers for Wii',
                             style: FusionText.headlineMedium,
                           ),
@@ -235,7 +237,7 @@ class _SDCardExportScreenState extends State<SDCardExportScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('Target SD Card',
+                                  const Text('Target SD Card',
                                       style: FusionText.labelLarge),
                                   if (_scanning)
                                     const SizedBox(
@@ -329,7 +331,7 @@ class _SDCardExportScreenState extends State<SDCardExportScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Target Loader',
+                              const Text('Target Loader',
                                   style: FusionText.labelLarge),
                               const SizedBox(height: 16),
                               _LoaderOption(
@@ -509,8 +511,8 @@ class _LoaderOption extends StatelessWidget {
                 groupValue: groupValue,
                 onChanged: onChanged,
                 activeColor: FusionColors.wii,
-                fillColor: MaterialStateProperty.resolveWith((states) {
-                  return states.contains(MaterialState.selected)
+                fillColor: WidgetStateProperty.resolveWith((states) {
+                  return states.contains(WidgetState.selected)
                       ? FusionColors.wii
                       : FusionColors.textSecondary;
                 }),

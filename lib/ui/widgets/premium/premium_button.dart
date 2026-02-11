@@ -24,8 +24,8 @@ class PremiumButton extends StatefulWidget {
   final double fontSize;
 
   const PremiumButton({
-    super.key,
     required this.label,
+    super.key,
     this.icon,
     this.onPressed,
     this.style = PremiumButtonStyle.primary,
@@ -55,7 +55,7 @@ class _PremiumButtonState extends State<PremiumButton>
       duration: const Duration(seconds: 2),
     )..repeat();
 
-    _shimmerAnimation = Tween<double>(begin: -1.0, end: 2.0).animate(
+    _shimmerAnimation = Tween<double>(begin: -1, end: 2).animate(
       CurvedAnimation(parent: _shimmerController, curve: Curves.easeInOut),
     );
   }
@@ -257,9 +257,9 @@ class _ShimmerPainter extends CustomPainter {
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: [
-          baseColor.withOpacity(0.0),
+          baseColor.withOpacity(0),
           baseColor.withOpacity(0.1),
-          baseColor.withOpacity(0.0),
+          baseColor.withOpacity(0),
         ],
         stops: const [0.3, 0.5, 0.7],
         transform: GradientRotation(progress * 3.14159),

@@ -4,14 +4,16 @@
 // ═══════════════════════════════════════════════════════════════════════════
 
 import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'dart:io';
-import '../../providers/discovery_provider.dart';
+
 import '../../core/app_logger.dart';
+import '../../providers/discovery_provider.dart';
 import '../fusion/design_system.dart';
 
 /// HTTP headers to avoid 403 errors from GameTDB
@@ -149,8 +151,8 @@ class GameCardData {
   const GameCardData({
     required this.id,
     required this.title,
-    this.coverUrl,
     required this.platform,
+    this.coverUrl,
     this.size,
     this.region,
     this.isFavorite = false,
@@ -222,8 +224,8 @@ class GameCoverCard extends StatefulWidget {
   final double height;
 
   const GameCoverCard({
-    super.key,
     required this.game,
+    super.key,
     this.onTap,
     this.onDoubleTap,
     this.onInfo,
@@ -254,10 +256,10 @@ class _GameCoverCardState extends State<GameCoverCard>
       vsync: this,
       duration: FusionAnimations.normal,
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.05).animate(
+    _scaleAnimation = Tween<double>(begin: 1, end: 1.05).animate(
       CurvedAnimation(parent: _hoverController, curve: Curves.easeOutCubic),
     );
-    _glowAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _glowAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _hoverController, curve: Curves.easeOutCubic),
     );
     // Listen to animation to trigger rebuilds
@@ -412,7 +414,7 @@ class _GameCoverCardState extends State<GameCoverCard>
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
                   color: FusionColors.textMuted,
@@ -450,7 +452,7 @@ class _GameCoverCardState extends State<GameCoverCard>
               const SizedBox(height: 8),
               Text(
                 '${(percent * 100).toInt()}%',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 11,
                   color: FusionColors.textMuted,
                 ),
@@ -595,14 +597,14 @@ class _GameCoverCardState extends State<GameCoverCard>
       bottom: 0,
       child: Container(
         height: 4,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color.fromRGBO(0, 0, 0, 0.5),
         ),
         child: FractionallySizedBox(
           alignment: Alignment.centerLeft,
           widthFactor: widget.game.downloadProgress ?? 0,
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   FusionColors.wiiBlue,
@@ -622,7 +624,7 @@ class _GameCoverCardState extends State<GameCoverCard>
       right: 8,
       child: Container(
         padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
           color: Color.fromRGBO(0, 0, 0, 0.6),
         ),
@@ -711,7 +713,6 @@ class _ActionButtonState extends State<_ActionButton> {
                   color: isHovered
                       ? buttonColor.withValues(alpha: 0.5)
                       : FusionColors.glassWhite(0.2),
-                  width: 1,
                 ),
               ),
               child: Column(
@@ -752,8 +753,8 @@ class GameCoverGrid extends StatelessWidget {
   final ScrollController? scrollController;
 
   const GameCoverGrid({
-    super.key,
     required this.games,
+    super.key,
     this.onGameTap,
     this.onGameInfo,
     this.onGameDownload,
@@ -784,8 +785,8 @@ class GameCoverGrid extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final cardWidth = 160.0;
-        final spacing = 16.0;
+        const cardWidth = 160.0;
+        const spacing = 16.0;
         final cols = ((constraints.maxWidth + spacing) / (cardWidth + spacing))
             .floor()
             .clamp(2, 8);

@@ -1,6 +1,7 @@
 import 'dart:io';
-import 'package:html/parser.dart' as html_parser;
+
 import 'package:flutter/foundation.dart';
+import 'package:html/parser.dart' as html_parser;
 
 class MyrientScraper {
   /// Searches a Myrient directory for a file matching the query.
@@ -16,12 +17,12 @@ class MyrientScraper {
 
       if (response.statusCode != 200) {
         debugPrint(
-            "[MyrientScraper] Failed to reach Myrient: ${response.statusCode}");
+            '[MyrientScraper] Failed to reach Myrient: ${response.statusCode}');
         return null;
       }
 
       final htmlBody =
-          await response.transform(SystemEncoding().decoder).join();
+          await response.transform(const SystemEncoding().decoder).join();
 
       // 2. Parse the HTML to find all links (hrefs)
       final document = html_parser.parse(htmlBody);
@@ -35,7 +36,7 @@ class MyrientScraper {
       final normalizedQuery = _normalize(query);
       debugPrint('[MyrientScraper] Looking for: "$normalizedQuery"');
 
-      for (var anchor in anchors) {
+      for (final anchor in anchors) {
         final href = anchor.attributes['href'];
         var text = anchor.text;
 
@@ -71,7 +72,7 @@ class MyrientScraper {
 
       return bestMatchUrl;
     } catch (e) {
-      debugPrint("[MyrientScraper] Error searching Myrient: $e");
+      debugPrint('[MyrientScraper] Error searching Myrient: $e');
       return null;
     } finally {
       client.close();

@@ -6,10 +6,12 @@
 // ============================================================================
 
 import 'dart:async';
+
 import 'package:flutter/material.dart';
-import '../ui/screens/controller_wizard_screen.dart';
-import 'package:wiigc_fusion/services/nintendont/nintendont_controller_service.dart';
 import 'package:wiigc_fusion/services/hardware_service.dart';
+import 'package:wiigc_fusion/services/nintendont/nintendont_controller_service.dart';
+
+import '../ui/screens/controller_wizard_screen.dart';
 
 /// Supported console types for controller mapping
 enum ConsoleTarget {
@@ -348,7 +350,7 @@ class _ControllerCustomizationScreenState
               padding: const EdgeInsets.only(left: 16),
               child: ElevatedButton.icon(
                 icon: const Icon(Icons.auto_fix_high, size: 18),
-                label: const Text("Wizard"),
+                label: const Text('Wizard'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: accentColor.withValues(alpha: 0.8),
                   foregroundColor: Colors.white,
@@ -938,7 +940,7 @@ class _ControllerCustomizationScreenState
   }) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(color: Colors.white10),
         ),
@@ -1079,7 +1081,6 @@ class _ControllerCustomizationScreenState
             ),
           ),
           Expanded(
-            flex: 1,
             child: Text(
               'Axis $axis',
               style: const TextStyle(

@@ -6,8 +6,8 @@ class DownloadQueueWidget extends StatelessWidget {
   final DownloadService downloadService;
 
   const DownloadQueueWidget({
-    super.key,
     required this.downloadService,
+    super.key,
   });
 
   @override
@@ -221,8 +221,8 @@ class DownloadIndicator extends StatelessWidget {
   final VoidCallback? onTap;
 
   const DownloadIndicator({
-    super.key,
     required this.downloadService,
+    super.key,
     this.onTap,
   });
 

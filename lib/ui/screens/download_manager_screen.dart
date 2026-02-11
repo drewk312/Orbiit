@@ -1,9 +1,11 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widgets/cover_art_widget.dart';
+
 import '../../providers/forge_provider.dart';
 import '../fusion/design_system.dart';
+import '../widgets/cover_art_widget.dart';
 
 /// Cosmic-themed download manager with premium glassmorphism
 class DownloadManagerScreen extends StatefulWidget {
@@ -104,7 +106,7 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen>
                                   ),
                                 ],
                               ),
-                              child: Icon(
+                              child: const Icon(
                                 Icons.rocket_launch_rounded,
                                 color: Colors.white,
                                 size: 28,
@@ -121,7 +123,7 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen>
                                 'WARP DRIVE',
                                 style: OrbText.caption.copyWith(
                                   color: OrbColors.orbitCyan,
-                                  letterSpacing: 2.0,
+                                  letterSpacing: 2,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
@@ -230,7 +232,7 @@ class _DownloadManagerScreenState extends State<DownloadManagerScreen>
                 ),
                 child: Opacity(
                   opacity: 0.3 + _pulseController.value * 0.2,
-                  child: Icon(
+                  child: const Icon(
                     Icons.rocket_launch_rounded,
                     size: 64,
                     color: OrbColors.orbitCyan,
@@ -375,8 +377,7 @@ class _CosmicDownloadCardState extends State<_CosmicDownloadCard>
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeOutCubic,
-        transform: Matrix4.identity()
-          ..translate(0.0, _isHovered ? -4.0 : 0.0, 0.0),
+        transform: Matrix4.identity()..translate(0.0, _isHovered ? -4.0 : 0.0),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(24),
           child: BackdropFilter(
@@ -492,7 +493,7 @@ class _CosmicDownloadCardState extends State<_CosmicDownloadCard>
                                 child: Container(
                                   height: 8,
                                   decoration: BoxDecoration(
-                                    gradient: LinearGradient(
+                                    gradient: const LinearGradient(
                                       colors: [
                                         OrbColors.orbitCyan,
                                         OrbColors.orbitPurple,
@@ -521,8 +522,6 @@ class _CosmicDownloadCardState extends State<_CosmicDownloadCard>
                                         height: 8,
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
                                             stops: [
                                               (_shimmerController.value - 0.3)
                                                   .clamp(0.0, 1.0),
@@ -600,7 +599,6 @@ class _CosmicDownloadCardState extends State<_CosmicDownloadCard>
                                 onPressed: () => widget.forge.cancelForge(),
                                 icon: Icons.close_rounded,
                                 label: 'Cancel',
-                                isPrimary: false,
                                 isDestructive: true,
                               ),
                             ],
@@ -669,7 +667,6 @@ class _StatusBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: color.withValues(alpha: 0.4),
-          width: 1,
         ),
       ),
       child: Row(
@@ -713,7 +710,6 @@ class _StatPill extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: color.withValues(alpha: 0.2),
-          width: 1,
         ),
       ),
       child: Row(

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import '../core/app_logger.dart';
 
 /// Smart Game Metadata Service
@@ -389,26 +388,33 @@ class GameMetadataService {
     if (p == 'wii u' || p == 'wiiu') return 'Nintendo_-_Wii_U';
     if (p == 'gamecube' || p == 'gc') return 'Nintendo_-_GameCube';
     if (p == 'n64' || p == 'nintendo 64') return 'Nintendo_-_Nintendo_64';
-    if (p == 'snes' || p == 'super nintendo')
+    if (p == 'snes' || p == 'super nintendo') {
       return 'Nintendo_-_Super_Nintendo_Entertainment_System';
-    if ((p == 'nes' || p == 'nintendo') && !p.contains('super'))
+    }
+    if ((p == 'nes' || p == 'nintendo') && !p.contains('super')) {
       return 'Nintendo_-_Nintendo_Entertainment_System';
-    if (p == 'gba' || p == 'game boy advance')
+    }
+    if (p == 'gba' || p == 'game boy advance') {
       return 'Nintendo_-_Game_Boy_Advance';
+    }
     if (p == 'gbc' || p == 'game boy color') return 'Nintendo_-_Game_Boy_Color';
     if (p == 'gb' || p == 'game boy') return 'Nintendo_-_Game_Boy';
-    if (p == 'nds' || p == 'ds' || p == 'nintendo ds')
+    if (p == 'nds' || p == 'ds' || p == 'nintendo ds') {
       return 'Nintendo_-_Nintendo_DS';
+    }
     if (p == '3ds' || p == 'nintendo 3ds') return 'Nintendo_-_Nintendo_3DS';
-    if (p == 'genesis' || p == 'mega drive' || p == 'sega genesis')
+    if (p == 'genesis' || p == 'mega drive' || p == 'sega genesis') {
       return 'Sega_-_Mega_Drive_-_Genesis';
+    }
     if (p == 'dreamcast' || p == 'sega dreamcast') return 'Sega_-_Dreamcast';
     if (p == 'saturn' || p == 'sega saturn') return 'Sega_-_Saturn';
-    if (p == 'ps1' || p == 'psx' || p == 'playstation')
+    if (p == 'ps1' || p == 'psx' || p == 'playstation') {
       return 'Sony_-_PlayStation';
+    }
     if (p == 'ps2' || p == 'playstation 2') return 'Sony_-_PlayStation_2';
-    if (p == 'psp' || p == 'playstation portable')
+    if (p == 'psp' || p == 'playstation portable') {
       return 'Sony_-_PlayStation_Portable';
+    }
 
     return 'Nintendo_-_Wii';
   }
@@ -434,12 +440,12 @@ class GameMetadata {
   const GameMetadata({
     required this.title,
     required this.description,
+    required this.platform,
     this.coverUrl,
     this.releaseDate,
     this.developer,
     this.publisher,
     this.genres = const [],
-    required this.platform,
     this.wikiUrl,
   });
 

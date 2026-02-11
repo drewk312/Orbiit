@@ -19,14 +19,17 @@ class SmartSearchService {
 
     // Explicit platform names
     if (lower.contains('wii')) hints.add('wii');
-    if (lower.contains('gamecube') || lower.contains('gc'))
+    if (lower.contains('gamecube') || lower.contains('gc')) {
       hints.add('gamecube');
+    }
     if (lower.contains('n64') || lower.contains('64')) hints.add('n64');
     if (lower.contains('gba') || lower.contains('advance')) hints.add('gba');
-    if (lower.contains('snes') || lower.contains('super nintendo'))
+    if (lower.contains('snes') || lower.contains('super nintendo')) {
       hints.add('snes');
-    if (lower.contains('nes') || lower.contains('nintendo entertainment'))
+    }
+    if (lower.contains('nes') || lower.contains('nintendo entertainment')) {
       hints.add('nes');
+    }
     if (lower.contains('ds') && !lower.contains('3ds')) hints.add('nds');
     if (lower.contains('3ds')) hints.add('3ds');
 
@@ -61,7 +64,7 @@ class SmartSearchService {
     String cleaned = query.trim().toLowerCase();
 
     // Direct typo fix
-    for (var typo in _commonTypos.keys) {
+    for (final typo in _commonTypos.keys) {
       if (cleaned.contains(typo)) {
         debugPrint(
             '[SmartSearch] Correcting typo: "$typo" -> "${_commonTypos[typo]}"');

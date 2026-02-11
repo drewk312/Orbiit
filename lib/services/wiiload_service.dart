@@ -36,8 +36,7 @@ class WiiloadService {
 
       // Wiiload / TCP Loader: 4-byte big-endian length, then file data
       final lengthBytes = Uint8List(4);
-      ByteData.view(lengthBytes.buffer)
-          .setUint32(0, dolBytes.length, Endian.big);
+      ByteData.view(lengthBytes.buffer).setUint32(0, dolBytes.length);
 
       socket.add(lengthBytes);
       socket.add(dolBytes);

@@ -292,7 +292,7 @@ class OSCService {
     developer.log('[OSC] Using mock homebrew data');
 
     final mockData = [
-      GameResult(
+      const GameResult(
         title: 'Homebrew Browser',
         platform: 'Wii Homebrew',
         downloadUrl: '$_cdnUrl/homebrew_browser/homebrew_browser.zip',
@@ -304,7 +304,7 @@ class OSCService {
         pageUrl: 'https://oscwii.org/library/app/homebrew_browser',
         description: 'Download homebrew apps directly to your Wii',
       ),
-      GameResult(
+      const GameResult(
         title: 'WiiMC',
         platform: 'Wii Homebrew',
         downloadUrl: '$_cdnUrl/wiimc/wiimc.zip',
@@ -316,7 +316,7 @@ class OSCService {
         pageUrl: 'https://oscwii.org/library/app/wiimc',
         description: 'Multi-format media player for Wii',
       ),
-      GameResult(
+      const GameResult(
         title: 'USB Loader GX',
         platform: 'Wii Homebrew',
         downloadUrl: '$_cdnUrl/usbloader_gx/usbloader_gx.zip',

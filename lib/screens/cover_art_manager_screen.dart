@@ -284,7 +284,7 @@ class _BatchDownloadProgressDialog extends StatefulWidget {
 class _BatchDownloadProgressDialogState
     extends State<_BatchDownloadProgressDialog> {
   String _status = 'Scanning library...';
-  double _progress = 0.0;
+  double _progress = 0;
   int _downloaded = 0;
   int _total = 0;
   bool _isRunning = true;

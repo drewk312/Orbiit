@@ -29,7 +29,7 @@ class PremiumGameInfoPanel extends StatelessWidget {
       child: SizedBox(
         width: 560,
         child: Padding(
-          padding: const EdgeInsets.all(18.0),
+          padding: const EdgeInsets.all(18),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,8 +69,8 @@ class PremiumGameInfoPanel extends StatelessWidget {
                   const SizedBox(width: 8),
                   TextButton(
                       onPressed: onDelete ?? () {},
-                      child: const Text('Delete'),
-                      style: TextButton.styleFrom(foregroundColor: Colors.red)),
+                      style: TextButton.styleFrom(foregroundColor: Colors.red),
+                      child: const Text('Delete')),
                 ],
               )
             ],

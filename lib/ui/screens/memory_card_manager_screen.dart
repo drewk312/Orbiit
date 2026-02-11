@@ -1,7 +1,9 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
+
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
+
 import '../../services/memory_card_service.dart';
 import '../../ui/fusion/design_system.dart';
 import '../../widgets/immersive_glass_header.dart';
@@ -69,7 +71,7 @@ class _MemoryCardManagerScreenState extends State<MemoryCardManagerScreen> {
           ImmersiveGlassHeader(
             title: 'Memory Card Manager',
             subtitle: 'Manage GameCube Saves (.raw/.gcp)',
-            leading: Icon(Icons.sd_storage_rounded,
+            leading: const Icon(Icons.sd_storage_rounded,
                 color: FusionColors.nebulaViolet),
             actions: [
               IconButton(

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../theme/fusion_theme.dart';
+
+import '../main.dart'; // For AppConfig
 import '../providers/forge_provider.dart';
 import '../services/update_service.dart';
-import '../main.dart'; // For AppConfig
+import '../theme/fusion_theme.dart';
 
 /// Settings Screen - Theme selection with animated toggle
 class SettingsScreen extends StatefulWidget {
@@ -13,11 +14,11 @@ class SettingsScreen extends StatefulWidget {
   final Function(bool) onDarkModeChanged;
 
   const SettingsScreen({
-    super.key,
     required this.currentTheme,
     required this.isDarkMode,
     required this.onThemeChanged,
     required this.onDarkModeChanged,
+    super.key,
   });
 
   @override
@@ -47,9 +48,9 @@ class _SettingsScreenState extends State<SettingsScreen>
       CurvedAnimation(parent: _toggleController, curve: Curves.easeOutBack),
     );
     _scaleAnim = TweenSequence<double>([
-      TweenSequenceItem(tween: Tween(begin: 1.0, end: 0.8), weight: 1),
+      TweenSequenceItem(tween: Tween(begin: 1, end: 0.8), weight: 1),
       TweenSequenceItem(tween: Tween(begin: 0.8, end: 1.1), weight: 1),
-      TweenSequenceItem(tween: Tween(begin: 1.1, end: 1.0), weight: 1),
+      TweenSequenceItem(tween: Tween(begin: 1.1, end: 1), weight: 1),
     ]).animate(
       CurvedAnimation(parent: _toggleController, curve: Curves.easeInOut),
     );
@@ -85,7 +86,7 @@ class _SettingsScreenState extends State<SettingsScreen>
     return Consumer<ForgeProvider>(builder: (context, forge, child) {
       return Card(
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -119,7 +120,7 @@ class _SettingsScreenState extends State<SettingsScreen>
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.all(24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -339,8 +340,8 @@ class _SettingsScreenState extends State<SettingsScreen>
       child: ListenableBuilder(
         listenable: _toggleController,
         builder: (context, _) {
-          final sunColor = const Color(0xFFFFB800);
-          final moonColor = const Color(0xFF8B5CF6);
+          const sunColor = Color(0xFFFFB800);
+          const moonColor = Color(0xFF8B5CF6);
           final bgColor = Color.lerp(
             sunColor.withValues(alpha: 0.15),
             moonColor.withValues(alpha: 0.15),

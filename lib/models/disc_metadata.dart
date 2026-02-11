@@ -199,9 +199,9 @@ class DiscMetadata {
     required this.embeddedTitle,
     required this.console,
     required this.region,
+    required this.format,
     this.discNumber = 0,
     this.discVersion = 0,
-    required this.format,
     this.compression = CompressionType.none,
     this.blockSize,
     this.isDecrypted = false,
@@ -305,10 +305,10 @@ class DiscMetadata {
     required String path,
     required String fileName,
     required String title,
-    String? gameId,
     required String platform,
     required int sizeBytes,
     required String extension,
+    String? gameId,
   }) {
     return DiscMetadata(
       filePath: path,

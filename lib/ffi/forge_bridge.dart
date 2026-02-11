@@ -47,15 +47,16 @@
 //
 // ═══════════════════════════════════════════════════════════════════════════
 
+import 'dart:async';
 import 'dart:ffi' as ffi;
 import 'dart:io';
-import 'dart:async';
-import 'package:http/http.dart' as http;
-import 'package:flutter/foundation.dart';
-import 'package:ffi/ffi.dart';
-import 'package:crypto/crypto.dart';
+
 import 'package:convert/convert.dart';
+import 'package:crypto/crypto.dart';
+import 'package:ffi/ffi.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
+
 import '../core/app_logger.dart';
 import '../core/forge_native.dart';
 import 'isolate_downloader.dart';
@@ -71,8 +72,8 @@ class _DartMission {
   final DateTime startTime;
 
   int status = ForgeStatus.handshaking.value;
-  double progress = 0.0;
-  String message = "Identifying...";
+  double progress = 0;
+  String message = 'Identifying...';
   bool isCancelled = false;
   bool isMissionPaused = false;
 
@@ -603,13 +604,13 @@ class ForgeBridge {
 
       // Don't reset progress to 0 since we might be resuming
       mission.update(
-          ForgeStatus.handshaking, mission.progress, "Starting download...");
+          ForgeStatus.handshaking, mission.progress, 'Starting download...');
       _sendCallback(callback, ForgeStatus.handshaking, mission.progress,
-          "Starting download...");
+          'Starting download...');
       logger.info(
-          "[ISOLATE-ENGINE] Starting download for mission #${mission.id}");
-      logger.info("[ISOLATE-ENGINE] URL: ${mission.url}");
-      logger.info("[ISOLATE-ENGINE] Dest: ${mission.destPath}");
+          '[ISOLATE-ENGINE] Starting download for mission #${mission.id}');
+      logger.info('[ISOLATE-ENGINE] URL: ${mission.url}');
+      logger.info('[ISOLATE-ENGINE] Dest: ${mission.destPath}');
 
       // Create isolate downloader
       mission.downloader = IsolateDownloader();
@@ -621,7 +622,7 @@ class ForgeBridge {
 
           switch (msg.type) {
             case DownloadMessageType.started:
-              logger.info("[ISOLATE-ENGINE] Download started");
+              logger.info('[ISOLATE-ENGINE] Download started');
               // Keep current progress to avoid UI jumping to 0% on resume
               mission.update(ForgeStatus.downloading, mission.progress,
                   msg.message ?? 'Downloading...');
@@ -634,7 +635,7 @@ class ForgeBridge {
               // Ensure we don't spam logs but keep updating state
               // Only log occasional updates or significant events
               if (msg.progress == 1.0) {
-                logger.info("[ISOLATE-ENGINE] Progress complete");
+                logger.info('[ISOLATE-ENGINE] Progress complete');
               }
 
               mission.update(
@@ -650,54 +651,55 @@ class ForgeBridge {
               break;
 
             case DownloadMessageType.completed:
-              logger.info("[ISOLATE-ENGINE] Download completed!");
-              mission.update(ForgeStatus.ready, 1.0, "Complete");
-              _sendCallback(callback, ForgeStatus.ready, 1.0, "Complete");
+              logger.info('[ISOLATE-ENGINE] Download completed!');
+              mission.update(ForgeStatus.ready, 1, 'Complete');
+              _sendCallback(callback, ForgeStatus.ready, 1, 'Complete');
               break;
 
             case DownloadMessageType.error:
-              logger.error("[ISOLATE-ENGINE] Download error: ${msg.error}");
-              mission.update(ForgeStatus.error, 0.0, msg.message ?? 'Error');
+              logger.error('[ISOLATE-ENGINE] Download error: ${msg.error}');
+              mission.update(ForgeStatus.error, 0, msg.message ?? 'Error');
               _sendCallback(
-                  callback, ForgeStatus.error, 0.0, msg.message ?? 'Error');
+                  callback, ForgeStatus.error, 0, msg.message ?? 'Error');
               break;
 
             case DownloadMessageType.cancelled:
-              logger.info("[ISOLATE-ENGINE] Download cancelled");
-              mission.update(ForgeStatus.error, 0.0, "Cancelled");
-              _sendCallback(callback, ForgeStatus.error, 0.0, "Cancelled");
+              logger.info('[ISOLATE-ENGINE] Download cancelled');
+              mission.update(ForgeStatus.error, 0, 'Cancelled');
+              _sendCallback(callback, ForgeStatus.error, 0, 'Cancelled');
               break;
           }
         },
         onError: (error) {
-          logger.error("[ISOLATE-ENGINE] Stream error", error: error);
-          mission.update(ForgeStatus.error, 0.0, "Error: $error");
-          _sendCallback(callback, ForgeStatus.error, 0.0, "Error: $error");
+          logger.error('[ISOLATE-ENGINE] Stream error', error: error);
+          mission.update(ForgeStatus.error, 0, 'Error: $error');
+          _sendCallback(callback, ForgeStatus.error, 0, 'Error: $error');
         },
       );
 
       // Start download in isolate (non-blocking)
       await mission.downloader!.startDownload(mission.url, mission.destPath);
     } catch (e) {
-      logger.error("[ISOLATE-ENGINE] Fatal error", error: e);
-      mission.update(ForgeStatus.error, 0.0, "Error: $e");
-      _sendCallback(callback, ForgeStatus.error, 0.0, "Error: $e");
+      logger.error('[ISOLATE-ENGINE] Fatal error', error: e);
+      mission.update(ForgeStatus.error, 0, 'Error: $e');
+      _sendCallback(callback, ForgeStatus.error, 0, 'Error: $e');
     }
   }
 
   // Helpers
   String _formatSpeed(int bytesPerSec) {
     if (bytesPerSec < 1024) return '$bytesPerSec B/s';
-    if (bytesPerSec < 1024 * 1024)
+    if (bytesPerSec < 1024 * 1024) {
       return '${(bytesPerSec / 1024).toStringAsFixed(1)} KB/s';
+    }
     return '${(bytesPerSec / (1024 * 1024)).toStringAsFixed(1)} MB/s';
   }
 
   String _formatDuration(Duration d) {
-    if (d.inHours > 99) return "--:--";
-    if (d.inHours > 0) return "${d.inHours}h ${d.inMinutes.remainder(60)}m";
-    if (d.inMinutes > 0) return "${d.inMinutes}m ${d.inSeconds.remainder(60)}s";
-    return "${d.inSeconds}s";
+    if (d.inHours > 99) return '--:--';
+    if (d.inHours > 0) return '${d.inHours}h ${d.inMinutes.remainder(60)}m';
+    if (d.inMinutes > 0) return '${d.inMinutes}m ${d.inSeconds.remainder(60)}s';
+    return '${d.inSeconds}s';
   }
 
   void _sendCallback(ForgeProgressCallbackDart callback, ForgeStatus status,
@@ -735,7 +737,7 @@ class ForgeBridge {
             } catch (_) {}
           }
           mission.status = ForgeStatus.error.value;
-          mission.message = "Cancelled";
+          mission.message = 'Cancelled';
         }
 
         return true;
@@ -753,11 +755,11 @@ class ForgeBridge {
     if (_dartMissions.containsKey(missionId)) {
       final mission = _dartMissions[missionId]!;
       if (!mission.isCancelled && !mission.isMissionPaused) {
-        AppLogger.instance.info("[FORGE] Pausing mission #$missionId");
+        AppLogger.instance.info('[FORGE] Pausing mission #$missionId');
 
         mission.isMissionPaused = true;
         mission.status = ForgeStatus.paused.value;
-        mission.message = "Paused";
+        mission.message = 'Paused';
         // Stop the download stream by closing connection
         // The catch block in _runDartMission should handle the abort
         mission.downloadSubscription?.cancel();
@@ -775,17 +777,17 @@ class ForgeBridge {
     if (_dartMissions.containsKey(missionId)) {
       final mission = _dartMissions[missionId]!;
       if (mission.isMissionPaused) {
-        AppLogger.instance.info("[FORGE] Resuming mission #$missionId");
+        AppLogger.instance.info('[FORGE] Resuming mission #$missionId');
 
         // CRITICAL: Reset cancelled flag so message listener works
         mission.isCancelled = false;
         mission.isMissionPaused = false;
         mission.status = ForgeStatus.downloading.value;
-        mission.message = "Resuming...";
+        mission.message = 'Resuming...';
 
         // Send callback to update UI immediately
         _sendCallback(
-            callback, ForgeStatus.downloading, mission.progress, "Resuming...");
+            callback, ForgeStatus.downloading, mission.progress, 'Resuming...');
 
         // Restart the download worker (will resume from existing file position)
         unawaited(_runDartMission(mission, callback));
@@ -909,7 +911,7 @@ class ForgeBridge {
   /// Calculate SHA-1 hash of a file.
   Future<String> calculateHash(String filePath) async {
     final file = File(filePath);
-    if (!file.existsSync()) throw Exception("File not found");
+    if (!file.existsSync()) throw Exception('File not found');
     // Run in Future to not block UI (though underlying implementation is sync for now)
     return Future(() {
       final digest = _calculateSha1Sync(file);
@@ -963,7 +965,7 @@ class ForgeBridge {
     // Read file in chunks to avoid memory overflow
     final output = AccumulatorSink<Digest>();
     final input = sha1.startChunkedConversion(output);
-    final access = file.openSync(mode: FileMode.read);
+    final access = file.openSync();
     final buffer = Uint8List(1024 * 1024); // 1MB buffer
 
     try {
@@ -1224,8 +1226,8 @@ class ForgeBridge {
       }
 
       // Attempt to identify
-      String id = "";
-      String title = "";
+      String id = '';
+      String title = '';
       int formatId = 0;
       int platformId = 0;
 
@@ -1250,7 +1252,7 @@ class ForgeBridge {
         final name = p.basenameWithoutExtension(file.path);
         final idMatch = RegExp(r'\[([A-Z0-9]{6})\]').firstMatch(name);
         title = name;
-        id = idMatch?.group(1) ?? "UNKNOWN";
+        id = idMatch?.group(1) ?? 'UNKNOWN';
       } else {
         return null;
       }
@@ -1436,8 +1438,9 @@ class GameIdentity {
   /// File size formatted as human-readable string
   String get formattedSize {
     if (fileSize < 1024) return '$fileSize B';
-    if (fileSize < 1024 * 1024)
+    if (fileSize < 1024 * 1024) {
       return '${(fileSize / 1024).toStringAsFixed(1)} KB';
+    }
     if (fileSize < 1024 * 1024 * 1024) {
       return '${(fileSize / (1024 * 1024)).toStringAsFixed(1)} MB';
     }

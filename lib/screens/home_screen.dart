@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../ui/fusion/design_system.dart';
+
 // import '../ui/widgets/premium/premium.dart'; // Deprecated
 import '../services/navigation_service.dart';
+import '../ui/fusion/design_system.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -71,7 +73,7 @@ class HomeScreen extends StatelessWidget {
               'QUICK LAUNCH',
               style: FusionText.labelMedium.copyWith(
                 color: FusionColors.nebulaCyan,
-                letterSpacing: 2.0,
+                letterSpacing: 2,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -110,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                                 title: 'Deep Space',
                                 subtitle: 'Browse games',
                                 icon: Icons.explore_rounded,
-                                gradientColors: [
+                                gradientColors: const [
                                   FusionColors.nebulaPurple,
                                   FusionColors.nebulaViolet
                                 ],
@@ -128,9 +130,9 @@ class HomeScreen extends StatelessWidget {
                                 title: 'Warp',
                                 subtitle: 'Downloads',
                                 icon: Icons.rocket_launch_rounded,
-                                gradientColors: [
+                                gradientColors: const [
                                   FusionColors.success,
-                                  const Color(0xFF059669)
+                                  Color(0xFF059669)
                                 ],
                                 glowColor: FusionColors.success,
                                 onTap: () => context
@@ -150,9 +152,9 @@ class HomeScreen extends StatelessWidget {
                                 title: 'Tech Lab',
                                 subtitle: 'Homebrew',
                                 icon: Icons.science_rounded,
-                                gradientColors: [
+                                gradientColors: const [
                                   FusionColors.warning,
-                                  const Color(0xFFD97706)
+                                  Color(0xFFD97706)
                                 ],
                                 glowColor: FusionColors.warning,
                                 onTap: () => context
@@ -277,7 +279,6 @@ class _CompactQuickActionCard extends StatefulWidget {
   final VoidCallback onTap;
 
   const _CompactQuickActionCard({
-    this.width,
     required this.height,
     required this.title,
     required this.subtitle,
@@ -285,6 +286,7 @@ class _CompactQuickActionCard extends StatefulWidget {
     required this.gradientColors,
     required this.glowColor,
     required this.onTap,
+    this.width,
   });
 
   @override
@@ -314,7 +316,7 @@ class _CompactQuickActionCardState extends State<_CompactQuickActionCard> {
           width: widget.width,
           height: widget.height,
           transform: Matrix4.identity()
-            ..translate(0.0, _isHovered ? -2.0 : 0.0, 0.0)
+            ..translate(0.0, _isHovered ? -2.0 : 0.0)
             ..scale(_isPressed ? 0.98 : 1.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(FusionRadius.xl),
@@ -417,7 +419,7 @@ class _LibraryStatsSectionState extends State<_LibraryStatsSection>
   bool _isScanning = false;
   int _wiiCount = 0;
   int _gcCount = 0;
-  double _totalGB = 0.0;
+  double _totalGB = 0;
   List<String> _detectedDrives = [];
   late AnimationController _pulseController;
 
@@ -444,7 +446,7 @@ class _LibraryStatsSectionState extends State<_LibraryStatsSection>
     setState(() => _isScanning = true);
 
     final drives = <String>[];
-    for (var letter in 'DEFGHIJKLMNOPQRSTUVWXYZ'.split('')) {
+    for (final letter in 'DEFGHIJKLMNOPQRSTUVWXYZ'.split('')) {
       final path = '$letter:\\\\';
       if (Directory(path).existsSync()) {
         drives.add(path);
@@ -506,7 +508,7 @@ class _LibraryStatsSectionState extends State<_LibraryStatsSection>
           'LIBRARY OVERVIEW',
           style: FusionText.labelMedium.copyWith(
             color: FusionColors.nebulaPurple,
-            letterSpacing: 2.0,
+            letterSpacing: 2,
             fontWeight: FontWeight.w700,
           ),
         ),

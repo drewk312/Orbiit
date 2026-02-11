@@ -1,8 +1,10 @@
 import 'dart:io';
-import 'package:flutter/material.dart';
+
 import 'package:file_picker/file_picker.dart';
-import '../widgets/immersive_glass_header.dart';
+import 'package:flutter/material.dart';
+
 import '../services/txtcodes_service.dart';
+import '../widgets/immersive_glass_header.dart';
 
 /// When [embedInWrapper] is true, returns only content (no app shell) for use in NavigationWrapper.
 class TxtCodesScreen extends StatefulWidget {
@@ -92,7 +94,7 @@ class _TxtCodesScreenState extends State<TxtCodesScreen> {
                         : () async {
                             final id = _idController.text.trim();
                             if (id.isEmpty) return;
-                            String? outputFile =
+                            final String? outputFile =
                                 await FilePicker.platform.saveFile(
                               dialogTitle: 'Save Codes',
                               fileName: '$id.txt',

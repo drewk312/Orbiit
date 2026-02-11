@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:path/path.dart' as p;
 
 class UniversalOrganizer {
@@ -46,11 +45,11 @@ class UniversalOrganizer {
       // If we don't have an ID, we make a "No ID" folder.
       // Nintendont MIGHT run it without ID if folder path is simple,
       // but standard practice is Title [ID].
-      final folderName = id != null ? "$cleanTitle [$id]" : cleanTitle;
+      final folderName = id != null ? '$cleanTitle [$id]' : cleanTitle;
 
       // Nintendont REQUIRED filename: "game.iso" (or game.ciso)
       // We rename it during download.
-      final strictFileName = "game$ext";
+      final strictFileName = 'game$ext';
 
       return {
         'fullPath': p.join(rootDrive, 'games', folderName, strictFileName),
@@ -66,13 +65,13 @@ class UniversalOrganizer {
     if (platform == 'Wii') {
       // Wii games MUST have an ID6 to be identified properly by loaders.
       // If we found one, use it. If not, fallback to filename (risky but better than crashing).
-      final safeId = id ?? "GAMEID";
-      final folderName = "$cleanTitle [$safeId]";
+      final safeId = id ?? 'GAMEID';
+      final folderName = '$cleanTitle [$safeId]';
 
       // Loaders prefer the file named as the ID (e.g., RMGE01.wbfs)
       // But they also accept Title.wbfs inside the folder.
       // We stick to the ID naming convention for maximum compatibility.
-      final strictFileName = "$safeId$ext";
+      final strictFileName = '$safeId$ext';
 
       return {
         'fullPath': p.join(rootDrive, 'wbfs', folderName, strictFileName),

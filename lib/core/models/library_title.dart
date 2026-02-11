@@ -25,14 +25,14 @@ class LibraryTitle {
     required this.gameId,
     required this.title,
     required this.platform,
-    this.region,
     required this.format,
     required this.filePath,
     required this.fileSizeBytes,
-    this.sha1Partial,
-    this.sha1Full,
     required this.addedTimestamp,
     required this.modifiedTimestamp,
+    this.region,
+    this.sha1Partial,
+    this.sha1Full,
     this.lastVerified,
     this.healthStatus = HealthStatus.unknown,
     this.hasCover = false,
@@ -96,7 +96,7 @@ class LibraryTitle {
       };
 
   String get formattedSize {
-    if (fileSizeBytes < 1024) return '${fileSizeBytes} B';
+    if (fileSizeBytes < 1024) return '$fileSizeBytes B';
     if (fileSizeBytes < 1024 * 1024) {
       return '${(fileSizeBytes / 1024).toStringAsFixed(1)} KB';
     }

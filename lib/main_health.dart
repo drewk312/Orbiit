@@ -1,13 +1,14 @@
-import 'package:flutter/material.dart';
-import '../core/models/health_score.dart';
-import '../core/models/health_issue.dart';
-import '../core/models/task.dart';
-import '../ui/screens/dashboard_screen.dart';
-import '../ui/screens/queue_screen.dart';
-import '../ui/screens/library_screen.dart';
-import '../ffi/forge_bridge.dart';
-import '../core/database/database.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+
+import '../core/database/database.dart';
+import '../core/models/health_issue.dart';
+import '../core/models/health_score.dart';
+import '../core/models/task.dart';
+import '../ffi/forge_bridge.dart';
+import '../ui/screens/dashboard_screen.dart';
+import '../ui/screens/library_screen.dart';
+import '../ui/screens/queue_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +27,7 @@ void main() async {
 class WiiGCFusionApp extends StatelessWidget {
   final AppDatabase database;
 
-  const WiiGCFusionApp({super.key, required this.database});
+  const WiiGCFusionApp({required this.database, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class WiiGCFusionApp extends StatelessWidget {
 class DashboardHome extends StatefulWidget {
   final AppDatabase database;
 
-  const DashboardHome({super.key, required this.database});
+  const DashboardHome({required this.database, super.key});
 
   @override
   State<DashboardHome> createState() => _DashboardHomeState();
@@ -57,7 +58,7 @@ class DashboardHome extends StatefulWidget {
 class _DashboardHomeState extends State<DashboardHome> {
   HealthScore? _healthScore;
   List<HealthIssue> _issues = [];
-  List<BackgroundTask> _tasks = [];
+  final List<BackgroundTask> _tasks = [];
   int _scannedFiles = 0;
   int _foundGames = 0;
   bool _scanning = false;
@@ -71,7 +72,7 @@ class _DashboardHomeState extends State<DashboardHome> {
     // _subscribeToEvents(); // Removed, handled in _startScan
   }
 
-  void _loadHealthData() async {
+  Future<void> _loadHealthData() async {
     final snapshot = await widget.database.getLatestHealthSnapshot();
     if (snapshot != null) {
       setState(() {
@@ -311,7 +312,7 @@ class _DashboardHomeState extends State<DashboardHome> {
             issueType: 'duplicate',
             severity: 'medium',
             description:
-                'Duplicate of \"$gameName\" (copy ${i + 1} of ${copies.length})',
+                'Duplicate of "$gameName" (copy ${i + 1} of ${copies.length})',
             estimatedImpactScore: -5,
             estimatedSpaceSavings: copies[i].fileSizeBytes as int,
             fixAction: 'delete',
@@ -335,8 +336,7 @@ class _DashboardHomeState extends State<DashboardHome> {
       duplicateCount: duplicateCount,
       corruptedCount: 0,
       missingMetadataCount: 0,
-      totalSizeBytes:
-          titles.fold<int>(0, (sum, t) => sum + (t.fileSizeBytes as int)),
+      totalSizeBytes: titles.fold<int>(0, (sum, t) => sum + (t.fileSizeBytes)),
       potentialSavingsBytes: totalSavings,
     );
 
@@ -368,7 +368,7 @@ class _DashboardHomeState extends State<DashboardHome> {
     _loadHealthData();
   }
 
-  void _startScan() async {
+  Future<void> _startScan() async {
     final result = await FilePicker.platform.getDirectoryPath(
       dialogTitle: 'Select folder to scan',
     );
@@ -403,7 +403,7 @@ class _DashboardHomeState extends State<DashboardHome> {
             _handleGameFound(path, identity);
           });
         } catch (e) {
-          debugPrint("Scan error: $e");
+          debugPrint('Scan error: $e');
         }
 
         if (mounted) {

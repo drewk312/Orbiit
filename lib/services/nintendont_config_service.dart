@@ -36,14 +36,14 @@ class NintendontConfigService {
     buffer.writeln('Name=$name');
     buffer.writeln('Polltype=1');
     buffer.writeln('DPAD=1');
-    buffer.writeln('');
+    buffer.writeln();
 
     // Button mappings
     buffer.writeln('# Button Mappings');
     for (final entry in buttonMappings.entries) {
       buffer.writeln('${entry.key}=${entry.value.toIniFormat()}');
     }
-    buffer.writeln('');
+    buffer.writeln();
 
     // Axis mappings
     buffer.writeln('# Axis Mappings');
@@ -117,7 +117,8 @@ class NintendontConfigService {
   Map<String, String> getPresetConfigs() {
     return {
       // Xbox 360 Controller
-      '045E_028E': '''[Controller]
+      '045E_028E': '''
+[Controller]
 VID=045E
 PID=028E
 Name=Xbox 360 Controller
@@ -140,7 +141,8 @@ RAnalog=5
 ''',
 
       // Xbox One Controller
-      '045E_02EA': '''[Controller]
+      '045E_02EA': '''
+[Controller]
 VID=045E
 PID=02EA
 Name=Xbox One Controller
@@ -163,7 +165,8 @@ RAnalog=5
 ''',
 
       // PS4 DualShock 4
-      '054C_09CC': '''[Controller]
+      '054C_09CC': '''
+[Controller]
 VID=054C
 PID=09CC
 Name=PS4 DualShock 4
@@ -186,7 +189,8 @@ RAnalog=9
 ''',
 
       // PS3 DualShock 3
-      '054C_0268': '''[Controller]
+      '054C_0268': '''
+[Controller]
 VID=054C
 PID=0268
 Name=PS3 DualShock 3

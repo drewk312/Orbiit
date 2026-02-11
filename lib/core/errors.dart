@@ -273,9 +273,9 @@ final class DownloadTooSmallError extends DownloadError {
 
   DownloadTooSmallError({
     required super.url,
-    super.gameTitle,
     required this.actualSize,
     required this.minimumSize,
+    super.gameTitle,
     this.cause,
     this.stackTrace,
   });

@@ -126,9 +126,7 @@ class BrowserAgentService {
           region: _detectRegion(title),
           provider: 'romsgames.net',
           pageUrl: 'https://romsgames.net$pageUrlSuffix',
-          downloadUrl: null, // Requires secondary resolution
           requiresBrowser: true,
-          isDirectDownload: false,
         ));
 
         debugPrint('[BrowserAgent] Added game: $title ($platformType)');

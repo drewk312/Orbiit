@@ -19,7 +19,7 @@ class EmptyState extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32.0),
+        padding: const EdgeInsets.all(32),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,

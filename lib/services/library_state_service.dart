@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
-import 'scanner_service.dart';
+
 import '../core/app_logger.dart';
+import 'scanner_service.dart';
 
 /// Library State Service - Persists library data across screen switches
 class LibraryStateService {

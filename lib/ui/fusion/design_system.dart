@@ -133,7 +133,6 @@ class FusionShadows {
         BoxShadow(
           color: FusionColors.nebulaCyan.withValues(alpha: 0.25 * intensity),
           blurRadius: 16 * intensity,
-          spreadRadius: 0,
         ),
         BoxShadow(
           color: FusionColors.nebulaCyan.withValues(alpha: 0.1 * intensity),
@@ -146,7 +145,6 @@ class FusionShadows {
         BoxShadow(
           color: FusionColors.nebulaPurple.withValues(alpha: 0.25 * intensity),
           blurRadius: 16 * intensity,
-          spreadRadius: 0,
         ),
         BoxShadow(
           color: FusionColors.nebulaPurple.withValues(alpha: 0.1 * intensity),
@@ -160,7 +158,6 @@ class FusionShadows {
         BoxShadow(
           color: color.withValues(alpha: 0.25 * intensity),
           blurRadius: 16 * intensity,
-          spreadRadius: 0,
         ),
         BoxShadow(
           color: color.withValues(alpha: 0.1 * intensity),
@@ -186,7 +183,7 @@ class FusionText {
     fontSize: 48,
     fontWeight: FontWeight.w700,
     color: FusionColors.textPrimary,
-    letterSpacing: -1.0,
+    letterSpacing: -1,
     height: 1.1,
   );
 

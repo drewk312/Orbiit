@@ -87,9 +87,6 @@ class VimmService {
         provider: "Vimm's Lair",
         pageUrl: '$_baseUrl/vault/$id',
         coverUrl: '$_baseUrl/image.php?type=box&id=$id', // Direct cover access
-        downloadUrl: null, // Mediated via downloadGame
-        requiresBrowser: false, // Handled by in-app downloader
-        isDirectDownload: false,
       ));
     }
 

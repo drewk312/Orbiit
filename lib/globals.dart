@@ -13,9 +13,10 @@
 
 import 'dart:async';
 import 'dart:io';
+
+import 'services/cover_art/cover_art_service.dart';
 import 'services/download_service.dart';
 import 'services/unified_search_service.dart';
-import 'services/cover_art/cover_art_service.dart';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // GLOBAL SERVICE INSTANCES

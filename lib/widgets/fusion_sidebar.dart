@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import '../ui/fusion/design_system.dart';
+
 import '../services/navigation_service.dart';
+import '../ui/fusion/design_system.dart';
 
 class FusionSidebar extends StatefulWidget {
   final int currentIndex;
   final ValueChanged<int> onSelected;
 
   const FusionSidebar(
-      {super.key, required this.currentIndex, required this.onSelected});
+      {required this.currentIndex, required this.onSelected, super.key});
 
   @override
   State<FusionSidebar> createState() => _FusionSidebarState();
@@ -16,9 +17,9 @@ class FusionSidebar extends StatefulWidget {
 class _FusionSidebarState extends State<FusionSidebar> {
   final ValueNotifier<bool> _hovered = ValueNotifier(false);
 
-  static const double _collapsedWidth = 72.0; // Restored
+  static const double _collapsedWidth = 72; // Restored
   static const double _expandedWidth =
-      220.0; // Optimized width to fit "Command Center" without extra gap
+      220; // Optimized width to fit "Command Center" without extra gap
 
   @override
   void dispose() {
@@ -42,10 +43,9 @@ class _FusionSidebarState extends State<FusionSidebar> {
             duration: FusionAnimations.medium,
             curve: FusionAnimations.curve,
             width: width,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: FusionColors.bgSecondary,
-              border: Border(
-                  right: BorderSide(color: FusionColors.border, width: 1)),
+              border: Border(right: BorderSide(color: FusionColors.border)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,12 +57,11 @@ class _FusionSidebarState extends State<FusionSidebar> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Flexible(
-                        fit: FlexFit.loose,
                         child: FittedBox(
                           alignment: Alignment.centerLeft,
                           child: Container(
                             padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: FusionColors.nintendoRed,
                               shape: BoxShape.circle,
                             ),
@@ -124,7 +123,7 @@ class _FusionSidebarState extends State<FusionSidebar> {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         decoration: BoxDecoration(
           border: selected
-              ? Border(
+              ? const Border(
                   left: BorderSide(color: FusionColors.nintendoRed, width: 4))
               : null,
           color: selected ? FusionColors.bgTertiary : null,

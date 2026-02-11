@@ -1,10 +1,11 @@
 import 'dart:io';
-import 'package:flutter/foundation.dart';
-import 'package:path/path.dart' as path;
+
 import 'package:archive/archive.dart';
 import 'package:archive/archive_io.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
+import 'package:path/path.dart' as path;
 
 class RiivolutionService {
   static final RiivolutionService _instance = RiivolutionService._internal();
@@ -43,7 +44,7 @@ class RiivolutionService {
       // For simplicity/robustness in this "system" context, let's use the direct OSC zip URL pattern
       // which is usually https://oscwii.org/library/app/{slug}/(ignoring version)/{slug}.zip
       // BUT api is safer. Let's try direct download from OSC library which redirects.
-      final downloadUrl =
+      const downloadUrl =
           'https://oscwii.org/library/app/$_riivolutionSlug/zip';
 
       onStatus('Downloading Riivolution...');
@@ -68,7 +69,7 @@ class RiivolutionService {
       if (tempDir.existsSync()) tempDir.deleteSync(recursive: true);
 
       onStatus('Riivolution Installed!');
-      onProgress(1.0);
+      onProgress(1);
     } catch (e) {
       _logger.severe('Riivolution install failed', e);
       rethrow;
@@ -137,7 +138,7 @@ class RiivolutionService {
       if (tempDir.existsSync()) tempDir.deleteSync(recursive: true);
 
       onStatus('Mod Installed Successfully!');
-      onProgress(1.0);
+      onProgress(1);
     } catch (e) {
       _logger.severe('Mod install failed', e);
       rethrow;

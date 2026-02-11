@@ -8,10 +8,10 @@ class HandshakeOverlay extends StatelessWidget {
   final bool isVisible;
 
   const HandshakeOverlay({
-    super.key,
     required this.statusMessage,
     required this.progress,
     required this.isVisible,
+    super.key,
   });
 
   @override
@@ -29,7 +29,6 @@ class HandshakeOverlay extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: Theme.of(context).primaryColor,
-              width: 1,
             ),
             boxShadow: [
               BoxShadow(
@@ -72,10 +71,10 @@ class HandshakeOverlay extends StatelessWidget {
                   Theme.of(context).primaryColor,
                 ),
               ),
-              if (statusMessage.contains("RomsGames")) ...[
+              if (statusMessage.contains('RomsGames')) ...[
                 const SizedBox(height: 12),
                 Text(
-                  "Bypassing JS Timer...",
+                  'Bypassing JS Timer...',
                   style: TextStyle(
                     fontSize: 10,
                     color: Colors.grey.withValues(alpha: 0.6),

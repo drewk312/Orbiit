@@ -54,7 +54,7 @@ class _ControllerWizardScreenState extends State<ControllerWizardScreen> {
         }
       }
     } catch (e) {
-      debugPrint("Error identifying controller: $e");
+      debugPrint('Error identifying controller: $e');
     }
   }
 
@@ -116,7 +116,7 @@ class _ControllerWizardScreenState extends State<ControllerWizardScreen> {
   void _applyToConfig(String target, GamepadEvent event) {
     // Simplified Binding: just store offset,mask
     // We assume 0 offset for now content with the key ID
-    _config.bindings[target] = "0,${event.key}";
+    _config.bindings[target] = '0,${event.key}';
   }
 
   void _showResultDialog() {
@@ -125,14 +125,14 @@ class _ControllerWizardScreenState extends State<ControllerWizardScreen> {
         context: context,
         builder: (ctx) => AlertDialog(
               backgroundColor: const Color(0xFF2D2D2D),
-              title: const Text("Configuration Generated",
+              title: const Text('Configuration Generated',
                   style: TextStyle(color: Colors.white)),
               content: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text("Save this as .ini file in /controllers folder:",
+                    const Text('Save this as .ini file in /controllers folder:',
                         style: TextStyle(color: Colors.white70)),
                     const SizedBox(height: 10),
                     Container(
@@ -151,13 +151,13 @@ class _ControllerWizardScreenState extends State<ControllerWizardScreen> {
               actions: [
                 TextButton(
                     onPressed: () => Navigator.pop(ctx),
-                    child: const Text("Close")),
+                    child: const Text('Close')),
                 ElevatedButton(
                     onPressed: () {
                       Navigator.pop(ctx);
                       Navigator.pop(context);
                     },
-                    child: const Text("Done"))
+                    child: const Text('Done'))
               ],
             ));
   }
@@ -219,7 +219,7 @@ class _ControllerWizardScreenState extends State<ControllerWizardScreen> {
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 icon: const Icon(Icons.save),
-                label: const Text("View INI"),
+                label: const Text('View INI'),
                 onPressed: _showResultDialog,
               )
             ],

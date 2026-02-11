@@ -1,8 +1,10 @@
 import 'dart:async';
-import 'dart:ui';
 import 'dart:math' as math;
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' hide Colors;
+
 import '../services/gametdb_service.dart';
 
 /// Tactile Bento Card - Glassmorphic game card with pulsing disc
@@ -15,10 +17,10 @@ class TactileBentoCard extends StatefulWidget {
   final VoidCallback? onTap;
 
   const TactileBentoCard({
-    super.key,
-    this.gameId,
     required this.title,
     required this.platform,
+    super.key,
+    this.gameId,
     this.health,
     this.verified = false,
     this.onTap,
@@ -57,7 +59,7 @@ class _TactileBentoCardState extends State<TactileBentoCard>
       vsync: this,
     )..repeat(reverse: true);
 
-    _pulseAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
+    _pulseAnimation = Tween<double>(begin: 0.8, end: 1).animate(
       CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
     );
 
@@ -67,7 +69,7 @@ class _TactileBentoCardState extends State<TactileBentoCard>
       vsync: this,
     );
 
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.05).animate(
+    _scaleAnimation = Tween<double>(begin: 1, end: 1.05).animate(
       CurvedAnimation(parent: _hoverController, curve: Curves.easeOutBack),
     );
 
@@ -168,7 +170,7 @@ class _TactileBentoCardState extends State<TactileBentoCard>
                             ..rotateX(rotationX)
                             ..rotateY(rotationY)
                             ..scaleByVector3(Vector3(_scaleAnimation.value,
-                                _scaleAnimation.value, 1.0)),
+                                _scaleAnimation.value, 1)),
                           alignment: Alignment.center,
                           child: Container(
                             decoration: BoxDecoration(
@@ -429,7 +431,7 @@ class _TactileBentoCardState extends State<TactileBentoCard>
                 height: 40,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white24, width: 1),
+                  border: Border.all(color: Colors.white24),
                 ),
               ),
               // Center hole
@@ -483,7 +485,7 @@ class _TactileBentoCardState extends State<TactileBentoCard>
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.favorite, color: Colors.white, size: 12),
+          const Icon(Icons.favorite, color: Colors.white, size: 12),
           const SizedBox(width: 4),
           Text(
             '$health%',

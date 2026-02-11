@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
-import '../ffi/forge_bridge.dart';
+
 import '../core/app_logger.dart';
+import '../ffi/forge_bridge.dart';
 import '../models/disc_metadata.dart';
 
 /// Scanner Service - Detects game files and reads internal metadata
@@ -54,9 +55,10 @@ class ScannerService {
           'PHASE 2: Loading native scanner (forge_core.dll) at ${docsDir.path}...');
       final initOk = _forge.init(docsDir.path);
       logger.info('✓ Native library initialized: $initOk');
-      if (!initOk)
+      if (!initOk) {
         logger.warning(
             'Native forge_init returned false - native scanning may not work');
+      }
 
       logger.info('PHASE 3: Scanning directory for game files...');
       final games = <ScannedGame>[];
@@ -318,7 +320,7 @@ class ScannerService {
 
   /// Read game ID and title from disc header
   Future<Map<String, dynamic>> _readDiscHeader(File file, String ext) async {
-    final raf = await file.open(mode: FileMode.read);
+    final raf = await file.open();
     try {
       List<int> header;
       bool magicValid = false;
@@ -634,10 +636,10 @@ class ScannedGame {
     required this.path,
     required this.fileName,
     required this.title,
-    this.gameId,
     required this.platform,
     required this.sizeBytes,
     required this.extension,
+    this.gameId,
     this.health = 0,
     this.verified = false,
     this.status = GameHealthStatus.unknown,

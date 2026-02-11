@@ -18,7 +18,6 @@
 // ═══════════════════════════════════════════════════════════════════════════
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 /// A MouseRegion wrapper that catches errors and logs widget identification
@@ -45,9 +44,9 @@ class SafeMouseRegion extends StatelessWidget {
   final bool opaque;
 
   const SafeMouseRegion({
-    super.key,
     required this.widgetName,
     required this.child,
+    super.key,
     this.onEnter,
     this.onHover,
     this.onExit,

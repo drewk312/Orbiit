@@ -69,7 +69,8 @@ class NativeLibraryLoader {
   /// Get instructions for installing the native library
   static String getInstallationInstructions() {
     if (Platform.isWindows) {
-      return '''Native library (forge_core.dll) not found!
+      return '''
+Native library (forge_core.dll) not found!
 
 To install:
 1. Download the forge_core library from the releases page
@@ -80,7 +81,8 @@ To install:
 
 The app will work in demo mode without the library, but some features will be limited.''';
     } else if (Platform.isLinux) {
-      return '''Native library (libforge_core.so) not found!
+      return '''
+Native library (libforge_core.so) not found!
 
 To install:
 1. Build or download the forge_core library
@@ -91,7 +93,8 @@ To install:
 
 The app will work in demo mode without the library, but some features will be limited.''';
     } else if (Platform.isMacOS) {
-      return '''Native library (libforge_core.dylib) not found!
+      return '''
+Native library (libforge_core.dylib) not found!
 
 To install:
 1. Build or download the forge_core library
