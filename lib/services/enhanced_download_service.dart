@@ -152,7 +152,8 @@ class EnhancedDownloadService {
   /// Add download with automatic source discovery
   Future<EnhancedDownloadTask> addDownload({
     required String title,
-    required String destinationFolder, String? gameId,
+    required String destinationFolder,
+    String? gameId,
     String? initialUrl,
     String? expectedSHA1,
     String? expectedSHA256,
