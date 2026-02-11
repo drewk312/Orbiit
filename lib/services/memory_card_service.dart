@@ -43,7 +43,6 @@ class MemoryCardService {
     // Or we could try to write a valid header if needed, but Nintendont handles raw zero-filled files fine usually.
     // Writing 16MB of zeros might be slow in pure Dart, but acceptable.
 
-    final sink = file.openWrite();
     // distinct implementation for speed?
     // let's just create sparse file if OS supports or write blocks
 

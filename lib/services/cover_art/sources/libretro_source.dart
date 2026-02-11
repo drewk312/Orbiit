@@ -86,8 +86,6 @@ class LibRetroSource implements CoverArtSource {
       case GamePlatform.nds:
       case GamePlatform.n3ds:
         return null; // Rely on GameTDB for these
-      default:
-        return null;
     }
   }
 }
